@@ -27,12 +27,26 @@
 /* The part-of-speech marker reads as an annotation, not prose. Small caps keep
    it in the display face, so it sits with the italic rather than interrupting
    it — the way a printed dictionary sets its labels. */
-.pos {
+/* The annotations that precede the definition. Both are set roman against the
+   italic run — when the surrounding text is italic, emphasis inverts — so they
+   read as one dimmed cluster of apparatus rather than as prose.
+   Small caps suit the language tag; the part of speech stays lowercase, the way
+   a printed dictionary sets it. */
+.lang {
   font-family: var(--font-display);
   font-style: normal;
   font-weight: 400;
   font-variant-caps: all-small-caps;
   font-size: 0.64em;
   letter-spacing: 0.08em;
+  opacity: 0.62;
+}
+
+.pos {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.64em;
+  letter-spacing: 0.01em;
   opacity: 0.62;
 }

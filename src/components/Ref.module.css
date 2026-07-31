@@ -1,0 +1,26 @@
+.sup {
+  line-height: 0;
+  font-size: 0.44em;
+  vertical-align: super;
+  margin-left: 0.14em;
+}
+
+
+.ref {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: inherit;
+  opacity: 0.65;
+  border-bottom: none;
+  padding: 0.2em;
+  transition: opacity 0.2s ease;
+}
+
+.ref:hover,
+.ref:focus-visible {
+  color: inherit;
+  opacity: 1;
+  border-bottom: none;
+}
