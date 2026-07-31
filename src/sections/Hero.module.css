@@ -1,0 +1,38 @@
+.hero {
+  max-width: 640px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(48px, 8vw, 104px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  margin: 0;
+}
+
+.definition {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.5;
+  color: var(--mist);
+  max-width: 520px;
+  margin: 30px auto 0;
+}
+
+/* The part-of-speech marker reads as an annotation, not prose. Small caps keep
+   it in the display face, so it sits with the italic rather than interrupting
+   it — the way a printed dictionary sets its labels. */
+.pos {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+  font-variant-caps: all-small-caps;
+  font-size: 0.64em;
+  letter-spacing: 0.08em;
+  opacity: 0.62;
+}

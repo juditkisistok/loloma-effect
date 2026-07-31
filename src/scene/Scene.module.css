@@ -1,0 +1,11 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    #22344c 0%,
+    #c78a68 55%,
+    #f4c9a8 100%
+  );
+}

@@ -1,0 +1,5 @@
+.card {
+  pointer-events: auto;
+  opacity: 0;
+  text-wrap: pretty;
+}
