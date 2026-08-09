@@ -10,9 +10,10 @@
   --paper-land: #e4dccb; 
 
   /* --- accents --- */
-  --teal: #0f9d8f; 
-  --teal-soft: #8fb0aa; 
-  --mist: #cfe2df; 
+  --teal: #0f9d8f;
+  --teal-soft: #8fb0aa;
+  --mist: #cfe2df;
+  --paper-soft: #e6f0ec; /* body copy set over the scene */
   --coral: #ff6f61; 
   --coral-warm: #ff9f6b; 
   --sand: #cb9a5c; 
