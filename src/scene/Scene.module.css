@@ -2,10 +2,123 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    #22344c 0%,
-    #c78a68 55%,
-    #f4c9a8 100%
-  );
+  overflow: hidden;
+  background: var(--deep-scene);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flora {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.flora img {
+  position: absolute;
+  height: auto;
+  filter: brightness(0) drop-shadow(0 10px 12px rgba(4, 14, 26, 0.32));
+  transform-origin: 50% 100%;
+}
+
+.palmLarge {
+  left: 38%;
+  bottom: 51.5%;
+  width: 11vw;
+  max-width: 172px;
+  min-width: 88px;
+}
+
+.palmSmall {
+  left: 48%;
+  bottom: 50.5%;
+  width: 8.5vw;
+  max-width: 132px;
+  min-width: 70px;
+  transform: scaleX(-1);
+}
+
+.mist {
+  animation: mistDrift 26s ease-in-out infinite;
+}
+
+.shimmer {
+  animation: shimmer 5.5s ease-in-out infinite;
+}
+
+.shimmer line {
+  stroke: #bfe6df;
+  stroke-width: 1;
+}
+
+.shimmer line:nth-child(1) {
+  opacity: 0.4;
+}
+
+.shimmer line:nth-child(2) {
+  opacity: 0.3;
+}
+
+.shimmer line:nth-child(3) {
+  opacity: 0.25;
+}
+
+.waterline {
+  stroke: #eafcf7;
+  stroke-width: 1.6;
+  opacity: 0.9;
+}
+
+.stars {
+  transition: opacity 0.5s ease;
+}
+
+@keyframes mistDrift {
+  0%,
+  100% {
+    transform: translateX(-16px);
+  }
+
+  50% {
+    transform: translateX(16px);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 700px) {
+  .palmLarge {
+    left: 32%;
+    bottom: 51.2%;
+    width: 26vw;
+  }
+
+  .palmSmall {
+    left: 50%;
+    bottom: 50.6%;
+    width: 21vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mist,
+  .shimmer {
+    animation: none;
+  }
 }

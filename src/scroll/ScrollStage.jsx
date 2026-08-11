@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { StageContext } from "./stageContext";
-import { scrollProgressOf } from "../lib/math";
+import { scrollProgressBetween, scrollProgressOf } from "../lib/math";
 
 
 export function ScrollStage({ children }) {
@@ -30,6 +30,8 @@ export function ScrollStage({ children }) {
       const frame = {
         p: scrollProgressOf(wrapRef.current),
         act: (name) => scrollProgressOf(sections.get(name)),
+        span: (startName, endName) =>
+          scrollProgressBetween(sections.get(startName), sections.get(endName)),
         t: reduced ? 0 : now / 1000,
         reduced,
       };
