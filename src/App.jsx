@@ -3,6 +3,7 @@ import { useStage } from "./scroll/stageContext";
 import { Scene } from "./scene/Scene";
 import { Hero } from "./sections/Hero";
 import { Knot } from "./sections/Knot";
+import { Impasse } from "./sections/Impasse";
 import styles from "./App.module.css";
 
 export default function App() {
@@ -26,6 +27,7 @@ function Stage() {
         <div className={styles.steps}>
           <Hero />
           <Knot />
+          <Impasse />
         </div>
       </div>
 
