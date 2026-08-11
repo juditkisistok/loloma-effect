@@ -27,9 +27,6 @@ export function Knot() {
           At the same time, some of the money tourists spend is helping pay to
           relocate communities already losing ground to the rising ocean.
         </p>
-        <p className={`${panelStyles.panelBody} ${styles.body}`}>
-          The problem and part of the response are deeply intertwined.
-        </p>
       </Card>
     </Act>
   );
