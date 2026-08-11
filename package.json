@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "data:tourism": "node scripts/fetch-tourism-arrivals.mjs",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
