@@ -60,10 +60,6 @@ export function Essay() {
         </div>
 
         <div className={styles.dataBlock}>
-          <div className={styles.dataHeader}>
-            <h3>Visitor arrivals to Fiji</h3>
-            <p>Annual arrivals, 1999-2025</p>
-          </div>
           <ArrivalsChart rows={rows} />
         </div>
       </article>

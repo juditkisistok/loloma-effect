@@ -1,7 +1,7 @@
 .figure {
-  width: min(1220px, 100vw);
+  width: min(1040px, 92vw);
   margin: 0 auto;
-  padding: 0 5vw;
+  padding: 0;
 }
 
 .svg {
@@ -9,15 +9,18 @@
   width: 100%;
   height: auto;
   overflow: visible;
+  cursor: crosshair;
 }
 
-.grid line {
-  stroke: rgba(17, 17, 17, 0.1);
+.plotSurface {
+  fill: transparent;
+}
+
+.plotRule {
+  stroke: rgba(17, 17, 17, 0.18);
   stroke-width: 1;
 }
 
-.grid text,
-.axis text,
 .caption {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -26,16 +29,32 @@
   color: #777;
 }
 
-.grid text {
-  text-anchor: end;
+.chartHeader text:first-child {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  fill: #111;
 }
 
-.axis text {
-  text-anchor: middle;
+.chartHeader tspan {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  fill: #73736d;
+}
+
+.storyLabels text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  fill: #73736d;
 }
 
 .area {
-  fill: rgba(15, 157, 143, 0.08);
+  fill: url("#arrivals-area");
+  transition: opacity 0.2s ease;
 }
 
 .line {
@@ -44,60 +63,131 @@
   stroke-width: 3.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  filter: url("#arrivals-line-glow");
 }
 
-.point {
-  fill: #f7f7f5;
-  stroke: #0f877c;
-  stroke-width: 2;
-}
-
-.pointMajor {
-  fill: #f7f7f5;
+.interruptionLine {
+  fill: none;
   stroke: var(--coral);
-  stroke-width: 2.5;
+  stroke-width: 3.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.annotation line {
-  stroke: rgba(180, 68, 47, 0.26);
-  stroke-dasharray: 4 7;
+.interruption {
+  transition: opacity 0.35s ease;
 }
 
-.annotation text {
+.interruption rect:first-child {
+  fill: rgba(255, 111, 97, 0.085);
+}
+
+.interruption .hatch {
+  fill: url("#arrivals-hatch");
+  opacity: 0.28;
+}
+
+.svg pattern line {
+  stroke: rgba(180, 68, 47, 0.24);
+  stroke-width: 1.2;
+}
+
+.latestNote {
+  pointer-events: none;
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s ease;
+}
+
+.latestNote rect {
+  fill: rgba(247, 247, 245, 0.78);
+  stroke: rgba(17, 17, 17, 0.18);
+  stroke-width: 1;
+}
+
+.latestNote text {
   font-family: var(--font-mono);
-  font-size: 12px;
-  fill: var(--sepia);
-}
-
-.latest text {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
   fill: #111;
 }
 
+.latestDot {
+  fill: #f7f7f5;
+  stroke: #0f877c;
+  stroke-width: 2.5;
+}
+
+.latestNote text:first-of-type {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.latestNote text:last-of-type {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: #777;
+}
+
+.hover {
+  pointer-events: none;
+}
+
+.hover > line {
+  stroke: rgba(17, 17, 17, 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.hover circle {
+  fill: #f7f7f5;
+  stroke: #111;
+  stroke-width: 2;
+}
+
+.hover rect {
+  fill: rgba(17, 17, 17, 0.9);
+}
+
+.hover text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: #f7f7f5;
+}
+
+.hover text:first-of-type {
+  font-weight: 600;
+}
+
+.hitArea {
+  fill: transparent;
+  pointer-events: all;
+}
+
 .caption {
-  max-width: 760px;
-  margin: 18px auto 0;
+  max-width: 520px;
+  margin: -12px auto 0;
   line-height: 1.5;
   text-align: center;
 }
 
 @media (max-width: 760px) {
   .figure {
-    width: 100vw;
-    padding: 0 12px;
+    width: min(100vw, 720px);
+    padding: 0 10px;
   }
 
   .line {
     stroke-width: 3;
   }
 
-  .grid text,
-  .axis text,
   .caption,
-  .annotation text,
-  .latest text {
+  .chartHeader tspan,
+  .storyLabels text,
+  .latestNote text:last-of-type {
     font-size: 11px;
+  }
+
+  .chartHeader text:first-child {
+    font-size: 19px;
   }
 }

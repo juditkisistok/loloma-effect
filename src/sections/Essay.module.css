@@ -54,7 +54,7 @@
 
 .storyBlock {
   display: grid;
-  gap: 9vh;
+  gap: 6vh;
 }
 
 .prose {
@@ -77,29 +77,6 @@
 
 .dataBlock {
   width: 100%;
-}
-
-.dataHeader {
-  width: min(520px, 88vw);
-  margin: 0 auto 34px;
-}
-
-.dataHeader h3 {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 2.4vw, 32px);
-  font-weight: 600;
-  line-height: 1.1;
-  margin: 0;
-  color: #111;
-  text-wrap: balance;
-}
-
-.dataHeader p {
-  margin: 10px 0 0;
-  font-family: var(--font-body);
-  font-size: clamp(14px, 1.2vw, 17px);
-  line-height: 1.42;
-  color: #777;
 }
 
 @media (max-width: 760px) {
