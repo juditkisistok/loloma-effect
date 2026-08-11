@@ -1,14 +1,15 @@
-import { ascending, csv, extent, max } from "d3";
+import { ascending, csv, csvParse, extent, max } from "d3";
+import tourismArrivalsCsvText from "./tourism-arrivals.csv?raw";
 
 export const tourismArrivalsCsvUrl = "/data/tourism-arrivals.csv";
 
 export const tourismArrivalSources = {
-  spcClimateChange: {
+  "spc-climate-change": {
     id: "spc-climate-change",
     name: "Pacific Data Hub .Stat",
     url: "https://stats.pacificdata.org/vis?lc=en&df[ds]=SPC2&df[id]=DF_CLIMATE_CHANGE&df[ag]=SPC&df[vs]=1.0&av=true&dq=A.TRSM_ARR.&pd=,&to[TIME_PERIOD]=false",
   },
-  fijiStatsPreliminary2025: {
+  "fiji-stats-preliminary-2025": {
     id: "fiji-stats-preliminary-2025",
     name: "Fiji Bureau of Statistics provisional visitor arrivals",
     url: "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
@@ -16,8 +17,15 @@ export const tourismArrivalSources = {
 };
 
 export async function loadTourismArrivals(url = tourismArrivalsCsvUrl) {
-  const rows = await csv(url, parseTourismArrivalRow);
+  const rows =
+    url === tourismArrivalsCsvUrl
+      ? parseBundledTourismArrivals()
+      : await csv(url, parseTourismArrivalRow);
   return sortTourismArrivals(rows.filter(isValidTourismArrival));
+}
+
+export function parseBundledTourismArrivals() {
+  return csvParse(tourismArrivalsCsvText, parseTourismArrivalRow);
 }
 
 export function fijiTourismArrivals(rows) {

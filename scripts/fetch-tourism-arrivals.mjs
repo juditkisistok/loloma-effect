@@ -12,6 +12,9 @@ const explorerUrl =
 const csvPath = fileURLToPath(
   new URL("../public/data/tourism-arrivals.csv", import.meta.url),
 );
+const bundledCsvPath = fileURLToPath(
+  new URL("../src/data/tourism-arrivals.csv", import.meta.url),
+);
 const rawCsvPath = fileURLToPath(
   new URL("../public/data/tourism-arrivals-spc-raw.csv", import.meta.url),
 );
@@ -75,7 +78,6 @@ async function main() {
     throw new Error("Pacific Data Hub response did not include Fiji arrivals.");
   }
 
-  const fijiYears = fijiRows.map((row) => Number(row.TIME_PERIOD));
   const cleanRows = [
     ...fijiRows.map((row) => ({
       year: Number(row.TIME_PERIOD),
@@ -89,6 +91,7 @@ async function main() {
     })),
     ...supplementalRows,
   ].sort((a, b) => a.year - b.year);
+  const cleanYears = cleanRows.map((row) => row.year);
 
   const latestFiji = cleanRows.reduce((latest, row) =>
     Number(row.year) > Number(latest.year) ? row : latest,
@@ -104,7 +107,7 @@ async function main() {
     geographies: [...new Set(validRows.map((row) => row.GEO_PICT))],
     fiji: {
       geoCode: "FJ",
-      years: [Math.min(...fijiYears), latestFiji.year],
+      years: [Math.min(...cleanYears), latestFiji.year],
       latest: {
         year: latestFiji.year,
         arrivals: latestFiji.arrivals,
@@ -116,7 +119,10 @@ async function main() {
   };
 
   await mkdir(dirname(csvPath), { recursive: true });
-  await writeFile(csvPath, `${csvFormat(cleanRows)}\n`);
+  await mkdir(dirname(bundledCsvPath), { recursive: true });
+  const cleanCsvText = `${csvFormat(cleanRows)}\n`;
+  await writeFile(csvPath, cleanCsvText);
+  await writeFile(bundledCsvPath, cleanCsvText);
   await writeFile(rawCsvPath, csvText);
   await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`);
 
