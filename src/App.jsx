@@ -4,6 +4,7 @@ import { Scene } from "./scene/Scene";
 import { Hero } from "./sections/Hero";
 import { Knot } from "./sections/Knot";
 import { Impasse } from "./sections/Impasse";
+import { Essay } from "./sections/Essay";
 import styles from "./App.module.css";
 
 export default function App() {
@@ -31,6 +32,7 @@ function Stage() {
         </div>
       </div>
 
+      <Essay />
     </div>
   );
 }

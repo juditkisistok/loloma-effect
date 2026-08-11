@@ -1,0 +1,61 @@
+.essay {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 15vh 6vw;
+  background:
+    linear-gradient(180deg, rgba(251, 246, 236, 0.88), rgba(239, 230, 212, 1)),
+    var(--paper-plate);
+  color: var(--ink);
+}
+
+.masthead {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 500;
+  line-height: 1.02;
+  margin: 0;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.byline {
+  margin: 28px 0 0;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.byline a {
+  color: var(--ink);
+  border-bottom-color: rgba(18, 38, 45, 0.26);
+}
+
+.byline a:hover {
+  color: var(--teal);
+  border-bottom-color: rgba(15, 157, 143, 0.4);
+}
+
+.date {
+  margin: 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sepia);
+}
+
+@media (max-width: 760px) {
+  .essay {
+    padding: 12vh 6vw 14vh;
+  }
+}
