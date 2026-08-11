@@ -26,10 +26,10 @@
 
 .panelBody {
   font-family: var(--font-body);
-  font-size: clamp(15px, 1.7vw, 18px);
-  line-height: 1.64;
+  font-size: clamp(14.5px, 1.45vw, 16.5px);
+  line-height: 1.72;
   color: var(--paper-soft);
-  max-width: 520px;
+  max-width: 500px;
   text-wrap: pretty;
   text-shadow: 0 1px 20px rgba(4, 14, 26, 0.85);
 }

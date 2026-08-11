@@ -1,10 +1,10 @@
 .statement {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(24px, 3.3vw, 42px);
-  line-height: 1.28;
+  font-size: clamp(23px, 3vw, 38px);
+  line-height: 1.24;
   color: var(--paper);
-  margin: 0 0 24px;
+  margin: 0 0 28px;
   text-wrap: balance;
   text-shadow: 0 2px 30px rgba(4, 14, 26, 0.8);
 }
@@ -14,5 +14,6 @@
 }
 
 .body + .body {
-  margin-top: 1.15em;
+  color: var(--mist);
+  margin-top: 1.35em;
 }
