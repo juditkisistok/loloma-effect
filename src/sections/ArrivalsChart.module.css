@@ -1,0 +1,103 @@
+.figure {
+  width: min(1220px, 100vw);
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid line {
+  stroke: rgba(17, 17, 17, 0.1);
+  stroke-width: 1;
+}
+
+.grid text,
+.axis text,
+.caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  fill: #777;
+  color: #777;
+}
+
+.grid text {
+  text-anchor: end;
+}
+
+.axis text {
+  text-anchor: middle;
+}
+
+.area {
+  fill: rgba(15, 157, 143, 0.08);
+}
+
+.line {
+  fill: none;
+  stroke: #0f877c;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.point {
+  fill: #f7f7f5;
+  stroke: #0f877c;
+  stroke-width: 2;
+}
+
+.pointMajor {
+  fill: #f7f7f5;
+  stroke: var(--coral);
+  stroke-width: 2.5;
+}
+
+.annotation line {
+  stroke: rgba(180, 68, 47, 0.26);
+  stroke-dasharray: 4 7;
+}
+
+.annotation text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--sepia);
+}
+
+.latest text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  fill: #111;
+}
+
+.caption {
+  max-width: 760px;
+  margin: 18px auto 0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .figure {
+    width: 100vw;
+    padding: 0 12px;
+  }
+
+  .line {
+    stroke-width: 3;
+  }
+
+  .grid text,
+  .axis text,
+  .caption,
+  .annotation text,
+  .latest text {
+    font-size: 11px;
+  }
+}

@@ -2,60 +2,113 @@
   position: relative;
   z-index: 3;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 15vh 6vw;
-  background:
-    linear-gradient(180deg, rgba(251, 246, 236, 0.88), rgba(239, 230, 212, 1)),
-    var(--paper-plate);
+  padding: 10vh 0 18vh;
+  background: #f7f7f5;
   color: var(--ink);
 }
 
 .masthead {
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 760px;
+  margin: 0 auto 8vh;
+  padding: 0 6vw;
   text-align: center;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(38px, 6vw, 72px);
-  font-weight: 500;
-  line-height: 1.02;
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-weight: 600;
+  line-height: 1.08;
   margin: 0;
-  color: var(--ink);
+  color: #111;
   text-wrap: balance;
 }
 
 .byline {
-  margin: 28px 0 0;
+  margin: 24px 0 0;
   font-family: var(--font-body);
-  font-size: clamp(14px, 1.2vw, 16px);
+  font-size: clamp(14px, 1.15vw, 16px);
+  font-weight: 600;
   line-height: 1.5;
-  color: var(--ink-soft);
+  color: #1f2526;
 }
 
 .byline a {
-  color: var(--ink);
-  border-bottom-color: rgba(18, 38, 45, 0.26);
+  color: #111;
+  border-bottom-color: rgba(17, 17, 17, 0.55);
 }
 
 .byline a:hover {
-  color: var(--teal);
-  border-bottom-color: rgba(15, 157, 143, 0.4);
+  color: #111;
+  border-bottom-color: rgba(17, 17, 17, 0.85);
 }
 
 .date {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--sepia);
+  color: #777;
+}
+
+.storyBlock {
+  display: grid;
+  gap: 9vh;
+}
+
+.prose {
+  width: min(520px, 88vw);
+  margin: 0 auto;
+}
+
+.prose p {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.48;
+  color: #3e3e3c;
+  text-wrap: pretty;
+}
+
+.prose p + p {
+  margin-top: 1.08em;
+}
+
+.dataBlock {
+  width: 100%;
+}
+
+.dataHeader {
+  width: min(520px, 88vw);
+  margin: 0 auto 34px;
+}
+
+.dataHeader h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0;
+  color: #111;
+  text-wrap: balance;
+}
+
+.dataHeader p {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.42;
+  color: #777;
 }
 
 @media (max-width: 760px) {
   .essay {
-    padding: 12vh 6vw 14vh;
+    padding: 9vh 0 14vh;
+  }
+
+  .masthead {
+    margin-bottom: 11vh;
+    padding: 0 6vw;
   }
 }
