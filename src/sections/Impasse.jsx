@@ -8,16 +8,17 @@ export function Impasse() {
   return (
     <Act name="impasse" align="center" height="165vh">
       <Card className={panelStyles.panel}>
+
+
         <p className={styles.statement}>
-          Fiji can't ask them to stop coming — tourism is, after all, a core part of their economy.</p>
+        Fiji can't simply ask people to stop coming.</p>
 
           <p className={`${panelStyles.panelBody} ${styles.body}`}>
-            Inconveniently enough, the thing doing the damage and the thing keeping the country afloat are the same thing.
+          So it's trying to answer a much harder question:
         </p>
 
         <p className={styles.turn}>
-          So Fiji has not asked its visitors to leave — instead, it has asked
-          them for something a bit more curious.
+        How do you keep tourism thriving without leaving the archipelago to carry the burden alone?
         </p>
       </Card>
     </Act>
