@@ -1,0 +1,117 @@
+.figure {
+  width: min(1040px, 92vw);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chartHeader text {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  fill: #111;
+}
+
+.plotRule {
+  stroke: rgba(17, 17, 17, 0.18);
+  stroke-width: 1;
+}
+
+.rowLabel text:first-child {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  fill: #222;
+}
+
+.rowLabel text:last-child {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: #777;
+}
+
+.segmentDirect {
+  fill: #0f877c;
+}
+
+.segmentSupply {
+  fill: rgba(15, 135, 124, 0.28);
+}
+
+.segmentWarming {
+  fill: var(--coral);
+}
+
+.fijiBar {
+  fill: rgba(17, 17, 17, 0.22);
+}
+
+.segmentLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: #777;
+  text-anchor: middle;
+  transition: opacity 0.2s ease;
+}
+
+.callout {
+  pointer-events: none;
+  transition: opacity 0.24s ease;
+}
+
+.callout rect {
+  fill: rgba(247, 247, 245, 0.9);
+  stroke: rgba(17, 17, 17, 0.2);
+  stroke-width: 1;
+}
+
+.callout text {
+  font-family: var(--font-mono);
+  fill: #111;
+}
+
+.callout text:first-of-type {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.callout text:last-of-type {
+  font-size: 10px;
+  fill: #777;
+}
+
+.caption {
+  max-width: 520px;
+  margin: -4px auto 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: #777;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .figure {
+    width: min(100vw, 720px);
+    padding: 0 10px;
+  }
+
+  .chartHeader text {
+    font-size: 15px;
+  }
+
+  .rowLabel text:first-child {
+    font-size: 12px;
+  }
+
+  .caption {
+    font-size: 11px;
+  }
+}

@@ -4,7 +4,9 @@ import {
   loadTourismArrivals,
   parseBundledTourismArrivals,
 } from "../data/tourismArrivals";
+import { Ref } from "../components/Ref";
 import { ArrivalsChart } from "./ArrivalsChart";
+import { JourneyComparison } from "./JourneyComparison";
 import styles from "./Essay.module.css";
 
 const storyEndYear = 2025;
@@ -75,6 +77,50 @@ export function Essay() {
             there.
           </p>
           <p>This is where the climate side of the story begins.</p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            Take one visitor travelling from London to Nadi in economy class.
+            Their return journey produces around <strong>6 tonnes of CO₂e</strong>, depending on the route and calculation method.
+            <Ref
+              n="3"
+              href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025"
+              label="UK government greenhouse gas conversion factors 2025"
+            />
+          </p>
+          <p>
+            Fiji's territorial CO₂ emissions were around {" "}
+            <strong>1.56 tonnes per person in 2024</strong>.
+            <Ref
+              n="4"
+              href="https://ourworldindata.org/profile/co2/fiji"
+              label="Our World in Data CO₂ profile for Fiji"
+            />
+          </p>
+          <p>
+            The figures are not directly equivalent: the flight estimate
+            includes aviation's wider warming effects, while Fiji's figure
+            counts only CO₂ released within its borders. Even with that caveat,
+            the imbalance is rather significant.
+          </p>
+        </div>
+
+        <div className={styles.dataBlock}>
+          <JourneyComparison />
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            That flight is one small part of decades of accumulated global
+            emissions - a total Fiji has contributed very little to.
+          </p>
+          <p>
+            By the time Nadi's shoreline appears through the window, most of the journey's
+            emissions have already been released. They sit outside Fiji's
+            national carbon account, even as the country has to spend more on
+            adapting to a warmer climate.
+          </p>
         </div>
       </article>
     </section>
