@@ -9,7 +9,6 @@
   width: 100%;
   height: auto;
   overflow: visible;
-  cursor: crosshair;
 }
 
 .plotSurface {
@@ -30,18 +29,10 @@
 }
 
 .chartHeader text:first-child {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
   fill: #111;
-}
-
-.chartHeader tspan {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  fill: #73736d;
 }
 
 .storyLabels text {
@@ -60,18 +51,19 @@
 .line {
   fill: none;
   stroke: #0f877c;
-  stroke-width: 3.5;
+  stroke-width: 3.1;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: url("#arrivals-line-glow");
+  filter: drop-shadow(0 3px 7px rgba(15, 135, 124, 0.13));
 }
 
 .interruptionLine {
   fill: none;
   stroke: var(--coral);
-  stroke-width: 3.7;
+  stroke-width: 3.3;
   stroke-linecap: round;
   stroke-linejoin: round;
+  filter: drop-shadow(0 3px 7px rgba(255, 111, 97, 0.13));
 }
 
 .interruption {
@@ -79,16 +71,16 @@
 }
 
 .interruption rect:first-child {
-  fill: rgba(255, 111, 97, 0.085);
+  fill: rgba(255, 111, 97, 0.045);
 }
 
 .interruption .hatch {
   fill: url("#arrivals-hatch");
-  opacity: 0.28;
+  opacity: 0.16;
 }
 
 .svg pattern line {
-  stroke: rgba(180, 68, 47, 0.24);
+  stroke: rgba(180, 68, 47, 0.18);
   stroke-width: 1.2;
 }
 
@@ -100,8 +92,8 @@
 }
 
 .latestNote rect {
-  fill: rgba(247, 247, 245, 0.78);
-  stroke: rgba(17, 17, 17, 0.18);
+  fill: rgba(247, 247, 245, 0.88);
+  stroke: rgba(17, 17, 17, 0.2);
   stroke-width: 1;
 }
 
@@ -111,19 +103,18 @@
 }
 
 .latestDot {
-  fill: #f7f7f5;
-  stroke: #0f877c;
-  stroke-width: 2.5;
+  fill: #0f877c;
+  stroke: none;
 }
 
 .latestNote text:first-of-type {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 
 .latestNote text:last-of-type {
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   fill: #777;
 }
@@ -132,35 +123,36 @@
   pointer-events: none;
 }
 
-.hover > line {
-  stroke: rgba(17, 17, 17, 0.2);
-  stroke-width: 1;
-  stroke-dasharray: 3 5;
-}
-
 .hover circle {
-  fill: #f7f7f5;
-  stroke: #111;
-  stroke-width: 2;
+  fill: #0f877c;
+  stroke: rgba(247, 247, 245, 0.92);
+  stroke-width: 2.5;
 }
 
 .hover rect {
-  fill: rgba(17, 17, 17, 0.9);
+  fill: rgba(247, 247, 245, 0.9);
+  stroke: rgba(17, 17, 17, 0.14);
+  stroke-width: 1;
 }
 
 .hover text {
   font-family: var(--font-mono);
-  font-size: 12px;
-  fill: #f7f7f5;
+  font-size: 11px;
+  fill: #333;
 }
 
 .hover text:first-of-type {
   font-weight: 600;
 }
 
-.hitArea {
-  fill: transparent;
-  pointer-events: all;
+.hitPath {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 26;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: stroke;
+  cursor: crosshair;
 }
 
 .caption {
@@ -181,13 +173,12 @@
   }
 
   .caption,
-  .chartHeader tspan,
   .storyLabels text,
   .latestNote text:last-of-type {
     font-size: 11px;
   }
 
   .chartHeader text:first-child {
-    font-size: 19px;
+    font-size: 15px;
   }
 }

@@ -17,7 +17,10 @@ export function ArrivalsChart({ rows = [] }) {
   const [hovered, setHovered] = useState(null);
   const chart = useMemo(() => buildChart(rows), [rows]);
   const drawProgress = chart.points.length ? progress : 0;
-  const latestNoteProgress = clamp((drawProgress - 0.9) / 0.08, 0, 1);
+  const interruptionProgress = chart.interruption
+    ? clamp((drawProgress - chart.interruption.startProgress) / 0.08, 0, 1)
+    : 0;
+  const latestNoteProgress = clamp((drawProgress - 0.975) / 0.025, 0, 1);
 
   useFrame((frame) => {
     const el = ref.current;
@@ -50,7 +53,13 @@ export function ArrivalsChart({ rows = [] }) {
       return !best || distance < best.distance ? { point, distance } : best;
     }, null);
 
-    setHovered(nearest?.point ?? null);
+    const next = nearest?.point;
+    if (next?.year === storyEndYear) {
+      setHovered(null);
+      return;
+    }
+
+    setHovered(next && next.progress <= drawProgress + 0.015 ? next : null);
   }
 
   return (
@@ -60,7 +69,6 @@ export function ArrivalsChart({ rows = [] }) {
         viewBox={`0 0 ${width} ${height}`}
         role="img"
         aria-label="Annual visitor arrivals to Fiji from 1995 to 2025"
-        onPointerMove={handlePointerMove}
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -74,28 +82,9 @@ export function ArrivalsChart({ rows = [] }) {
             <line x1="0" y1="0" x2="0" y2="10" />
           </pattern>
           <linearGradient id="arrivals-area" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#0f877c" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#0f877c" stopOpacity="0.02" />
+            <stop offset="0%" stopColor="#0f877c" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#0f877c" stopOpacity="0.01" />
           </linearGradient>
-          <filter
-            id="arrivals-line-glow"
-            x="-8%"
-            y="-30%"
-            width="116%"
-            height="160%"
-          >
-            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-            <feColorMatrix
-              in="blur"
-              type="matrix"
-              values="0 0 0 0 0.05 0 0 0 0 0.53 0 0 0 0 0.49 0 0 0 0.45 0"
-              result="glow"
-            />
-            <feMerge>
-              <feMergeNode in="glow" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
           <clipPath id="arrivals-reveal">
             <rect
               x={margin.left}
@@ -123,15 +112,14 @@ export function ArrivalsChart({ rows = [] }) {
 
         <g className={styles.chartHeader}>
           <text x={labelInset} y={margin.top - 34}>
-            Visitor arrivals to Fiji
-            <tspan dx="12">Annual arrivals, 1995-2025</tspan>
+            Visitor arrivals to Fiji, 1995-2025
           </text>
         </g>
 
         {chart.interruption && (
           <g
             className={styles.interruption}
-            opacity={drawProgress > chart.interruption.startProgress ? 1 : 0}
+            opacity={interruptionProgress}
           >
             <rect
               x={chart.interruption.x}
@@ -151,14 +139,23 @@ export function ArrivalsChart({ rows = [] }) {
 
         <g clipPath="url(#arrivals-reveal)">
           <path className={styles.area} d={chart.areaPath} />
-          <path className={styles.line} d={chart.linePath} pathLength="1" />
-          {chart.interruption?.linePath && (
-            <path
-              className={styles.interruptionLine}
-              d={chart.interruption.linePath}
-            />
-          )}
         </g>
+        <path
+          className={styles.line}
+          d={chart.linePath}
+          pathLength="1"
+          style={{
+            strokeDasharray: 1,
+            strokeDashoffset: 1 - drawProgress,
+          }}
+        />
+        {chart.interruption?.linePath && (
+          <path
+            className={styles.interruptionLine}
+            d={chart.interruption.linePath}
+            clipPath="url(#arrivals-reveal)"
+          />
+        )}
 
         <g className={styles.storyLabels}>
           {chart.storyLabels.map((label) => (
@@ -174,31 +171,30 @@ export function ArrivalsChart({ rows = [] }) {
         </g>
 
         {chart.latest && (
-          <g
-            className={styles.latestNote}
-            opacity={latestNoteProgress}
-            transform={`translate(0 ${(1 - latestNoteProgress) * 8})`}
-          >
+          <>
             <circle
               className={styles.latestDot}
               cx={chart.x(chart.latest.year)}
               cy={chart.y(chart.latest.arrivals)}
-              r="5"
+              r="4"
+              opacity={latestNoteProgress}
             />
             <g
-              transform={`translate(${chart.x(chart.latest.year) - 68} ${
-                chart.y(chart.latest.arrivals) - 64
+              className={styles.latestNote}
+              opacity={latestNoteProgress}
+              transform={`translate(${chart.x(chart.latest.year) - 70} ${
+                chart.y(chart.latest.arrivals) - 58 + (1 - latestNoteProgress) * 8
               })`}
             >
-              <rect width="136" height="50" />
-              <text x="14" y="20">
+              <rect width="140" height="46" />
+              <text x="13" y="18">
                 {formatWhole(chart.latest.arrivals)}
               </text>
-              <text x="14" y="38">
+              <text x="13" y="35">
                 2025 preliminary
               </text>
             </g>
-          </g>
+          </>
         )}
 
         {hovered && (
@@ -208,30 +204,25 @@ export function ArrivalsChart({ rows = [] }) {
               hovered.arrivals,
             )})`}
           >
-            <line y1="0" y2={height - margin.bottom - chart.y(hovered.arrivals)} />
-            <circle r="7" />
+            <circle r="4.5" />
             <g
               transform={`translate(${
-                chart.x(hovered.year) > width - 260 ? -164 : 16
-              } -58)`}
+                chart.x(hovered.year) > width - 210 ? -136 : 14
+              } -42)`}
             >
-              <rect width="148" height="48" rx="0" />
-              <text x="12" y="20">
-                {hovered.year}
-              </text>
-              <text x="12" y="37">
-                {formatWhole(hovered.arrivals)} arrivals
+              <rect width="122" height="34" rx="0" />
+              <text x="10" y="14">
+                {hovered.year} · {formatWhole(hovered.arrivals)}
               </text>
             </g>
           </g>
         )}
 
-        <rect
-          className={styles.hitArea}
-          x={margin.left}
-          y={margin.top}
-          width={width - margin.left - margin.right}
-          height={height - margin.top - margin.bottom}
+        <path
+          className={styles.hitPath}
+          d={chart.linePath}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={() => setHovered(null)}
         />
       </svg>
       <figcaption className={styles.caption}>
