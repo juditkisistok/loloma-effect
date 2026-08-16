@@ -1,0 +1,180 @@
+.figure {
+  width: min(1080px, 94vw);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.header text:first-child {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: #53666a;
+}
+
+.header text:last-child,
+.legend text,
+.panel text,
+.place text,
+.highlightPlace text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  fill: #6c7c80;
+}
+
+.map {
+  opacity: 0.98;
+}
+
+.land {
+  fill: rgba(198, 201, 196, 0.66);
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 0.9;
+  vector-effect: non-scaling-stroke;
+}
+
+.place circle,
+.highlightPlace circle {
+  fill: #111;
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 1.4;
+}
+
+.place text,
+.highlightPlace text {
+  paint-order: stroke;
+  stroke: rgba(247, 247, 245, 0.9);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.highlightPlace text {
+  fill: #26383c;
+}
+
+.dot {
+  cursor: pointer;
+  transition:
+    r 0.16s ease,
+    opacity 0.2s ease,
+    fill 0.16s ease,
+    stroke-width 0.16s ease;
+}
+
+.dot:focus-visible {
+  outline: none;
+  stroke-width: 3;
+}
+
+.relocatedDot {
+  fill: var(--coral);
+  stroke: rgba(247, 247, 245, 0.95);
+  stroke-width: 1.6;
+}
+
+.assessmentDot {
+  fill: rgba(15, 157, 143, 0.28);
+  stroke: #0f877c;
+  stroke-width: 1.4;
+}
+
+.selectedDot {
+  fill: #111;
+  stroke: #f7f7f5;
+  stroke-width: 2;
+}
+
+.legend text {
+  font-size: 11px;
+}
+
+.panel {
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.panel line {
+  stroke: rgba(18, 38, 45, 0.14);
+  stroke-width: 1;
+}
+
+.panelKicker {
+  font-size: 11px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em !important;
+  fill: #53666a !important;
+}
+
+.countPair text:not(.bigCount),
+.detailText,
+.panelStatus,
+.nationalCount {
+  font-size: 12px !important;
+  fill: #6a7b7f !important;
+}
+
+.nationalCount {
+  font-weight: 700;
+}
+
+.bigCount {
+  font-family: var(--font-display) !important;
+  font-size: 48px !important;
+  font-weight: 600;
+  letter-spacing: 0 !important;
+  fill: #111 !important;
+}
+
+.panelTitle {
+  font-family: var(--font-body) !important;
+  font-size: 18px !important;
+  font-weight: 700;
+  letter-spacing: 0 !important;
+  fill: #111 !important;
+}
+
+.caption {
+  max-width: 720px;
+  margin: -6px auto 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  color: #777;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .figure {
+    width: min(100vw, 720px);
+    padding: 0 10px;
+  }
+
+  .header text:first-child {
+    font-size: 12px;
+  }
+
+  .header text:last-child,
+  .legend text,
+  .panel text,
+  .place text,
+  .highlightPlace text,
+  .caption {
+    font-size: 10px;
+  }
+
+  .bigCount {
+    font-size: 40px !important;
+  }
+}

@@ -9,6 +9,7 @@ import { ArrivalsChart } from "./ArrivalsChart";
 import { flightComparison, journeyOptions } from "../data/journeyComparison";
 import { CoastalExposure } from "./CoastalExposure";
 import { JourneyComparison } from "./JourneyComparison";
+import { RelocationDecision } from "./RelocationDecision";
 import styles from "./Essay.module.css";
 
 const storyEndYear = 2025;
@@ -210,6 +211,65 @@ export function Essay() {
             For some communities, adapting in place may mean seawalls, raised
             homes or changes to the water supply. For others, those measures are
             no longer enough, and relocation needs to enter the conversation.
+          </p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            For Vunidogoloa, a coastal village on Vanua Levu, that conversation
+            led to a move. In 2014, about 140 residents from 26 households moved
+            to a site two kilometres inland. It became Fiji's first village to
+            complete a planned relocation because of climate change.
+            <Ref
+              n="7"
+              href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8072796/"
+              label="Planned relocation and health case study from Vunidogoloa, Fiji"
+            />
+          </p>
+          <p>
+            The move resolved some immediate problems. The new site offered
+            safer housing, better road access and soil where taro, cassava,
+            pineapples and bananas could grow without saltwater reaching their
+            roots.
+          </p>
+          <p>
+            It also changed familiar routines. The sea was now two kilometres
+            away, making fishing more time-consuming. Residents later reported
+            eating less fresh seafood and more packaged food.
+          </p>
+          <p>
+            Relocation reduced the village's exposure to flooding and saltwater,
+            but it also changed how people accessed food, work and the sea. This
+            is why Fiji treats it as a last resort.
+          </p>
+          <p>
+            Vunidogoloa was the first community to move, but it was not the
+            last. As of 2025, Fiji had relocated{" "}
+            <strong>six communities</strong>. A further{" "}
+            <strong>43 had been identified for assessment</strong> - not ordered
+            to move, and not all expected to.
+            <Ref
+              n="8"
+              href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
+              label="Fiji Parliament Daily Hansard, 14 July 2025"
+            />
+          </p>
+        </div>
+
+        <div className={styles.dataBlock}>
+          <RelocationDecision />
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            The assessments are not limited to sea-level rise. Heavy rainfall,
+            river flooding, landslides and unstable ground can also make a
+            settlement unsafe. In each case, the first question is whether the
+            risk can be reduced without moving the community.
+          </p>
+          <p>
+            With dozens of communities requiring assessment, the response cannot
+            be improvised one village at a time.
           </p>
         </div>
       </article>
