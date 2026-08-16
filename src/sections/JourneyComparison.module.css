@@ -11,11 +11,17 @@
   overflow: visible;
 }
 
-.chartHeader text {
+.chartHeader text:first-child {
   font-family: var(--font-body);
   font-size: 17px;
   font-weight: 700;
   fill: #111;
+}
+
+.chartHeader text:last-child {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #777;
 }
 
 .plotRule {
@@ -34,6 +40,13 @@
   font-family: var(--font-mono);
   font-size: 12px;
   fill: #777;
+}
+
+.segmentDirect,
+.segmentSupply,
+.segmentWarming,
+.fijiBar {
+  transition: width 0.34s ease;
 }
 
 .segmentDirect {
@@ -103,7 +116,7 @@
     padding: 0 10px;
   }
 
-  .chartHeader text {
+  .chartHeader text:first-child {
     font-size: 15px;
   }
 

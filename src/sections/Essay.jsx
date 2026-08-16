@@ -6,6 +6,7 @@ import {
 } from "../data/tourismArrivals";
 import { Ref } from "../components/Ref";
 import { ArrivalsChart } from "./ArrivalsChart";
+import { flightComparison, journeyOptions } from "../data/journeyComparison";
 import { JourneyComparison } from "./JourneyComparison";
 import styles from "./Essay.module.css";
 
@@ -36,6 +37,12 @@ export function Essay() {
     [rows],
   );
   const latestArrivals = latest ? formatWhole(latest.arrivals) : null;
+  const [selectedJourneyId, setSelectedJourneyId] = useState("london");
+  const [journeyMenuOpen, setJourneyMenuOpen] = useState(false);
+  const selectedJourney =
+    journeyOptions.find((journey) => journey.id === selectedJourneyId) ??
+    journeyOptions[0];
+  const roundedJourneyTonnes = Math.round(selectedJourney.total);
 
   return (
     <section className={styles.essay} aria-labelledby="essay-title">
@@ -77,12 +84,41 @@ export function Essay() {
             there.
           </p>
           <p>This is where the climate side of the story begins.</p>
-        </div>
-
-        <div className={styles.prose}>
           <p>
-            Take one visitor travelling from London to Nadi in economy class.
-            Their return journey produces around <strong>6 tonnes of CO₂e</strong>, depending on the route and calculation method.
+            Take one visitor travelling from {" "}
+            <span className={styles.inlineMenu}>
+              <button
+                className={styles.inlineSelect}
+                type="button"
+                aria-label="Choose origin city"
+                aria-expanded={journeyMenuOpen}
+                onClick={() => setJourneyMenuOpen((open) => !open)}
+              >
+                {selectedJourney.label}
+              </button>
+              {journeyMenuOpen && (
+                <span className={styles.inlineOptions}>
+                  {journeyOptions.map((journey) => (
+                    <button
+                      className={styles.inlineOption}
+                      key={journey.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedJourneyId(journey.id);
+                        setJourneyMenuOpen(false);
+                      }}
+                    >
+                      {journey.label}
+                    </button>
+                  ))}
+                </span>
+              )}
+            </span>{" "}
+            to Nadi in economy class. Their return journey produces around {" "}
+            <strong>
+              {roundedJourneyTonnes} tonne
+              {roundedJourneyTonnes === 1 ? "" : "s"} of CO₂e
+            </strong>, depending on the route and calculation method.
             <Ref
               n="3"
               href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025"
@@ -91,7 +127,10 @@ export function Essay() {
           </p>
           <p>
             Fiji's territorial CO₂ emissions were around {" "}
-            <strong>1.56 tonnes per person in 2024</strong>.
+            <strong>
+              {flightComparison.fijiPerPerson.toFixed(2)} tonnes per person in
+              2024
+            </strong>.
             <Ref
               n="4"
               href="https://ourworldindata.org/profile/co2/fiji"
@@ -107,7 +146,7 @@ export function Essay() {
         </div>
 
         <div className={styles.dataBlock}>
-          <JourneyComparison />
+          <JourneyComparison selectedId={selectedJourneyId} />
         </div>
 
         <div className={styles.prose}>

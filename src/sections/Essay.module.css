@@ -75,6 +75,61 @@
   margin-top: 1.08em;
 }
 
+.inlineMenu {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.inlineSelect {
+  appearance: none;
+  border: 0;
+  border-bottom: 1px dashed rgba(15, 135, 124, 0.55);
+  border-radius: 0;
+  background: transparent;
+  color: #0f877c;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0 0.02em 0.04em;
+  cursor: pointer;
+}
+
+.inlineSelect:focus-visible {
+  outline: 2px solid rgba(15, 135, 124, 0.28);
+  outline-offset: 3px;
+}
+
+.inlineOptions {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: calc(100% + 0.28em);
+  display: grid;
+  min-width: max-content;
+  background: rgba(247, 247, 245, 0.96);
+  border: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.inlineOption {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #333;
+  font-family: var(--font-body);
+  font-size: 0.78em;
+  line-height: 1;
+  padding: 0.58em 0.72em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.inlineOption:hover,
+.inlineOption:focus-visible {
+  background: rgba(15, 135, 124, 0.08);
+  color: #0f877c;
+}
+
 .dataBlock {
   width: 100%;
 }
