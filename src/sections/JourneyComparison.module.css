@@ -24,29 +24,38 @@
   fill: #777;
 }
 
-.plotRule {
-  stroke: rgba(17, 17, 17, 0.18);
+.legend rect {
+  fill-opacity: 1;
+}
+
+.legend text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #6a6a63;
+  dominant-baseline: middle;
+}
+
+.baseline {
+  stroke: rgba(17, 17, 17, 0.16);
   stroke-width: 1;
 }
 
-.rowLabel text:first-child {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 700;
-  fill: #222;
+.ticks line {
+  stroke: rgba(17, 17, 17, 0.22);
+  stroke-width: 1;
 }
 
-.rowLabel text:last-child {
+.ticks text {
   font-family: var(--font-mono);
-  font-size: 12px;
-  fill: #777;
+  font-size: 10px;
+  fill: #97968d;
+  text-anchor: middle;
 }
 
 .segmentDirect,
 .segmentSupply,
-.segmentWarming,
-.fijiBar {
-  transition: width 0.34s ease;
+.segmentWarming {
+  transition: opacity 0.2s ease;
 }
 
 .segmentDirect {
@@ -54,48 +63,78 @@
 }
 
 .segmentSupply {
-  fill: rgba(15, 135, 124, 0.28);
+  fill: rgba(15, 135, 124, 0.32);
 }
 
 .segmentWarming {
   fill: var(--coral);
 }
 
-.fijiBar {
-  fill: rgba(17, 17, 17, 0.22);
+.plane line {
+  stroke: #1c1c19;
+  stroke-width: 2.2;
+  stroke-linecap: round;
 }
 
-.segmentLabel {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  fill: #777;
-  text-anchor: middle;
-  transition: opacity 0.2s ease;
+.plane path {
+  fill: #1c1c19;
 }
 
-.callout {
+.totalNote {
   pointer-events: none;
   transition: opacity 0.24s ease;
 }
 
-.callout rect {
-  fill: rgba(247, 247, 245, 0.9);
-  stroke: rgba(17, 17, 17, 0.2);
-  stroke-width: 1;
-}
-
-.callout text {
+.totalNote text:first-child {
   font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
   fill: #111;
 }
 
-.callout text:first-of-type {
-  font-size: 13px;
-  font-weight: 700;
+.totalNote text:last-child {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  fill: #8a8a80;
 }
 
-.callout text:last-of-type {
+.fijiMarker line {
+  stroke: var(--sand-deep);
+  stroke-width: 2;
+}
+
+.fijiMarker circle {
+  fill: var(--sand-deep);
+}
+
+.fijiMarker text {
+  font-family: var(--font-mono);
   font-size: 10px;
+  fill: #7a5c2c;
+}
+
+.fijiMarker .fijiValue {
+  font-weight: 700;
+  fill: var(--sand-deep);
+}
+
+.bracket line {
+  stroke: #a6a59b;
+  stroke-width: 1;
+}
+
+.bigNumber {
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 600;
+  fill: #111;
+}
+
+.bigCaption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
   fill: #777;
 }
 
@@ -120,7 +159,15 @@
     font-size: 15px;
   }
 
-  .rowLabel text:first-child {
+  .legend text {
+    font-size: 12px;
+  }
+
+  .bigNumber {
+    font-size: 40px;
+  }
+
+  .bigCaption {
     font-size: 12px;
   }
 

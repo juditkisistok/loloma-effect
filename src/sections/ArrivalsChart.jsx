@@ -31,13 +31,13 @@ export function ArrivalsChart({ rows = [] }) {
     }
 
     const rect = el.getBoundingClientRect();
-    const start = window.innerHeight * 0.68;
-    const end = window.innerHeight * 0.24;
+    const start = window.innerHeight * 0.95;
+    const end = window.innerHeight * 0.1;
     const raw = (start - rect.top) / (start - end);
     const pageBottom =
       window.scrollY + window.innerHeight >=
       document.documentElement.scrollHeight - 2;
-    const next = pageBottom ? 1 : easeOutCubic(clamp(raw, 0, 1));
+    const next = pageBottom ? 1 : clamp(raw, 0, 1);
 
     setProgress((current) =>
       Math.abs(current - next) > 0.002 ? next : current,
@@ -305,8 +305,4 @@ function buildChart(rows) {
     interruption,
     latest: rows.find((row) => row.year === storyEndYear) ?? rows.at(-1),
   };
-}
-
-function easeOutCubic(t) {
-  return 1 - (1 - t) ** 3;
 }
