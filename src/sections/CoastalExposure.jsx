@@ -6,7 +6,7 @@ import { useFrame } from "../scroll/stageContext";
 import styles from "./CoastalExposure.module.css";
 
 const width = 1000;
-const height = 470;
+const height = 425;
 const years = Array.from({ length: 25 }, (_, index) => 1999 + index);
 const colorForYear = interpolateRgb("#149f94", "#ff7668");
 
@@ -92,26 +92,20 @@ export function CoastalExposure() {
           className={styles.factRail}
           opacity={clamp((progress - 0.64) / 0.22, 0, 1)}
         >
-          <line x1="724" x2="724" y1="168" y2="354" />
-          <text x="746" y="176" className={styles.factKicker}>
-            WHY THIS EDGE MATTERS
-          </text>
+          <line x1="724" x2="724" y1="168" y2="316" />
           <text x="746" y="220" className={styles.factValueTeal}>
-            +13 cm
+            +13 cm - Lautoka sea level since 1993
           </text>
-          <text x="746" y="242">
-            Lautoka sea level since 1993
-          </text>
-          <text x="746" y="288" className={styles.factValue}>
+          <text x="746" y="264" className={styles.factValue}>
             27%
           </text>
-          <text x="816" y="286">
-            within 1 km of the sea
+          <text x="816" y="262">
+            of the population lives within 1 km of the sea
           </text>
-          <text x="746" y="336" className={styles.factValue}>
+          <text x="746" y="308" className={styles.factValue}>
             76%
           </text>
-          <text x="816" y="334">
+          <text x="816" y="306">
             within 5 km
           </text>
         </g>
@@ -154,7 +148,6 @@ export function CoastalExposure() {
             177°30'E
           </text>
         </g>
-
       </svg>
       <figcaption className={styles.caption}>
         Sources: Digital Earth Pacific / Pacific Data Hub Annual Shorelines
