@@ -7,6 +7,7 @@ import {
 import { Ref } from "../components/Ref";
 import { ArrivalsChart } from "./ArrivalsChart";
 import { flightComparison, journeyOptions } from "../data/journeyComparison";
+import { CoastalExposure } from "./CoastalExposure";
 import { JourneyComparison } from "./JourneyComparison";
 import styles from "./Essay.module.css";
 
@@ -159,6 +160,56 @@ export function Essay() {
             emissions have already been released. They sit outside Fiji's
             national carbon account, even as the country has to spend more on
             adapting to a warmer climate.
+          </p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            Much of that adaptation work is concentrated along the coast, where{" "}
+            <strong>
+              76% of Fiji's population lives within five kilometres of the sea
+            </strong>
+            {". "}
+            More than a quarter lives within a single kilometre.
+            <Ref
+              n="6"
+              href="https://www.sprep.org/news/676-communities-face-possible-relocation-in-fiji-as-climate-impacts-escalate"
+              label="SPREP coverage of possible community relocation in Fiji"
+            />
+          </p>
+          <p>
+            At Lautoka, sea level has risen by around{" "}
+            <strong>13 centimetres since 1993</strong>.
+            <Ref
+              n="5"
+              href="https://sealevel.nasa.gov/internal_resources/522/Lautoka_Fiji_combined.pdf"
+              label="NASA Sea Level Change Team summary for Lautoka, Fiji"
+            />
+          </p>
+          <p>
+            Thirteen centimetres is easy to dismiss when it is drawn on a piece
+            of paper. On the coast, however, it gives high tides and storm
+            surges a higher starting point. Saltwater reaches gardens, fields
+            and freshwater supplies more often. Erosion becomes harder to
+            control.
+          </p>
+          <p>
+            The changes tend to arrive as a series of practical problems: a crop
+            that no longer grows well, a well that turns brackish, or a section
+            of shoreline that needs to be repaired again after the next period
+            of high water.
+          </p>
+        </div>
+
+        <div className={styles.dataBlock}>
+          <CoastalExposure />
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            For some communities, adapting in place may mean seawalls, raised
+            homes or changes to the water supply. For others, those measures are
+            no longer enough, and relocation needs to enter the conversation.
           </p>
         </div>
       </article>
