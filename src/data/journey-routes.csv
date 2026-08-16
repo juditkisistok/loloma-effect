@@ -1,0 +1,5 @@
+id,label,route_codes,route_note
+london,London,LHR|SYD|NAN,via Sydney
+los-angeles,Los Angeles,LAX|NAN,
+tokyo,Tokyo,HND|NAN,
+singapore,Singapore,SIN|NAN,

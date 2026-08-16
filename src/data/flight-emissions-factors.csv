@@ -1,0 +1,6 @@
+id,label,value_kg_co2e_per_passenger_km,source_title,source_url
+fiji_per_person_2024,Fiji territorial CO2 per person 2024,1.5561111,Our World in Data CO2 profile for Fiji,https://ourworldindata.org/profile/co2/fiji
+uk_long_haul_economy_direct_co2,UK long-haul economy direct CO2,0.06826,UK government greenhouse gas conversion factors 2025,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025
+uk_long_haul_economy_without_rf,UK long-haul economy without radiative forcing,0.06926,UK government greenhouse gas conversion factors 2025,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025
+uk_long_haul_economy_with_rf,UK long-haul economy with radiative forcing,0.11704,UK government greenhouse gas conversion factors 2025,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025
+uk_long_haul_economy_wtt,UK long-haul economy well-to-tank,0.02461,UK government greenhouse gas conversion factors 2025,https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025

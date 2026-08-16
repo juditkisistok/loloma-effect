@@ -137,9 +137,10 @@ export function JourneyComparison({ selectedId = "london" }) {
         </g>
       </svg>
       <figcaption className={styles.caption}>
-        Source note: estimates use UK government 2025 long-haul economy factors
-        as a common per-kilometre proxy. Route distances are great-circle
-        approximations; London is shown via Sydney to reflect a practical routing.
+        Source note: {selected.routeLabel} return distance estimated at {" "}
+        {selected.returnKm.toLocaleString("en-US")} passenger-km using
+        great-circle airport distances. Emissions use UK government 2025
+        long-haul economy factors, including aviation's non-CO₂ effects.
       </figcaption>
     </figure>
   );

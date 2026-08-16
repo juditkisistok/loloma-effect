@@ -1,51 +1,50 @@
-import { geoDistance } from "d3";
+import { csvParse, geoDistance } from "d3";
+import airportsCsv from "./journey-airports.csv?raw";
+import factorsCsv from "./flight-emissions-factors.csv?raw";
+import routesCsv from "./journey-routes.csv?raw";
 
 const earthRadiusKm = 6371;
 
+const factorRows = csvParse(factorsCsv, (row) => ({
+  id: row.id,
+  label: row.label,
+  value: Number(row.value_kg_co2e_per_passenger_km),
+  sourceTitle: row.source_title,
+  sourceUrl: row.source_url,
+}));
+const factors = Object.fromEntries(factorRows.map((row) => [row.id, row]));
+
+const airports = Object.fromEntries(
+  csvParse(airportsCsv, (row) => [
+    row.code,
+    {
+      label: row.label,
+      lat: Number(row.latitude),
+      lon: Number(row.longitude),
+    },
+  ]),
+);
+
 export const flightComparison = {
-  fijiPerPerson: 1.5561111,
+  fijiPerPerson: factors.fiji_per_person_2024.value,
+  sources: {
+    fiji: factors.fiji_per_person_2024,
+    flight: factors.uk_long_haul_economy_with_rf,
+  },
   ukLongHaulEconomyFactors: {
-    directCo2: 0.06826,
-    withoutRf: 0.06926,
-    withRf: 0.11704,
-    fuelSupply: 0.02461,
+    directCo2: factors.uk_long_haul_economy_direct_co2.value,
+    withoutRf: factors.uk_long_haul_economy_without_rf.value,
+    withRf: factors.uk_long_haul_economy_with_rf.value,
+    fuelSupply: factors.uk_long_haul_economy_wtt.value,
   },
 };
 
-const airports = {
-  LHR: { lon: -0.4543, lat: 51.47 },
-  SYD: { lon: 151.1753, lat: -33.9399 },
-  LAX: { lon: -118.4085, lat: 33.9416 },
-  HND: { lon: 139.7798, lat: 35.5494 },
-  SIN: { lon: 103.9915, lat: 1.3644 },
-  NAN: { lon: 177.4434, lat: -17.7554 },
-};
-
-const rawRouteOptions = [
-  {
-    id: "london",
-    label: "London",
-    route: ["LHR", "SYD", "NAN"],
-    note: "via Sydney",
-  },
-  {
-    id: "los-angeles",
-    label: "Los Angeles",
-    route: ["LAX", "NAN"],
-  },
-  {
-    id: "tokyo",
-    label: "Tokyo",
-    route: ["HND", "NAN"],
-  },
-  {
-    id: "singapore",
-    label: "Singapore",
-    route: ["SIN", "NAN"],
-  },
-];
-
-export const journeyOptions = rawRouteOptions
+export const journeyOptions = csvParse(routesCsv, (row) => ({
+  id: row.id,
+  label: row.label,
+  route: row.route_codes.split("|"),
+  note: row.route_note,
+}))
   .map(buildJourney)
   .filter((route) => route.total > flightComparison.fijiPerPerson);
 
@@ -74,6 +73,7 @@ function buildJourney(option) {
 
   return {
     ...option,
+    routeLabel: option.route.map((code) => airports[code].label).join(" → "),
     returnKm,
     segments: [
       {
