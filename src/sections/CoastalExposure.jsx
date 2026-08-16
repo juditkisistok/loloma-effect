@@ -93,6 +93,9 @@ export function CoastalExposure() {
           opacity={clamp((progress - 0.64) / 0.22, 0, 1)}
         >
           <line x1="724" x2="724" y1="168" y2="316" />
+          <text x="746" y="176" className={styles.factKicker}>
+            COASTAL PROXIMITY
+          </text>
           <text x="746" y="220" className={styles.factValueTeal}>
             +13 cm - Lautoka sea level since 1993
           </text>
@@ -100,13 +103,13 @@ export function CoastalExposure() {
             27%
           </text>
           <text x="816" y="262">
-            of the population lives within 1 km of the sea
+            live within 1 km of the coast
           </text>
           <text x="746" y="308" className={styles.factValue}>
             76%
           </text>
           <text x="816" y="306">
-            within 5 km
+            live within 5 km
           </text>
         </g>
 
