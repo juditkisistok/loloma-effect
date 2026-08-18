@@ -327,6 +327,55 @@ export function Essay() {
             />
           </p>
         </div>
+
+        <div className={styles.prose}>
+          <p>
+            The cost of relocation is easier to understand through one
+            village.
+          </p>
+          <p>
+            Nabavatu is inland, also on Vanua Levu. After Tropical Cyclone
+            Ana in January 2021, the ground beneath it began to fail. Land
+            slumped, deep cracks appeared and government mapping found that
+            most homes were in medium- or high-risk areas.
+          </p>
+          <p>
+            The village was evacuated. Residents were initially told they
+            would be living in tents for three months. More than four years
+            later, they were still waiting at the temporary site.
+            <Ref
+              n="13"
+              href="https://www.fijivillage.com/"
+              label="Nabavatu evacuation and temporary relocation coverage"
+            />
+          </p>
+          <p>
+            In 2024, the government approved a new site around 800 metres
+            away. The relocation was budgeted at approximately{" "}
+            <strong>FJ$5.9 million</strong>.
+            <Ref
+              n="14"
+              href="https://www.fiji.gov.fj/"
+              label="Fiji Cabinet, Nabavatu relocation budget approval, 2024"
+            />
+          </p>
+          <p>
+            That amount has to provide more than new houses. The project
+            includes roads, drainage, water, electricity and sanitation: the
+            basic systems needed to make the new site liveable.
+          </p>
+          <p>
+            In 2025, the government committed{" "}
+            <strong>FJ$3.5 million</strong> from the relocation trust fund,
+            with the rest of the project relying on bilateral and other
+            support.
+            <Ref
+              n="9"
+              href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
+              label="Fiji Parliament Daily Hansard, 14 July 2025"
+            />
+          </p>
+        </div>
       </article>
     </section>
   );
