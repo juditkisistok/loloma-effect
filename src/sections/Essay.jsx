@@ -11,6 +11,7 @@ import { CoastalExposure } from "./CoastalExposure";
 import { JourneyComparison } from "./JourneyComparison";
 import { RelocationDecision } from "./RelocationDecision";
 import { FundingTimeline } from "./FundingTimeline";
+import { LolomaHour } from "./LolomaHour";
 import styles from "./Essay.module.css";
 
 const storyEndYear = 2025;
@@ -472,6 +473,10 @@ export function Essay() {
               label="eGlobal Travel Media, first-three-month Loloma Hour results, September 2025"
             />
           </p>
+        </div>
+
+        <div className={styles.dataBlock}>
+          <LolomaHour />
         </div>
 
         <div className={styles.prose}>

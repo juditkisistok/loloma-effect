@@ -1,0 +1,106 @@
+.figure {
+  width: min(1040px, 92vw);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chartHeader text:first-child {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  fill: #111;
+}
+
+.chartHeader text:last-child {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #777;
+}
+
+.bigNumber {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 600;
+  fill: #0f877c;
+}
+
+.counterCaption {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: #3e3e3c;
+}
+
+.sessionsNote {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: #8a8a80;
+}
+
+.tileIcon path {
+  fill: none;
+  stroke: #0f877c;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tileValue {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  fill: #111;
+}
+
+.tileLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #6a6a63;
+}
+
+.caption {
+  max-width: 620px;
+  margin: -4px auto 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  color: #777;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .figure {
+    width: min(100vw, 720px);
+    padding: 0 10px;
+  }
+
+  .chartHeader text:first-child {
+    font-size: 15px;
+  }
+
+  .chartHeader text:last-child,
+  .sessionsNote,
+  .tileLabel,
+  .caption {
+    font-size: 10px;
+  }
+
+  .bigNumber {
+    font-size: 56px;
+  }
+
+  .counterCaption {
+    font-size: 11px;
+  }
+
+  .tileValue {
+    font-size: 18px;
+  }
+}
