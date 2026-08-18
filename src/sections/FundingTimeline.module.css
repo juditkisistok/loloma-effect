@@ -1,0 +1,165 @@
+.figure {
+  width: min(1040px, 92vw);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.chartHeader text:first-child {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  fill: #111;
+}
+
+.chartHeader text:last-child {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #777;
+}
+
+.baseline {
+  stroke: rgba(17, 17, 17, 0.16);
+  stroke-width: 1;
+}
+
+.ticks line {
+  stroke: rgba(17, 17, 17, 0.22);
+  stroke-width: 1;
+}
+
+.ticks text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: #97968d;
+  text-anchor: middle;
+}
+
+.revenueBand {
+  fill: rgba(15, 135, 124, 0.16);
+}
+
+.revenueHatch {
+  fill: url(#funding-hatch);
+}
+
+.revenueHatch line {
+  stroke: rgba(15, 135, 124, 0.4);
+  stroke-width: 1;
+}
+
+.revenueLabel text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #0f877c;
+}
+
+.revenueLabel text:first-child {
+  font-weight: 700;
+}
+
+.breakMark {
+  transition: opacity 0.2s ease;
+}
+
+.breakMark path {
+  fill: none;
+  stroke: var(--coral);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.breakMark text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #b8402f;
+}
+
+.breakMark text:first-child {
+  font-weight: 700;
+}
+
+.neededBar rect {
+  fill: rgba(17, 17, 17, 0.06);
+  stroke: rgba(17, 17, 17, 0.55);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 3;
+}
+
+.committedBar rect {
+  fill: var(--coral);
+}
+
+.neededBar text,
+.committedBar text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  fill: #111;
+}
+
+.barCaption {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  fill: #777 !important;
+}
+
+.gapBracket line {
+  stroke: #a6a59b;
+  stroke-width: 1;
+}
+
+.gapBracket text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #53666a;
+}
+
+.contextLine text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #6a7b7f;
+}
+
+.caption {
+  max-width: 620px;
+  margin: -4px auto 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  color: #777;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .figure {
+    width: min(100vw, 720px);
+    padding: 0 10px;
+  }
+
+  .chartHeader text:first-child {
+    font-size: 15px;
+  }
+
+  .chartHeader text:last-child,
+  .revenueLabel text,
+  .breakMark text,
+  .contextLine text,
+  .caption {
+    font-size: 10px;
+  }
+
+  .neededBar text,
+  .committedBar text {
+    font-size: 12px;
+  }
+}

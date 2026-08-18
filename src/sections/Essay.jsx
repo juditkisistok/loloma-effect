@@ -10,6 +10,7 @@ import { flightComparison, journeyOptions } from "../data/journeyComparison";
 import { CoastalExposure } from "./CoastalExposure";
 import { JourneyComparison } from "./JourneyComparison";
 import { RelocationDecision } from "./RelocationDecision";
+import { FundingTimeline } from "./FundingTimeline";
 import styles from "./Essay.module.css";
 
 const storyEndYear = 2025;
@@ -374,6 +375,19 @@ export function Essay() {
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
+          </p>
+        </div>
+
+        <div className={styles.dataBlock}>
+          <FundingTimeline />
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            Fiji now has rules for deciding when relocation should happen and
+            a fund that can contribute to the cost. What it does not have is
+            a dependable source of money large enough to meet every case
+            likely to come before it.
           </p>
         </div>
       </article>
