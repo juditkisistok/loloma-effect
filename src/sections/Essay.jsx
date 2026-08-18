@@ -58,18 +58,28 @@ export function Essay() {
             Judit Kisistok
           </a>
         </p>
-        <p className={styles.date}>August 2025</p>
+        <p className={styles.date}>August 2026</p>
       </div>
 
       <article className={styles.storyBlock}>
         <div className={styles.prose}>
           <p>
-            {latestArrivals
-              ? `${latestArrivals} people came to Fiji in ${storyEndYear} - more than in any year before. Follow the line of arrivals and you will see the visitor numbers have risen dramatically since the turn of the century. There is, naturally, one sharp interruption in 2020, when the world halted and travel stopped almost overnight; we all know the reason.`
-              : ""}
+            {latestArrivals ? `${latestArrivals} ` : ""}people came to Fiji in{" "}
+            {storyEndYear} — more than in any year before.
+            <Ref
+              n="3"
+              href="https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/"
+              label="Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR; Fiji Bureau of Statistics"
+            />
           </p>
           <p>
-            Then the visitors returned and in {storyEndYear}, Fiji recorded its
+            Follow the line of arrivals and you will see visitor numbers rising
+            dramatically since the turn of the century. There is, naturally, one
+            sharp interruption in 2020, when the world halted and international
+            travel stopped almost overnight. We all know the reason.
+          </p>
+          <p>
+            Then the visitors returned. By {storyEndYear}, Fiji recorded its
             busiest year yet.
           </p>
         </div>
@@ -122,7 +132,7 @@ export function Essay() {
               {roundedJourneyTonnes === 1 ? "" : "s"} of CO₂e
             </strong>, depending on the route and calculation method.
             <Ref
-              n="3"
+              n="4"
               href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025"
               label="UK government greenhouse gas conversion factors 2025"
             />
@@ -134,13 +144,13 @@ export function Essay() {
               2024
             </strong>.
             <Ref
-              n="4"
+              n="5"
               href="https://ourworldindata.org/profile/co2/fiji"
               label="Our World in Data CO₂ profile for Fiji"
             />
           </p>
           <p>
-            The figures are not directly equivalent: the flight estimate
+          The figures are not directly equivalent: the flight estimate
             includes aviation's wider warming effects, while Fiji's figure
             counts only CO₂ released within its borders. Even with that caveat,
             the imbalance is rather significant.
@@ -182,7 +192,7 @@ export function Essay() {
             At Lautoka, sea level has risen by around{" "}
             <strong>13 centimetres since 1993</strong>.
             <Ref
-              n="5"
+              n="7"
               href="https://sealevel.nasa.gov/internal_resources/522/Lautoka_Fiji_combined.pdf"
               label="NASA Sea Level Change Team summary for Lautoka, Fiji"
             />
@@ -209,19 +219,20 @@ export function Essay() {
         <div className={styles.prose}>
           <p>
             For some communities, adapting in place may mean seawalls, raised
-            homes or changes to the water supply. For others, those measures are
-            no longer enough, and relocation needs to enter the conversation.
+            homes or changes to the water supply. For others, those measures
+            are no longer enough, and relocation needs to enter the
+            conversation.
           </p>
         </div>
 
         <div className={styles.prose}>
           <p>
             For Vunidogoloa, a coastal village on Vanua Levu, that conversation
-            led to a move. In 2014, about 140 residents from 26 households moved
-            to a site two kilometres inland. It became Fiji's first village to
-            complete a planned relocation because of climate change.
+            led to a move. In 2014, about 140 residents moved to a new site two
+            kilometres inland. It became Fiji's first planned relocation
+            because of climate change.
             <Ref
-              n="7"
+              n="8"
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8072796/"
               label="Planned relocation and health case study from Vunidogoloa, Fiji"
             />
@@ -238,18 +249,18 @@ export function Essay() {
             eating less fresh seafood and more packaged food.
           </p>
           <p>
-            Relocation reduced the village's exposure to flooding and saltwater,
-            but it also changed how people accessed food, work and the sea. This
-            is why Fiji treats it as a last resort.
+            The move made Vunidogoloa safer, but it did not preserve the
+            village exactly as it was. This is why Fiji treats relocation as a
+            last resort.
           </p>
           <p>
             Vunidogoloa was the first community to move, but it was not the
             last. As of 2025, Fiji had relocated{" "}
             <strong>six communities</strong>. A further{" "}
-            <strong>43 had been identified for assessment</strong> - not ordered
-            to move, and not all expected to.
+            <strong>43 had been identified for assessment</strong> — not
+            ordered to move, and not all expected to.
             <Ref
-              n="8"
+              n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
@@ -268,8 +279,8 @@ export function Essay() {
             risk can be reduced without moving the community.
           </p>
           <p>
-            With dozens of communities requiring assessment, the response cannot
-            be improvised one village at a time.
+            With dozens of communities requiring assessment, the response
+            cannot be improvised one village at a time.
           </p>
         </div>
       </article>
