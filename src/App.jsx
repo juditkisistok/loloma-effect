@@ -5,6 +5,7 @@ import { Hero } from "./sections/Hero";
 import { Knot } from "./sections/Knot";
 import { Impasse } from "./sections/Impasse";
 import { Essay } from "./sections/Essay";
+import { Close } from "./sections/Close";
 import styles from "./App.module.css";
 
 export default function App() {
@@ -33,6 +34,7 @@ function Stage() {
       </div>
 
       <Essay />
+      <Close />
     </div>
   );
 }
