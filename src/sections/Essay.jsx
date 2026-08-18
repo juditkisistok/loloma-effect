@@ -389,6 +389,103 @@ export function Essay() {
             a dependable source of money large enough to meet every case
             likely to come before it.
           </p>
+          <p>
+            Money, however, is not the only thing a relocation requires. A
+            village also needs somewhere to go.
+          </p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            Most land in Fiji is iTaukei land, held communally by Indigenous
+            landowning groups rather than simply bought and sold on the open
+            market.
+            <Ref
+              n="15"
+              href="https://itaukeilandtrustboard.com.fj/"
+              label="iTaukei Land Trust Board, communal land tenure in Fiji"
+            />{" "}
+            Where a village cannot move within its own customary land,
+            another landowning group may need to agree to host it. Fiji's
+            Climate Change Act requires the rights and concerns of both the
+            relocating and host communities to be taken into account.
+            <Ref
+              n="16"
+              href="https://www.fiji.gov.fj/getattachment/Legislations/CLIMATE-CHANGE-ACT-2021"
+              label="Fiji Climate Change Act 2021, planned relocation provisions"
+            />
+          </p>
+          <p>
+            That means making room for somebody else's future, on land that
+            also carries your own history.
+          </p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>It brings the story back to its first word.</p>
+          <p>Loloma.</p>
+          <p>
+            At its largest, loloma can look like one community making space
+            for another that can no longer safely remain where it is.
+          </p>
+          <p>It can also ask for something much smaller.</p>
+          <p>An hour.</p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            In April 2025, Tourism Fiji launched Loloma Hour, inviting
+            visitors to give one hour of their stay back to the place they
+            had come to enjoy.
+            <Ref
+              n="17"
+              href="https://www.fiji.travel/loloma-hour"
+              label="Tourism Fiji, Loloma Hour"
+            />
+          </p>
+          <p>
+            Visitors could plant coral, restore mangroves, join wildlife
+            conservation, help with beach clean-ups or take part in cultural
+            activities led by local communities. At launch,{" "}
+            <strong>21 tourism partners</strong> offered more than{" "}
+            <strong>40 ways</strong> to participate, with a first-year target
+            of <strong>5,000 hours</strong>.
+            <Ref
+              n="18"
+              href="https://www.fiji.travel/loloma-hour"
+              label="Tourism Fiji, Loloma Hour launch details"
+            />
+          </p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            In its first three months, published results put the programme
+            at <strong>3,540 hours</strong> across{" "}
+            <strong>317 sessions</strong>. Participants collected{" "}
+            <strong>512 kilograms of rubbish</strong> and planted{" "}
+            <strong>1,211 corals</strong>, <strong>12,858 mangroves</strong>{" "}
+            and <strong>313 trees</strong>.
+            <Ref
+              n="19"
+              href="https://www.eglobaltravelmedia.com.au/"
+              label="eGlobal Travel Media, first-three-month Loloma Hour results, September 2025"
+            />
+          </p>
+        </div>
+
+        <div className={styles.prose}>
+          <p>
+            These numbers should not be mistaken for an offset. An hour spent
+            planting coral does not cancel the flight that brought a visitor
+            to Fiji, and it does not close the country's relocation funding
+            gap.
+          </p>
+          <p>
+            It does something more modest: it directs some of the time,
+            attention and labour brought by tourism towards work already
+            being done on the islands.
+          </p>
         </div>
       </article>
     </section>
