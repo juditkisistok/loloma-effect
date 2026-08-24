@@ -93,6 +93,11 @@ export function Close() {
               businesses and the countries that have contributed most to
               global emissions.
             </p>
+          </Card>
+        </Act>
+
+        <Act name="close3b" align="center" height="165vh">
+          <Card className={styles.beat}>
             <p className={styles.support}>
               The interesting thing about loloma is that it does not ask a
               visitor to fix Fiji. It asks them to have a relationship with
