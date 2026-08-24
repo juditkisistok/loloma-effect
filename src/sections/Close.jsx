@@ -5,6 +5,7 @@ import { Scene } from "../scene/Scene";
 import { duskTheme } from "../scene/sceneThemes";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
+import panelStyles from "../styles/panel.module.css";
 import styles from "./Close.module.css";
 
 const farewellLines = [
@@ -53,7 +54,7 @@ export function Close() {
 
       <div className={styles.steps}>
         <Act name="close1" align="center" height="150vh">
-          <Card className={styles.beat}>
+          <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               We tend to think about travel in terms of what we get to take
               home.
@@ -66,7 +67,7 @@ export function Close() {
         </Act>
 
         <Act name="close2" align="center" height="165vh">
-          <Card className={styles.beat}>
+          <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               Loloma asks whether travel can contain something moving in the
               other direction too.
@@ -83,7 +84,7 @@ export function Close() {
         </Act>
 
         <Act name="close3" align="center" height="165vh">
-          <Card className={styles.beat}>
+          <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               One hour cannot carry the weight of Fiji's climate problem, and
               it should not have to.
@@ -97,7 +98,7 @@ export function Close() {
         </Act>
 
         <Act name="close3b" align="center" height="165vh">
-          <Card className={styles.beat}>
+          <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.support}>
               The interesting thing about loloma is that it does not ask a
               visitor to fix Fiji. It asks them to have a relationship with
