@@ -312,7 +312,7 @@ export const fijiBoundary = {
       "province": "Cakaudrove",
       "households": 30,
       "relocationType": "Full Relocation",
-      "distanceMeters": 1500,
+      "distanceMeters": 2000,
       "fundedBy": "Fijian Government",
       "cause": "Old village was low-lying and exposed to frequent flooding, coastal inundation from storm surges, high tides and sea level rise.",
       "impact": "The new village is on land belonging to one of the clans of Vunidogoloa. New site is inland, detached from their traditional fishing grounds, adoption of alternative means of livelihood support was initially challenging.",

@@ -8,7 +8,8 @@ const earthRadiusKm = 6371;
 const factorRows = csvParse(factorsCsv, (row) => ({
   id: row.id,
   label: row.label,
-  value: Number(row.value_kg_co2e_per_passenger_km),
+  value: Number(row.value),
+  unit: row.unit,
   sourceTitle: row.source_title,
   sourceUrl: row.source_url,
 }));

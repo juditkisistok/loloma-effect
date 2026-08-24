@@ -66,12 +66,12 @@ export function Essay() {
       <article className={styles.storyBlock}>
         <div className={styles.prose}>
           <p>
-            {latestArrivals ? `${latestArrivals} ` : ""}people came to Fiji in{" "}
-            {storyEndYear} — more than in any year before.
+          {latestArrivals ? `${latestArrivals} ` : ""}people travelled to Fiji in{" "}
+          {storyEndYear}.
             <Ref
               n="3"
               href="https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/"
-              label="Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR; Fiji Bureau of Statistics"
+              label="Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR; 2025 supplemental point from Fiji Bureau of Statistics"
             />
           </p>
           <p>
@@ -81,8 +81,8 @@ export function Essay() {
             travel stopped almost overnight. We all know the reason.
           </p>
           <p>
-            Then the visitors returned. By {storyEndYear}, Fiji recorded its
-            busiest year yet.
+            Then the visitors returned. By {storyEndYear}, Fiji was again near
+            the million-visitor mark.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export function Essay() {
             </strong>.
             <Ref
               n="5"
-              href="https://ourworldindata.org/profile/co2/fiji"
+              href="https://ourworldindata.org/co2/country/fiji"
               label="Our World in Data CO₂ profile for Fiji"
             />
           </p>
@@ -461,16 +461,17 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            In its first three months, published results put the programme
-            at <strong>3,540 hours</strong> across{" "}
-            <strong>317 sessions</strong>. Participants collected{" "}
-            <strong>512 kilograms of rubbish</strong> and planted{" "}
-            <strong>1,211 corals</strong>, <strong>12,858 mangroves</strong>{" "}
-            and <strong>313 trees</strong>.
+            One year on, the programme had reached{" "}
+            <strong>17,407 hours</strong> across <strong>2,146 sessions</strong>{" "}
+            at <strong>27 properties</strong> — more than three times the
+            original 5,000-hour target. Participants planted{" "}
+            <strong>2,980 corals</strong> and <strong>13,056 mangroves</strong>,
+            added <strong>461 trees</strong>, and collected{" "}
+            <strong>1,112 kilograms</strong> of waste.
             <Ref
               n="19"
-              href="https://www.eglobaltravelmedia.com.au/"
-              label="eGlobal Travel Media, first-three-month Loloma Hour results, September 2025"
+              href="https://www.fiji.travel/loloma-hour"
+              label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />
           </p>
         </div>

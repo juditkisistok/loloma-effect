@@ -14,7 +14,8 @@ export function Knot() {
         </p>
         <p className={`${panelStyles.panelBody} ${styles.body}`}>
           Tourism brings jobs, income, and opportunity — accounting for around
-          40% of the country’s GDP.
+          40% of the country’s GDP once direct and indirect contributions are
+          combined.
           <Ref
             n="2"
             href="https://www.finance.gov.fj/wp-content/uploads/2024/02/Fact-Sheet-Tourism.pdf"

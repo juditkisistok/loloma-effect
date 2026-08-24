@@ -5,19 +5,21 @@ export const lolomaHour = {
     activityTypes: 40,
     firstYearTargetHours: 5000,
   },
-  firstQuarter: {
-    hours: 3540,
-    sessions: 317,
+  yearOne: {
+    period: "April 2025 – April 2026",
+    properties: 27,
+    hours: 17407,
+    sessions: 2146,
     outcomes: [
-      { id: "rubbish", label: "kg of rubbish collected", value: 512 },
-      { id: "corals", label: "corals planted", value: 1211 },
-      { id: "mangroves", label: "mangroves planted", value: 12858 },
-      { id: "trees", label: "trees planted", value: 313 },
+      { id: "rubbish", label: "kg of waste collected", value: 1112.04 },
+      { id: "corals", label: "corals planted", value: 2980 },
+      { id: "mangroves", label: "mangroves planted", value: 13056 },
+      { id: "trees", label: "trees planted", value: 461 },
     ],
   },
   source: {
-    title: "eGlobal Travel Media",
-    date: "September 2025",
-    url: "https://www.eglobaltravelmedia.com.au/",
+    title: "Tourism Fiji, Loloma Hour annual results",
+    date: "April 2025 – April 2026",
+    url: "https://www.fiji.travel/loloma-hour",
   },
 };

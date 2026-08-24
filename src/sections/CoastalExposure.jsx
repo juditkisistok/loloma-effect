@@ -43,7 +43,7 @@ export function CoastalExposure() {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Stylized annual shorelines for Fiji's Lautoka-Nadi coast from 1999 to 2023, showing inward coastal movement, sea-level rise at Lautoka, and population exposure near the coast."
+        aria-label="Illustrative shoreline animation for Fiji's Lautoka-Nadi coast from 1999 to 2023, with cited annotations for Lautoka sea-level rise and population exposure near the coast."
       >
         <defs>
           <linearGradient id="coast-year-ramp" x1="0" y1="0" x2="1" y2="0">
@@ -134,15 +134,6 @@ export function CoastalExposure() {
           />
         </g>
 
-        <g className={styles.scale}>
-          <line x1="84" x2="194" y1="360" y2="360" />
-          <line x1="84" x2="84" y1="352" y2="368" />
-          <line x1="194" x2="194" y1="352" y2="368" />
-          <text x="84" y="344">
-            500 m
-          </text>
-        </g>
-
         <g className={styles.coords}>
           <text x="238" y="406">
             177°24'E
@@ -155,8 +146,8 @@ export function CoastalExposure() {
       <figcaption className={styles.caption}>
         Sources: Digital Earth Pacific / Pacific Data Hub Annual Shorelines
         (Landsat, 30 m); NASA Sea Level Change Team Lautoka summary; SPREP Fiji
-        relocation coverage. Shoreline geometry is stylized for the scroll
-        transition; annotations use the cited measurements.
+        relocation coverage. The shoreline animation is illustrative for the
+        scroll transition; annotations use the cited measurements.
       </figcaption>
     </figure>
   );
