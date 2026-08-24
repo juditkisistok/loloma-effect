@@ -26,7 +26,7 @@ export function Close() {
     const nextCoralsOn = coralProgress > 0.03;
     setCoralsOn((current) => (current !== nextCoralsOn ? nextCoralsOn : current));
 
-    const lightProgress = frame.act("close4");
+    const lightProgress = frame.act("close5");
     const nextOn = lightProgress > 0.04;
     const nextClimb = clamp((lightProgress - 0.04) / 0.9, 0, 1);
     setLights((current) =>
@@ -42,7 +42,7 @@ export function Close() {
         <Scene
           theme={duskTheme}
           toneStart="close1"
-          toneEnd="close4"
+          toneEnd="close5"
           idPrefix="dusk"
           corals
           coralsOn={coralsOn}
@@ -110,16 +110,21 @@ export function Close() {
         </Act>
 
         <Act name="close4" align="center" height="220vh">
-          <div className={styles.farewell}>
-            {farewellLines.map((line) => (
-              <Card key={line}>
-                <p className={styles.line}>{line}</p>
-              </Card>
-            ))}
-            <Card>
-              <p className={styles.vinaka}>Vinaka.</p>
-            </Card>
-          </div>
+          <Card className={`${panelStyles.panel} ${styles.finalBeat}`}>
+            <div className={styles.farewell}>
+              {farewellLines.map((line) => (
+                <p key={line} className={styles.line}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          </Card>
+        </Act>
+
+        <Act name="close5" align="center" height="140vh">
+          <Card>
+            <p className={styles.vinaka}>Vinaka.</p>
+          </Card>
         </Act>
       </div>
     </div>
