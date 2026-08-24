@@ -121,10 +121,12 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close5" align="center" height="140vh">
-          <Card>
-            <p className={styles.vinaka}>Vinaka.</p>
-          </Card>
+        <Act name="close5" align="start" height="220vh">
+          <div className={styles.vinakaLock}>
+            <Card>
+              <p className={styles.vinaka}>Vinaka.</p>
+            </Card>
+          </div>
         </Act>
       </div>
     </div>

@@ -76,10 +76,19 @@
   text-shadow: 0 2px 30px rgba(4, 14, 26, 0.8);
 }
 
+.vinakaLock {
+  position: sticky;
+  top: 58vh;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
 .vinaka {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(48px, 7vw, 88px);
+  font-size: clamp(44px, 6.4vw, 78px);
   line-height: 1;
   color: var(--paper);
   margin: 0;
