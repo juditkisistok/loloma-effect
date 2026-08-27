@@ -43,14 +43,14 @@ export function RelocationDecision() {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Fiji map with hoverable public GIS points for completed relocations and adaptation survey communities."
+        aria-label="Interactive Fiji map of completed relocations and communities surveyed for adaptation."
       >
         <g className={styles.header}>
           <text x="58" y="47">
             STAY, ADAPT OR MOVE
           </text>
           <text x="58" y="70">
-            Public GIS points for completed relocation and scoped adaptation sites
+            Mapped relocations and communities surveyed for adaptation
           </text>
         </g>
 
@@ -104,9 +104,8 @@ export function RelocationDecision() {
                 role="button"
                 aria-label={`${dot.title}: ${dot.status}`}
                 onPointerEnter={() => setHoveredId(dot.id)}
-                onPointerLeave={() => setHoveredId("completed-vunidogoloa")}
+                onPointerDown={() => setHoveredId(dot.id)}
                 onFocus={() => setHoveredId(dot.id)}
-                onBlur={() => setHoveredId("completed-vunidogoloa")}
               />
             );
           })}
@@ -119,7 +118,7 @@ export function RelocationDecision() {
           </text>
           <circle className={styles.assessmentDot} cx="105" cy="0" r="4" />
           <text x="118" y="4">
-            adaptation survey
+            surveyed for adaptation
           </text>
         </g>
 
@@ -129,7 +128,7 @@ export function RelocationDecision() {
           transform={`translate(724 ${92 + (1 - panelReveal) * 8})`}
         >
           <text className={styles.panelKicker} x="0" y="0">
-            DECISION FIELD
+            NATIONAL PICTURE
           </text>
 
           <g className={styles.countPair} transform="translate(0 48)">

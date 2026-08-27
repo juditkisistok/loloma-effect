@@ -23,6 +23,8 @@ const tileImages = {
 };
 
 const tileOffsets = [-330, -110, 110, 330];
+const targetMultiple =
+  lolomaHour.yearOne.hours / lolomaHour.launch.firstYearTargetHours;
 
 export function LolomaHour() {
   const ref = useRef(null);
@@ -47,7 +49,7 @@ export function LolomaHour() {
   });
 
   const countReveal = clamp(progress / 0.4, 0, 1);
-  const displayedHours = Math.round(1 + (lolomaHour.yearOne.hours - 1) * countReveal);
+  const displayedHours = Math.round(lolomaHour.yearOne.hours * countReveal);
   const sessionsReveal = clamp((progress - 0.36) / 0.14, 0, 1);
   const tileReveals = lolomaHour.yearOne.outcomes.map((_, index) =>
     clamp((progress - (0.48 + index * 0.1)) / 0.14, 0, 1),
@@ -60,7 +62,7 @@ export function LolomaHour() {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours volunteered by Loloma Hour participants across ${formatWhole(lolomaHour.yearOne.sessions)} sessions and ${lolomaHour.yearOne.properties} properties, Tourism Fiji's reported results for ${lolomaHour.yearOne.period}. Reported outcomes, kept as separate totals rather than a single conversion: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
+        aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours volunteered by Loloma Hour participants, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions and ${lolomaHour.yearOne.properties} properties. Tourism Fiji's reported results for ${lolomaHour.yearOne.period}. Reported outcomes, kept as separate totals rather than a single conversion: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
       >
         <g className={styles.chartHeader}>
           <text x="70" y="40">
@@ -76,7 +78,7 @@ export function LolomaHour() {
             {formatWhole(displayedHours)}
           </text>
           <text className={styles.counterCaption} textAnchor="middle" y="26">
-            hours volunteered, year one
+            hours volunteered · {targetMultiple.toFixed(1)}× the target
           </text>
           <text
             className={styles.sessionsNote}
@@ -121,7 +123,7 @@ export function LolomaHour() {
       </div>
       <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
-        Against a first-year target of {formatWhole(lolomaHour.launch.firstYearTargetHours)} hours.
+        First-year target: {formatWhole(lolomaHour.launch.firstYearTargetHours)} hours.
         Kept as parallel outcomes, not a conversion from hours: different activities require
         different amounts of labour. Source: {lolomaHour.source.title}, {lolomaHour.source.date}.
       </figcaption>

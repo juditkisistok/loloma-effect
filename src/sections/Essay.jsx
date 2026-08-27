@@ -66,19 +66,19 @@ export function Essay() {
       <article className={styles.storyBlock}>
         <div className={styles.prose}>
           <p>
-          {latestArrivals ? `${latestArrivals} ` : ""}people travelled to Fiji in{" "}
-          {storyEndYear}.
+            Fiji recorded {latestArrivals ?? "nearly one million"} visitor
+            arrivals in {storyEndYear}.
             <Ref
               n="3"
               href="https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/"
-              label="Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR; 2025 supplemental point from Fiji Bureau of Statistics"
+              label="Fiji Bureau of Statistics, provisional visitor arrivals for December 2025"
             />
           </p>
           <p>
             Follow the line of arrivals and you will see visitor numbers rising
-            dramatically since the turn of the century. There is, naturally, one
-            sharp interruption in 2020, when the world halted and international
-            travel stopped almost overnight. We all know the reason.
+            dramatically since the turn of the century. There is, naturally, a
+            two-year interruption beginning in 2020, when international travel
+            stopped almost overnight. We all know the reason.
           </p>
           <p>
             Then the visitors returned. By {storyEndYear}, Fiji was again near
@@ -99,7 +99,7 @@ export function Essay() {
           </p>
           <p>This is where the climate side of the story begins.</p>
           <p>
-            Take one visitor travelling from {" "}
+            Take one visitor travelling from{" "}
             <span className={styles.inlineMenu}>
               <button
                 className={styles.inlineSelect}
@@ -152,7 +152,7 @@ export function Essay() {
             />
           </p>
           <p>
-          The figures are not directly equivalent: the flight estimate
+            The figures are not directly equivalent: the flight estimate
             includes aviation's wider warming effects, while Fiji's figure
             counts only CO₂ released within its borders. Even with that caveat,
             the imbalance is rather significant.
@@ -166,13 +166,13 @@ export function Essay() {
         <div className={styles.prose}>
           <p>
             That flight is one small part of decades of accumulated global
-            emissions - a total Fiji has contributed very little to.
+            emissions — a total Fiji has contributed very little to.
           </p>
           <p>
-            By the time Nadi's shoreline appears through the window, most of the journey's
-            emissions have already been released. They sit outside Fiji's
-            national carbon account, even as the country has to spend more on
-            adapting to a warmer climate.
+            By the time Nadi's shoreline appears through the window, most of
+            the flight's climate impact has already been created. It sits
+            outside Fiji's national carbon account, even as the country has to
+            spend more on adapting to a warmer climate.
           </p>
         </div>
 
@@ -211,6 +211,12 @@ export function Essay() {
             that no longer grows well, a well that turns brackish, or a section
             of shoreline that needs to be repaired again after the next period
             of high water.
+          </p>
+          <p>
+            Shorelines do not all move in the same direction. The satellite
+            record below follows one small island off Lautoka where the measured
+            edge moved outward near the highlighted line, even as local sea
+            level rose. One shoreline cannot stand in for the whole country.
           </p>
         </div>
 
@@ -324,7 +330,7 @@ export function Essay() {
             revenue stream originally intended to sustain it.
             <Ref
               n="12"
-              href="https://www.parliament.gov.fj/"
+              href="https://www.parliament.gov.fj/wp-content/uploads/2022/03/Daily-Hansard-Thursday-24-March-2022.pdf"
               label="Fiji Cabinet / Parliament of Fiji, Environment and Climate Adaptation Levy repeal, 2022"
             />
           </p>
@@ -347,7 +353,7 @@ export function Essay() {
             later, they were still waiting at the temporary site.
             <Ref
               n="13"
-              href="https://www.fijivillage.com/"
+              href="https://www.fijivillage.com/feature/Nabavatu-villagers-dont-have-to-live-in-tents-anymore-as-new-house-constructions-about-to-begin-r548fx/"
               label="Nabavatu evacuation and temporary relocation coverage"
             />
           </p>
@@ -357,7 +363,7 @@ export function Essay() {
             <strong>FJ$5.9 million</strong>.
             <Ref
               n="14"
-              href="https://www.fiji.gov.fj/"
+              href="https://www.fiji.gov.fj/decisions-made-at-the-meeting-of-cabinet-held-on-27-february-2024/"
               label="Fiji Cabinet, Nabavatu relocation budget approval, 2024"
             />
           </p>
@@ -385,10 +391,22 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
+            In December 2025, New Zealand announced a further $5 million
+            contribution to the national relocation fund, including support for
+            Nabavatu. The announcement did not specify the currency or reserve
+            the whole amount for that village.
+            <Ref
+              n="15"
+              href="https://www.fiji.gov.fj/fiji-secures-5-million-contribution-to-climate-relocation-of-communities-trust-fund-from-new-zealand/"
+              label="Fiji Government, New Zealand contribution to the Climate Relocation of Communities Trust Fund, December 2025"
+            />
+          </p>
+          <p>
             Fiji now has rules for deciding when relocation should happen and
-            a fund that can contribute to the cost. What it does not have is
-            a dependable source of money large enough to meet every case
-            likely to come before it.
+            a fund that can contribute to the cost. What it no longer has is
+            the recurring domestic revenue stream originally intended to
+            sustain that fund. Partner contributions remain important, but
+            they arrive as individual commitments rather than a standing levy.
           </p>
           <p>
             Money, however, is not the only thing a relocation requires. A
@@ -402,7 +420,7 @@ export function Essay() {
             landowning groups rather than simply bought and sold on the open
             market.
             <Ref
-              n="15"
+              n="16"
               href="https://itaukeilandtrustboard.com.fj/"
               label="iTaukei Land Trust Board, communal land tenure in Fiji"
             />{" "}
@@ -411,7 +429,7 @@ export function Essay() {
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
             <Ref
-              n="16"
+              n="17"
               href="https://www.fiji.gov.fj/getattachment/Legislations/CLIMATE-CHANGE-ACT-2021"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -439,7 +457,7 @@ export function Essay() {
             visitors to give one hour of their stay back to the place they
             had come to enjoy.
             <Ref
-              n="17"
+              n="18"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour"
             />
@@ -452,7 +470,7 @@ export function Essay() {
             <strong>40 ways</strong> to participate, with a first-year target
             of <strong>5,000 hours</strong>.
             <Ref
-              n="18"
+              n="19"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour launch details"
             />
@@ -469,7 +487,7 @@ export function Essay() {
             added <strong>461 trees</strong>, and collected{" "}
             <strong>1,112 kilograms</strong> of waste.
             <Ref
-              n="19"
+              n="20"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />
@@ -484,8 +502,8 @@ export function Essay() {
           <p>
             These numbers should not be mistaken for an offset. An hour spent
             planting coral does not cancel the flight that brought a visitor
-            to Fiji, and it does not close the country's relocation funding
-            gap.
+            to Fiji, and it does not replace the long-term financing that
+            planned relocation requires.
           </p>
           <p>
             It does something more modest: it directs some of the time,

@@ -61,13 +61,13 @@ export function JourneyComparison({ selectedId = "london" }) {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={`A return journey from ${selected.label} to Nadi emits about ${selected.total.toFixed(
+        aria-label={`A return journey from ${selected.label} to Nadi has an estimated climate impact of ${selected.total.toFixed(
           1,
         )} tonnes CO₂e — around ${multiple.toFixed(
           1,
         )} times Fiji's ${flightComparison.fijiPerPerson.toFixed(
           2,
-        )} tonne annual per-person CO₂ footprint`}
+        )} tonnes of territorial CO₂ per person in 2024. The measures are not directly equivalent because the flight estimate includes non-CO₂ effects.`}
       >
         <defs>
           <clipPath id="jc-pill">
@@ -174,7 +174,7 @@ export function JourneyComparison({ selectedId = "london" }) {
             {selected.total.toFixed(1)}t CO₂e
           </text>
           <text x="0" y="15">
-            return flight, total
+            incl. non-CO₂ effects
           </text>
         </g>
 
@@ -186,10 +186,10 @@ export function JourneyComparison({ selectedId = "london" }) {
           <line y1="-26" y2="-9" />
           <circle cy="-9" r="3.5" />
           <text y="-48" textAnchor="middle">
-            Fiji, per person
+            Fiji territorial CO₂
           </text>
           <text y="-34" textAnchor="middle" className={styles.fijiValue}>
-            {flightComparison.fijiPerPerson.toFixed(2)}t / yr
+            {flightComparison.fijiPerPerson.toFixed(2)}t / person / yr
           </text>
         </g>
 
@@ -214,7 +214,7 @@ export function JourneyComparison({ selectedId = "london" }) {
             {multiple.toFixed(1)}×
           </text>
           <text textAnchor="middle" className={styles.bigCaption} y="22">
-            Fiji's whole annual footprint, per person
+            Fiji's annual territorial CO₂, per person
           </text>
         </g>
       </svg>
@@ -224,7 +224,9 @@ export function JourneyComparison({ selectedId = "london" }) {
         Source note: {selected.routeLabel} return distance estimated at{" "}
         {selected.returnKm.toLocaleString("en-US")} passenger-km using
         great-circle airport distances. Emissions use UK government 2025
-        long-haul economy factors, including aviation's non-CO₂ effects.
+        long-haul economy factors, including aviation's non-CO₂ effects. The
+        Fiji benchmark is territorial CO₂ per person, so the comparison shows
+        scale rather than like-for-like accounting.
       </figcaption>
     </figure>
   );

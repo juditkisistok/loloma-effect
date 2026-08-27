@@ -17,6 +17,13 @@ export const relocationFunding = {
     committedYear: 2025,
     committedFjd: 3_500_000,
   },
+  partnerContribution: {
+    announcedMonth: "December",
+    announcedYear: 2025,
+    donor: "New Zealand",
+    amountLabel: "$5M",
+    currencySpecified: false,
+  },
   context: {
     relocatedCommunities: 6,
     assessedCommunities: 43,

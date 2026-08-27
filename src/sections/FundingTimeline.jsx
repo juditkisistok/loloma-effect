@@ -71,7 +71,7 @@ export function FundingTimeline() {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={`Timeline of Fiji's climate relocation trust fund. In 2019 the fund launched with a projected 3 percent levy contribution of about FJ$5 million a year. The levy was removed in April 2022. In 2024 Nabavatu's relocation was budgeted at FJ$5.9 million; in 2025 the government committed FJ$3.5 million from the trust fund toward it, a shortfall of about ${formatMillions(nabavatuGapFjd)}. For context, six communities have been relocated nationally and 43 are under assessment, though costs are not uniform across villages.`}
+        aria-label={`Timeline of Fiji's climate relocation trust fund. In 2019 the fund launched with a projected 3 percent levy contribution of about FJ$5 million a year. The levy was removed in April 2022. In 2024 Nabavatu's relocation was budgeted at FJ$5.9 million; in 2025 the government committed FJ$3.5 million from the trust fund toward it. The remaining ${formatMillions(nabavatuGapFjd)} was not covered by that trust-fund commitment. In December 2025, New Zealand announced a separate $5 million contribution to the national fund; the announcement did not specify the currency or assign the full amount to Nabavatu.`}
       >
         <defs>
           <pattern
@@ -98,7 +98,7 @@ export function FundingTimeline() {
             How the funding changed
           </text>
           <text x={margin.left} y="60">
-            The relocation trust fund's original model, and the cost of one
+            The original revenue model, then the July 2025 commitment for one
             village
           </text>
         </g>
@@ -175,7 +175,7 @@ export function FundingTimeline() {
             height={barBaseY - neededTop}
           />
           <text x={neededX} y={neededTop - 26} textAnchor="middle" className={styles.barCaption}>
-            Nabavatu, needed
+            Nabavatu budget
           </text>
           <text x={neededX} y={neededTop - 10} textAnchor="middle">
             {formatMillions(relocationFunding.nabavatu.budgetFjd)}
@@ -190,7 +190,7 @@ export function FundingTimeline() {
             height={barBaseY - committedTop}
           />
           <text x={committedX} y={committedTop - 26} textAnchor="middle" className={styles.barCaption}>
-            Trust fund, committed
+            July commitment
           </text>
           <text x={committedX} y={committedTop - 10} textAnchor="middle">
             {formatMillions(relocationFunding.nabavatu.committedFjd)}
@@ -217,25 +217,34 @@ export function FundingTimeline() {
             y2={committedTopFull}
           />
           <text
-            x={neededX + 42}
-            y={(neededTopFull + committedTopFull) / 2}
-            dominantBaseline="middle"
+            x={neededX - 38}
+            y={(neededTopFull + committedTopFull) / 2 - 5}
+            textAnchor="end"
           >
-            {formatMillions(nabavatuGapFjd)} short
+            <tspan x={neededX - 38} dy="0">
+              {formatMillions(nabavatuGapFjd)}
+            </tspan>
+            <tspan x={neededX - 38} dy="15">
+              outside July commitment
+            </tspan>
           </text>
         </g>
 
         <g
           className={styles.contextLine}
           opacity={contextReveal}
-          transform={`translate(${margin.left} ${height - 24})`}
+          transform={`translate(${margin.left} ${height - 36})`}
         >
           <text x="0" y="0">
-            For context: {relocationFunding.context.relocatedCommunities}{" "}
-            communities relocated nationally ·{" "}
-            {relocationFunding.context.assessedCommunities} identified for
-            assessment since 2021 — costs vary by village, and are not
-            multiplied here.
+            <tspan x="0" dy="0">
+              DEC 2025 · {relocationFunding.partnerContribution.donor} announced
+              another {relocationFunding.partnerContribution.amountLabel} for
+              the national relocation fund.
+            </tspan>
+            <tspan x="0" dy="16">
+              The announcement did not specify the currency or assign the full
+              amount only to Nabavatu.
+            </tspan>
           </text>
         </g>
       </svg>
@@ -243,7 +252,8 @@ export function FundingTimeline() {
       <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
         Sources: Fiji Prime Minister's Office; Fiji Revenue and Customs
-        Service; Fiji Cabinet; Parliament of Fiji.
+        Service; Fiji Cabinet; Parliament of Fiji; New Zealand contribution
+        announced by the Fiji Government.
       </figcaption>
     </figure>
   );
