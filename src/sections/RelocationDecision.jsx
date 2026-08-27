@@ -4,7 +4,8 @@ import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import styles from "./RelocationDecision.module.css";
 
-const { width, height } = fijiBoundary.dimensions;
+const { width } = fijiBoundary.dimensions;
+const height = 590;
 
 export function RelocationDecision() {
   const ref = useRef(null);
@@ -43,14 +44,14 @@ export function RelocationDecision() {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Interactive Fiji map of completed relocations and communities surveyed for adaptation."
+        aria-label="Interactive Fiji map showing six completed relocations, 17 public adaptation-survey locations, and a national total of 43 communities screened since 2021."
       >
         <g className={styles.header}>
           <text x="58" y="47">
             STAY, ADAPT OR MOVE
           </text>
           <text x="58" y="70">
-            Mapped relocations and communities surveyed for adaptation
+            Public GIS locations · select a point for its recorded status
           </text>
         </g>
 
@@ -59,14 +60,12 @@ export function RelocationDecision() {
             <path key={path.id} className={styles.land} d={path.d} />
           ))}
 
-          {fijiBoundary.places.map((place) => (
+          {fijiBoundary.places
+            .filter((place) => place.id !== "vunidogoloa-label")
+            .map((place) => (
             <g
               key={place.id}
-              className={
-                place.id === "vunidogoloa-label"
-                  ? styles.highlightPlace
-                  : styles.place
-              }
+              className={styles.place}
               transform={`translate(${place.x} ${place.y})`}
             >
               <circle r="2.4" />
@@ -89,29 +88,30 @@ export function RelocationDecision() {
                   );
             const selected = dot.id === hoveredId;
             return (
-              <circle
-                key={dot.id}
-                className={`${styles.dot} ${
-                  dot.type === "relocated"
-                    ? styles.relocatedDot
-                    : styles.assessmentDot
-                } ${selected ? styles.selectedDot : ""}`}
-                cx={dot.x}
-                cy={dot.y}
-                r={selected ? 7.2 : dot.type === "relocated" ? 5.6 : 3.8}
-                opacity={reveal}
-                tabIndex="0"
-                role="button"
-                aria-label={`${dot.title}: ${dot.status}`}
-                onPointerEnter={() => setHoveredId(dot.id)}
-                onPointerDown={() => setHoveredId(dot.id)}
-                onFocus={() => setHoveredId(dot.id)}
-              />
+              <g key={dot.id} opacity={reveal}>
+                <circle
+                  className={`${styles.dotPulse} ${
+                    dot.type === "relocated"
+                      ? styles.relocatedPulse
+                      : styles.assessmentPulse
+                  } ${selected ? styles.selectedPulse : ""}`}
+                  cx={dot.x}
+                  cy={dot.y}
+                  r={selected ? 20 : dot.type === "relocated" ? 17 : 8}
+                  style={{ animationDelay: `${-(index % 8) * 0.42}s` }}
+                  tabIndex="0"
+                  role="button"
+                  aria-label={`${dot.title}: ${dot.status}`}
+                  onPointerEnter={() => setHoveredId(dot.id)}
+                  onPointerDown={() => setHoveredId(dot.id)}
+                  onFocus={() => setHoveredId(dot.id)}
+                />
+              </g>
             );
           })}
         </g>
 
-        <g className={styles.legend} transform="translate(58 488)">
+        <g className={styles.legend} transform="translate(58 500)">
           <circle className={styles.relocatedDot} cx="0" cy="0" r="5.5" />
           <text x="14" y="4">
             relocated
@@ -125,64 +125,55 @@ export function RelocationDecision() {
         <g
           className={styles.panel}
           opacity={panelReveal}
-          transform={`translate(724 ${92 + (1 - panelReveal) * 8})`}
+          transform={`translate(${704 + (1 - panelReveal) * 8} 0)`}
         >
-          <text className={styles.panelKicker} x="0" y="0">
+          <line className={styles.panelRail} x1="-28" x2="-28" y1="92" y2="568" />
+
+          <text className={styles.panelKicker} x="0" y="47">
             NATIONAL PICTURE
           </text>
 
-          <g className={styles.countPair} transform="translate(0 48)">
-            <text className={styles.bigCount} x="0" y="0">
+          <g className={styles.countPair} transform="translate(0 112)">
+            <text className={styles.bigCount} x="58" y="0" textAnchor="end">
               6
             </text>
-            <text x="58" y="-9">
+            <text x="82" y="-23">
               communities relocated
             </text>
-            <text x="58" y="13">
+            <text x="82" y="-1">
               as of 2025
             </text>
           </g>
 
-          <g className={styles.countPair} transform="translate(0 118)">
-            <text className={styles.bigCount} x="0" y="0">
-              17
+          <g className={styles.countPair} transform="translate(0 188)">
+            <text className={styles.bigCount} x="58" y="0" textAnchor="end">
+              43
             </text>
-            <text x="84" y="-9">
-              public survey points
+            <text x="82" y="-23">
+              communities screened
             </text>
-            <text x="84" y="13">
-              mapped by CCD / UNOSAT
+            <text x="82" y="-1">
+              nationally since 2021
             </text>
           </g>
 
-          <text className={styles.nationalCount} x="0" y="160">
-            43 screened nationally since 2021
+          <text className={styles.mappedNote} x="0" y="226">
+            17 survey locations have public coordinates here
           </text>
 
-          <line x1="0" x2="218" y1="184" y2="184" />
+          <line className={styles.panelDivider} x1="0" x2="238" y1="252" y2="252" />
 
-          <text className={styles.panelTitle} x="0" y="226">
+          <text className={styles.panelKicker} x="0" y="282">
+            SELECTED LOCATION
+          </text>
+          <text className={styles.panelTitle} x="0" y="312">
             {panel.title}
           </text>
-          <text className={styles.panelStatus} x="0" y="254">
+          <text className={styles.panelStatus} x="0" y="338">
             {panel.status}
           </text>
-          <TextBlock lines={panel.detail} x={0} y={290} />
+          <TextBlock lines={panel.detail} x={0} y={370} />
 
-          <line x1="0" x2="218" y1="360" y2="360" />
-
-          <text className={styles.panelKicker} x="0" y="396">
-            POSSIBLE OUTCOMES
-          </text>
-          <text x="0" y="428">
-            adapt in place
-          </text>
-          <text x="0" y="454">
-            remain under assessment
-          </text>
-          <text x="0" y="480">
-            relocate with consent
-          </text>
         </g>
       </svg>
       </div>
@@ -201,7 +192,7 @@ function TextBlock({ lines, x, y }) {
   return (
     <text className={styles.detailText} x={x} y={y}>
       {lines.map((line, index) => (
-        <tspan key={`${index}-${line}`} x={x} dy={index === 0 ? 0 : 23}>
+        <tspan key={`${index}-${line}`} x={x} dy={index === 0 ? 0 : 21}>
           {line}
         </tspan>
       ))}
@@ -222,11 +213,11 @@ function buildDots() {
   const relocated = fijiBoundary.completed.map((point) => ({
     ...point,
     title: point.name,
-    status: `${point.relocationType}, completed ${point.year}`,
+    status: `${sentenceCase(point.relocationType)} · completed ${point.year}`,
     detail: [
-      `${point.province} province; ${point.households} households.`,
-      `Moved about ${point.distanceMeters} m from old site.`,
-      ...wrapText(point.cause, 32, 2),
+      `${point.province} · ${point.households} households`,
+      `Moved about ${formatDistance(point.distanceMeters)}`,
+      ...wrapText(point.cause, 32),
     ],
     type: "relocated",
   }));
@@ -240,7 +231,7 @@ function buildDots() {
     }`,
     detail: [
       "Adaptation Survey 2022 point.",
-      ...wrapText(point.hazards, 32, 3),
+      ...wrapText(point.hazards, 32),
     ],
     type: "assessment",
   }));
@@ -248,7 +239,20 @@ function buildDots() {
   return [...relocated, ...assessment];
 }
 
-function wrapText(value, maxLength, maxLines) {
+function formatDistance(distanceMeters) {
+  if (distanceMeters >= 1000) {
+    const kilometres = distanceMeters / 1000;
+    return `${Number.isInteger(kilometres) ? kilometres : kilometres.toFixed(1)} km`;
+  }
+  return `${distanceMeters} m`;
+}
+
+function sentenceCase(value) {
+  const text = String(value ?? "");
+  return `${text.charAt(0).toUpperCase()}${text.slice(1).toLowerCase()}`;
+}
+
+function wrapText(value, maxLength) {
   if (!value) return [];
   const words = String(value).split(/\s+/);
   const lines = [];
@@ -262,16 +266,9 @@ function wrapText(value, maxLength, maxLines) {
     } else {
       line = next;
     }
-    if (lines.length === maxLines) break;
   }
 
-  if (line && lines.length < maxLines) lines.push(line);
-  if (
-    lines.length === maxLines &&
-    words.join(" ").length > lines.join(" ").length
-  ) {
-    lines[maxLines - 1] = `${lines[maxLines - 1].replace(/[.,;:]$/, "")}...`;
-  }
+  if (line) lines.push(line);
 
   return lines;
 }

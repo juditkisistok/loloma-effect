@@ -1,5 +1,5 @@
 .figure {
-  width: min(1080px, 94vw);
+  width: min(1120px, 94vw);
   margin: 0 auto;
   padding: 0;
 }
@@ -17,7 +17,7 @@
 
 .header text:first-child {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
   fill: #53666a;
@@ -27,7 +27,8 @@
 .legend text,
 .panel text,
 .place text,
-.highlightPlace text {
+.highlightPlace text,
+.selectedMapLabel {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.01em;
@@ -66,18 +67,47 @@
   fill: #26383c;
 }
 
-.dot {
+.dotPulse {
+  stroke-width: 1;
   cursor: pointer;
+  pointer-events: all;
+  transform-box: fill-box;
+  transform-origin: center;
   transition:
-    r 0.16s ease,
-    opacity 0.2s ease,
-    fill 0.16s ease,
-    stroke-width 0.16s ease;
+    r 0.2s ease,
+    stroke-width 0.2s ease;
+  animation: mapPointPulse 3.8s ease-in-out infinite;
 }
 
-.dot:focus-visible {
+.relocatedPulse {
+  fill: rgba(255, 111, 97, 0.22);
+  stroke: rgba(255, 111, 97, 0.68);
+}
+
+.assessmentPulse {
+  fill: rgba(15, 135, 124, 0.14);
+  stroke: rgba(15, 135, 124, 0.56);
+}
+
+.selectedPulse {
+  stroke-width: 1.35;
+  animation-duration: 2.8s;
+}
+
+.selectedPulse.relocatedPulse {
+  fill: rgba(255, 111, 97, 0.3);
+  stroke: rgba(210, 78, 64, 0.86);
+}
+
+.selectedPulse.assessmentPulse {
+  fill: rgba(15, 135, 124, 0.23);
+  stroke: rgba(9, 104, 97, 0.84);
+}
+
+.dotPulse:focus-visible {
   outline: none;
-  stroke-width: 3;
+  stroke: #26383c;
+  stroke-width: 2;
 }
 
 .relocatedDot {
@@ -92,12 +122,6 @@
   stroke-width: 1.4;
 }
 
-.selectedDot {
-  fill: #111;
-  stroke: #f7f7f5;
-  stroke-width: 2;
-}
-
 .legend text {
   font-size: 11px;
 }
@@ -108,9 +132,14 @@
     transform 0.22s ease;
 }
 
-.panel line {
+.panelDivider,
+.panelRail {
   stroke: rgba(18, 38, 45, 0.14);
   stroke-width: 1;
+}
+
+.panelRail {
+  stroke: rgba(18, 38, 45, 0.1);
 }
 
 .panelKicker {
@@ -123,18 +152,19 @@
 .countPair text:not(.bigCount),
 .detailText,
 .panelStatus,
-.nationalCount {
+.mappedNote {
   font-size: 12px !important;
   fill: #6a7b7f !important;
 }
 
-.nationalCount {
-  font-weight: 700;
+.mappedNote {
+  font-size: 10px !important;
+  letter-spacing: 0.025em !important;
 }
 
 .bigCount {
   font-family: var(--font-display) !important;
-  font-size: 48px !important;
+  font-size: 45px !important;
   font-weight: 600;
   letter-spacing: 0 !important;
   fill: #111 !important;
@@ -148,9 +178,27 @@
   fill: #111 !important;
 }
 
+.panelStatus {
+  font-weight: 700;
+  fill: #52676b !important;
+}
+
+@keyframes mapPointPulse {
+  0%,
+  100% {
+    opacity: 0.74;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
 .caption {
   max-width: 720px;
-  margin: -6px auto 0;
+  margin: 12px auto 0;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.01em;
@@ -192,5 +240,12 @@
     padding: 0 20px;
     max-width: none;
     margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotPulse {
+    animation: none;
+    opacity: 0;
   }
 }
