@@ -11,6 +11,10 @@
   overflow: visible;
 }
 
+.scrollHint {
+  display: none;
+}
+
 .header text:first-child {
   font-family: var(--font-mono);
   font-size: 13px;
@@ -157,24 +161,36 @@
 
 @media (max-width: 760px) {
   .figure {
-    width: min(100vw, 720px);
-    padding: 0 10px;
+    width: 100%;
   }
 
-  .header text:first-child {
-    font-size: 12px;
+  .scrollWrap {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
   }
 
-  .header text:last-child,
-  .legend text,
-  .panel text,
-  .place text,
-  .highlightPlace text,
+  .svg {
+    width: 960px;
+    max-width: none;
+  }
+
+  .scrollHint {
+    display: block;
+    margin: 8px 0 0;
+    padding: 0 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #97968d;
+    text-align: right;
+  }
+
   .caption {
-    font-size: 10px;
-  }
-
-  .bigCount {
-    font-size: 40px !important;
+    padding: 0 20px;
+    max-width: none;
+    margin-top: 4px;
   }
 }

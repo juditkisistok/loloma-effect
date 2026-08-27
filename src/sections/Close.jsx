@@ -83,7 +83,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close3" align="center" height="165vh">
+        <Act name="close3" align="center" height="155vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               One hour cannot carry the weight of Fiji's climate problem, and
@@ -97,7 +97,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close3b" align="center" height="165vh">
+        <Act name="close3b" align="center" height="140vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.support}>
               The interesting thing about loloma is that it does not ask a
@@ -109,7 +109,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close4" align="center" height="220vh">
+        <Act name="close4" align="center" height="165vh">
           <Card className={`${panelStyles.panel} ${styles.finalBeat}`}>
             <div className={styles.farewell}>
               {farewellLines.map((line) => (
@@ -121,7 +121,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close5" align="start" height="220vh">
+        <Act name="close5" align="start" height="190vh">
           <div className={styles.vinakaLock}>
             <Card>
               <p className={styles.vinaka}>Vinaka.</p>

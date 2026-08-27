@@ -24,3 +24,49 @@
   opacity: 1;
   border-bottom: none;
 }
+
+.wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.popover {
+  position: absolute;
+  z-index: 20;
+  bottom: calc(100% + 0.5em);
+  left: 50%;
+  width: max-content;
+  max-width: 220px;
+  padding: 0.6em 0.75em;
+  border-radius: 6px;
+  background: rgba(15, 20, 19, 0.96);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  color: #f4f4f0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.4;
+  text-align: left;
+  letter-spacing: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 5px solid transparent;
+  border-top-color: rgba(15, 20, 19, 0.96);
+  transform: translateX(-50%);
+}
+
+.wrap:hover .popover,
+.wrap:focus-within .popover {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

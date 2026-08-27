@@ -11,6 +11,10 @@
   overflow: visible;
 }
 
+.scrollHint {
+  display: none;
+}
+
 .chartHeader text:first-child {
   font-family: var(--font-body);
   font-size: 17px;
@@ -41,6 +45,13 @@
   font-family: var(--font-mono);
   font-size: 12px;
   fill: #8a8a80;
+}
+
+.iconBackdrop {
+  fill: var(--paper-soft, #e6f0ec);
+  stroke: var(--teal, #0f9d8f);
+  stroke-opacity: 0.25;
+  stroke-width: 1;
 }
 
 .tileIcon path {
@@ -77,30 +88,37 @@
 
 @media (max-width: 760px) {
   .figure {
-    width: min(100vw, 720px);
-    padding: 0 10px;
+    width: 100%;
+    padding: 0;
   }
 
-  .chartHeader text:first-child {
-    font-size: 15px;
+  .scrollWrap {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
   }
 
-  .chartHeader text:last-child,
-  .sessionsNote,
-  .tileLabel,
-  .caption {
-    font-size: 10px;
+  .svg {
+    width: 960px;
+    max-width: none;
   }
 
-  .bigNumber {
-    font-size: 56px;
-  }
-
-  .counterCaption {
+  .scrollHint {
+    display: block;
+    margin: 8px 0 0;
+    padding: 0 20px;
+    font-family: var(--font-mono);
     font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #97968d;
+    text-align: right;
   }
 
-  .tileValue {
-    font-size: 18px;
+  .caption {
+    padding: 0 20px;
+    max-width: none;
+    margin-top: 4px;
   }
 }

@@ -150,6 +150,7 @@
 
 .dataBlock {
   width: 100%;
+  min-width: 0;
   padding: clamp(28px, 4.2vh, 52px) 0;
   background: #efefeb;
 }

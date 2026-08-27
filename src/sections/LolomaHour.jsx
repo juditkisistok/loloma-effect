@@ -14,15 +14,12 @@ const tileIcons = {
   rubbish: (
     <path d="M-8,-10 L8,-10 L6,12 Q0,16 -6,12 Z M-5,-10 L-5,-15 Q0,-19 5,-15 L5,-10" />
   ),
-  corals: (
-    <path d="M0,14 L0,-2 M0,-2 L-9,-14 M0,-2 L0,-16 M0,-2 L9,-14 M-9,-14 L-9,-18 M0,-16 L0,-20 M9,-14 L9,-18" />
-  ),
-  mangroves: (
-    <path d="M0,-14 L0,4 M0,4 L-10,16 M0,4 L0,16 M0,4 L10,16 M-10,16 L-13,20 M0,16 L0,20 M10,16 L13,20" />
-  ),
-  trees: (
-    <path d="M0,16 L0,4 M-11,4 L11,4 L0,-16 Z" />
-  ),
+};
+
+const tileImages = {
+  corals: "/assets/branching-coral-a.png",
+  mangroves: "/assets/mangrove-sapling.png",
+  trees: "/assets/monstera-leaf-cluster.png",
 };
 
 const tileOffsets = [-330, -110, 110, 330];
@@ -58,6 +55,7 @@ export function LolomaHour() {
 
   return (
     <figure className={styles.figure} ref={ref}>
+      <div className={styles.scrollWrap}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -97,7 +95,21 @@ export function LolomaHour() {
               transform={`translate(${width / 2 + tileOffsets[index]} 280) translate(0 ${(1 - tileReveals[index]) * 14})`}
               opacity={tileReveals[index]}
             >
-              <g className={styles.tileIcon}>{tileIcons[outcome.id]}</g>
+              <g className={styles.tileIcon}>
+                <circle className={styles.iconBackdrop} cx="0" cy="-8" r="30" />
+                {tileImages[outcome.id] ? (
+                  <image
+                    href={tileImages[outcome.id]}
+                    x="-26"
+                    y="-38"
+                    width="52"
+                    height="52"
+                    preserveAspectRatio="xMidYMid meet"
+                  />
+                ) : (
+                  tileIcons[outcome.id]
+                )}
+              </g>
               <text className={styles.tileValue} textAnchor="middle" y="46">
                 {formatOutcome(outcome.value)}
               </text>
@@ -106,6 +118,8 @@ export function LolomaHour() {
           ))}
         </g>
       </svg>
+      </div>
+      <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
         Against a first-year target of {formatWhole(lolomaHour.launch.firstYearTargetHours)} hours.
         Kept as parallel outcomes, not a conversion from hours: different activities require

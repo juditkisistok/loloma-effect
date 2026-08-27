@@ -11,6 +11,10 @@
   overflow: visible;
 }
 
+.scrollHint {
+  display: none;
+}
+
 .chartHeader text:first-child {
   font-family: var(--font-body);
   font-size: 17px;
@@ -142,24 +146,36 @@
 
 @media (max-width: 760px) {
   .figure {
-    width: min(100vw, 720px);
-    padding: 0 10px;
+    width: 100%;
   }
 
-  .chartHeader text:first-child {
-    font-size: 15px;
+  .scrollWrap {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
   }
 
-  .chartHeader text:last-child,
-  .revenueLabel text,
-  .breakMark text,
-  .contextLine text,
+  .svg {
+    width: 960px;
+    max-width: none;
+  }
+
+  .scrollHint {
+    display: block;
+    margin: 8px 0 0;
+    padding: 0 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #97968d;
+    text-align: right;
+  }
+
   .caption {
-    font-size: 10px;
-  }
-
-  .neededBar text,
-  .committedBar text {
-    font-size: 12px;
+    padding: 0 20px;
+    max-width: none;
+    margin-top: 4px;
   }
 }

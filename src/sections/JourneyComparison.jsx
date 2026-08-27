@@ -56,6 +56,7 @@ export function JourneyComparison({ selectedId = "london" }) {
 
   return (
     <figure className={styles.figure} ref={ref}>
+      <div className={styles.scrollWrap}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -217,6 +218,8 @@ export function JourneyComparison({ selectedId = "london" }) {
           </text>
         </g>
       </svg>
+      </div>
+      <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
         Source note: {selected.routeLabel} return distance estimated at{" "}
         {selected.returnKm.toLocaleString("en-US")} passenger-km using

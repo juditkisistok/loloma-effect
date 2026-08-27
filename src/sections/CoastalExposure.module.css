@@ -11,6 +11,10 @@
   overflow: visible;
 }
 
+.scrollHint {
+  display: none;
+}
+
 .grid line {
   stroke: rgba(48, 58, 56, 0.12);
   stroke-width: 1;
@@ -118,25 +122,36 @@
 
 @media (max-width: 760px) {
   .figure {
-    width: min(100vw, 720px);
-    padding: 0 10px;
+    width: 100%;
   }
 
-  .kicker text,
-  .yearKey text,
-  .scale text,
-  .coords text,
-  .factRail text,
-  .caption {
+  .scrollWrap {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
+  }
+
+  .svg {
+    width: 960px;
+    max-width: none;
+  }
+
+  .scrollHint {
+    display: block;
+    margin: 8px 0 0;
+    padding: 0 20px;
+    font-family: var(--font-mono);
     font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #97968d;
+    text-align: right;
   }
 
-  .yearKey text:first-child {
-    font-size: 30px;
-  }
-
-  .factValue,
-  .factValueTeal {
-    font-size: 29px;
+  .caption {
+    padding: 0 20px;
+    max-width: none;
+    margin-top: 4px;
   }
 }

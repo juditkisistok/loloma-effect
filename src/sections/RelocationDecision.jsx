@@ -38,6 +38,7 @@ export function RelocationDecision() {
 
   return (
     <figure className={styles.figure} ref={ref}>
+      <div className={styles.scrollWrap}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -185,6 +186,8 @@ export function RelocationDecision() {
           </text>
         </g>
       </svg>
+      </div>
+      <p className={styles.scrollHint}>Scroll for full map →</p>
       <figcaption className={styles.caption}>
         Sources: geoBoundaries gbOpen Fiji ADM0 boundary; Fiji Climate Change
         Division / UNOSAT GIS Platform, Completed Relocation (CCD, 2023) and

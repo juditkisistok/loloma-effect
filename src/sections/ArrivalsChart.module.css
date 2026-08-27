@@ -11,6 +11,10 @@
   overflow: visible;
 }
 
+.scrollHint {
+  display: none;
+}
+
 .plotSurface {
   fill: transparent;
 }
@@ -164,21 +168,36 @@
 
 @media (max-width: 760px) {
   .figure {
-    width: min(100vw, 720px);
-    padding: 0 10px;
+    width: 100%;
   }
 
-  .line {
-    stroke-width: 3;
+  .scrollWrap {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px;
   }
 
-  .caption,
-  .storyLabels text,
-  .latestNote text:last-of-type {
+  .svg {
+    width: 960px;
+    max-width: none;
+  }
+
+  .scrollHint {
+    display: block;
+    margin: 8px 0 0;
+    padding: 0 20px;
+    font-family: var(--font-mono);
     font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #97968d;
+    text-align: right;
   }
 
-  .chartHeader text:first-child {
-    font-size: 15px;
+  .caption {
+    padding: 0 20px;
+    max-width: none;
+    margin-top: 4px;
   }
 }

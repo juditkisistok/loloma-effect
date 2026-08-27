@@ -39,6 +39,7 @@ export function CoastalExposure() {
   const activeT = activeIndex / (years.length - 1);
   return (
     <figure className={styles.figure} ref={ref}>
+      <div className={styles.scrollWrap}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -143,6 +144,8 @@ export function CoastalExposure() {
           </text>
         </g>
       </svg>
+      </div>
+      <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
         Sources: Digital Earth Pacific / Pacific Data Hub Annual Shorelines
         (Landsat, 30 m); NASA Sea Level Change Team Lautoka summary; SPREP Fiji

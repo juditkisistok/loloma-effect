@@ -64,6 +64,7 @@ export function ArrivalsChart({ rows = [] }) {
 
   return (
     <figure className={styles.figure} ref={ref}>
+      <div className={styles.scrollWrap}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -225,6 +226,8 @@ export function ArrivalsChart({ rows = [] }) {
           onPointerLeave={() => setHovered(null)}
         />
       </svg>
+      </div>
+      <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
         Source: Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR. 2025 is a
         preliminary supplemental point from Fiji Bureau of Statistics.

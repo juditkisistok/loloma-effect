@@ -66,6 +66,7 @@ export function FundingTimeline() {
 
   return (
     <figure className={styles.figure} ref={ref}>
+      <div className={styles.scrollWrap}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -238,6 +239,8 @@ export function FundingTimeline() {
           </text>
         </g>
       </svg>
+      </div>
+      <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
         Sources: Fiji Prime Minister's Office; Fiji Revenue and Customs
         Service; Fiji Cabinet; Parliament of Fiji.
