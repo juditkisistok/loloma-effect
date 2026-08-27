@@ -17,6 +17,12 @@
       "note": "SPC DF_CLIMATE_CHANGE annual tourism arrivals indicator TRSM_ARR."
     },
     {
+      "id": "fiji-stats-supplemental",
+      "name": "Fiji Bureau of Statistics visitor-arrivals table",
+      "url": "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
+      "note": "Official Fiji visitor-arrivals table used only to fill a year missing from the Pacific Data Hub extract."
+    },
+    {
       "id": "fiji-stats-preliminary-2025",
       "name": "Fiji Bureau of Statistics provisional visitor arrivals",
       "url": "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
@@ -24,7 +30,7 @@
       "note": "Provisional 2025 annual visitor arrivals, not yet present in the SPC extract."
     }
   ],
-  "rows": 30,
+  "rows": 31,
   "rawRows": 29,
   "geographies": [
     "FJ"

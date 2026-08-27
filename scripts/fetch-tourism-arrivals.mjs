@@ -38,7 +38,24 @@ const sourceStatsFiji2025 = {
   note: "Provisional 2025 annual visitor arrivals, not yet present in the SPC extract.",
 };
 
+const sourceStatsFijiSupplemental = {
+  id: "fiji-stats-supplemental",
+  name: "Fiji Bureau of Statistics visitor-arrivals table",
+  url: "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
+  note: "Official Fiji visitor-arrivals table used only to fill a year missing from the Pacific Data Hub extract.",
+};
+
 const supplementalRows = [
+  {
+    year: 2006,
+    arrivals: 548589,
+    geo_code: "FJ",
+    geography: "Fiji",
+    unit: "N",
+    source_id: sourceStatsFijiSupplemental.id,
+    is_preliminary: "FALSE",
+    note: "Missing from the Pacific Data Hub extract; supplemented from the Fiji Bureau of Statistics visitor-arrivals table.",
+  },
   {
     year: 2025,
     arrivals: 986367,
@@ -78,18 +95,20 @@ async function main() {
     throw new Error("Pacific Data Hub response did not include Fiji arrivals.");
   }
 
+  const spcRows = fijiRows.map((row) => ({
+    year: Number(row.TIME_PERIOD),
+    arrivals: Number(row.OBS_VALUE),
+    geo_code: row.GEO_PICT,
+    geography: "Fiji",
+    unit: row.UNIT_MEASURE,
+    source_id: sourceSpc.id,
+    is_preliminary: "FALSE",
+    note: "",
+  }));
+  const spcYears = new Set(spcRows.map((row) => row.year));
   const cleanRows = [
-    ...fijiRows.map((row) => ({
-      year: Number(row.TIME_PERIOD),
-      arrivals: Number(row.OBS_VALUE),
-      geo_code: row.GEO_PICT,
-      geography: "Fiji",
-      unit: row.UNIT_MEASURE,
-      source_id: sourceSpc.id,
-      is_preliminary: "FALSE",
-      note: "",
-    })),
-    ...supplementalRows,
+    ...spcRows,
+    ...supplementalRows.filter((row) => !spcYears.has(row.year)),
   ].sort((a, b) => a.year - b.year);
   const cleanYears = cleanRows.map((row) => row.year);
 
@@ -101,7 +120,7 @@ async function main() {
     title: "Tourism Arrivals",
     fetchedAt: new Date().toISOString(),
     rawSource: sourceSpc,
-    sources: [sourceSpc, sourceStatsFiji2025],
+    sources: [sourceSpc, sourceStatsFijiSupplemental, sourceStatsFiji2025],
     rows: cleanRows.length,
     rawRows: validRows.length,
     geographies: [...new Set(validRows.map((row) => row.GEO_PICT))],

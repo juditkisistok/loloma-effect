@@ -7,12 +7,10 @@
 .svg {
   display: block;
   width: 100%;
+  max-width: 1000px;
   height: auto;
+  margin: 0 auto;
   overflow: visible;
-}
-
-.scrollHint {
-  display: none;
 }
 
 .plotSurface {
@@ -24,12 +22,35 @@
   stroke-width: 1;
 }
 
+.yAxis line {
+  stroke: rgba(17, 17, 17, 0.1);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.yAxis text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: #66665f;
+}
+
 .caption {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.02em;
   fill: #777;
   color: #777;
+}
+
+.caption a {
+  color: inherit;
+  text-decoration-color: rgba(17, 17, 17, 0.35);
+  text-underline-offset: 0.18em;
+}
+
+.caption a:hover,
+.caption a:focus-visible {
+  color: #111;
 }
 
 .chartHeader text:first-child {
@@ -83,6 +104,14 @@
   opacity: 0.16;
 }
 
+.interruptionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  fill: #a94737;
+}
+
 .svg pattern line {
   stroke: rgba(180, 68, 47, 0.18);
   stroke-width: 1.2;
@@ -109,6 +138,18 @@
 .latestDot {
   fill: #0f877c;
   stroke: none;
+}
+
+.dataDot {
+  fill: #0f877c;
+  stroke: rgba(247, 247, 245, 0.96);
+  stroke-width: 1.4;
+  cursor: crosshair;
+  outline: none;
+}
+.dataDot:focus {
+  stroke: #111;
+  stroke-width: 2.5;
 }
 
 .latestNote text:first-of-type {
@@ -139,14 +180,26 @@
   stroke-width: 1;
 }
 
+.hover .hoverAccent {
+  fill: #0f877c;
+  stroke: none;
+}
+
 .hover text {
   font-family: var(--font-mono);
-  font-size: 11px;
   fill: #333;
 }
 
-.hover text:first-of-type {
+.hover .hoverValue {
+  font-size: 13px;
   font-weight: 600;
+}
+
+.hover .hoverMeta {
+  font-size: 9px;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  fill: #66665f;
 }
 
 .hitPath {
@@ -173,26 +226,13 @@
 
   .scrollWrap {
     display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible;
     padding: 0 20px;
   }
 
   .svg {
-    width: 960px;
-    max-width: none;
-  }
-
-  .scrollHint {
-    display: block;
-    margin: 8px 0 0;
-    padding: 0 20px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #97968d;
-    text-align: right;
+    width: 100%;
+    max-width: 100%;
   }
 
   .caption {

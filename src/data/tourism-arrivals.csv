@@ -10,6 +10,7 @@ year,arrivals,geo_code,geography,unit,source_id,is_preliminary,note
 2003,451000,FJ,Fiji,N,spc-climate-change,FALSE,
 2004,513000,FJ,Fiji,N,spc-climate-change,FALSE,
 2005,547000,FJ,Fiji,N,spc-climate-change,FALSE,
+2006,548589,FJ,Fiji,N,fiji-stats-supplemental,FALSE,Missing from the Pacific Data Hub extract; supplemented from the Fiji Bureau of Statistics visitor-arrivals table.
 2007,542000,FJ,Fiji,N,spc-climate-change,FALSE,
 2008,627000,FJ,Fiji,N,spc-climate-change,FALSE,
 2009,605000,FJ,Fiji,N,spc-climate-change,FALSE,

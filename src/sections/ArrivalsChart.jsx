@@ -1,26 +1,44 @@
 import { extent, format, line, max, pointer, scaleLinear } from "d3";
-import { useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import styles from "./ArrivalsChart.module.css";
 
-const width = 1000;
+const maxWidth = 1000;
 const height = 392;
-const margin = { top: 82, right: 44, bottom: 36, left: 44 };
-const labelInset = 64;
+const margin = { top: 82, right: 24, bottom: 38, left: 58 };
 const storyEndYear = 2025;
 const formatWhole = format(",");
 
 export function ArrivalsChart({ rows = [] }) {
   const ref = useRef(null);
+  const wrapRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [hovered, setHovered] = useState(null);
-  const chart = useMemo(() => buildChart(rows), [rows]);
+  const [width, setWidth] = useState(maxWidth);
+  const chart = useMemo(() => buildChart(rows, width), [rows, width]);
   const drawProgress = chart.points.length ? progress : 0;
   const interruptionProgress = chart.interruption
     ? clamp((drawProgress - chart.interruption.startProgress) / 0.08, 0, 1)
     : 0;
   const latestNoteProgress = clamp((drawProgress - 0.975) / 0.025, 0, 1);
+
+  useLayoutEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return undefined;
+
+    const updateWidth = (nextWidth) => {
+      const boundedWidth = Math.min(maxWidth, Math.max(300, Math.round(nextWidth)));
+      setWidth((current) => (current === boundedWidth ? current : boundedWidth));
+    };
+    updateWidth(wrap.clientWidth);
+
+    const observer = new ResizeObserver((entries) => {
+      updateWidth(entries[0]?.contentRect.width ?? wrap.clientWidth);
+    });
+    observer.observe(wrap);
+    return () => observer.disconnect();
+  }, []);
 
   useFrame((frame) => {
     const el = ref.current;
@@ -64,12 +82,12 @@ export function ArrivalsChart({ rows = [] }) {
 
   return (
     <figure className={styles.figure} ref={ref}>
-      <div className={styles.scrollWrap}>
+      <div className={styles.scrollWrap} ref={wrapRef}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Annual visitor arrivals to Fiji from 1995 to 2025"
+        aria-label="Annual visitor arrivals to Fiji from 1995 to 2025. The Pacific Data Hub series rises from 476,000 in 1995 to more than one million before collapsing during the COVID-19 interruption in 2020 and 2021, then recovering to 986,367 in 2025."
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -112,9 +130,20 @@ export function ArrivalsChart({ rows = [] }) {
         />
 
         <g className={styles.chartHeader}>
-          <text x={labelInset} y={margin.top - 34}>
-            Visitor arrivals to Fiji, 1995-2025
+          <text x={margin.left + 14} y={margin.top - 34}>
+            Visitor arrivals to Fiji, 1995–2025
           </text>
+        </g>
+
+        <g className={styles.yAxis}>
+          {chart.yTicks.map((tick) => (
+            <g key={tick} transform={`translate(0 ${chart.y(tick)})`}>
+              <line x1={margin.left} x2={width - margin.right} />
+              <text x={margin.left - 10} y="4" textAnchor="end">
+                {formatAxisValue(tick)}
+              </text>
+            </g>
+          ))}
         </g>
 
         {chart.interruption && (
@@ -135,6 +164,17 @@ export function ArrivalsChart({ rows = [] }) {
               width={chart.interruption.width}
               height={height - margin.top - margin.bottom}
             />
+            <text
+              className={styles.interruptionLabel}
+              x="0"
+              y="0"
+              textAnchor="end"
+              transform={`translate(${
+                chart.interruption.x + 14
+              } ${margin.top + 12}) rotate(-90)`}
+            >
+              COVID-19
+            </text>
           </g>
         )}
 
@@ -157,6 +197,27 @@ export function ArrivalsChart({ rows = [] }) {
             clipPath="url(#arrivals-reveal)"
           />
         )}
+
+        <g className={styles.dataPoints} clipPath="url(#arrivals-reveal)">
+          {chart.points.map((point) => (
+           <circle
+             key={point.year}
+              className={styles.dataDot}
+             cx={chart.x(point.year)}
+             cy={chart.y(point.arrivals)}
+              r="2.2"
+              tabIndex={point.progress <= drawProgress + 0.015 ? 0 : -1}
+              aria-label={`${point.year}: ${formatWhole(point.arrivals)} visitor arrivals${
+                point.source?.id === "fiji-stats-supplemental"
+                  ? ", supplemental Fiji Bureau of Statistics observation"
+                  : ""
+              }`}
+              onFocus={() => setHovered(point)}
+              onBlur={() => setHovered(null)}
+              onPointerDown={() => setHovered(point)}
+            />
+          ))}
+        </g>
 
         <g className={styles.storyLabels}>
           {chart.storyLabels.map((label) => (
@@ -183,7 +244,7 @@ export function ArrivalsChart({ rows = [] }) {
             <g
               className={styles.latestNote}
               opacity={latestNoteProgress}
-              transform={`translate(${chart.x(chart.latest.year) - 70} ${
+              transform={`translate(${width - margin.right - 140} ${
                 chart.y(chart.latest.arrivals) - 58 + (1 - latestNoteProgress) * 8
               })`}
             >
@@ -192,7 +253,7 @@ export function ArrivalsChart({ rows = [] }) {
                 {formatWhole(chart.latest.arrivals)}
               </text>
               <text x="13" y="35">
-                2025 preliminary
+                {chart.latest.isPreliminary ? "2025 preliminary" : "2025"}
               </text>
             </g>
           </>
@@ -208,12 +269,20 @@ export function ArrivalsChart({ rows = [] }) {
             <circle r="4.5" />
             <g
               transform={`translate(${
-                chart.x(hovered.year) > width - 210 ? -136 : 14
-              } -42)`}
+                chart.x(hovered.year) > width - 206 ? -178 : 14
+              } -56)`}
             >
-              <rect width="122" height="34" rx="0" />
-              <text x="10" y="14">
-                {hovered.year} · {formatWhole(hovered.arrivals)}
+              <rect width="164" height="48" rx="2" />
+              <rect className={styles.hoverAccent} width="4" height="48" rx="2" />
+              <text className={styles.hoverValue} x="14" y="20">
+                {formatWhole(hovered.arrivals)}
+              </text>
+              <text className={styles.hoverMeta} x="14" y="37">
+                {hovered.previousYear
+                  ? `${hovered.year} · ${formatChange(
+                      hovered.changePct,
+                    )} vs ${hovered.previousYear}`
+                  : `${hovered.year} · series start`}
               </text>
             </g>
           </g>
@@ -223,24 +292,42 @@ export function ArrivalsChart({ rows = [] }) {
           className={styles.hitPath}
           d={chart.linePath}
           onPointerMove={handlePointerMove}
+          onPointerDown={handlePointerMove}
           onPointerLeave={() => setHovered(null)}
         />
       </svg>
       </div>
-      <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
-        Source: Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR. 2025 is a
-        preliminary supplemental point from Fiji Bureau of Statistics.
+        Source:{" "}
+        <a
+          href="https://stats.pacificdata.org/vis?av=true&df%5Bag%5D=SPC&df%5Bds%5D=SPC2&df%5Bid%5D=DF_CLIMATE_CHANGE&df%5Bvs%5D=1.0&dq=A.TRSM_ARR.&lc=en&pd=%2C&to%5BTIME_PERIOD%5D=false"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR
+        </a>{" "}
+        — an official Pacific Dataviz Challenge 2026 dataset. The missing 2006
+        observation (548,589) and preliminary 2025 total are supplemented from
+        the{" "}
+        <a
+          href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Fiji Bureau of Statistics
+        </a>
+        .
       </figcaption>
     </figure>
   );
 }
 
-function buildChart(rows) {
+function buildChart(rows, width) {
   const fallback = {
     x: () => margin.left,
     y: () => height - margin.bottom,
     points: [],
+    yTicks: [],
     storyLabels: [],
     linePath: "",
     areaPath: "",
@@ -252,11 +339,12 @@ function buildChart(rows) {
 
   const yearExtent = extent(rows, (row) => row.year);
   const arrivalMax = max(rows, (row) => row.arrivals) ?? 0;
+  const yMax = Math.ceil(arrivalMax / 200000) * 200000;
   const x = scaleLinear()
     .domain(yearExtent)
     .range([margin.left, width - margin.right]);
   const y = scaleLinear()
-    .domain([0, Math.ceil(arrivalMax / 200000) * 200000])
+    .domain([0, yMax])
     .range([height - margin.bottom, margin.top])
     .nice();
 
@@ -269,10 +357,18 @@ function buildChart(rows) {
     rows[0].year,
   )},${y(0)}Z`;
 
-  const points = rows.map((row) => ({
-    ...row,
-    progress: (x(row.year) - margin.left) / (width - margin.left - margin.right),
-  }));
+  const points = rows.map((row, index) => {
+    const previous = rows[index - 1];
+    return {
+      ...row,
+      previousYear: previous?.year ?? null,
+      changePct: previous
+        ? ((row.arrivals - previous.arrivals) / previous.arrivals) * 100
+        : null,
+      progress:
+        (x(row.year) - margin.left) / (width - margin.left - margin.right),
+    };
+  });
   const interruptionStart = rows.find((row) => row.year === 2020);
   const interruptionEnd = rows.find((row) => row.year === 2021);
   const interruption =
@@ -293,19 +389,29 @@ function buildChart(rows) {
     x,
     y,
     points,
-    storyLabels: [
-      { year: yearExtent[0], text: `${yearExtent[0]}`, anchor: "middle" },
-      {
-        year: 2020.5,
-        x: interruption ? interruption.labelX : x(2020.5),
-        text: "2020-21",
-        anchor: "middle",
-      },
-      { year: storyEndYear, text: `${storyEndYear}`, anchor: "middle" },
-    ],
+    yTicks: [0, yMax / 3, (yMax * 2) / 3, yMax],
+    storyLabels: (width < 600
+      ? [yearExtent[0], 2005, 2015, storyEndYear]
+      : [yearExtent[0], 2000, 2005, 2010, 2015, storyEndYear]
+    ).map((year) => ({ year, text: `${year}`, anchor: "middle" })),
     linePath,
     areaPath,
     interruption,
     latest: rows.find((row) => row.year === storyEndYear) ?? rows.at(-1),
   };
+}
+
+function formatAxisValue(value) {
+  if (value === 0) return "0";
+  if (value >= 1000000) {
+    const millions = value / 1000000;
+    return `${Number.isInteger(millions) ? millions : millions.toFixed(1)}m`;
+  }
+  return `${Math.round(value / 1000)}k`;
+}
+
+function formatChange(value) {
+  if (!Number.isFinite(value)) return "";
+  if (Math.abs(value) < 0.05) return "0.0%";
+  return `${value > 0 ? "+" : "−"}${Math.abs(value).toFixed(1)}%`;
 }

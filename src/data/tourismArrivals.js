@@ -14,6 +14,11 @@ export const tourismArrivalSources = {
     name: "Fiji Bureau of Statistics provisional visitor arrivals",
     url: "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
   },
+  "fiji-stats-supplemental": {
+    id: "fiji-stats-supplemental",
+    name: "Fiji Bureau of Statistics visitor-arrivals table",
+    url: "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
+  },
 };
 
 export async function loadTourismArrivals(url = tourismArrivalsCsvUrl) {
