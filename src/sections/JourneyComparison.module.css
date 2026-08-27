@@ -28,32 +28,13 @@
   fill: #777;
 }
 
-.legend rect {
-  fill-opacity: 1;
-}
-
-.legend text {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: #6a6a63;
-  dominant-baseline: middle;
-}
-
-.baseline {
-  stroke: rgba(17, 17, 17, 0.16);
-  stroke-width: 1;
-}
-
-.ticks line {
-  stroke: rgba(17, 17, 17, 0.22);
-  stroke-width: 1;
-}
-
-.ticks text {
+.rowLabel text,
+.statKicker {
   font-family: var(--font-mono);
   font-size: 10px;
-  fill: #97968d;
-  text-anchor: middle;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: #6f7775;
 }
 
 .segmentDirect,
@@ -74,83 +55,60 @@
   fill: var(--coral);
 }
 
-.plane line {
-  stroke: #1c1c19;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-}
-
-.plane path {
-  fill: #1c1c19;
-}
-
-.totalNote {
+.segmentLabels {
   pointer-events: none;
   transition: opacity 0.24s ease;
 }
 
-.totalNote text:first-child {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  fill: #111;
-}
-
-.totalNote text:last-child {
+.segmentLabels text {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.02em;
-  fill: #8a8a80;
+  letter-spacing: 0;
+  fill: #626b69;
 }
 
-.fijiMarker line {
-  stroke: var(--sand-deep);
-  stroke-width: 2;
+.rowValue {
+  letter-spacing: 0 !important;
 }
 
-.fijiMarker circle {
+.guide {
+  stroke: rgba(17, 17, 17, 0.12);
+  stroke-width: 1;
+}
+
+.benchmarkBar {
   fill: var(--sand-deep);
 }
 
-.fijiMarker text {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  fill: #7a5c2c;
-}
-
-.fijiMarker .fijiValue {
-  font-weight: 700;
-  fill: var(--sand-deep);
-}
-
-.bracket line {
-  stroke: #a6a59b;
+.statDivider {
+  stroke: rgba(17, 17, 17, 0.14);
   stroke-width: 1;
 }
 
 .bigNumber {
   font-family: var(--font-display);
-  font-size: 46px;
+  font-size: 54px;
   font-weight: 600;
   fill: #111;
 }
 
 .bigCaption {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.02em;
-  fill: #777;
+  font-size: 10px;
+  letter-spacing: 0.015em;
+  fill: #6f7775;
 }
 
 .caption {
-  max-width: 520px;
-  margin: -4px auto 0;
+  width: 73.2%;
+  max-width: none;
+  margin: 8px 0 0 5.8%;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.02em;
   line-height: 1.5;
   color: #777;
-  text-align: center;
+  text-align: left;
 }
 
 @media (max-width: 760px) {
@@ -183,8 +141,9 @@
   }
 
   .caption {
+    width: auto;
     padding: 0 20px;
     max-width: none;
-    margin-top: 4px;
+    margin: 4px 0 0;
   }
 }

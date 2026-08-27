@@ -1,16 +1,16 @@
 import { scaleLinear } from "d3";
-import { useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { journeyOptions, flightComparison } from "../data/journeyComparison";
-import { clamp } from "../lib/math";
-import { useFrame } from "../scroll/stageContext";
 import styles from "./JourneyComparison.module.css";
 
 const width = 1000;
-const height = 350;
-const margin = { left: 56, right: 56 };
-const trackY = 208;
+const height = 244;
+const margin = { left: 58, right: 210 };
+const flightY = 104;
+const benchmarkY = 207;
+const flightBarHeight = 30;
+const benchmarkBarHeight = 16;
 const maxFlightTotal = Math.max(...journeyOptions.map((route) => route.total));
-
 const segmentClassNames = {
   direct: styles.segmentDirect,
   supply: styles.segmentSupply,
@@ -18,226 +18,164 @@ const segmentClassNames = {
 };
 
 export function JourneyComparison({ selectedId = "london" }) {
-  const ref = useRef(null);
-  const [progress, setProgress] = useState(0);
   const selected =
     journeyOptions.find((route) => route.id === selectedId) ?? journeyOptions[0];
   const chart = useMemo(() => buildChart(selected), [selected]);
   const multiple = selected.total / flightComparison.fijiPerPerson;
 
-  useFrame((frame) => {
-    const el = ref.current;
-    if (!el) return;
-    if (frame.reduced) {
-      setProgress(1);
-      return;
-    }
-
-    const rect = el.getBoundingClientRect();
-    const start = window.innerHeight * 0.95;
-    const end = window.innerHeight * 0.1;
-    const raw = (start - rect.top) / (start - end);
-
-    setProgress((current) => {
-      const next = clamp(raw, 0, 1);
-      return Math.abs(current - next) > 0.002 ? next : current;
-    });
-  });
-
-  const trailReveal = clamp(progress / 0.55, 0, 1);
-  const totalNoteOpacity = clamp((progress - 0.42) / 0.16, 0, 1);
-  const fijiOpacity = clamp((progress - 0.55) / 0.2, 0, 1);
-  const bracketOpacity = clamp((progress - 0.72) / 0.16, 0, 1);
-  const bigStatOpacity = clamp((progress - 0.8) / 0.2, 0, 1);
-
-  const trailWidth = chart.trailFullWidth * trailReveal;
-  const planeX = chart.trackX0 + trailWidth;
-  const totalNoteX = Math.min(planeX + 14, width - margin.right - 118);
-
   return (
-    <figure className={styles.figure} ref={ref}>
+    <figure className={styles.figure}>
       <div className={styles.scrollWrap}>
-      <svg
-        className={styles.svg}
-        viewBox={`0 0 ${width} ${height}`}
-        role="img"
-        aria-label={`A return journey from ${selected.label} to Nadi has an estimated climate impact of ${selected.total.toFixed(
-          1,
-        )} tonnes CO₂e — around ${multiple.toFixed(
-          1,
-        )} times Fiji's ${flightComparison.fijiPerPerson.toFixed(
-          2,
-        )} tonnes of territorial CO₂ per person in 2024. The measures are not directly equivalent because the flight estimate includes non-CO₂ effects.`}
-      >
-        <defs>
-          <clipPath id="jc-pill">
-            <rect
-              x={chart.trackX0}
-              y={trackY - 9}
-              width={chart.trailFullWidth}
-              height="18"
-              rx="9"
-            />
-          </clipPath>
-          <clipPath id="jc-reveal">
-            <rect x={chart.trackX0} y="0" width={trailWidth} height={height} />
-          </clipPath>
-          <linearGradient id="jc-sheen" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#fff" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        <g className={styles.chartHeader}>
-          <text x={margin.left} y="34">
-            One return journey to Nadi
-          </text>
-          <text x={margin.left} y="54">
-            {selected.label}
-            {selected.note ? ` ${selected.note}` : ""} ·{" "}
-            {selected.returnKm.toLocaleString("en-US")} passenger-km
-          </text>
-        </g>
-
-        <g className={styles.legend}>
-          {selected.segments.map((segment, i) => (
-            <g
-              key={segment.key}
-              transform={`translate(${chart.trackX0 + i * 232} 100)`}
-            >
+        <svg
+          className={styles.svg}
+          viewBox={`0 0 ${width} ${height}`}
+          role="img"
+          aria-label={`A return journey from ${selected.label} to Nadi has an estimated climate impact of ${selected.total.toFixed(
+            1,
+          )} tonnes CO₂e — around ${multiple.toFixed(
+            1,
+          )} times Fiji's ${flightComparison.fijiPerPerson.toFixed(
+            2,
+          )} tonnes of territorial CO₂ per person in 2024. The measures are not directly equivalent because the flight estimate includes non-CO₂ effects.`}
+        >
+          <defs>
+            <clipPath id="jc-flight-pill">
               <rect
-                className={segmentClassNames[segment.key]}
-                width="10"
-                height="10"
-                rx="2"
+                x={chart.trackX0}
+                y={flightY}
+                width={chart.flightWidth}
+                height={flightBarHeight}
+                rx={flightBarHeight / 2}
               />
-              <text x="18" y="9">
-                {segment.label} · {segment.value.toFixed(1)}t
-              </text>
-            </g>
-          ))}
-        </g>
+            </clipPath>
+          </defs>
 
-        <line
-          className={styles.baseline}
-          x1={chart.trackX0}
-          x2={width - margin.right}
-          y1={trackY}
-          y2={trackY}
-        />
+          <g className={styles.chartHeader}>
+            <text x={margin.left} y="31">
+              One return journey to Nadi
+            </text>
+            <text x={margin.left} y="52">
+              {selected.label}
+              {selected.note ? ` ${selected.note}` : ""} ·{" "}
+              {selected.returnKm.toLocaleString("en-US")} passenger-km
+            </text>
+          </g>
 
-        <g className={styles.ticks}>
-          {chart.ticks.map((tick) => (
-            <g key={tick.value} transform={`translate(${tick.x} ${trackY})`}>
-              <line y1="0" y2="8" />
-              <text y="24">{tick.value}t</text>
-            </g>
-          ))}
-        </g>
+          <g className={styles.rowLabel}>
+            <text x={chart.trackX0} y={flightY - 13}>
+              FLIGHT CLIMATE IMPACT
+            </text>
+            <text
+              className={styles.rowValue}
+              x={chart.totalX}
+              y={flightY - 13}
+              textAnchor="end"
+            >
+              {selected.total.toFixed(1)} t CO₂e
+            </text>
+          </g>
 
-        <g clipPath="url(#jc-pill)">
-          <g clipPath="url(#jc-reveal)">
+          <line
+            className={styles.guide}
+            x1={chart.trackX0}
+            x2={chart.trackX1}
+            y1={flightY + flightBarHeight / 2}
+            y2={flightY + flightBarHeight / 2}
+          />
+
+          <g clipPath="url(#jc-flight-pill)">
             {chart.segments.map((segment) => (
               <rect
                 key={segment.key}
                 className={segmentClassNames[segment.key]}
                 x={segment.x0}
-                y={trackY - 9}
+                y={flightY}
                 width={segment.x1 - segment.x0}
-                height="18"
+                height={flightBarHeight}
               />
             ))}
-            <rect
-              x={chart.trackX0}
-              y={trackY - 9}
-              width={chart.trailFullWidth}
-              height="9"
-              fill="url(#jc-sheen)"
-            />
           </g>
-        </g>
 
-        <g
-          className={styles.plane}
-          transform={`translate(${planeX - 26} ${trackY}) rotate(-6)`}
-        >
-          <line x1="0" y1="0" x2="20" y2="0" />
-          <path d="M18,-5 L32,0 L18,5 Z" />
-        </g>
+          <g className={styles.segmentLabels}>
+            {selected.segments.map((segment, index) => (
+              <g
+                key={segment.key}
+                transform={`translate(${chart.trackX0 + index * 170} ${
+                  flightY + 49
+                })`}
+              >
+                <rect
+                  className={segmentClassNames[segment.key]}
+                  width="9"
+                  height="9"
+                  rx="2"
+                />
+                <text x="16" y="8">
+                  {segment.label} · {segment.value.toFixed(1)} t
+                </text>
+              </g>
+            ))}
+          </g>
 
-        <g
-          className={styles.totalNote}
-          opacity={totalNoteOpacity}
-          transform={`translate(${totalNoteX} ${trackY - 34})`}
-        >
-          <text x="0" y="0">
-            {selected.total.toFixed(1)}t CO₂e
-          </text>
-          <text x="0" y="15">
-            incl. non-CO₂ effects
-          </text>
-        </g>
+          <line
+            className={styles.guide}
+            x1={chart.trackX0}
+            x2={chart.trackX1}
+            y1={benchmarkY + benchmarkBarHeight / 2}
+            y2={benchmarkY + benchmarkBarHeight / 2}
+          />
 
-        <g
-          className={styles.fijiMarker}
-          opacity={fijiOpacity}
-          transform={`translate(${chart.fijiX} ${trackY})`}
-        >
-          <line y1="-26" y2="-9" />
-          <circle cy="-9" r="3.5" />
-          <text y="-48" textAnchor="middle">
-            Fiji territorial CO₂
-          </text>
-          <text y="-34" textAnchor="middle" className={styles.fijiValue}>
-            {flightComparison.fijiPerPerson.toFixed(2)}t / person / yr
-          </text>
-        </g>
+          <g className={styles.rowLabel}>
+            <text x={chart.trackX0} y={benchmarkY - 13}>
+              FIJI BENCHMARK · {flightComparison.fijiPerPerson.toFixed(2)} T CO₂
+              / PERSON / YEAR
+            </text>
+          </g>
 
-        <g
-          className={styles.bracket}
-          opacity={bracketOpacity}
-          transform={`translate(0 ${trackY + 64})`}
-        >
-          <line x1={chart.fijiX} x2={chart.fijiX} y1="-6" y2="6" />
-          <line x1={chart.totalX} x2={chart.totalX} y1="-6" y2="6" />
-          <line x1={chart.fijiX} x2={chart.totalX} y1="0" y2="0" />
-        </g>
+          <rect
+            className={styles.benchmarkBar}
+            x={chart.trackX0}
+            y={benchmarkY}
+            width={chart.benchmarkWidth}
+            height={benchmarkBarHeight}
+            rx={benchmarkBarHeight / 2}
+          />
 
-        <g
-          className={styles.bigStat}
-          opacity={bigStatOpacity}
-          transform={`translate(${(chart.fijiX + chart.totalX) / 2} ${
-            trackY + 104
-          })`}
-        >
-          <text textAnchor="middle" className={styles.bigNumber}>
-            {multiple.toFixed(1)}×
-          </text>
-          <text textAnchor="middle" className={styles.bigCaption} y="22">
-            Fiji's annual territorial CO₂, per person
-          </text>
-        </g>
-      </svg>
+          <line className={styles.statDivider} x1="824" x2="824" y1="80" y2="235" />
+
+          <g className={styles.bigStat} transform="translate(858 104)">
+            <text className={styles.statKicker}>SCALE OF THE GAP</text>
+            <text className={styles.bigNumber} y="58">
+              {multiple.toFixed(1)}×
+            </text>
+            <text className={styles.bigCaption} y="86">
+              Fiji's annual
+            </text>
+            <text className={styles.bigCaption} y="104">
+              territorial CO₂
+            </text>
+            <text className={styles.bigCaption} y="122">
+              per person
+            </text>
+          </g>
+        </svg>
       </div>
       <p className={styles.scrollHint}>Scroll for full chart →</p>
       <figcaption className={styles.caption}>
-        Source note: {selected.routeLabel} return distance estimated at{" "}
-        {selected.returnKm.toLocaleString("en-US")} passenger-km using
-        great-circle airport distances. Emissions use UK government 2025
-        long-haul economy factors, including aviation's non-CO₂ effects. The
-        Fiji benchmark is territorial CO₂ per person, so the comparison shows
-        scale rather than like-for-like accounting.
+        Flight estimate: {selected.routeLabel}; {selected.returnKm.toLocaleString("en-US")} passenger-km;
+        UK government 2025 long-haul economy factors, including non-CO₂ effects.
+        Fiji benchmark: territorial CO₂ per person in 2024. Scale comparison
+        only; accounting boundaries differ.
       </figcaption>
     </figure>
   );
 }
 
 function buildChart(selected) {
-  const trackX0 = margin.left + 34;
+  const trackX0 = margin.left;
   const trackX1 = width - margin.right;
   const x = scaleLinear()
     .domain([0, maxFlightTotal])
-    .nice()
     .range([trackX0, trackX1]);
 
   let cursor = trackX0;
@@ -248,14 +186,15 @@ function buildChart(selected) {
     return built;
   });
 
+  const totalX = x(selected.total);
+
   return {
     x,
     trackX0,
     trackX1,
-    ticks: x.ticks(6).map((value) => ({ value, x: x(value) })),
     segments,
-    totalX: x(selected.total),
-    fijiX: x(flightComparison.fijiPerPerson),
-    trailFullWidth: x(selected.total) - trackX0,
+    totalX,
+    flightWidth: totalX - trackX0,
+    benchmarkWidth: x(flightComparison.fijiPerPerson) - trackX0,
   };
 }
