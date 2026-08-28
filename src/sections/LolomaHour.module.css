@@ -30,21 +30,81 @@
 
 .bigNumber {
   font-family: var(--font-display);
-  font-size: 72px;
+  font-size: 68px;
   font-weight: 600;
   fill: #0f877c;
 }
 
 .counterCaption {
   font-family: var(--font-mono);
-  font-size: 13px;
-  fill: #3e3e3c;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: #4d5e60;
 }
 
 .sessionsNote {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   fill: #8a8a80;
+}
+
+.multiple {
+  font-family: var(--font-display);
+  font-size: 68px;
+  font-weight: 600;
+  fill: #111;
+}
+
+.multipleLabel,
+.outcomesHeader text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  fill: #667375;
+}
+
+.heroDivider {
+  stroke: rgba(17, 17, 17, 0.13);
+  stroke-width: 1;
+}
+
+.gaugeTrack {
+  fill: rgba(15, 135, 124, 0.09);
+}
+
+.targetFill {
+  fill: #bf8739;
+}
+
+.beyondFill {
+  fill: #0f877c;
+}
+
+.gaugeDivider {
+  stroke: rgba(247, 247, 245, 0.92);
+  stroke-width: 2;
+}
+
+.gaugeLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.targetGaugeLabel {
+  fill: #3f2e18;
+}
+
+.beyondGaugeLabel {
+  fill: rgba(247, 247, 245, 0.95);
+}
+
+.outcomesHeader line {
+  stroke: rgba(17, 17, 17, 0.13);
+  stroke-width: 1;
 }
 
 .iconBackdrop {
@@ -57,21 +117,21 @@
 .tileIcon path {
   fill: none;
   stroke: #0f877c;
-  stroke-width: 1.6;
+  stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .tileValue {
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 700;
   fill: #111;
 }
 
 .tileLabel {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   fill: #6a6a63;
 }
 
@@ -84,6 +144,12 @@
   line-height: 1.5;
   color: #777;
   text-align: center;
+}
+
+.caption a {
+  color: inherit;
+  text-decoration-color: rgba(15, 135, 124, 0.45);
+  text-underline-offset: 2px;
 }
 
 @media (max-width: 760px) {
