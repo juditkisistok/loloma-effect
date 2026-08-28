@@ -28,114 +28,129 @@
   fill: #777;
 }
 
-.baseline {
-  stroke: rgba(17, 17, 17, 0.16);
+.panelDivider,
+.contextDivider {
+  stroke: rgba(17, 17, 17, 0.14);
   stroke-width: 1;
 }
 
-.ticks line {
-  stroke: rgba(17, 17, 17, 0.22);
-  stroke-width: 1;
-}
-
-.ticks text {
+.panelKicker,
+.panelUnit,
+.panelNote,
+.year,
+.removedLabel,
+.shareLabel,
+.contextLine text,
+.barValueLight,
+.barValueDark {
   font-family: var(--font-mono);
+}
+
+.panelKicker {
   font-size: 10px;
-  fill: #97968d;
-  text-anchor: middle;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: #596b6f;
 }
 
-.revenueBand {
-  fill: rgba(15, 135, 124, 0.16);
+.panelValue {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 600;
+  fill: #111;
 }
 
-.revenueHatch {
-  fill: url(#funding-hatch);
+.panelUnit {
+  font-size: 11px;
+  fill: #6d7675;
 }
 
-.revenueHatch line {
-  stroke: rgba(15, 135, 124, 0.4);
+.panelNote {
+  font-size: 10px;
+  fill: #7b8280;
+}
+
+.levyRail {
+  stroke: rgba(17, 17, 17, 0.12);
   stroke-width: 1;
 }
 
-.revenueLabel text {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: #0f877c;
-}
-
-.revenueLabel text:first-child {
-  font-weight: 700;
+.levyBand {
+  fill: rgba(15, 135, 124, 0.2);
 }
 
 .breakMark {
-  transition: opacity 0.2s ease;
-}
-
-.breakMark path {
   fill: none;
   stroke: var(--coral);
-  stroke-width: 2;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.breakMark text {
-  font-family: var(--font-mono);
-  font-size: 11px;
+.year,
+.removedLabel {
+  font-size: 10px;
+  fill: #858b88;
+}
+
+.removedLabel {
+  font-weight: 700;
   fill: #b8402f;
 }
 
-.breakMark text:first-child {
-  font-weight: 700;
-}
-
-.neededBar rect {
-  fill: rgba(17, 17, 17, 0.06);
-  stroke: rgba(17, 17, 17, 0.55);
-  stroke-width: 1.4;
-  stroke-dasharray: 3 3;
-}
-
-.committedBar rect {
+.committedBar {
   fill: var(--coral);
 }
 
-.neededBar text,
-.committedBar text {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  fill: #111;
+.gapBar {
+  fill: rgba(17, 17, 17, 0.055);
 }
 
-.barCaption {
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  fill: #777 !important;
+.gapHatch {
+  fill: url(#funding-gap-hatch);
 }
 
-.gapBracket line {
-  stroke: #a6a59b;
+.hatchLine {
+  stroke: rgba(17, 17, 17, 0.3);
   stroke-width: 1;
 }
 
-.gapBracket text {
-  font-family: var(--font-mono);
-  font-size: 11px;
+.barValueLight,
+.barValueDark {
+  font-size: 12px;
   font-weight: 700;
+}
+
+.barValueLight {
+  fill: #fff;
+}
+
+.barValueDark {
+  fill: #3f4a4b;
+}
+
+.shareLabel {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  fill: #697675;
+}
+
+.contextLine text:first-child {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   fill: #53666a;
 }
 
-.contextLine text {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: #6a7b7f;
+.contextLine text:last-child {
+  font-size: 10px;
+  fill: #7a8585;
 }
 
 .caption {
-  max-width: 620px;
-  margin: -4px auto 0;
+  max-width: 760px;
+  margin: 8px auto 0;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.01em;
@@ -174,8 +189,8 @@
   }
 
   .caption {
-    padding: 0 20px;
     max-width: none;
     margin-top: 4px;
+    padding: 0 20px;
   }
 }
