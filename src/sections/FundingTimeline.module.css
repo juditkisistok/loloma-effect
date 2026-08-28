@@ -1,196 +1,227 @@
 .figure {
-  width: min(1040px, 92vw);
+  width: min(1060px, 88vw);
   margin: 0 auto;
-  padding: 0;
+  color: #111;
 }
 
-.svg {
+.header {
   display: block;
+}
+
+.kicker,
+.bandLabels,
+.marker,
+.caption {
+  font-family: var(--font-mono);
+}
+
+.kicker {
+  margin: 0 0 12px;
+  color: #0c746c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: baseline;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.25vw, 16px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.title strong {
+  color: #111;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.2vw, 58px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  text-transform: none;
+}
+
+.title span {
+  color: #566668;
+}
+
+.allocation {
+  margin-top: clamp(60px, 6.5vw, 78px);
+}
+
+.band {
+  position: relative;
+  display: flex;
   width: 100%;
-  height: auto;
+  height: 54px;
   overflow: visible;
 }
 
-.scrollHint {
-  display: none;
+.committedBand,
+.uncoveredBand {
+  display: block;
+  height: 100%;
 }
 
-.chartHeader text:first-child {
-  font-family: var(--font-body);
-  font-size: 17px;
-  font-weight: 700;
-  fill: #111;
+.committedBand {
+  border-radius: 27px 0 0 27px;
+  background: #0f877c;
 }
 
-.chartHeader text:last-child {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: #777;
+.uncoveredBand {
+  border-radius: 0 27px 27px 0;
+  background-color: rgba(215, 85, 72, 0.12);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 9px,
+    rgba(215, 85, 72, 0.2) 9px 10px
+  );
 }
 
-.panelDivider,
-.contextDivider {
-  stroke: rgba(17, 17, 17, 0.14);
-  stroke-width: 1;
+.marker {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: #344748;
+  white-space: nowrap;
+  transform: translateX(-50%);
 }
 
-.panelKicker,
-.panelUnit,
-.panelNote,
-.year,
-.removedLabel,
-.shareLabel,
-.contextLine text,
-.barValueLight,
-.barValueDark {
-  font-family: var(--font-mono);
+.marker::after {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 50%;
+  width: 1px;
+  height: 61px;
+  background: #344748;
+  content: "";
 }
 
-.panelKicker {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  fill: #596b6f;
-}
-
-.panelValue {
+.marker strong {
   font-family: var(--font-display);
   font-size: 34px;
   font-weight: 600;
-  fill: #111;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
 }
 
-.panelUnit {
+.marker span {
   font-size: 11px;
-  fill: #6d7675;
-}
-
-.panelNote {
-  font-size: 10px;
-  fill: #7b8280;
-}
-
-.levyRail {
-  stroke: rgba(17, 17, 17, 0.12);
-  stroke-width: 1;
-}
-
-.levyBand {
-  fill: rgba(15, 135, 124, 0.2);
-}
-
-.breakMark {
-  fill: none;
-  stroke: var(--coral);
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.year,
-.removedLabel {
-  font-size: 10px;
-  fill: #858b88;
-}
-
-.removedLabel {
   font-weight: 700;
-  fill: #b8402f;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.committedBar {
-  fill: var(--coral);
+.bandLabels {
+  display: grid;
+  margin-top: 19px;
 }
 
-.gapBar {
-  fill: rgba(17, 17, 17, 0.055);
+.committedLabel,
+.uncoveredLabel {
+  display: grid;
+  gap: 5px;
 }
 
-.gapHatch {
-  fill: url(#funding-gap-hatch);
+.uncoveredLabel {
+  padding-left: clamp(20px, 3vw, 42px);
 }
 
-.hatchLine {
-  stroke: rgba(17, 17, 17, 0.3);
-  stroke-width: 1;
+.bandLabels strong {
+  font-family: var(--font-display);
+  font-size: clamp(29px, 3vw, 40px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
 }
 
-.barValueLight,
-.barValueDark {
+.committedLabel strong {
+  color: #0f766e;
+}
+
+.uncoveredLabel strong {
+  color: #b6493e;
+}
+
+.bandLabels span {
+  color: #667272;
   font-size: 12px;
-  font-weight: 700;
-}
-
-.barValueLight {
-  fill: #fff;
-}
-
-.barValueDark {
-  fill: #3f4a4b;
-}
-
-.shareLabel {
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  fill: #697675;
-}
-
-.contextLine text:first-child {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  fill: #53666a;
-}
-
-.contextLine text:last-child {
-  font-size: 10px;
-  fill: #7a8585;
+  line-height: 1.45;
 }
 
 .caption {
-  max-width: 760px;
-  margin: 8px auto 0;
-  font-family: var(--font-mono);
+  margin: clamp(30px, 4vw, 44px) 0 0;
+  color: #747974;
   font-size: 11px;
-  letter-spacing: 0.01em;
-  line-height: 1.5;
-  color: #777;
-  text-align: center;
+  line-height: 1.55;
+  text-align: left;
 }
 
-@media (max-width: 760px) {
-  .figure {
-    width: 100%;
+@media (max-width: 700px) {
+  .allocation {
+    margin-top: 62px;
   }
 
-  .scrollWrap {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 20px;
+  .band {
+    height: 42px;
   }
 
-  .svg {
-    width: 960px;
-    max-width: none;
+  .committedBand {
+    border-radius: 21px 0 0 21px;
   }
 
-  .scrollHint {
-    display: block;
-    margin: 8px 0 0;
-    padding: 0 20px;
-    font-family: var(--font-mono);
+  .uncoveredBand {
+    border-radius: 0 21px 21px 0;
+  }
+
+  .marker {
+    bottom: calc(100% + 11px);
+    gap: 6px;
+  }
+
+  .marker::after {
+    top: calc(100% + 5px);
+    height: 49px;
+  }
+
+  .marker strong {
+    font-size: 28px;
+  }
+
+  .bandLabels {
+    margin-top: 17px;
+  }
+
+  .uncoveredLabel {
+    padding-left: 16px;
+  }
+
+  .bandLabels strong {
+    font-size: clamp(25px, 8vw, 32px);
+  }
+
+  .bandLabels span {
     font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #97968d;
-    text-align: right;
   }
 
-  .caption {
-    max-width: none;
-    margin-top: 4px;
-    padding: 0 20px;
+}
+
+@media (max-width: 390px) {
+  .marker {
+    transform: translateX(-58%);
+  }
+
+  .marker span {
+    display: none;
   }
 }
