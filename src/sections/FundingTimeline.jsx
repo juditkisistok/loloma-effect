@@ -23,6 +23,7 @@ export function FundingTimeline() {
         <p className={styles.kicker}>Nabavatu relocation</p>
         <h3 id="nabavatu-funding-title" className={styles.title}>
           <strong>{formatMillions(relocationFunding.nabavatu.budgetFjd)}</strong>
+          {" "}
           <span>approved budget · February 2024</span>
         </h3>
       </header>

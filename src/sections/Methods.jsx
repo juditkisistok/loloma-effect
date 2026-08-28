@@ -5,7 +5,7 @@ const rows = [
     name: "Visitor arrivals",
     source: "Pacific Data Hub / SPC; Fiji Bureau of Statistics",
     url: "https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals",
-    method: "Overnight tourists plus same-day visitors. The rounded 2006 value is replaced with the exact national total, and preliminary 2025 is supplied from Fiji Bureau of Statistics releases.",
+    method: "Annual TOUR series. Fiji Bureau values replace the rounded 2006 and inconsistent 2024 entries, and supply preliminary 2025. Same-day excursionists are excluded so every year uses one definition.",
     licence: "Pacific Data Hub: Other (Open); national supplements cited at source.",
   },
   {
@@ -19,7 +19,7 @@ const rows = [
     name: "Flight comparison",
     source: "UK government conversion factors; Our World in Data",
     url: "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
-    method: "Return great-circle distance multiplied by 2025 long-haul economy factors. Direct CO₂ is compared with Fiji territorial CO₂; upstream and non-CO₂ effects remain separate.",
+    method: "Return great-circle distance multiplied by 2025 long-haul economy factors. Direct CO₂ is compared with Fiji territorial CO₂; fuel-supply, trace-gas and non-CO₂ effects remain visibly separate.",
     licence: "UK Open Government Licence; OWID attribution terms.",
   },
   {

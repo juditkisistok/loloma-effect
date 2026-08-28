@@ -93,6 +93,11 @@
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(0 3px 5px rgba(18, 38, 45, 0.1));
 }
+.measurePoint {
+  fill: rgba(247, 247, 245, 0.96);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
 .coords text {
   font-family: var(--font-mono);
   font-size: 10px;

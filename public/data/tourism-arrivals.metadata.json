@@ -1,12 +1,12 @@
 {
   "title": "Tourism Arrivals",
-  "fetchedAt": "2026-08-28T20:17:15.550Z",
+  "fetchedAt": "2026-08-28T22:52:03.154Z",
   "rawSource": {
     "id": "spc-tourism-arrivals",
     "name": "Pacific Data Hub .Stat",
     "url": "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0",
     "apiUrl": "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_TOURISM_ARRIVALS,1.0/A.FJ.?dimensionAtObservation=AllDimensions&format=csv",
-    "note": "SPC DF_TOURISM_ARRIVALS. Annual total constructed from overnight tourists (TOUR) and same-day visitors (EXCR)."
+    "note": "SPC DF_TOURISM_ARRIVALS annual visitor-arrivals series (VISITOR_DURATION_CAT = TOUR)."
   },
   "sources": [
     {
@@ -14,13 +14,20 @@
       "name": "Pacific Data Hub .Stat",
       "url": "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0",
       "apiUrl": "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_TOURISM_ARRIVALS,1.0/A.FJ.?dimensionAtObservation=AllDimensions&format=csv",
-      "note": "SPC DF_TOURISM_ARRIVALS. Annual total constructed from overnight tourists (TOUR) and same-day visitors (EXCR)."
+      "note": "SPC DF_TOURISM_ARRIVALS annual visitor-arrivals series (VISITOR_DURATION_CAT = TOUR)."
     },
     {
       "id": "fiji-stats-supplemental",
       "name": "Fiji Bureau of Statistics visitor-arrivals table",
       "url": "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
-      "note": "Official Fiji visitor-arrivals table used to replace the Pacific Data Hub's rounded 2006 value with the exact national total."
+      "note": "Official Fiji visitor-arrivals table used for the exact 2006 national total."
+    },
+    {
+      "id": "fiji-stats-provisional-2024",
+      "name": "Fiji Bureau of Statistics provisional visitor arrivals",
+      "url": "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-2024/",
+      "publishedDate": "2025-01-16",
+      "note": "Provisional 2024 annual visitor arrivals; used in place of an inconsistent value in the SPC extract."
     },
     {
       "id": "fiji-stats-preliminary-2025",
@@ -31,7 +38,7 @@
     }
   ],
   "rows": 31,
-  "rawRows": 56,
+  "rawRows": 30,
   "geographies": [
     "FJ"
   ],

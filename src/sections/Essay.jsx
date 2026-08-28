@@ -151,7 +151,7 @@ export function Essay() {
             </strong>.
             <Ref
               n="5"
-              href="https://ourworldindata.org/co2/country/fiji"
+              href="https://ourworldindata.org/profile/co2/fiji"
               label="Our World in Data CO₂ profile for Fiji"
             />
           </p>
@@ -310,26 +310,23 @@ export function Essay() {
             Change Act.
             <Ref
               n="10"
-              href="https://www.fiji.gov.fj/getattachment/Media-Centre/News/PM-Bainimarama-Launches-World-First-Climate-Reloc"
-              label="Fiji Climate Relocation of Communities Trust Fund, launched 2019"
+              href="https://www.un.int/fiji/news/world%E2%80%99s-first-%E2%80%93ever-relocation-trust-fund-people-displaced-climate-change-launched-fijian-prime"
+              label="Fiji Mission to the United Nations, world-first relocation trust fund launch, 2019"
             />
           </p>
           <p>
             The original plan directed 3% of the Environment and Climate
-            Adaptation Levy into the fund — about FJ$5 million a year. It was a
-            direct link between revenue generated partly by the visitor economy
-            and communities facing climate loss.
+            Adaptation Levy into the fund: a direct link between revenue
+            generated partly by the visitor economy and communities facing
+            climate loss.
             <Ref
               n="11"
-              href="https://www.frcs.org.fj/"
-              label="Fiji Revenue and Customs Service, Environment and Climate Adaptation Levy"
-            />
-          </p>
-          <p>
-            When the levy ended in 2022, the allocation did not. Fiji redirected
-            3% of VAT from prescribed services, together with specified levies,
-            into the same fund. The tax changed; the domestic funding stream
-            continued.
+              href="https://www.laws.gov.fj/Acts/ViewSection/63007?query=plastic+bottle"
+              label="Laws of Fiji, three-percent allocation to the relocation trust fund"
+            />{" "}
+            When the levy ended in 2022, Fiji redirected the 3% allocation from
+            prescribed-service VAT and specified levies. The tax changed; the
+            domestic funding stream continued.
             <Ref
               n="12"
               href="https://www.parliament.gov.fj/wp-content/uploads/2022/03/Daily-Hansard-Thursday-24-March-2022.pdf"
@@ -347,18 +344,20 @@ export function Essay() {
           </p>
           <p>
             The village was evacuated. Residents were initially told they
-            would be living in tents for three months. More than four years
-            later, they were still waiting at the temporary site.
+            would be living in tents for three months. By July 2026, 37
+            families were preparing to move into permanent homes, with keys
+            expected by September or October.
             <Ref
               n="13"
-              href="https://www.fijivillage.com/feature/Nabavatu-villagers-dont-have-to-live-in-tents-anymore-as-new-house-constructions-about-to-begin-r548fx/"
-              label="Nabavatu evacuation and temporary relocation coverage"
+              href="https://pmn.co.nz/read/pacific-region/the-trauma-remains-fiji-families-finally-leaving-tent-life-after-nearly-six-years"
+              label="Pacific Media Network, Nabavatu families prepare to relocate, July 2026"
             />
           </p>
           <p>
             In 2024, the government approved a new site around 800 metres away.
-            The <strong>FJ$5.9 million</strong> budget covered not just houses,
-            but roads, drainage, water, electricity and sanitation.
+            Its <strong>FJ$5.9 million</strong> budget covered homes and the
+            infrastructure around them: roads, drainage, water, electricity
+            and sanitation.
             <Ref
               n="14"
               href="https://www.fiji.gov.fj/decisions-made-at-the-meeting-of-cabinet-held-on-27-february-2024/"
@@ -367,8 +366,8 @@ export function Essay() {
           </p>
           <p>
             In July 2025, the government committed{" "}
-            <strong>FJ$3.5 million</strong> from the relocation trust fund,
-            covering 59% of the approved budget.
+            <strong>FJ$3.5 million</strong> from the relocation trust fund —
+            59% of that approved budget.
             <Ref
               n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
@@ -415,7 +414,7 @@ export function Essay() {
             relocating and host communities to be taken into account.
             <Ref
               n="17"
-              href="https://www.fiji.gov.fj/getattachment/Legislations/CLIMATE-CHANGE-ACT-2021"
+              href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
           </p>

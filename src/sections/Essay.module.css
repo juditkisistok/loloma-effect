@@ -85,8 +85,8 @@
   line-height: 1.48;
   color: #3e3e3c;
   text-wrap: pretty;
-  text-align: justify;
-  hyphens: auto;
+  text-align: left;
+  hyphens: none;
 }
 
 .prose p + p {

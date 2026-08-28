@@ -30,12 +30,12 @@ export function JourneyComparison({ selectedId = "london" }) {
           <section className={styles.barGroup}>
             <div className={styles.rowHeading}>
               <span>FLIGHT CLIMATE IMPACT</span>
-              <strong>{selected.total.toFixed(1)} t CO₂e</strong>
+              <strong>{selected.total.toFixed(2)} t CO₂e</strong>
             </div>
             <div
               className={styles.track}
               role="img"
-              aria-label={`${selected.total.toFixed(1)} tonnes CO₂e: ${selected.segments.map((segment) => `${segment.label} ${segment.value.toFixed(1)} tonnes`).join(", ")}.`}
+              aria-label={`${selected.total.toFixed(2)} tonnes CO₂e: ${selected.segments.map((segment) => `${segment.label} ${segment.value.toFixed(2)} tonnes`).join(", ")}.`}
             >
               <div className={styles.flightBar} style={{ width: `${flightWidth}%` }}>
                 {selected.segments.map((segment) => (
@@ -51,7 +51,7 @@ export function JourneyComparison({ selectedId = "london" }) {
               {selected.segments.map((segment) => (
                 <span key={segment.key}>
                   <i className={segmentClassNames[segment.key]} aria-hidden="true" />
-                  {segment.label} · {segment.value.toFixed(1)} t
+                  {segment.label} · {segment.value.toFixed(2)} t
                 </span>
               ))}
             </div>
@@ -83,9 +83,9 @@ export function JourneyComparison({ selectedId = "london" }) {
       <figcaption className={styles.caption}>
         Great-circle route estimate; an actual itinerary may be longer. Direct
         flight CO₂ is compared with Fiji's territorial CO₂ on the same basis.
-        Fuel supply and aviation's non-CO₂ effects are shown separately in the
-        total climate-impact bar. Sources: UK government 2025 conversion
-        factors; Our World in Data, Fiji, 2024.
+        Fuel-supply and trace-gas emissions, then aviation's non-CO₂ effects,
+        are shown separately in the total climate-impact bar. Sources: UK
+        government 2025 conversion factors; Our World in Data, Fiji, 2024.
       </figcaption>
     </figure>
   );

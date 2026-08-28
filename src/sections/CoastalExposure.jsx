@@ -122,6 +122,13 @@ export function CoastalExposure() {
                 d={currentPath}
                 style={{ stroke: currentColor }}
               />
+              <circle
+                className={styles.measurePoint}
+                cx={chart.hotspotPoint[0]}
+                cy={chart.hotspotPoint[1]}
+                r="5.5"
+                style={{ stroke: currentColor }}
+              />
             </g>
 
             <g className={styles.coords}>
@@ -137,7 +144,7 @@ export function CoastalExposure() {
           </div>
 
           <aside className={styles.factRail}>
-            <p>NEAREST VALID MEASUREMENT</p>
+            <p>AT THE CIRCLED POINT</p>
             <strong>+{chart.hotspot.rate.toFixed(1)} m/yr</strong>
             <span>this measured point accreted, on average</span>
             <small>estimated uncertainty · ±{chart.hotspot.se.toFixed(1)} m/yr</small>
@@ -145,11 +152,9 @@ export function CoastalExposure() {
         </div>
 
         <figcaption className={styles.caption}>
-          Four thin lines show the island’s measured edges in 1999, 2007, 2015
-          and 2023. The thick line is animation; its in-between positions are
-          not extra data. The rate is the nearest valid measurement—not a
-          search for the largest change. Elsewhere, Fiji’s shorelines may move
-          in the opposite direction. Source: {" "}
+          Measured shoreline edges: 1999, 2007, 2015 and 2023. The thick line
+          interpolates between them; it is not extra data. The circled rate is
+          the nearest valid measurement, not an island average. Source: {" "}
           <a
             href={coastalShoreline.source.url}
             target="_blank"
@@ -157,7 +162,8 @@ export function CoastalExposure() {
           >
             Digital Earth Pacific / Pacific Data Hub Annual Shorelines
           </a>{" "}
-          (Landsat, 30 m). Full selection and smoothing method below.
+          (Landsat, 30 m). Elsewhere, shores may move in the opposite
+          direction; full method below.
         </figcaption>
       </div>
     </figure>
@@ -215,6 +221,7 @@ function buildChart() {
     samples,
     pathBuilder,
     hotspot,
+    hotspotPoint: projection(hotspot.coordinates),
   };
 }
 

@@ -14,6 +14,11 @@ export const tourismArrivalSources = {
     name: "Fiji Bureau of Statistics provisional visitor arrivals",
     url: "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
   },
+  "fiji-stats-provisional-2024": {
+    id: "fiji-stats-provisional-2024",
+    name: "Fiji Bureau of Statistics provisional visitor arrivals",
+    url: "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-2024/",
+  },
   "fiji-stats-supplemental": {
     id: "fiji-stats-supplemental",
     name: "Fiji Bureau of Statistics visitor-arrivals table",

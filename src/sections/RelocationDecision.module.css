@@ -81,13 +81,13 @@
 }
 
 .relocatedPulse {
-  fill: rgba(255, 111, 97, 0.22);
-  stroke: rgba(255, 111, 97, 0.68);
+  fill: rgba(255, 111, 97, 0.28);
+  stroke: rgba(226, 84, 70, 0.78);
 }
 
 .assessmentPulse {
-  fill: rgba(15, 135, 124, 0.14);
-  stroke: rgba(15, 135, 124, 0.56);
+  fill: rgba(15, 135, 124, 0.19);
+  stroke: rgba(10, 118, 109, 0.68);
 }
 
 .selectedPulse {
@@ -188,8 +188,8 @@
 @keyframes mapPointPulse {
   0%,
   100% {
-    opacity: 0.74;
-    transform: scale(0.92);
+    opacity: 0.88;
+    transform: scale(0.94);
   }
 
   50% {

@@ -84,7 +84,7 @@ function buildJourney(option) {
       },
       {
         key: "supply",
-        label: "Fuel supply",
+        label: "Supply + trace gases",
         value: fuelSupplyAndTrace,
       },
       {

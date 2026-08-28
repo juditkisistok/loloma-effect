@@ -86,7 +86,7 @@ export function ArrivalsChart({ rows = [] }) {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Combined official series of annual visitor arrivals to Fiji from 1995 to 2025. Pacific Data Hub observations are supplemented with Fiji Bureau of Statistics values for 2006 and preliminary 2025 data. Arrivals rise from 476,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
+        aria-label="Official annual visitor-arrivals series for Fiji from 1995 to 2025. Pacific Data Hub observations are supplemented with Fiji Bureau of Statistics values for 2006, 2024 and 2025. Arrivals rise from 476,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -130,10 +130,14 @@ export function ArrivalsChart({ rows = [] }) {
 
         <g className={styles.chartHeader}>
           <text x={margin.left + 14} y={margin.top - 34}>
-            Visitor arrivals to Fiji, 1995–2025
+            {width < 360
+              ? "Fiji visitors · 1995–2025"
+              : "Visitor arrivals to Fiji, 1995–2025"}
           </text>
           <text x={margin.left + 14} y={margin.top - 15}>
-            SCROLL: THE LINE TRACES THIRTY YEARS OF ARRIVALS
+            {width < 360
+              ? "SCROLL: THIRTY YEARS OF ARRIVALS"
+              : "SCROLL: THE LINE TRACES THIRTY YEARS OF ARRIVALS"}
           </text>
         </g>
 
@@ -210,8 +214,10 @@ export function ArrivalsChart({ rows = [] }) {
               r="2.2"
               tabIndex={point.progress <= drawProgress + 0.015 ? 0 : -1}
               aria-label={`${point.year}: ${formatWhole(point.arrivals)} visitor arrivals${
-                point.source?.id === "fiji-stats-supplemental"
-                  ? ", supplemental Fiji Bureau of Statistics observation"
+                point.isPreliminary ? ", preliminary" : ""
+              }${
+                point.source?.id !== "spc-tourism-arrivals"
+                  ? ", sourced from the Fiji Bureau of Statistics"
                   : ""
               }`}
               onFocus={() => setHovered(point)}
@@ -308,9 +314,8 @@ export function ArrivalsChart({ rows = [] }) {
           >
             Pacific Data Hub / SPC Tourism Arrivals
           </a>{" "}
-          — an official Pacific Dataviz Challenge 2026 dataset. Its rounded 2006
-          value is replaced with the exact national total (548,589), and the
-          preliminary 2025 total is added from the{" "}
+          — official Pacific Dataviz Challenge 2026 data. This chart uses its
+          TOUR series; the{" "}
           <a
             href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
             target="_blank"
@@ -318,7 +323,8 @@ export function ArrivalsChart({ rows = [] }) {
           >
             Fiji Bureau of Statistics
           </a>
-          .
+          {" "}supplies the exact 2006 total and provisional 2024–25 totals,
+          replacing an inconsistent 2024 value in the Pacific extract.
         </figcaption>
       </div>
     </figure>
