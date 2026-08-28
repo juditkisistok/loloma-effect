@@ -49,13 +49,11 @@ export function ArrivalsChart({ rows = [] }) {
     }
 
     const rect = el.getBoundingClientRect();
-    const start = window.innerHeight * 0.95;
-    const end = window.innerHeight * 0.1;
-    const raw = (start - rect.top) / (start - end);
-    const pageBottom =
-      window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight - 2;
-    const next = pageBottom ? 1 : clamp(raw, 0, 1);
+    const stickyRatio = window.innerWidth <= 760 ? 0.06 : 0.18;
+    const stickyTop = Math.max(18, window.innerHeight * stickyRatio);
+    const stickyHeight = el.firstElementChild?.offsetHeight ?? 0;
+    const travel = Math.max(el.offsetHeight - stickyHeight - stickyTop, 1);
+    const next = clamp((stickyTop - rect.top) / travel, 0, 1);
 
     setProgress((current) =>
       Math.abs(current - next) > 0.002 ? next : current,
@@ -82,7 +80,8 @@ export function ArrivalsChart({ rows = [] }) {
 
   return (
     <figure className={styles.figure} ref={ref}>
-      <div className={styles.scrollWrap} ref={wrapRef}>
+      <div className={styles.sticky}>
+        <div className={styles.scrollWrap} ref={wrapRef}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
@@ -132,6 +131,9 @@ export function ArrivalsChart({ rows = [] }) {
         <g className={styles.chartHeader}>
           <text x={margin.left + 14} y={margin.top - 34}>
             Visitor arrivals to Fiji, 1995–2025
+          </text>
+          <text x={margin.left + 14} y={margin.top - 15}>
+            SCROLL: THE LINE TRACES THIRTY YEARS OF ARRIVALS
           </text>
         </g>
 
@@ -296,28 +298,29 @@ export function ArrivalsChart({ rows = [] }) {
           onPointerLeave={() => setHovered(null)}
         />
       </svg>
+        </div>
+        <figcaption className={styles.caption}>
+          Source:{" "}
+          <a
+            href="https://stats.pacificdata.org/vis?av=true&df%5Bag%5D=SPC&df%5Bds%5D=SPC2&df%5Bid%5D=DF_CLIMATE_CHANGE&df%5Bvs%5D=1.0&dq=A.TRSM_ARR.&lc=en&pd=%2C&to%5BTIME_PERIOD%5D=false"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR
+          </a>{" "}
+          — an official Pacific Dataviz Challenge 2026 dataset. The missing
+          2006 observation (548,589) and preliminary 2025 total are supplemented
+          from the{" "}
+          <a
+            href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Fiji Bureau of Statistics
+          </a>
+          .
+        </figcaption>
       </div>
-      <figcaption className={styles.caption}>
-        Source:{" "}
-        <a
-          href="https://stats.pacificdata.org/vis?av=true&df%5Bag%5D=SPC&df%5Bds%5D=SPC2&df%5Bid%5D=DF_CLIMATE_CHANGE&df%5Bvs%5D=1.0&dq=A.TRSM_ARR.&lc=en&pd=%2C&to%5BTIME_PERIOD%5D=false"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR
-        </a>{" "}
-        — an official Pacific Dataviz Challenge 2026 dataset. The missing 2006
-        observation (548,589) and preliminary 2025 total are supplemented from
-        the{" "}
-        <a
-          href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Fiji Bureau of Statistics
-        </a>
-        .
-      </figcaption>
     </figure>
   );
 }

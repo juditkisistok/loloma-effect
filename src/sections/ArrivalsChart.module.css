@@ -1,7 +1,14 @@
 .figure {
   width: min(1040px, 92vw);
+  height: 155vh;
   margin: 0 auto;
   padding: 0;
+}
+
+.sticky {
+  position: sticky;
+  top: max(18px, 18vh);
+  width: 100%;
 }
 
 .svg {
@@ -58,6 +65,13 @@
   font-size: 17px;
   font-weight: 700;
   fill: #111;
+}
+
+.chartHeader text:last-child {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  fill: #859092;
 }
 
 .storyLabels text {
@@ -141,15 +155,17 @@
 }
 
 .dataDot {
-  fill: #0f877c;
-  stroke: rgba(247, 247, 245, 0.96);
-  stroke-width: 1.4;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 0;
   cursor: crosshair;
   outline: none;
 }
+
 .dataDot:focus {
-  stroke: #111;
-  stroke-width: 2.5;
+  fill: #0f877c;
+  stroke: rgba(247, 247, 245, 0.96);
+  stroke-width: 2;
 }
 
 .latestNote text:first-of-type {
@@ -222,6 +238,11 @@
 @media (max-width: 760px) {
   .figure {
     width: 100%;
+    height: 170vh;
+  }
+
+  .sticky {
+    top: max(18px, 6vh);
   }
 
   .scrollWrap {
@@ -239,5 +260,15 @@
     padding: 0 20px;
     max-width: none;
     margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figure {
+    height: auto;
+  }
+
+  .sticky {
+    position: static;
   }
 }
