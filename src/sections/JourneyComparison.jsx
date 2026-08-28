@@ -1,15 +1,6 @@
-import { scaleLinear } from "d3";
-import { useMemo } from "react";
 import { journeyOptions, flightComparison } from "../data/journeyComparison";
 import styles from "./JourneyComparison.module.css";
 
-const width = 1000;
-const height = 244;
-const margin = { left: 58, right: 210 };
-const flightY = 104;
-const benchmarkY = 207;
-const flightBarHeight = 30;
-const benchmarkBarHeight = 16;
 const maxFlightTotal = Math.max(...journeyOptions.map((route) => route.total));
 const segmentClassNames = {
   direct: styles.segmentDirect,
@@ -20,181 +11,82 @@ const segmentClassNames = {
 export function JourneyComparison({ selectedId = "london" }) {
   const selected =
     journeyOptions.find((route) => route.id === selectedId) ?? journeyOptions[0];
-  const chart = useMemo(() => buildChart(selected), [selected]);
-  const multiple = selected.total / flightComparison.fijiPerPerson;
+  const direct = selected.segments.find((segment) => segment.key === "direct");
+  const directMultiple = direct.value / flightComparison.fijiPerPerson;
+  const flightWidth = (selected.total / maxFlightTotal) * 100;
+  const benchmarkWidth = (flightComparison.fijiPerPerson / maxFlightTotal) * 100;
 
   return (
     <figure className={styles.figure}>
-      <div className={styles.scrollWrap}>
-        <svg
-          className={styles.svg}
-          viewBox={`0 0 ${width} ${height}`}
-          role="img"
-          aria-label={`A return journey from ${selected.label} to Nadi has an estimated climate impact of ${selected.total.toFixed(
-            1,
-          )} tonnes CO₂e — around ${multiple.toFixed(
-            1,
-          )} times Fiji's ${flightComparison.fijiPerPerson.toFixed(
-            2,
-          )} tonnes of territorial CO₂ per person in 2024. The measures are not directly equivalent because the flight estimate includes non-CO₂ effects.`}
-        >
-          <defs>
-            <clipPath id="jc-flight-pill">
-              <rect
-                x={chart.trackX0}
-                y={flightY}
-                width={chart.flightWidth}
-                height={flightBarHeight}
-                rx={flightBarHeight / 2}
-              />
-            </clipPath>
-          </defs>
+      <header className={styles.header}>
+        <h3>One return journey to Nadi</h3>
+        <p>
+          {selected.label}{selected.note ? ` ${selected.note}` : ""} · {selected.returnKm.toLocaleString("en-US")} passenger-km
+        </p>
+      </header>
 
-          <g className={styles.chartHeader}>
-            <text x={margin.left} y="31">
-              One return journey to Nadi
-            </text>
-            <text x={margin.left} y="52">
-              {selected.label}
-              {selected.note ? ` ${selected.note}` : ""} ·{" "}
-              {selected.returnKm.toLocaleString("en-US")} passenger-km
-            </text>
-          </g>
-
-          <g className={styles.rowLabel}>
-            <text x={chart.trackX0} y={flightY - 13}>
-              FLIGHT CLIMATE IMPACT
-            </text>
-            <text
-              className={styles.rowValue}
-              x={chart.totalX}
-              y={flightY - 13}
-              textAnchor="end"
+      <div className={styles.layout}>
+        <div className={styles.bars}>
+          <section className={styles.barGroup}>
+            <div className={styles.rowHeading}>
+              <span>FLIGHT CLIMATE IMPACT</span>
+              <strong>{selected.total.toFixed(1)} t CO₂e</strong>
+            </div>
+            <div
+              className={styles.track}
+              role="img"
+              aria-label={`${selected.total.toFixed(1)} tonnes CO₂e: ${selected.segments.map((segment) => `${segment.label} ${segment.value.toFixed(1)} tonnes`).join(", ")}.`}
             >
-              {selected.total.toFixed(1)} t CO₂e
-            </text>
-          </g>
-
-          <line
-            className={styles.guide}
-            x1={chart.trackX0}
-            x2={chart.trackX1}
-            y1={flightY + flightBarHeight / 2}
-            y2={flightY + flightBarHeight / 2}
-          />
-
-          <g clipPath="url(#jc-flight-pill)">
-            {chart.segments.map((segment) => (
-              <rect
-                key={segment.key}
-                className={segmentClassNames[segment.key]}
-                x={segment.x0}
-                y={flightY}
-                width={segment.x1 - segment.x0}
-                height={flightBarHeight}
-              />
-            ))}
-          </g>
-
-          <g className={styles.segmentLabels}>
-            {selected.segments.map((segment, index) => (
-              <g
-                key={segment.key}
-                transform={`translate(${chart.trackX0 + index * 170} ${
-                  flightY + 49
-                })`}
-              >
-                <rect
-                  className={segmentClassNames[segment.key]}
-                  width="9"
-                  height="9"
-                  rx="2"
-                />
-                <text x="16" y="8">
+              <div className={styles.flightBar} style={{ width: `${flightWidth}%` }}>
+                {selected.segments.map((segment) => (
+                  <span
+                    key={segment.key}
+                    className={segmentClassNames[segment.key]}
+                    style={{ width: `${(segment.value / selected.total) * 100}%` }}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className={styles.legend}>
+              {selected.segments.map((segment) => (
+                <span key={segment.key}>
+                  <i className={segmentClassNames[segment.key]} aria-hidden="true" />
                   {segment.label} · {segment.value.toFixed(1)} t
-                </text>
-              </g>
-            ))}
-          </g>
+                </span>
+              ))}
+            </div>
+          </section>
 
-          <line
-            className={styles.guide}
-            x1={chart.trackX0}
-            x2={chart.trackX1}
-            y1={benchmarkY + benchmarkBarHeight / 2}
-            y2={benchmarkY + benchmarkBarHeight / 2}
-          />
+          <section className={styles.barGroup}>
+            <div className={styles.rowHeading}>
+              <span>FIJI TERRITORIAL CO₂</span>
+              <strong>{flightComparison.fijiPerPerson.toFixed(2)} t / person / year</strong>
+            </div>
+            <div className={styles.track}>
+              <div
+                className={styles.benchmarkBar}
+                style={{ width: `${benchmarkWidth}%` }}
+                role="img"
+                aria-label={`${flightComparison.fijiPerPerson.toFixed(2)} tonnes of territorial CO₂ per person in Fiji in 2024.`}
+              />
+            </div>
+          </section>
+        </div>
 
-          <g className={styles.rowLabel}>
-            <text x={chart.trackX0} y={benchmarkY - 13}>
-              FIJI BENCHMARK · {flightComparison.fijiPerPerson.toFixed(2)} T CO₂
-              / PERSON / YEAR
-            </text>
-          </g>
-
-          <rect
-            className={styles.benchmarkBar}
-            x={chart.trackX0}
-            y={benchmarkY}
-            width={chart.benchmarkWidth}
-            height={benchmarkBarHeight}
-            rx={benchmarkBarHeight / 2}
-          />
-
-          <line className={styles.statDivider} x1="824" x2="824" y1="80" y2="235" />
-
-          <g className={styles.bigStat} transform="translate(858 104)">
-            <text className={styles.statKicker}>SCALE OF THE GAP</text>
-            <text className={styles.bigNumber} y="58">
-              {multiple.toFixed(1)}×
-            </text>
-            <text className={styles.bigCaption} y="86">
-              Fiji's annual
-            </text>
-            <text className={styles.bigCaption} y="104">
-              territorial CO₂
-            </text>
-            <text className={styles.bigCaption} y="122">
-              per person
-            </text>
-          </g>
-        </svg>
+        <aside className={styles.stat} aria-label={`Direct flight carbon dioxide alone is ${directMultiple.toFixed(1)} times Fiji's annual territorial carbon dioxide per person.`}>
+          <p>DIRECT CO₂ ALONE</p>
+          <strong>{directMultiple.toFixed(1)}×</strong>
+          <span>Fiji's annual territorial CO₂ per person</span>
+        </aside>
       </div>
-      <p className={styles.scrollHint}>Scroll for full chart →</p>
+
       <figcaption className={styles.caption}>
-        Flight estimate: {selected.routeLabel}; {selected.returnKm.toLocaleString("en-US")} passenger-km;
-        UK government 2025 long-haul economy factors, including non-CO₂ effects.
-        Fiji benchmark: territorial CO₂ per person in 2024. Scale comparison
-        only; accounting boundaries differ.
+        Great-circle route estimate; an actual itinerary may be longer. Direct
+        flight CO₂ is compared with Fiji's territorial CO₂ on the same basis.
+        Fuel supply and aviation's non-CO₂ effects are shown separately in the
+        total climate-impact bar. Sources: UK government 2025 conversion
+        factors; Our World in Data, Fiji, 2024.
       </figcaption>
     </figure>
   );
-}
-
-function buildChart(selected) {
-  const trackX0 = margin.left;
-  const trackX1 = width - margin.right;
-  const x = scaleLinear()
-    .domain([0, maxFlightTotal])
-    .range([trackX0, trackX1]);
-
-  let cursor = trackX0;
-  const segments = selected.segments.map((segment) => {
-    const segmentWidth = x(segment.value) - trackX0;
-    const built = { ...segment, x0: cursor, x1: cursor + segmentWidth };
-    cursor += segmentWidth;
-    return built;
-  });
-
-  const totalX = x(selected.total);
-
-  return {
-    x,
-    trackX0,
-    trackX1,
-    segments,
-    totalX,
-    flightWidth: totalX - trackX0,
-    benchmarkWidth: x(flightComparison.fijiPerPerson) - trackX0,
-  };
 }

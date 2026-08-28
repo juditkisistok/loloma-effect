@@ -11,6 +11,11 @@ export const relocationFunding = {
     removedYear: 2022,
     removedMonth: "April",
   },
+  replacement: {
+    effectiveYear: 2022,
+    sharePercent: 3,
+    mechanism: "VAT on prescribed services and specified levies",
+  },
   nabavatu: {
     approvedYear: 2024,
     budgetFjd: 5_900_000,

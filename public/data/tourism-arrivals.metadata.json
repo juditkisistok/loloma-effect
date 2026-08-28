@@ -1,26 +1,26 @@
 {
   "title": "Tourism Arrivals",
-  "fetchedAt": "2026-08-11T20:45:22.039Z",
+  "fetchedAt": "2026-08-28T20:17:15.550Z",
   "rawSource": {
-    "id": "spc-climate-change",
+    "id": "spc-tourism-arrivals",
     "name": "Pacific Data Hub .Stat",
-    "url": "https://stats.pacificdata.org/vis?lc=en&df[ds]=SPC2&df[id]=DF_CLIMATE_CHANGE&df[ag]=SPC&df[vs]=1.0&av=true&dq=A.TRSM_ARR.&pd=,&to[TIME_PERIOD]=false",
-    "apiUrl": "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_CLIMATE_CHANGE,1.0/A.TRSM_ARR.FJ?dimensionAtObservation=AllDimensions&format=csv",
-    "note": "SPC DF_CLIMATE_CHANGE annual tourism arrivals indicator TRSM_ARR."
+    "url": "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0",
+    "apiUrl": "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_TOURISM_ARRIVALS,1.0/A.FJ.?dimensionAtObservation=AllDimensions&format=csv",
+    "note": "SPC DF_TOURISM_ARRIVALS. Annual total constructed from overnight tourists (TOUR) and same-day visitors (EXCR)."
   },
   "sources": [
     {
-      "id": "spc-climate-change",
+      "id": "spc-tourism-arrivals",
       "name": "Pacific Data Hub .Stat",
-      "url": "https://stats.pacificdata.org/vis?lc=en&df[ds]=SPC2&df[id]=DF_CLIMATE_CHANGE&df[ag]=SPC&df[vs]=1.0&av=true&dq=A.TRSM_ARR.&pd=,&to[TIME_PERIOD]=false",
-      "apiUrl": "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_CLIMATE_CHANGE,1.0/A.TRSM_ARR.FJ?dimensionAtObservation=AllDimensions&format=csv",
-      "note": "SPC DF_CLIMATE_CHANGE annual tourism arrivals indicator TRSM_ARR."
+      "url": "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0",
+      "apiUrl": "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_TOURISM_ARRIVALS,1.0/A.FJ.?dimensionAtObservation=AllDimensions&format=csv",
+      "note": "SPC DF_TOURISM_ARRIVALS. Annual total constructed from overnight tourists (TOUR) and same-day visitors (EXCR)."
     },
     {
       "id": "fiji-stats-supplemental",
       "name": "Fiji Bureau of Statistics visitor-arrivals table",
       "url": "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
-      "note": "Official Fiji visitor-arrivals table used only to fill a year missing from the Pacific Data Hub extract."
+      "note": "Official Fiji visitor-arrivals table used to replace the Pacific Data Hub's rounded 2006 value with the exact national total."
     },
     {
       "id": "fiji-stats-preliminary-2025",
@@ -31,7 +31,7 @@
     }
   ],
   "rows": 31,
-  "rawRows": 29,
+  "rawRows": 56,
   "geographies": [
     "FJ"
   ],

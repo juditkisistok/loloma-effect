@@ -11,7 +11,8 @@
   overflow: visible;
 }
 
-.scrollHint {
+.scrollHint,
+.mobileView {
   display: none;
 }
 
@@ -158,14 +159,15 @@
 }
 
 .mappedNote {
-  font-size: 10px !important;
+  font-size: 11px !important;
   letter-spacing: 0.025em !important;
 }
 
 .bigCount {
-  font-family: var(--font-display) !important;
-  font-size: 45px !important;
-  font-weight: 600;
+  font-family: var(--font-body) !important;
+  font-size: 40px !important;
+  font-weight: 700;
+  font-variant-numeric: lining-nums tabular-nums;
   letter-spacing: 0 !important;
   fill: #111 !important;
 }
@@ -200,7 +202,7 @@
   max-width: 720px;
   margin: 12px auto 0;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.01em;
   line-height: 1.5;
   color: #777;
@@ -209,43 +211,115 @@
 
 @media (max-width: 760px) {
   .figure {
+    width: auto;
+    margin: 0 20px;
+  }
+
+  .scrollWrap { display: none; }
+  .mobileView { display: block; }
+  .mobileHeader h3 {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #53666a;
+  }
+  .mobileHeader p {
+    margin: 7px 0 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.45;
+    color: #68787b;
+  }
+  .mobileCounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 24px 0 12px;
+  }
+  .mobileCounts div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+  }
+  .mobileCounts strong {
+    font-family: var(--font-body);
+    font-size: 39px;
+    font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    line-height: 1;
+    color: #111;
+  }
+  .mobileCounts span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.45;
+    color: #5f6f72;
+  }
+  .mobileMap {
+    display: block;
     width: 100%;
+    height: auto;
+    margin: 4px 0 0;
   }
-
-  .scrollWrap {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 20px;
-  }
-
-  .svg {
-    width: 960px;
-    max-width: none;
-  }
-
-  .scrollHint {
-    display: block;
-    margin: 8px 0 0;
-    padding: 0 20px;
+  .mobileLegend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 4px;
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #97968d;
-    text-align: right;
+    color: #5f6f72;
   }
+  .mobileLegend span { display: inline-flex; align-items: center; gap: 7px; }
+  .mobileLegend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+  .mobilePanel {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(17, 17, 17, 0.14);
+  }
+  .mobilePanel p,
+  .mobilePanel strong,
+  .mobilePanel span {
+    font-family: var(--font-mono);
+  }
+  .mobilePanel p {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #53666a;
+  }
+  .mobilePanel h4 {
+    margin: 8px 0;
+    font-family: var(--font-body);
+    font-size: 21px;
+    color: #111;
+  }
+  .mobilePanel strong {
+    display: block;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #52676b;
+  }
+  .mobilePanel div { display: grid; gap: 4px; margin-top: 12px; }
+  .mobilePanel span { font-size: 12px; line-height: 1.45; color: #667679; }
 
   .caption {
-    padding: 0 20px;
+    padding: 0;
     max-width: none;
-    margin-top: 4px;
+    margin-top: 24px;
+    font-size: 11px;
+    text-align: left;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dotPulse {
     animation: none;
-    opacity: 0;
+    opacity: 1;
   }
 }

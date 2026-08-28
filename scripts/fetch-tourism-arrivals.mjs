@@ -4,10 +4,10 @@ import { fileURLToPath } from "node:url";
 import { csvFormat, csvParse } from "d3";
 
 const apiUrl =
-  "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_CLIMATE_CHANGE,1.0/A.TRSM_ARR.FJ?dimensionAtObservation=AllDimensions&format=csv";
+  "https://stats-sdmx-disseminate.pacificdata.org/rest/data/SPC,DF_TOURISM_ARRIVALS,1.0/A.FJ.?dimensionAtObservation=AllDimensions&format=csv";
 
 const explorerUrl =
-  "https://stats.pacificdata.org/vis?lc=en&df[ds]=SPC2&df[id]=DF_CLIMATE_CHANGE&df[ag]=SPC&df[vs]=1.0&av=true&dq=A.TRSM_ARR.&pd=,&to[TIME_PERIOD]=false";
+  "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0";
 
 const csvPath = fileURLToPath(
   new URL("../public/data/tourism-arrivals.csv", import.meta.url),
@@ -23,11 +23,11 @@ const metadataPath = fileURLToPath(
 );
 
 const sourceSpc = {
-  id: "spc-climate-change",
+  id: "spc-tourism-arrivals",
   name: "Pacific Data Hub .Stat",
   url: explorerUrl,
   apiUrl,
-  note: "SPC DF_CLIMATE_CHANGE annual tourism arrivals indicator TRSM_ARR.",
+  note: "SPC DF_TOURISM_ARRIVALS. Annual total constructed from overnight tourists (TOUR) and same-day visitors (EXCR).",
 };
 
 const sourceStatsFiji2025 = {
@@ -42,7 +42,7 @@ const sourceStatsFijiSupplemental = {
   id: "fiji-stats-supplemental",
   name: "Fiji Bureau of Statistics visitor-arrivals table",
   url: "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
-  note: "Official Fiji visitor-arrivals table used only to fill a year missing from the Pacific Data Hub extract.",
+  note: "Official Fiji visitor-arrivals table used to replace the Pacific Data Hub's rounded 2006 value with the exact national total.",
 };
 
 const supplementalRows = [
@@ -54,7 +54,7 @@ const supplementalRows = [
     unit: "N",
     source_id: sourceStatsFijiSupplemental.id,
     is_preliminary: "FALSE",
-    note: "Missing from the Pacific Data Hub extract; supplemented from the Fiji Bureau of Statistics visitor-arrivals table.",
+    note: "Exact national total from Fiji Bureau of Statistics; replaces the rounded 549,000 value in the Pacific Data Hub dataset.",
   },
   {
     year: 2025,
@@ -85,31 +85,35 @@ async function main() {
   const validRows = rows.filter(
     (row) =>
       row.FREQ === "A" &&
-      row.CLIMATE_CHANGE_INDICATORS === "TRSM_ARR" &&
+      row.GEO_PICT === "FJ" &&
+      ["TOUR", "EXCR"].includes(row.VISITOR_DURATION_CAT) &&
       Number.isFinite(Number(row.TIME_PERIOD)) &&
       Number.isFinite(Number(row.OBS_VALUE)),
   );
-  const fijiRows = validRows.filter((row) => row.GEO_PICT === "FJ");
+  const fijiRows = validRows;
 
   if (fijiRows.length === 0) {
     throw new Error("Pacific Data Hub response did not include Fiji arrivals.");
   }
 
-  const spcRows = fijiRows.map((row) => ({
-    year: Number(row.TIME_PERIOD),
-    arrivals: Number(row.OBS_VALUE),
-    geo_code: row.GEO_PICT,
+  const totalsByYear = new Map();
+  for (const row of fijiRows) {
+    const year = Number(row.TIME_PERIOD);
+    totalsByYear.set(year, (totalsByYear.get(year) ?? 0) + Number(row.OBS_VALUE));
+  }
+  const spcRows = [...totalsByYear].map(([year, arrivals]) => ({
+    year,
+    arrivals,
+    geo_code: "FJ",
     geography: "Fiji",
-    unit: row.UNIT_MEASURE,
+    unit: "N",
     source_id: sourceSpc.id,
     is_preliminary: "FALSE",
     note: "",
   }));
-  const spcYears = new Set(spcRows.map((row) => row.year));
-  const cleanRows = [
-    ...spcRows,
-    ...supplementalRows.filter((row) => !spcYears.has(row.year)),
-  ].sort((a, b) => a.year - b.year);
+  const cleanByYear = new Map(spcRows.map((row) => [row.year, row]));
+  for (const row of supplementalRows) cleanByYear.set(row.year, row);
+  const cleanRows = [...cleanByYear.values()].sort((a, b) => a.year - b.year);
   const cleanYears = cleanRows.map((row) => row.year);
 
   const latestFiji = cleanRows.reduce((latest, row) =>
@@ -123,7 +127,7 @@ async function main() {
     sources: [sourceSpc, sourceStatsFijiSupplemental, sourceStatsFiji2025],
     rows: cleanRows.length,
     rawRows: validRows.length,
-    geographies: [...new Set(validRows.map((row) => row.GEO_PICT))],
+    geographies: ["FJ"],
     fiji: {
       geoCode: "FJ",
       years: [Math.min(...cleanYears), latestFiji.year],
@@ -142,7 +146,7 @@ async function main() {
   const cleanCsvText = `${csvFormat(cleanRows)}\n`;
   await writeFile(csvPath, cleanCsvText);
   await writeFile(bundledCsvPath, cleanCsvText);
-  await writeFile(rawCsvPath, csvText);
+  await writeFile(rawCsvPath, `${csvText.replace(/\r\n/g, "\n").trimEnd()}\n`);
   await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`);
 
   console.log(

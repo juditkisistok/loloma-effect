@@ -86,7 +86,7 @@ export function ArrivalsChart({ rows = [] }) {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Annual visitor arrivals to Fiji from 1995 to 2025. The Pacific Data Hub series rises from 476,000 in 1995 to more than one million before collapsing during the COVID-19 interruption in 2020 and 2021, then recovering to 986,367 in 2025."
+        aria-label="Combined official series of annual visitor arrivals to Fiji from 1995 to 2025. Pacific Data Hub observations are supplemented with Fiji Bureau of Statistics values for 2006 and preliminary 2025 data. Arrivals rise from 476,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -302,15 +302,15 @@ export function ArrivalsChart({ rows = [] }) {
         <figcaption className={styles.caption}>
           Source:{" "}
           <a
-            href="https://stats.pacificdata.org/vis?av=true&df%5Bag%5D=SPC&df%5Bds%5D=SPC2&df%5Bid%5D=DF_CLIMATE_CHANGE&df%5Bvs%5D=1.0&dq=A.TRSM_ARR.&lc=en&pd=%2C&to%5BTIME_PERIOD%5D=false"
+            href="https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals"
             target="_blank"
             rel="noreferrer"
           >
-            Pacific Data Hub / SPC DF_CLIMATE_CHANGE, TRSM_ARR
+            Pacific Data Hub / SPC Tourism Arrivals
           </a>{" "}
-          — an official Pacific Dataviz Challenge 2026 dataset. The missing
-          2006 observation (548,589) and preliminary 2025 total are supplemented
-          from the{" "}
+          — an official Pacific Dataviz Challenge 2026 dataset. Its rounded 2006
+          value is replaced with the exact national total (548,589), and the
+          preliminary 2025 total is added from the{" "}
           <a
             href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
             target="_blank"

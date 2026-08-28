@@ -264,9 +264,9 @@ export const fijiBoundary = {
       "province": "Bua",
       "households": 19,
       "relocationType": "Partial Relocation",
-      "distanceMeters": 210,
+      "distanceMeters": null,
       "fundedBy": "Fijian Government",
-      "cause": "Low lying community on Yadua Island severely impacted by sea level rise, inundation and coastal erosion. TC Evans in 2021 destroyed 19 houses along the coast, prompting partial relocation.",
+      "cause": "Low-lying community on Yadua Island affected by sea-level rise, inundation and coastal erosion. Tropical Cyclone Evan destroyed 19 coastal houses in December 2012, prompting a partial relocation.",
       "impact": "Residents are generally pleased with the relocation.",
       "x": 305,
       "y": 197.8

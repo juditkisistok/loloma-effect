@@ -9,6 +9,7 @@ const bbox = {
   maxLat: -17.48,
 };
 const years = new Set([1999, 2007, 2015, 2023]);
+const displayIslandCenter = [177.347, -17.6141];
 const tileUrl = "https://tileserver.prod.digitalearthpacific.io/data/coastlines";
 const debug = process.argv.includes("--debug");
 
@@ -381,7 +382,13 @@ async function main() {
     }
   }
 
-  rateFeatures.sort((a, b) => Math.abs(b.rate) - Math.abs(a.rate));
+  const nearestRate = rateFeatures
+    .map((candidate) => ({
+      ...candidate,
+      displayDistance: distance(candidate.coordinates, displayIslandCenter),
+    }))
+    .sort((a, b) => a.displayDistance - b.displayDistance)[0];
+  delete nearestRate.displayDistance;
 
   const data = {
     source: {
@@ -395,7 +402,12 @@ async function main() {
     bbox,
     years: [...years],
     shorelines: shorelineFeatures,
-    rates: rateFeatures.slice(0, 90),
+    rateSelection: {
+      rule: "Nearest good, statistically significant rate point to the displayed island centre; selected from the complete extracted rate-point pool without sorting or filtering by rate magnitude.",
+      displayIslandCenter,
+      eligiblePointCount: rateFeatures.length,
+    },
+    rates: [nearestRate],
   };
 
   await mkdir("src/data", { recursive: true });
@@ -405,10 +417,7 @@ async function main() {
   );
 
   console.log(
-    `Wrote ${shorelineFeatures.length} shoreline segments and ${Math.min(
-      rateFeatures.length,
-      90,
-    )} rate points.`,
+    `Wrote ${shorelineFeatures.length} shoreline segments and ${rateFeatures.length} rate points.`,
   );
 
   if (debug) {

@@ -41,10 +41,10 @@ export function RelocationDecision() {
     <figure className={styles.figure} ref={ref}>
       <div className={styles.scrollWrap}>
       <svg
-        className={styles.svg}
+        className={`${styles.svg} ${styles.desktopSvg}`}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Interactive Fiji map showing six completed relocations, 17 public adaptation-survey locations, and a national total of 43 communities screened since 2021."
+        aria-label="Interactive Fiji map showing six communities with completed full or partial relocations, 17 public adaptation-survey locations, and a national total of 43 communities screened since 2021."
       >
         <g className={styles.header}>
           <text x="58" y="47">
@@ -138,10 +138,10 @@ export function RelocationDecision() {
               6
             </text>
             <text x="82" y="-23">
-              communities relocated
+              completed moves
             </text>
             <text x="82" y="-1">
-              as of 2025
+              2 full · 4 partial
             </text>
           </g>
 
@@ -177,7 +177,57 @@ export function RelocationDecision() {
         </g>
       </svg>
       </div>
-      <p className={styles.scrollHint}>Scroll for full map →</p>
+
+      <div className={styles.mobileView}>
+        <header className={styles.mobileHeader}>
+          <h3>Stay, adapt or move</h3>
+          <p>Public GIS locations · select a point for its recorded status</p>
+        </header>
+        <div className={styles.mobileCounts}>
+          <div><strong>6</strong><span>completed moves<br />2 full · 4 partial</span></div>
+          <div><strong>43</strong><span>communities screened<br />nationally since 2021</span></div>
+        </div>
+        <svg
+          className={styles.mobileMap}
+          viewBox="35 78 665 405"
+          role="img"
+          aria-label="Map of Fiji with six completed full or partial relocation locations and 17 public adaptation-survey locations."
+        >
+          <g className={styles.map}>
+            {fijiBoundary.paths.map((path) => (
+              <path key={path.id} className={styles.land} d={path.d} />
+            ))}
+            {dots.map((dot, index) => {
+              const selected = dot.id === hoveredId;
+              return (
+                <circle
+                  key={dot.id}
+                  className={`${styles.dotPulse} ${dot.type === "relocated" ? styles.relocatedPulse : styles.assessmentPulse} ${selected ? styles.selectedPulse : ""}`}
+                  cx={dot.x}
+                  cy={dot.y}
+                  r={selected ? 18 : dot.type === "relocated" ? 15 : 7}
+                  style={{ animationDelay: `${-(index % 8) * 0.42}s` }}
+                  tabIndex="0"
+                  role="button"
+                  aria-label={`${dot.title}: ${dot.status}`}
+                  onPointerDown={() => setHoveredId(dot.id)}
+                  onFocus={() => setHoveredId(dot.id)}
+                />
+              );
+            })}
+          </g>
+        </svg>
+        <div className={styles.mobileLegend}>
+          <span><i className={styles.relocatedDot} />completed move</span>
+          <span><i className={styles.assessmentDot} />surveyed for adaptation</span>
+        </div>
+        <section className={styles.mobilePanel} aria-live="polite">
+          <p>SELECTED LOCATION</p>
+          <h4>{panel.title}</h4>
+          <strong>{panel.status}</strong>
+          <div>{panel.detail.map((line) => <span key={line}>{line}</span>)}</div>
+        </section>
+      </div>
       <figcaption className={styles.caption}>
         Sources: geoBoundaries gbOpen Fiji ADM0 boundary; Fiji Climate Change
         Division / UNOSAT GIS Platform, Completed Relocation (CCD, 2023) and
@@ -216,7 +266,9 @@ function buildDots() {
     status: `${sentenceCase(point.relocationType)} · completed ${point.year}`,
     detail: [
       `${point.province} · ${point.households} households`,
-      `Moved about ${formatDistance(point.distanceMeters)}`,
+      ...(point.distanceMeters
+        ? [`Moved about ${formatDistance(point.distanceMeters)}`]
+        : []),
       ...wrapText(point.cause, 32),
     ],
     type: "relocated",

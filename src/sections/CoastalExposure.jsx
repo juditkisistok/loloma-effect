@@ -5,9 +5,9 @@ import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import styles from "./CoastalExposure.module.css";
 
-const width = 1000;
-const height = 425;
-const plot = { x0: 54, y0: 26, x1: 690, y1: 412 };
+const width = 700;
+const height = 390;
+const plot = { x0: 24, y0: 10, x1: 676, y1: 380 };
 const years = coastalShoreline.years;
 const islandCenter = [177.347, -17.6141];
 const yearColors = ["#149f94", "#2f9188", "#d88970", "#ff7668"];
@@ -69,20 +69,29 @@ export function CoastalExposure() {
   return (
     <figure className={styles.figure} ref={ref}>
       <div className={styles.sticky}>
-        <div className={styles.scrollWrap}>
+        <header className={styles.header}>
+          <div>
+            <h3>One small island · four satellite snapshots</h3>
+            <p>Scroll: the thick line moves between four measured edges</p>
+          </div>
+          <div className={styles.yearKey} aria-label={`Current observation year ${activeYear}`}>
+            <strong>{activeYear}</strong>
+            <div className={styles.yearRamp} aria-hidden="true">
+              <span style={{ left: `${activeT * 100}%` }} />
+            </div>
+            <div className={styles.yearEnds}><span>1999</span><span>2023</span></div>
+          </div>
+        </header>
+
+        <div className={styles.layout}>
+          <div className={styles.plotWrap}>
           <svg
             className={styles.svg}
             viewBox={`0 0 ${width} ${height}`}
             role="img"
-            aria-label={`Four satellite observations show how the edge of a small island off Lautoka changed between 1999 and 2023. The nearest observation year is ${activeYear}. A nearby measuring line shows that this section of shore built outward by an average ${chart.hotspot.rate.toFixed(1)} metres per year.`}
+            aria-label={`Four satellite observations show how the edge of a small island off Lautoka changed between 1999 and 2023. The current observation year is ${activeYear}. The nearest valid rate measurement shows that this section of shore built outward by an average ${chart.hotspot.rate.toFixed(1)} metres per year.`}
           >
             <defs>
-              <linearGradient id="coast-year-ramp" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#149f94" />
-                <stop offset="33%" stopColor="#2f9188" />
-                <stop offset="67%" stopColor="#d88970" />
-                <stop offset="100%" stopColor="#ff7668" />
-              </linearGradient>
               <clipPath id="shore-paper-clip">
                 <rect
                   x={plot.x0}
@@ -91,54 +100,7 @@ export function CoastalExposure() {
                   height={plot.y1 - plot.y0}
                 />
               </clipPath>
-              <clipPath id="year-value-clip">
-                <rect x="730" y="34" width="154" height="58" />
-              </clipPath>
             </defs>
-
-            <g className={styles.kicker}>
-              <text x="70" y="63">
-                ONE SMALL ISLAND · FOUR SATELLITE SNAPSHOTS
-              </text>
-              <text x="70" y="82">
-                SCROLL: THE THICK LINE MOVES BETWEEN FOUR MEASURED EDGES
-              </text>
-            </g>
-
-            <g className={styles.yearKey}>
-              <g clipPath="url(#year-value-clip)">
-                <text
-                  className={styles.yearValue}
-                  x="874"
-                  y={74 - segmentProgress * 50}
-                  textAnchor="end"
-                >
-                  {years[segmentIndex]}
-                </text>
-                <text
-                  className={styles.yearValue}
-                  x="874"
-                  y={124 - segmentProgress * 50}
-                  textAnchor="end"
-                >
-                  {years[segmentIndex + 1]}
-                </text>
-              </g>
-              <rect x="724" y="92" width="150" height="8" />
-              <rect
-                className={styles.yearNeedle}
-                x={724 + activeT * 150 - 1}
-                y="88"
-                width="2"
-                height="16"
-              />
-              <text x="724" y="121">
-                1999
-              </text>
-              <text x="850" y="121">
-                2023
-              </text>
-            </g>
 
             <g clipPath="url(#shore-paper-clip)">
               <path className={styles.reefShadow} d={currentPath} />
@@ -171,31 +133,22 @@ export function CoastalExposure() {
               </text>
             </g>
 
-            <g className={styles.factRail}>
-              <text x="724" y="186" className={styles.factKicker}>
-                NEARBY SHORELINE CHANGE
-              </text>
-              <text x="724" y="236" className={styles.factValueTeal}>
-                +{chart.hotspot.rate.toFixed(1)} m/yr
-              </text>
-              <text x="724" y="264" className={styles.factDetail}>
-                land grew outward, on average
-              </text>
-              <text x="724" y="286" className={styles.factDetail}>
-                uncertainty: ±{chart.hotspot.se.toFixed(1)} m/yr
-              </text>
-            </g>
           </svg>
+          </div>
+
+          <aside className={styles.factRail}>
+            <p>NEAREST VALID MEASUREMENT</p>
+            <strong>+{chart.hotspot.rate.toFixed(1)} m/yr</strong>
+            <span>this measured point accreted, on average</span>
+            <small>estimated uncertainty · ±{chart.hotspot.se.toFixed(1)} m/yr</small>
+          </aside>
         </div>
-        <p className={styles.mobileYear} aria-hidden="true">
-          {activeYear}
-        </p>
-        <p className={styles.scrollHint}>Scroll for full graphic →</p>
+
         <figcaption className={styles.caption}>
           Four thin lines show the island’s measured edges in 1999, 2007, 2015
           and 2023. The thick line is animation; its in-between positions are
-          not extra data. At the nearby measuring line, the shore built outward
-          by an average 2.4 metres a year. Elsewhere, Fiji’s shorelines may move
+          not extra data. The rate is the nearest valid measurement—not a
+          search for the largest change. Elsewhere, Fiji’s shorelines may move
           in the opposite direction. Source: {" "}
           <a
             href={coastalShoreline.source.url}
@@ -204,8 +157,7 @@ export function CoastalExposure() {
           >
             Digital Earth Pacific / Pacific Data Hub Annual Shorelines
           </a>{" "}
-          (Landsat, 30 m), an official Pacific Dataviz Challenge 2026 dataset.
-          Lines are smoothed between recorded vertices for display.
+          (Landsat, 30 m). Full selection and smoothing method below.
         </figcaption>
       </div>
     </figure>
@@ -241,7 +193,7 @@ function buildChart() {
     observation.coordinates.map(projection),
   );
   const samples = projectedObservations.reduce((aligned, coordinates) => {
-    const sampled = resampleClosedLine(coordinates, 16);
+    const sampled = resampleClosedLine(coordinates, 48);
     const previous = aligned.at(-1);
     aligned.push(previous ? alignSamples(previous, sampled) : sampled);
     return aligned;

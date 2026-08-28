@@ -5,12 +5,9 @@ import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import styles from "./LolomaHour.module.css";
 
-const width = 1000;
-const height = 440;
 const formatWhole = format(",");
-const formatOutcome = (value) => (Number.isInteger(value) ? formatWhole(value) : format(",.2f")(value));
-const gauge = { x: 70, y: 224, width: 860, height: 20, maxHours: 20000 };
-const outcomeCenters = [175, 390, 610, 825];
+const formatOutcome = (value) =>
+  Number.isInteger(value) ? formatWhole(value) : format(",.2f")(value);
 const tileImages = {
   corals: "/assets/branching-coral-a.png",
   mangroves: "/assets/mangrove-sapling.png",
@@ -18,6 +15,7 @@ const tileImages = {
 };
 const targetMultiple =
   lolomaHour.yearOne.hours / lolomaHour.launch.firstYearTargetHours;
+const gaugeMax = 20000;
 
 export function LolomaHour() {
   const ref = useRef(null);
@@ -30,12 +28,10 @@ export function LolomaHour() {
       setProgress(1);
       return;
     }
-
     const rect = el.getBoundingClientRect();
     const start = window.innerHeight * 0.92;
     const end = window.innerHeight * 0.12;
     const next = clamp((start - rect.top) / (start - end), 0, 1);
-
     setProgress((current) =>
       Math.abs(current - next) > 0.002 ? next : current,
     );
@@ -43,164 +39,80 @@ export function LolomaHour() {
 
   const countReveal = clamp(progress / 0.4, 0, 1);
   const displayedHours = Math.round(lolomaHour.yearOne.hours * countReveal);
-  const sessionsReveal = clamp((progress - 0.36) / 0.14, 0, 1);
-  const tileReveals = lolomaHour.yearOne.outcomes.map((_, index) =>
-    clamp((progress - (0.48 + index * 0.1)) / 0.14, 0, 1),
+  const detailReveal = clamp((progress - 0.32) / 0.18, 0, 1);
+  const targetShare = (lolomaHour.launch.firstYearTargetHours / gaugeMax) * 100;
+  const fillShare = (displayedHours / gaugeMax) * 100;
+  const targetWithinFill = Math.min(
+    100,
+    (targetShare / Math.max(fillShare, 0.001)) * 100,
   );
-  const targetHours = lolomaHour.launch.firstYearTargetHours;
-  const actualFillWidth =
-    gauge.width * (Math.min(displayedHours, gauge.maxHours) / gauge.maxHours);
-  const targetX = gauge.x + gauge.width * (targetHours / gauge.maxHours);
-  const finalActualX =
-    gauge.x + gauge.width * (lolomaHour.yearOne.hours / gauge.maxHours);
 
   return (
-    <figure className={styles.figure} ref={ref}>
-      <div className={styles.scrollWrap}>
-      <svg
-        className={styles.svg}
-        viewBox={`0 0 ${width} ${height}`}
-        role="img"
-        aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours volunteered by Loloma Hour participants, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions and ${lolomaHour.yearOne.properties} properties. Tourism Fiji's reported results for ${lolomaHour.yearOne.period}. Reported outcomes, kept as separate totals rather than a single conversion: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
-      >
-        <defs>
-          <clipPath id="loloma-gauge-fill">
-            <rect
-              x={gauge.x}
-              y={gauge.y}
-              width={actualFillWidth}
-              height={gauge.height}
-              rx={gauge.height / 2}
-            />
-          </clipPath>
-        </defs>
+    <figure
+      className={styles.figure}
+      ref={ref}
+      aria-label={`${formatWhole(lolomaHour.yearOne.hours)} volunteer hours, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions at ${lolomaHour.yearOne.properties} properties. Reported outcomes are separate totals: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
+    >
+      <header className={styles.header}>
+        <h3>What 17,407 volunteer hours looked like</h3>
+        <p>Loloma Hour · {lolomaHour.yearOne.period}</p>
+      </header>
 
-        <g className={styles.chartHeader}>
-          <text x="70" y="40">
-            Visitors volunteered {targetMultiple.toFixed(1)}× the first-year target
-          </text>
-          <text x="70" y="60">
-            Loloma Hour, {lolomaHour.yearOne.period}
-          </text>
-        </g>
-
-        <g className={styles.counter}>
-          <text className={styles.bigNumber} x="70" y="154">
-            {formatWhole(displayedHours)}
-          </text>
-          <text className={styles.counterCaption} x="70" y="179">
-            VOLUNTEER HOURS
-          </text>
-          <text
-            className={styles.sessionsNote}
-            x="70"
-            y="201"
-            opacity={sessionsReveal}
-          >
+      <div className={styles.hero}>
+        <div className={styles.metric}>
+          <strong>{formatWhole(displayedHours)}</strong>
+          <span>VOLUNTEER HOURS</span>
+          <small style={{ opacity: detailReveal }}>
             {formatWhole(lolomaHour.yearOne.sessions)} sessions · {lolomaHour.yearOne.properties} properties
-          </text>
-          <line className={styles.heroDivider} x1="500" x2="500" y1="104" y2="202" />
-          <text className={styles.multiple} x="570" y="154">
-            {targetMultiple.toFixed(1)}×
-          </text>
-          <text className={styles.multipleLabel} x="570" y="179">
-            OF THE FIRST-YEAR TARGET
-          </text>
-          <text className={styles.sessionsNote} x="570" y="201" opacity={sessionsReveal}>
-            target set at {formatWhole(targetHours)} hours
-          </text>
-        </g>
+          </small>
+        </div>
+        <div className={styles.metricSecondary}>
+          <strong>{targetMultiple.toFixed(1)}×</strong>
+          <span>THE FIRST-YEAR TARGET</span>
+          <small style={{ opacity: detailReveal }}>
+            target · {formatWhole(lolomaHour.launch.firstYearTargetHours)} hours
+          </small>
+        </div>
+      </div>
 
-        <g className={styles.gauge}>
-          <rect
-            className={styles.gaugeTrack}
-            x={gauge.x}
-            y={gauge.y}
-            width={gauge.width}
-            height={gauge.height}
-            rx={gauge.height / 2}
-          />
-          <g clipPath="url(#loloma-gauge-fill)">
-            <rect
-              className={styles.targetFill}
-              x={gauge.x}
-              y={gauge.y}
-              width={targetX - gauge.x}
-              height={gauge.height}
-            />
-            <rect
-              className={styles.beyondFill}
-              x={targetX}
-              y={gauge.y}
-              width={gauge.x + gauge.width - targetX}
-              height={gauge.height}
-            />
-          </g>
-          {[1, 2, 3].map((multiple) => {
-            const x = gauge.x + gauge.width * multiple * 0.25;
-            return (
-              <line
-                key={multiple}
-                className={styles.gaugeDivider}
-                x1={x}
-                x2={x}
-                y1={gauge.y - 4}
-                y2={gauge.y + gauge.height + 4}
-              />
-            );
-          })}
-          <text
-            className={`${styles.gaugeLabel} ${styles.targetGaugeLabel}`}
-            x={(gauge.x + targetX) / 2}
-            y={gauge.y + 14}
-            textAnchor="middle"
-            opacity={sessionsReveal}
-          >
-            {formatWhole(targetHours)} H TARGET
-          </text>
-          <text
-            className={`${styles.gaugeLabel} ${styles.beyondGaugeLabel}`}
-            x={(targetX + finalActualX) / 2}
-            y={gauge.y + 14}
-            textAnchor="middle"
-            opacity={sessionsReveal}
-          >
-            +{formatWhole(lolomaHour.yearOne.hours - targetHours)} H BEYOND TARGET
-          </text>
-        </g>
+      <div className={styles.gauge} aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours against a first-year target of ${formatWhole(lolomaHour.launch.firstYearTargetHours)} hours.`} role="img">
+        <div className={styles.gaugeTrack}>
+          <div className={styles.gaugeFill} style={{ width: `${fillShare}%` }}>
+            <span className={styles.targetFill} style={{ width: `${targetWithinFill}%` }} />
+            <span className={styles.beyondFill} />
+          </div>
+          <i className={styles.targetMarker} style={{ left: `${targetShare}%` }} />
+        </div>
+        <div className={styles.gaugeNotes}>
+          <span style={{ left: `${targetShare}%` }}>{formatWhole(lolomaHour.launch.firstYearTargetHours)} h target</span>
+          <strong>+{formatWhole(lolomaHour.yearOne.hours - lolomaHour.launch.firstYearTargetHours)} hours beyond target</strong>
+        </div>
+      </div>
 
-        <g className={styles.outcomesHeader} opacity={sessionsReveal}>
-          <text x="70" y="292">REPORTED OUTCOMES</text>
-          <line x1="214" x2="930" y1="287" y2="287" />
-        </g>
-
-        <g className={styles.outcomes}>
-          {lolomaHour.yearOne.outcomes.map((outcome, index) => (
-            <g
+      <div className={styles.outcomesHeading}><span>REPORTED OUTCOMES</span><i /></div>
+      <div className={styles.outcomes}>
+        {lolomaHour.yearOne.outcomes.map((outcome, index) => {
+          const reveal = clamp((progress - (0.46 + index * 0.08)) / 0.16, 0, 1);
+          return (
+            <div
+              className={styles.outcome}
               key={outcome.id}
-              transform={`translate(${outcomeCenters[index]} 350) translate(0 ${(1 - tileReveals[index]) * 12})`}
-              opacity={tileReveals[index]}
+              style={{ opacity: reveal, transform: `translateY(${(1 - reveal) * 10}px)` }}
             >
               <OutcomeImage id={outcome.id} />
-              <text className={styles.tileValue} textAnchor="middle" y="40">
-                {formatOutcome(outcome.value)}
-              </text>
-              <text className={styles.tileLabel} textAnchor="middle" y="62">
-                {outcome.label}
-              </text>
-            </g>
-          ))}
-        </g>
-      </svg>
+              <strong>{formatOutcome(outcome.value)}</strong>
+              <span>{outcome.label}</span>
+            </div>
+          );
+        })}
       </div>
-      <p className={styles.scrollHint}>Scroll for full chart →</p>
+
       <figcaption className={styles.caption}>
-        Reported outcomes are parallel totals, not conversions from volunteer hours;
-        activities require different amounts of labour. Source:{" "}
+        Reported outcomes are parallel totals, not conversions from volunteer
+        hours; activities require different amounts of labour. Source:{" "}
         <a href={lolomaHour.source.url} target="_blank" rel="noreferrer">
           {lolomaHour.source.title}
-        </a>
-        , {lolomaHour.source.date}.
+        </a>, {lolomaHour.source.date}.
       </figcaption>
     </figure>
   );
@@ -209,24 +121,16 @@ export function LolomaHour() {
 function OutcomeImage({ id }) {
   if (id === "rubbish") {
     return (
-      <g className={styles.tileIcon}>
-        <circle className={styles.iconBackdrop} cx="0" cy="-8" r="30" />
-        <path d="M-8,-9 L8,-9 L6,11 Q0,15 -6,11 Z M-5,-9 L-5,-14 Q0,-18 5,-14 L5,-9" />
-      </g>
+      <div className={styles.outcomeImage} aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M22 25h20l-2 25c-5 4-11 4-16 0l-2-25Zm4 0v-7c4-4 8-4 12 0v7" />
+        </svg>
+      </div>
     );
   }
-
   return (
-    <g className={styles.tileIcon} aria-hidden="true">
-      <circle className={styles.iconBackdrop} cx="0" cy="-8" r="30" />
-      <image
-        href={tileImages[id]}
-        x="-26"
-        y="-36"
-        width="52"
-        height="52"
-        preserveAspectRatio="xMidYMid meet"
-      />
-    </g>
+    <div className={styles.outcomeImage} aria-hidden="true">
+      <img src={tileImages[id]} alt="" />
+    </div>
   );
 }

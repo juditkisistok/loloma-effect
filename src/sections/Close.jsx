@@ -53,7 +53,7 @@ export function Close() {
       </div>
 
       <div className={styles.steps}>
-        <Act name="close1" align="center" height="150vh">
+        <Act name="close1" align="center" height="110vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               We tend to think about travel in terms of what we get to take
@@ -66,7 +66,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close2" align="center" height="165vh">
+        <Act name="close2" align="center" height="120vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               Loloma asks whether travel can contain something moving in the
@@ -83,7 +83,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close3" align="center" height="155vh">
+        <Act name="close3" align="center" height="120vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.lead}>
               One hour cannot carry the weight of Fiji's climate problem, and
@@ -94,22 +94,15 @@ export function Close() {
               businesses and the countries that have contributed most to
               global emissions.
             </p>
-          </Card>
-        </Act>
-
-        <Act name="close3b" align="center" height="140vh">
-          <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.support}>
-              The interesting thing about loloma is that it does not ask a
-              visitor to fix Fiji. It asks them to have a relationship with
-              the place they came to see — to arrive as more than a
-              consumer, and to recognise that being welcomed somewhere can
-              also mean giving something back.
+              Loloma does not ask a visitor to fix Fiji. It asks them to arrive
+              as more than a consumer — and to recognise that being welcomed
+              somewhere can also mean giving something back.
             </p>
           </Card>
         </Act>
 
-        <Act name="close4" align="center" height="165vh">
+        <Act name="close4" align="center" height="130vh">
           <Card className={`${panelStyles.panel} ${styles.finalBeat}`}>
             <div className={styles.farewell}>
               {farewellLines.map((line) => (
@@ -121,7 +114,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close5" align="start" height="190vh">
+        <Act name="close5" align="start" height="140vh">
           <div className={styles.vinakaLock}>
             <Card>
               <p className={styles.vinaka}>Vinaka.</p>

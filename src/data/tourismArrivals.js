@@ -4,10 +4,10 @@ import tourismArrivalsCsvText from "./tourism-arrivals.csv?raw";
 export const tourismArrivalsCsvUrl = "/data/tourism-arrivals.csv";
 
 export const tourismArrivalSources = {
-  "spc-climate-change": {
-    id: "spc-climate-change",
+  "spc-tourism-arrivals": {
+    id: "spc-tourism-arrivals",
     name: "Pacific Data Hub .Stat",
-    url: "https://stats.pacificdata.org/vis?lc=en&df[ds]=SPC2&df[id]=DF_CLIMATE_CHANGE&df[ag]=SPC&df[vs]=1.0&av=true&dq=A.TRSM_ARR.&pd=,&to[TIME_PERIOD]=false",
+    url: "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0",
   },
   "fiji-stats-preliminary-2025": {
     id: "fiji-stats-preliminary-2025",

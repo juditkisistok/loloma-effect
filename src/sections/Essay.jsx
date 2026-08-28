@@ -12,6 +12,7 @@ import { JourneyComparison } from "./JourneyComparison";
 import { RelocationDecision } from "./RelocationDecision";
 import { FundingTimeline } from "./FundingTimeline";
 import { LolomaHour } from "./LolomaHour";
+import { Methods } from "./Methods";
 import styles from "./Essay.module.css";
 
 const storyEndYear = 2025;
@@ -47,6 +48,9 @@ export function Essay() {
     journeyOptions.find((journey) => journey.id === selectedJourneyId) ??
     journeyOptions[0];
   const roundedJourneyTonnes = Math.round(selectedJourney.total);
+  const selectedDirectCo2 = selectedJourney.segments.find(
+    (segment) => segment.key === "direct",
+  )?.value;
 
   return (
     <section className={styles.essay} aria-labelledby="essay-title">
@@ -152,10 +156,12 @@ export function Essay() {
             />
           </p>
           <p>
-            The figures are not directly equivalent: the flight estimate
-            includes aviation's wider warming effects, while Fiji's figure
-            counts only CO₂ released within its borders. Even with that caveat,
-            the imbalance is rather significant.
+            The comparison below keeps the accounting boundaries visible.
+            The flight's direct CO₂ — about{" "}
+            <strong>{selectedDirectCo2.toFixed(1)} tonnes</strong> — can be
+            compared with Fiji's territorial CO₂. Fuel production and
+            aviation's non-CO₂ warming effects are then added separately to
+            show the wider estimated climate impact.
           </p>
         </div>
 
@@ -178,12 +184,13 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Much of that adaptation work is concentrated along the coast, where{" "}
+            Based on Fiji's 2007 census distribution, much of that adaptation
+            work is concentrated along the coast: {" "}
             <strong>
-              76% of Fiji's population lives within five kilometres of the sea
+              76% of the population lived within five kilometres of the sea
             </strong>
             {". "}
-            More than a quarter lives within a single kilometre.
+            More than a quarter lived within a single kilometre.
             <Ref
               n="6"
               href="https://www.sprep.org/news/676-communities-face-possible-relocation-in-fiji-as-climate-impacts-escalate"
@@ -214,9 +221,9 @@ export function Essay() {
           </p>
           <p>
             Shorelines do not all move in the same direction. The satellite
-            record below follows one small island off Lautoka where the measured
-            edge moved outward near the highlighted line, even as local sea
-            level rose. One shoreline cannot stand in for the whole country.
+            record below follows one small island off Lautoka where the nearest
+            valid rate measurement shows modest outward growth, even as local
+            sea level rose. One shoreline cannot stand in for the whole country.
           </p>
         </div>
 
@@ -263,10 +270,11 @@ export function Essay() {
           </p>
           <p>
             Vunidogoloa was the first community to move, but it was not the
-            last. As of 2025, Fiji had relocated{" "}
-            <strong>six communities</strong>. A further{" "}
-            <strong>43 had been identified for assessment</strong> — not
-            ordered to move, and not all expected to.
+            last. As of 2025, six communities had completed full or partial
+            relocations. Since 2021, <strong>43 communities had been
+            screened</strong>: some moved towards adapting in place, while
+            others remained under assessment. Screening is not an order to
+            move.
             <Ref
               n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
@@ -325,13 +333,15 @@ export function Essay() {
             facing climate loss.
           </p>
           <p>
-            But the arrangement did not last. The levy was removed in April
-            2022, leaving the trust fund in place without the domestic
-            revenue stream originally intended to sustain it.
+            In April 2022, the levy itself was removed — but the allocation
+            did not disappear. Fiji redirected 3% of VAT collected from
+            prescribed services, together with specified levies, into the
+            same relocation fund. The tax label changed; the commitment to a
+            domestic funding stream continued.
             <Ref
               n="12"
               href="https://www.parliament.gov.fj/wp-content/uploads/2022/03/Daily-Hansard-Thursday-24-March-2022.pdf"
-              label="Fiji Cabinet / Parliament of Fiji, Environment and Climate Adaptation Levy repeal, 2022"
+              label="Fiji Parliament, replacement of the ECAL allocation with VAT and specified levies, 2022"
             />
           </p>
         </div>
@@ -403,10 +413,10 @@ export function Essay() {
           </p>
           <p>
             Fiji now has rules for deciding when relocation should happen and
-            a fund that can contribute to the cost. What it no longer has is
-            the recurring domestic revenue stream originally intended to
-            sustain that fund. Partner contributions remain important, but
-            they arrive as individual commitments rather than a standing levy.
+            a domestic funding mechanism that can contribute to the cost.
+            Nabavatu shows the scale of the task: one trust-fund commitment
+            covered 59% of one village's approved budget. Partner support can
+            help close what remains, but it arrives as separate commitments.
           </p>
           <p>
             Money, however, is not the only thing a relocation requires. A
@@ -511,6 +521,7 @@ export function Essay() {
             being done on the islands.
           </p>
         </div>
+        <Methods />
       </article>
     </section>
   );
