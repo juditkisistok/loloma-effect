@@ -25,55 +25,41 @@
   text-align: center;
 }
 
-.finalBeat {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.lead {
-  font-family: var(--font-display);
+.framing {
+  font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(24px, 3.2vw, 40px);
-  line-height: 1.28;
-  color: var(--paper);
+  font-size: clamp(15.5px, 1.55vw, 18px);
+  line-height: 1.58;
+  color: var(--paper-soft);
+  max-width: 560px;
   margin: 0;
-  text-wrap: balance;
-  text-shadow: 0 2px 30px rgba(4, 14, 26, 0.8);
+  text-wrap: pretty;
+  text-shadow: 0 1px 22px rgba(4, 14, 26, 0.85);
 }
 
-.support {
+.turn {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(17px, 1.9vw, 23px);
-  line-height: 1.55;
-  color: var(--mist);
-  margin: 28px 0 0;
-  text-wrap: pretty;
-  text-shadow: 0 2px 24px rgba(4, 14, 26, 0.7);
-}
-
-.support + .support {
-  margin-top: 1.1em;
-}
-
-.farewell {
-  display: grid;
-  gap: 0.55em;
-  max-width: 560px;
-  margin: 0 auto;
-}
-
-.line {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(19px, 2.25vw, 28px);
-  line-height: 1.24;
+  font-size: clamp(21px, 2.45vw, 34px);
+  line-height: 1.2;
   color: var(--paper);
-  margin: 0;
+  max-width: 650px;
+  margin: 26px auto 0;
   text-wrap: balance;
-  text-shadow: 0 2px 30px rgba(4, 14, 26, 0.8);
+  text-shadow: 0 2px 30px rgba(4, 14, 26, 0.82);
+}
+
+.context {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(14.5px, 1.45vw, 16.5px);
+  line-height: 1.65;
+  color: var(--mist);
+  max-width: 560px;
+  margin: 22px auto 0;
+  text-wrap: pretty;
+  text-shadow: 0 1px 20px rgba(4, 14, 26, 0.8);
 }
 
 .vinakaLock {
@@ -94,14 +80,4 @@
   margin: 0;
   letter-spacing: -0.01em;
   text-shadow: 0 4px 40px rgba(4, 14, 26, 0.85);
-}
-
-@media (max-width: 700px) {
-  .finalBeat {
-    max-width: min(680px, 88vw);
-  }
-
-  .farewell {
-    gap: 0.62em;
-  }
 }

@@ -8,15 +8,6 @@ import { useFrame } from "../scroll/stageContext";
 import panelStyles from "../styles/panel.module.css";
 import styles from "./Close.module.css";
 
-const farewellLines = [
-  "Fiji cannot simply ask people to stop coming.",
-  "Loloma Hour asks them not to come empty-handed.",
-  "So come.",
-  "Stay.",
-  "And while you are here,",
-  "give an hour.",
-];
-
 export function Close() {
   const [coralsOn, setCoralsOn] = useState(false);
   const [lights, setLights] = useState({ on: false, climb: 0 });
@@ -55,12 +46,16 @@ export function Close() {
       <div className={styles.steps}>
         <Act name="close1" align="center" height="110vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
-            <p className={styles.lead}>
+            <p className={styles.framing}>
               We tend to think about travel in terms of what we get to take
               home.
             </p>
-            <p className={styles.support}>
-              A view. A story. A photograph. A memory of having been
+            <br/>
+            <p className={styles.framing}>A view.</p>
+            <p className={styles.framing}>A story.</p>
+            <p className={styles.framing}>A photograph.</p>
+            <p className={styles.turn}>
+              The memory of having been
               somewhere beautiful.
             </p>
           </Card>
@@ -68,49 +63,59 @@ export function Close() {
 
         <Act name="close2" align="center" height="120vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
-            <p className={styles.lead}>
-              Loloma asks whether travel can contain something moving in the
+            <p className={styles.turn}>
+              Loloma hour asks whether travel can contain something moving in the
               other direction too.
             </p>
-            <p className={styles.support}>
-              A mangrove planted into a damaged shoreline. A piece of reef
-              restored. An hour spent learning about a place from the people
-              who live there.
+            <br/>
+            <p className={styles.framing}>
+              A mangrove planted along a shoreline. 
+            </p> 
+            <p className={styles.framing}>
+              Coral planted on a reef.
+              
             </p>
-            <p className={styles.support}>
-              Not payment for having come. Not absolution. Just reciprocity.
-            </p>
+            <br/>
+            <p className={styles.framing}>
+            An hour spent learning about a place from the people who live
+            there.
+            </p> 
+
           </Card>
         </Act>
 
         <Act name="close3" align="center" height="120vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
-            <p className={styles.lead}>
+            <p className={styles.framing}>
               One hour cannot carry the weight of Fiji's climate problem, and
               it should not have to.
             </p>
-            <p className={styles.support}>
+            <p className={styles.context}>
               The larger responsibility still belongs with governments,
               businesses and the countries that have contributed most to
               global emissions.
             </p>
-            <p className={styles.support}>
-              Loloma does not ask a visitor to fix Fiji. It asks them to arrive
-              as more than a consumer — and to recognise that being welcomed
-              somewhere can also mean giving something back.
+            <p className={styles.context}>
+              Loloma does not ask a visitor to fix Fiji.
+            </p>
+            <p className={styles.turn}>
+              It asks them to arrive as more than a consumer — and to recognise
+              that being welcomed somewhere can also mean giving something
+              back.
             </p>
           </Card>
         </Act>
 
         <Act name="close4" align="center" height="130vh">
-          <Card className={`${panelStyles.panel} ${styles.finalBeat}`}>
-            <div className={styles.farewell}>
-              {farewellLines.map((line) => (
-                <p key={line} className={styles.line}>
-                  {line}
-                </p>
-              ))}
-            </div>
+          <Card className={`${panelStyles.panel} ${styles.beat}`}>
+            <p className={styles.framing}>
+              Fiji cannot simply ask people to stop coming. Loloma Hour asks
+              them not to come empty-handed.
+            </p>
+            <p className={styles.context}>So come. Stay.</p>
+            <p className={styles.turn}>
+              And while you are here, give an hour.
+            </p>
           </Card>
         </Act>
 
