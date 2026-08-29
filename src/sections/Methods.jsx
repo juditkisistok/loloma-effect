@@ -5,8 +5,8 @@ const rows = [
     name: "Visitor arrivals",
     source: "Pacific Data Hub / SPC; Fiji Bureau of Statistics",
     url: "https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals",
-    method: "Annual TOUR series. Pacific Data supplies 1995–2024; the Fiji Bureau supplies the missing provisional 2025 total. Same-day excursionists are excluded so every year uses one definition.",
-    licence: "Pacific Data Hub: Other (Open); the 2025 national supplement is cited at source.",
+    method: "Annual TOUR series. Pacific Data supplies 1995–2023. The SPC extract lists 928,938 arrivals for 2024; Fiji's national statistical authority reports 982,938, consistent with its published 5.7% annual increase. The visual therefore uses Fiji Bureau of Statistics values for 2024 and provisional 2025. Same-day excursionists are excluded so every year uses one definition.",
+    licence: "Pacific Data Hub: Other (Open); the 2024–2025 national values are cited at source.",
   },
   {
     name: "Shoreline snapshots",

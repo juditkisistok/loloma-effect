@@ -30,22 +30,31 @@ const sourceSpc = {
   note: "SPC DF_TOURISM_ARRIVALS annual visitor-arrivals series (VISITOR_DURATION_CAT = TOUR).",
 };
 
-const sourceStatsFiji2025 = {
-  id: "fiji-stats-provisional-2025",
-  name: "Fiji Bureau of Statistics provisional visitor arrivals",
-  url: "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
-  publishedDate: "2026-01-18",
-  note: "Provisional 2025 annual visitor arrivals, not yet present in the SPC extract.",
+const sourceStatsFiji = {
+  id: "fiji-stats-visitor-arrivals",
+  name: "Fiji Bureau of Statistics visitor arrivals",
+  url: "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
+  note: "National visitor-arrivals totals used for 2024 and provisional 2025.",
 };
 
 const supplementalRows = [
+  {
+    year: 2024,
+    arrivals: 982938,
+    geo_code: "FJ",
+    geography: "Fiji",
+    unit: "N",
+    source_id: sourceStatsFiji.id,
+    is_preliminary: "FALSE",
+    note: "Fiji Bureau of Statistics total used to resolve a discrepancy in the SPC extract.",
+  },
   {
     year: 2025,
     arrivals: 986367,
     geo_code: "FJ",
     geography: "Fiji",
     unit: "N",
-    source_id: sourceStatsFiji2025.id,
+    source_id: sourceStatsFiji.id,
     is_preliminary: "TRUE",
     note: "Provisional annual visitor arrivals published January 18 2026.",
   },
@@ -95,6 +104,7 @@ async function main() {
   const cleanYears = cleanRows.map((row) => row.year);
 
   const expectedSupplemental = new Map([
+    [2024, 982938],
     [2025, 986367],
   ]);
   for (const [year, expected] of expectedSupplemental) {
@@ -113,7 +123,7 @@ async function main() {
     rawSource: sourceSpc,
     sources: [
       sourceSpc,
-      sourceStatsFiji2025,
+      sourceStatsFiji,
     ],
     rows: cleanRows.length,
     rawRows: validRows.length,

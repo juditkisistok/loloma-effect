@@ -9,10 +9,10 @@ export const tourismArrivalSources = {
     name: "Pacific Data Hub .Stat",
     url: "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0",
   },
-  "fiji-stats-provisional-2025": {
-    id: "fiji-stats-provisional-2025",
-    name: "Fiji Bureau of Statistics provisional visitor arrivals",
-    url: "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
+  "fiji-stats-visitor-arrivals": {
+    id: "fiji-stats-visitor-arrivals",
+    name: "Fiji Bureau of Statistics visitor arrivals",
+    url: "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
   },
 };
 

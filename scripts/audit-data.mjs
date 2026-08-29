@@ -28,7 +28,7 @@ assert(tourism.every((row) => row.geography === "FJ" && row.unit === "N"), "Tour
 for (const [year, arrivals, preliminary] of [
   [1995, 318000, false],
   [2006, 549000, false],
-  [2024, 928938, false],
+  [2024, 982938, false],
   [2025, 986367, true],
 ]) {
   const row = tourism.find((candidate) => candidate.year === year);

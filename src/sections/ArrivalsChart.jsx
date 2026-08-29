@@ -86,7 +86,7 @@ export function ArrivalsChart({ rows = [] }) {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Annual visitor-arrivals series for Fiji from 1995 to 2025. Pacific Data Hub observations through 2024 are supplemented with a Fiji Bureau of Statistics value for 2025. Arrivals rise from 318,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
+        aria-label="Annual visitor-arrivals series for Fiji from 1995 to 2025. Pacific Data Hub observations through 2023 are followed by Fiji Bureau of Statistics values for 2024 and 2025. Arrivals rise from 318,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -319,7 +319,7 @@ export function ArrivalsChart({ rows = [] }) {
               Overnight visitors only; same-day excursionists excluded
             </span>
           </span>
-          ), supplemented with the provisional 2025 total from the{" "}
+          ) through 2023, with 2024 and provisional 2025 values from the{" "}
           <a
             href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
             target="_blank"
