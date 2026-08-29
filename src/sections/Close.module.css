@@ -28,10 +28,10 @@
 .framing {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(15.5px, 1.55vw, 18px);
-  line-height: 1.58;
+  font-size: var(--card-body-size);
+  line-height: var(--card-body-leading);
   color: var(--paper-soft);
-  max-width: 560px;
+  max-width: var(--card-body-width);
   margin: 0;
   text-wrap: pretty;
   text-shadow: 0 1px 22px rgba(4, 14, 26, 0.85);

@@ -28,4 +28,9 @@
   --font-body: Inter, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
+  /* --- narrative cards --- */
+  --card-body-size: 17px;
+  --card-body-leading: 1.58;
+  --card-body-width: 540px;
+
 }

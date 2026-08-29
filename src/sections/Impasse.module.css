@@ -1,19 +1,19 @@
 .statement {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(15.5px, 1.55vw, 18px);
-  line-height: 1.58;
+  font-size: var(--card-body-size);
+  line-height: var(--card-body-leading);
   color: var(--paper-soft);
-  max-width: 540px;
+  max-width: var(--card-body-width);
   margin: 0 auto 18px;
   text-wrap: pretty;
   text-shadow: 0 1px 22px rgba(4, 14, 26, 0.85);
 }
 
 .body {
-  font-size: clamp(15.5px, 1.55vw, 18px);
-  line-height: 1.58;
-  max-width: 540px;
+  font-size: var(--card-body-size);
+  line-height: var(--card-body-leading);
+  max-width: var(--card-body-width);
   margin: 0 auto 18px;
   color: var(--paper-soft);
 }
