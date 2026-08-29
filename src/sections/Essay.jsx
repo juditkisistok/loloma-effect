@@ -183,9 +183,6 @@ export function Essay() {
             That imbalance reaches Fiji at the water's edge. But the data do
             not show a simple story of every coastline retreating.
           </p>
-        </div>
-
-        <div className={styles.prose}>
           <p>
             At Lautoka, sea level has risen by around{" "}
             <strong>13 centimetres since 1993</strong>.
@@ -223,9 +220,6 @@ export function Essay() {
             safe. Sometimes the answer is to adapt in place. Sometimes it is to
             pack up and move.
           </p>
-        </div>
-
-        <div className={styles.prose}>
           <p>
             In 2014, about 140 residents from Vunidogoloa, a coastal village on
             Vanua Levu, relocated to higher ground two kilometres away by road.
@@ -279,52 +273,30 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Relocation is one outcome, not the default. Assessments are not
-            limited to sea-level rise: heavy rainfall, river flooding,
-            landslides and unstable ground can also make a settlement unsafe.
-            In each case, the first question is whether the risk can be reduced
-            without moving the community.
-          </p>
-          <p>
             With dozens requiring assessment, Fiji cannot improvise its
             response one village at a time. It published national relocation
-            guidelines in 2018 and, in 2019, launched what the Fijian government
-            described as the world's first national climate-relocation trust
-            fund. Planned relocation was later written into Fiji's Climate
-            Change Act.
+            guidelines in 2018 and, a year later, launched what the Fijian
+            government described as the world's first climate-relocation trust
+            fund.
             <Ref
               n="9"
               href="https://www.un.int/fiji/news/world%E2%80%99s-first-%E2%80%93ever-relocation-trust-fund-people-displaced-climate-change-launched-fijian-prime"
               label="Fiji Mission to the United Nations, world-first relocation trust fund launch, 2019"
             />
-          </p>
-        </div>
-
-        <div className={styles.prose}>
-          <p>
-            The human reality becomes clearer through one village. Nabavatu is
-            inland, also on Vanua Levu. Heavy rain from Tropical Cyclone Ana in
-            January 2021 triggered landslides and deep cracks that left the
-            ground unstable.
-          </p>
-          <p>
-            The village was evacuated. By July 2026, 37 families were preparing
-            to move into permanent homes, with keys expected by September or
-            October.
+            Planned relocation was subsequently written into Fiji's Climate
+            Change Act.
             <Ref
               n="10"
-              href="https://pmn.co.nz/read/pacific-region/the-trauma-remains-fiji-families-finally-leaving-tent-life-after-nearly-six-years"
-              label="Pacific Media Network, Nabavatu families prepare to relocate, July 2026"
+              href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
+              label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
           </p>
           <p>
-            Nabavatu is a reminder that planned relocation is not only about
-            the sea, and that moving a community is a long process rather than
-            a single construction project.
+            Together, these measures aim to turn relocation from an improvised
+            response into a national process: the guidelines define how
+            communities should be consulted, the fund provides a way to pay for
+            the work, and the Act makes relocation a government responsibility.
           </p>
-        </div>
-
-        <div className={styles.prose}>
           <p>
             About nine-tenths of land in Fiji is iTaukei land, held communally
             by Indigenous landowning groups rather than simply bought and sold
@@ -339,7 +311,7 @@ export function Essay() {
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
             <Ref
-              n="12"
+              n="10"
               href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -350,32 +322,30 @@ export function Essay() {
           </p>
         </div>
 
-        <div className={styles.prose}>
+        <div className={`${styles.prose} ${styles.pivot}`}>
           <p>
-            Fiji is already doing this work — in policy, in villages and
-            between communities. Nothing a visitor does during a holiday can
-            cancel the flight that brought them there, or finance a village's
-            relocation. The more useful question is smaller — and more human:
-            once you arrive, what does it mean to help care for the place that
-            welcomed you?
+            Responsibility for meeting this challenge extends beyond Fiji —
+            and compels us to rethink travel as a practice. Doing so is only
+            one part of that wider effort, but it can begin to change the
+            relationship between visitor and host for the better. The question
+            then becomes: once you arrive, what does it mean to help care for
+            the place that welcomed you?
           </p>
-          <p>The answer brings the story back to its first word.</p>
-          <p>Loloma.</p>
           <p>
-            At its largest, loloma can look like one community making space
-            for another that can no longer safely remain where it is.
+            The answer brings us back to where we started: the concept of
+            loloma.
           </p>
-          <p>It can also ask for something much smaller.</p>
-          <p>An hour.</p>
-        </div>
-
-        <div className={styles.prose}>
+          <p>
+            Loloma can look like one community making space for another that
+            can no longer safely remain where it is. Or it can be a much
+            smaller ask: an hour of your time.
+          </p>
           <p>
             In April 2025, Tourism Fiji launched Loloma Hour, inviting
             visitors to give one hour of their stay back to the place they
             had come to enjoy.
             <Ref
-              n="13"
+              n="12"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour"
             />
@@ -388,21 +358,16 @@ export function Essay() {
             <strong>40 ways</strong> to participate, with a first-year target
             of <strong>5,000 hours</strong>.
             <Ref
-              n="14"
+              n="13"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour launch details"
             />
           </p>
-        </div>
-
-        <div className={styles.prose}>
           <p>
-            One year on, the programme had surpassed its target more than
-            threefold. The graphic below separates the contributed-hours total
-            from the environmental outcomes it reported; one is not a
-            conversion of the other.
+            One year on, Tourism Fiji reported <strong>17,407 contributed
+            hours</strong> — 3.5 times the programme's first-year target.
             <Ref
-              n="15"
+              n="14"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />
@@ -415,14 +380,9 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Loloma Hour is not an offset. It cannot cancel the flight that
-            brought a visitor to Fiji, and it does not replace the long-term
-            financing that planned relocation requires.
-          </p>
-          <p>
-            It does something more modest: it directs some of the time,
-            attention and labour brought by tourism towards work already
-            being done on the islands.
+            Seventeen thousand hours do not solve the larger imbalance. But
+            they turn part of what tourism brings — people's time, attention
+            and labour — towards work already being done on the islands.
           </p>
         </div>
         <Methods />

@@ -68,6 +68,10 @@
   margin-top: var(--space-prose-beat);
 }
 
+.storyBlock > .prose + .pivot {
+  margin-top: clamp(40px, 4.5vh, 54px);
+}
+
 .storyBlock > .prose + .dataBlock {
   margin-top: var(--space-section);
 }
@@ -79,6 +83,11 @@
 .prose {
   width: min(600px, 88vw);
   margin: 0 auto;
+}
+
+.pivot {
+  padding-top: clamp(40px, 4.5vh, 54px);
+  border-top: 1px solid rgba(17, 17, 17, 0.18);
 }
 
 .prose p {
