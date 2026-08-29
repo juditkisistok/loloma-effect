@@ -63,7 +63,7 @@
   min-width: 0;
   margin: 22px auto 0;
 }
-.orbitChart { display: block; width: min(292px, 100%); height: auto; overflow: visible; }
+.orbitChart { display: block; width: min(330px, 100%); height: auto; overflow: visible; }
 .orbitTrack,
 .activityArc {
   fill: none;
@@ -245,7 +245,7 @@
   .metric span { font-size: 11px; }
   .metric small { font-size: 12px; }
   .targetOrbit { width: min(300px, 100%); margin: 24px auto 0; }
-  .orbitChart { width: min(280px, 88vw); }
+  .orbitChart { width: min(304px, 92vw); }
   .outcomesHeading { margin-bottom: 22px; }
   .outcomes { grid-template-columns: repeat(2, 1fr); gap: 30px 18px; }
   .outcome { grid-template-rows: 86px auto auto; }

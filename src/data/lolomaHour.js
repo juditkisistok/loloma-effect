@@ -10,6 +10,12 @@ export const lolomaHour = {
     properties: 27,
     hours: 17407,
     sessions: 2146,
+    activityHours: [
+      { id: "wildlife", label: "Wildlife", value: 4581 },
+      { id: "reef", label: "Reef", value: 3390 },
+      { id: "community", label: "Community", value: 5672 },
+      { id: "coastline", label: "Coastline", value: 3764 },
+    ],
     outcomes: [
       { id: "rubbish", label: "kg of waste collected", value: 1112.04 },
       { id: "corals", label: "corals planted", value: 2980 },

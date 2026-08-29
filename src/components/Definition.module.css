@@ -1,0 +1,70 @@
+.term {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted currentColor;
+  line-height: inherit;
+  cursor: help;
+  outline: none;
+}
+
+.term:focus-visible {
+  border-bottom-style: solid;
+  outline: 2px solid rgba(15, 135, 124, 0.28);
+  outline-offset: 3px;
+}
+
+.popover {
+  position: absolute;
+  z-index: 30;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  width: 260px;
+  max-width: min(260px, 76vw);
+  padding: 9px 11px;
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  border-radius: 4px;
+  background: rgba(247, 247, 245, 0.98);
+  box-shadow: 0 8px 22px rgba(17, 17, 17, 0.13);
+  color: #333;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    visibility 140ms ease;
+}
+
+.term:hover .popover,
+.term:focus-visible .popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 760px) {
+  .popover {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+    transform: translateY(6px);
+  }
+
+  .term:hover .popover,
+  .term:focus-visible .popover {
+    transform: translateY(0);
+  }
+}
