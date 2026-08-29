@@ -7,6 +7,7 @@ import styles from "./Scene.module.css";
 const WIDTH = 1440;
 const HEIGHT = 900;
 const WATERLINE = 540;
+const assetUrl = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 
 const farRidge = [
   [0, 478],
@@ -242,8 +243,8 @@ export function Scene({
       </svg>
 
       <div className={styles.flora}>
-        <img className={styles.palmLarge} src="/assets/palm-tree.png" alt="" />
-        <img className={styles.palmSmall} src="/assets/palm-tree.png" alt="" />
+        <img className={styles.palmLarge} src={assetUrl("palm-tree.png")} alt="" />
+        <img className={styles.palmSmall} src={assetUrl("palm-tree.png")} alt="" />
       </div>
 
       {corals && (
@@ -252,7 +253,7 @@ export function Scene({
             <img
               key={item.src}
               className={styles.collageImg}
-              src={`/assets/${item.src}`}
+              src={assetUrl(item.src)}
               alt=""
               style={{
                 left: item.left,

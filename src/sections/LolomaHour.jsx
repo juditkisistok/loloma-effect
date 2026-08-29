@@ -9,11 +9,12 @@ import styles from "./LolomaHour.module.css";
 const formatWhole = format(",");
 const formatOutcome = (value) =>
   Number.isInteger(value) ? formatWhole(value) : format(",.2f")(value);
+const assetUrl = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const tileImages = {
-  rubbish: "/assets/blue-cleanup-bucket.png",
-  corals: "/assets/soft-coral-pink.png",
-  mangroves: "/assets/mature-mangrove.png",
-  trees: "/assets/coastal-tree-cluster.png",
+  rubbish: assetUrl("blue-cleanup-bucket.png"),
+  corals: assetUrl("soft-coral-pink.png"),
+  mangroves: assetUrl("mature-mangrove.png"),
+  trees: assetUrl("coastal-tree-cluster.png"),
 };
 const targetMultiple =
   lolomaHour.yearOne.hours / lolomaHour.launch.firstYearTargetHours;
