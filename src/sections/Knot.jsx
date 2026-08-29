@@ -13,9 +13,8 @@ export function Knot() {
           In 2025, Fiji welcomed nearly a million visitors.
         </p>
         <p className={`${panelStyles.panelBody} ${styles.body}`}>
-          Tourism brings jobs, income, and opportunity — accounting for around
-          40% of the country’s GDP once direct and indirect contributions are
-          combined.
+          Tourism runs through Fiji’s economy, accounting for around 40% of the
+          country’s GDP once direct and indirect contributions are combined.
           <Ref
             n="2"
             href="https://www.finance.gov.fj/wp-content/uploads/2024/02/Fact-Sheet-Tourism.pdf"
@@ -25,8 +24,9 @@ export function Knot() {
           their journeys add to the pressures already reshaping Fiji’s coasts.
         </p>
         <p className={`${panelStyles.panelBody} ${styles.body}`}>
-          At the same time, some of the money tourists spend is helping pay to
-          relocate communities already losing ground to the rising ocean.
+          At the same time, the money visitors spend supports livelihoods and
+          public revenue; their time and attention can give something back to
+          the islands, too.
         </p>
       </Card>
     </Act>
