@@ -185,11 +185,8 @@ export function Essay() {
             of the flight's climate impact has already been created.
           </p>
           <p>
-            That imbalance reaches Fiji at the water's edge. But the data do
-            not show a simple story of every coastline retreating.
-          </p>
-          <p>
-            At Lautoka, sea level has risen by around{" "}
+            That imbalance reaches Fiji at the water's edge. At Lautoka, sea
+            level has risen by around{" "}
             <strong>13 centimetres since 1993</strong>.
             <Ref
               n="7"
@@ -199,17 +196,15 @@ export function Essay() {
             {" "}But sea level measures the height of the water; shoreline data
             track where water meets land. Waves and currents can add sediment
             in one place and remove it in another, so the two don't always move
-            together. Across 3,838 good-certainty shoreline-rate estimates
-            around Lautoka and Nadi, shores moved in both directions; the
-            median point shifted seaward by <strong>0.22 metres a year</strong>.
+            together.
           </p>
           <p>
             Tivua Island, about 13 kilometres west of Lautoka, illustrates this
-            distinction. At the highlighted point, its shore advanced by an
-            average <strong>0.38 metres a year</strong>. The data tell us that
-            the shoreline moved, but not why — and outward movement does not
-            mean the island is safe from rising water. The climate story is,
-            unsurprisingly, more complicated than a single moving line.
+            distinction. The graphic below follows four measured shorelines
+            from 1999 to 2023 and compares the highlighted point with nearby
+            shores. It shows how the island's edge moved — not why, and not
+            whether the island is safe from higher water. The climate story
+            is, unsurprisingly, more complicated than a single moving line.
           </p>
         </div>
 
@@ -335,21 +330,19 @@ export function Essay() {
 
         <div className={`${styles.prose} ${styles.pivot}`}>
           <p>
-            Responsibility for meeting this challenge extends beyond Fiji —
-            and compels us to rethink travel as a practice. Doing so is only
-            one part of that wider effort, but it can begin to change the
-            relationship between visitor and host for the better. The question
-            then becomes: once you arrive, what does it mean to help care for
-            the place that welcomed you?
+            That commitment is profound, rooted in relationships and rights
+            that belong to Fiji. But responsibility for the climate crisis
+            reaches far beyond the archipelago's shores. A traveller's role in
+            that response is different and much smaller, yet it carries a faint
+            echo: welcome creates a relationship, and care can move in both
+            directions.
           </p>
           <p>
-            The answer brings us back to where we started: the concept of
-            loloma.
+            That leaves us with a more human question: how might you take part
+            in that care?
           </p>
           <p>
-            Loloma can look like one community making space for another that
-            can no longer safely remain where it is. Or it can be a much
-            smaller ask: an hour of your time.
+            The answer brings us back to where we started: <b>loloma</b>.
           </p>
           <p>
             In April 2025, Tourism Fiji launched Loloma Hour, inviting
