@@ -59,6 +59,10 @@ const rows = [
         url: "https://www.oceanlight.com/log/diving-the-vatu-i-ra-passage-in-fijis-bligh-waters.html",
       },
       {
+        label: "SPREP — Status of Coral Reefs in Fiji",
+        url: "https://www.sprep.org/att/IRC/eCOPIES/Countries/Fiji/13.pdf",
+      },
+      {
         label: "WWF — Kabara vesi factsheet",
         url: "https://wwfasia.awsassets.panda.org/downloads/kabara_email_1.pdf",
       },
