@@ -217,52 +217,54 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            The measurements are not contradictory. Sea level records the
-            height of the water; shoreline position marks where water meets
-            land, which also shifts with waves, sediment and vegetation. Fiji's
-            coasts are not changing along one neat line. Each coast — and each
-            community — faces a different combination of risks.
-          </p>
-          <p>
             For the people living beside those changing shores, the important
-            question is not simply whether a line moved inward or outward. It is
+            question is not simply whether a line moved inward or outward — it is
             whether homes, water supplies, roads and livelihoods can remain
             safe. Sometimes the answer is to adapt in place. Sometimes it is to
-            move.
+            pack up and move.
           </p>
         </div>
 
         <div className={styles.prose}>
           <p>
-            For Vunidogoloa, a coastal village on Vanua Levu, that conversation
-            led to a move. In 2014, about 140 residents moved to a new site about
-            two kilometres away by road. It is widely recognised as Fiji's
-            first climate-related planned relocation.
+            In 2014, about 140 residents from Vunidogoloa, a coastal village on
+            Vanua Levu, relocated to higher ground two kilometres away by road.
+            It became Fiji's first village to relocate with government support
+            away from environmental risk.
             <Ref
               n="7"
-              href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8072796/"
-              label="Planned relocation and health case study from Vunidogoloa, Fiji"
+              href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12055693/"
+              label="Longitudinal study of climate-related relocation in Vunidogoloa, Fiji"
             />
           </p>
           <p>
             The new site offered safer housing, better road access and farmland
-            where crops could grow without saltwater intrusion. It also changed
-            familiar routines: the sea was now two kilometres away, making
-            fishing more time-consuming. Residents later reported eating less
-            fresh seafood and more packaged food.
+            where crops could grow without saltwater intrusion. However, it also
+            changed familiar routines: fishing now took longer, and residents
+            later described eating less fresh seafood and more packaged food —
+            a shift researchers linked both to the distance from fishing grounds
+            and easier access to shops.
+            <Ref
+              n="7"
+              href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12055693/"
+              label="Longitudinal study of climate-related relocation in Vunidogoloa, Fiji"
+            />
           </p>
           <p>
-            The move made Vunidogoloa safer, but it did not preserve the
-            village exactly as it was. This is why Fiji treats relocation as a
-            last resort.
+            The move reduced Vunidogoloa's exposure to coastal hazards, but it
+            did not preserve village life exactly as it was. This trade-off
+            helps explain why Fiji treats relocation as a last resort.
+            <Ref
+              n="8"
+              href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
+              label="Fiji Parliament Daily Hansard, 14 July 2025"
+            />
           </p>
           <p>
-            Vunidogoloa was the first village relocated through Fiji's
-            climate-change programme, but it was not the last community to
-            move. As of 2025, six communities had completed full or partial
-            relocations. Since 2021, <strong>43 communities had been screened</strong>:
-            some moved towards adapting in place, while others remained under
-            assessment. Screening is not an order to move.
+            By 2025, six communities in total had completed full or partial
+            relocations. Since 2021, <strong>43 communities had been screened</strong>,
+            but screening did not necessarily lead to a move: some shifted
+            towards adapting in place, while others remained under assessment.
             <Ref
               n="8"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
