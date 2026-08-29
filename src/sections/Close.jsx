@@ -17,7 +17,7 @@ export function Close() {
     const nextCoralsOn = coralProgress > 0.03;
     setCoralsOn((current) => (current !== nextCoralsOn ? nextCoralsOn : current));
 
-    const lightProgress = frame.act("close5");
+    const lightProgress = frame.act("close4");
     const nextOn = lightProgress > 0.04;
     const nextClimb = clamp((lightProgress - 0.04) / 0.9, 0, 1);
     setLights((current) =>
@@ -33,7 +33,7 @@ export function Close() {
         <Scene
           theme={duskTheme}
           toneStart="close1"
-          toneEnd="close5"
+          toneEnd="close4"
           idPrefix="dusk"
           corals
           coralsOn={coralsOn}
@@ -47,16 +47,14 @@ export function Close() {
         <Act name="close1" align="center" height="110vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.framing}>
-              We tend to think about travel in terms of what we get to take
-              home.
+              We tend to think about travel in terms of what we take home.
             </p>
             <br/>
             <p className={styles.framing}>A view.</p>
             <p className={styles.framing}>A story.</p>
             <p className={styles.framing}>A photograph.</p>
             <p className={styles.turn}>
-              The memory of having been
-              somewhere beautiful.
+              The memory of having been somewhere beautiful.
             </p>
           </Card>
         </Act>
@@ -64,62 +62,36 @@ export function Close() {
         <Act name="close2" align="center" height="120vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.turn}>
-              Loloma hour asks whether travel can contain something moving in the
-              other direction too.
+              Loloma Hour asks what might move in the other direction.
             </p>
-            <br/>
-            <p className={styles.framing}>
-              A mangrove planted along a shoreline. 
-            </p> 
-            <p className={styles.framing}>
-              Coral planted on a reef.
-              
+            <br/><p className={styles.framing}>
+              A mangrove taking root at the water's edge.
             </p>
-            <br/>
-            <p className={styles.framing}>
-            An hour spent learning about a place from the people who live
-            there.
-            </p> 
-
+            <p className={styles.framing}>Coral planted on a reef.</p>
+            <br/><p className={styles.framing}>
+              An hour spent learning from the people who call this place home.
+            </p>
           </Card>
         </Act>
 
-        <Act name="close3" align="center" height="120vh">
+        <Act name="close3" align="center" height="165vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.framing}>
-              One hour cannot carry the weight of Fiji's climate problem, and
-              it should not have to.
+              An hour is not an answer to Fiji's climate problem. That
+              responsibility reaches far beyond any visitor.
             </p>
             <p className={styles.context}>
-              The larger responsibility still belongs with governments,
-              businesses and the countries that have contributed most to
-              global emissions.
-            </p>
-            <p className={styles.context}>
-              Loloma does not ask a visitor to fix Fiji.
+              Fiji cannot simply ask people to stop coming. Loloma asks for a
+              different kind of arrival: come as more than a consumer, and
+              meet Fiji's welcome with care of your own.
             </p>
             <p className={styles.turn}>
-              It asks them to arrive as more than a consumer — and to recognise
-              that being welcomed somewhere can also mean giving something
-              back.
+              So come. Stay. <br/>And while you are here, give an hour.
             </p>
           </Card>
         </Act>
 
-        <Act name="close4" align="center" height="130vh">
-          <Card className={`${panelStyles.panel} ${styles.beat}`}>
-            <p className={styles.framing}>
-              Fiji cannot simply ask people to stop coming. Loloma Hour asks
-              them not to come empty-handed.
-            </p>
-            <p className={styles.context}>So come. Stay.</p>
-            <p className={styles.turn}>
-              And while you are here, give an hour.
-            </p>
-          </Card>
-        </Act>
-
-        <Act name="close5" align="start" height="140vh">
+        <Act name="close4" align="start" height="140vh">
           <div className={styles.vinakaLock}>
             <Card>
               <p className={styles.vinaka}>Vinaka.</p>
