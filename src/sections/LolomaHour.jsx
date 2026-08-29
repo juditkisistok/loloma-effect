@@ -17,11 +17,40 @@ const tileImages = {
 };
 const targetMultiple =
   lolomaHour.yearOne.hours / lolomaHour.launch.firstYearTargetHours;
+const activityColors = {
+  wildlife: "#0f877c",
+  reef: "#e06f5f",
+  community: "#bf8739",
+  coastline: "#4f7f8f",
+};
 const targetRadii = [50, 64, 78, 92];
+const ringCapacity = lolomaHour.launch.firstYearTargetHours;
+const activityRanges = lolomaHour.yearOne.activityHours.map(
+  (activity, index, activities) => {
+    const start = activities
+      .slice(0, index)
+      .reduce((sum, item) => sum + item.value, 0);
+    return { ...activity, start, end: start + activity.value };
+  },
+);
+const activityArcTrim = 8.5;
+
+function describeArc(radius, startShare, endShare) {
+  const startAngle = -Math.PI / 2 + startShare * Math.PI * 2;
+  const endAngle = -Math.PI / 2 + endShare * Math.PI * 2;
+  const startX = Math.cos(startAngle) * radius;
+  const startY = Math.sin(startAngle) * radius;
+  const endX = Math.cos(endAngle) * radius;
+  const endY = Math.sin(endAngle) * radius;
+  const largeArc = endShare - startShare > 0.5 ? 1 : 0;
+
+  return `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArc} 1 ${endX} ${endY}`;
+}
 
 export function LolomaHour() {
   const ref = useRef(null);
   const [progress, setProgress] = useState(0);
+  const [activeActivityId, setActiveActivityId] = useState(null);
 
   useFrame((frame) => {
     const el = ref.current;
@@ -44,6 +73,10 @@ export function LolomaHour() {
   const detailReveal = clamp((progress - 0.32) / 0.18, 0, 1);
   const ringReveal = clamp(progress / 0.85, 0, 1);
   const displayedMultiple = targetMultiple * ringReveal;
+  const activeActivity = lolomaHour.yearOne.activityHours.find(
+    (activity) => activity.id === activeActivityId,
+  );
+  const visibleActivityHours = lolomaHour.yearOne.hours * ringReveal;
   const summarySceneOpacity = 1 - clamp((progress - 0.38) / 0.08, 0, 1);
   const resultsSceneOpacity = clamp((progress - 0.46) / 0.1, 0, 1);
   const mobileCaptionOpacity = clamp((progress - 0.58) / 0.12, 0, 1);
@@ -77,45 +110,122 @@ export function LolomaHour() {
                 className={styles.orbitChart}
                 viewBox="0 0 250 238"
                 role="img"
-                aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours filled three complete ${formatWhole(lolomaHour.launch.firstYearTargetHours)}-hour rings and almost half of a fourth.`}
+                aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours filled three complete ${formatWhole(lolomaHour.launch.firstYearTargetHours)}-hour rings and almost half of a fourth. Hover or focus the activity labels to compare ${lolomaHour.yearOne.activityHours.map((activity) => `${formatWhole(activity.value)} ${activity.label.toLowerCase()} hours`).join(", ")}.`}
               >
                 <g transform="translate(125 112)">
                   {targetRadii.map((radius, index) => {
                     const circumference = 2 * Math.PI * radius;
-                    const ringProgress = clamp(displayedMultiple - index, 0, 1);
-                    const strokeProgress =
-                      ringProgress >= 0.999
-                        ? {}
-                        : {
-                            strokeDasharray: `${circumference * ringProgress} ${circumference}`,
-                            strokeDashoffset: 0,
-                          };
+                    const ringStart = index * ringCapacity;
+                    const ringEnd = ringStart + ringCapacity;
                     return (
                       <g key={radius}>
                         <circle className={styles.orbitTrack} r={radius} />
-                        <circle
-                          className={index === 0 ? styles.orbitTarget : styles.orbitBeyond}
-                          r={radius}
-                          opacity={ringProgress > 0.001 ? 1 : 0}
-                          {...strokeProgress}
-                        />
+                        {activityRanges.map((activity) => {
+                          const segmentStart = Math.max(activity.start, ringStart);
+                          const segmentEnd = Math.min(
+                            activity.end,
+                            ringEnd,
+                            visibleActivityHours,
+                          );
+                          if (segmentEnd <= segmentStart) return null;
+
+                          const startShare = (segmentStart - ringStart) / ringCapacity;
+                          const share = (segmentEnd - segmentStart) / ringCapacity;
+                          const startsInsideRing = segmentStart > ringStart + 0.001;
+                          const endsInsideRing = segmentEnd < ringEnd - 0.001;
+                          const startInset = startsInsideRing
+                            ? activityArcTrim / 2
+                            : 0;
+                          const endInset = endsInsideRing
+                            ? activityArcTrim / 2
+                            : 0;
+                          const segmentLength = Math.max(
+                            0,
+                            share * circumference - startInset - endInset,
+                          );
+                          const renderedStartShare =
+                            startShare + startInset / circumference;
+                          const renderedEndShare =
+                            renderedStartShare + segmentLength / circumference;
+                          const isFirstArc = segmentStart === activity.start;
+
+                          return (
+                            <path
+                              className={styles.activityArc}
+                              key={activity.id}
+                              d={describeArc(
+                                radius,
+                                renderedStartShare,
+                                renderedEndShare,
+                              )}
+                              style={{
+                                "--activity-color": activityColors[activity.id],
+                                "--activity-opacity":
+                                  activeActivity && activeActivity.id !== activity.id
+                                    ? 0.16
+                                    : 1,
+                              }}
+                              tabIndex={isFirstArc ? 0 : undefined}
+                              role={isFirstArc ? "button" : undefined}
+                              aria-hidden={isFirstArc ? undefined : "true"}
+                              aria-label={
+                                isFirstArc
+                                  ? `${activity.label}: ${formatWhole(activity.value)} hours, ${((activity.value / lolomaHour.yearOne.hours) * 100).toFixed(1)} percent of the total`
+                                  : undefined
+                              }
+                              onMouseEnter={() => setActiveActivityId(activity.id)}
+                              onMouseLeave={() => setActiveActivityId(null)}
+                              onFocus={() => setActiveActivityId(activity.id)}
+                              onBlur={() => setActiveActivityId(null)}
+                              onClick={() => setActiveActivityId(activity.id)}
+                            />
+                          );
+                        })}
                       </g>
                     );
                   })}
                 </g>
-                <text className={styles.orbitValue} x="125" y="120" textAnchor="middle">
-                  {displayedMultiple.toFixed(1)}×
+                <text
+                  className={`${styles.orbitValue} ${activeActivity ? styles.orbitValueDetail : ""}`}
+                  x="125"
+                  y="116"
+                  textAnchor="middle"
+                >
+                  {activeActivity
+                    ? formatWhole(activeActivity.value)
+                    : `${displayedMultiple.toFixed(1)}×`}
                 </text>
-                <text className={styles.orbitLabel} x="125" y="134" textAnchor="middle">
-                  TARGET
+                <text className={styles.orbitLabel} x="125" y="132" textAnchor="middle">
+                  {activeActivity ? `${activeActivity.label.toUpperCase()} HOURS` : "TARGET"}
                 </text>
+                {activeActivity && (
+                  <text className={styles.orbitContext} x="125" y="146" textAnchor="middle">
+                    {((activeActivity.value / lolomaHour.yearOne.hours) * 100).toFixed(1)}% OF TOTAL
+                  </text>
+                )}
                 <text className={styles.orbitUnit} x="125" y="231" textAnchor="middle">
                   EACH RING = {formatWhole(lolomaHour.launch.firstYearTargetHours)} HOURS
                 </text>
               </svg>
-              <div className={styles.orbitLegend} style={{ opacity: detailReveal }}>
-                <span><i className={styles.targetKey} />first-year target</span>
-                <span><i className={styles.beyondKey} />+{formatWhole(lolomaHour.yearOne.hours - lolomaHour.launch.firstYearTargetHours)} hours beyond</span>
+              <div className={styles.activityLegend} style={{ opacity: detailReveal }}>
+                {lolomaHour.yearOne.activityHours.map((activity) => (
+                  <button
+                    type="button"
+                    key={activity.id}
+                    aria-pressed={activeActivityId === activity.id}
+                    title={`${activity.label}: ${formatWhole(activity.value)} hours, ${((activity.value / lolomaHour.yearOne.hours) * 100).toFixed(1)}% of the total`}
+                    style={{ "--activity-color": activityColors[activity.id] }}
+                    onMouseEnter={() => setActiveActivityId(activity.id)}
+                    onMouseLeave={() => setActiveActivityId(null)}
+                    onFocus={() => setActiveActivityId(activity.id)}
+                    onBlur={() => setActiveActivityId(null)}
+                    onClick={() => setActiveActivityId(activity.id)}
+                  >
+                    <i />
+                    <span>{activity.label}</span>
+                    <strong>{formatWhole(activity.value)}</strong>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -149,8 +259,8 @@ export function LolomaHour() {
           style={{ "--mobile-caption-opacity": mobileCaptionOpacity }}
         >
           Tourism Fiji divides the 17,407 hours among wildlife, reef,
-          community and coastline activities. The four outcomes shown here
-          are reported separately, without an hours-per-outcome breakdown.
+          community and coastline activities, and reports the programme
+          outcomes shown here.
           Source:{" "}
           <a href={lolomaHour.source.url} target="_blank" rel="noreferrer">
             {lolomaHour.source.title}

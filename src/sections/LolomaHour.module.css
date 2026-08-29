@@ -65,27 +65,34 @@
 }
 .orbitChart { display: block; width: min(292px, 100%); height: auto; overflow: visible; }
 .orbitTrack,
-.orbitTarget,
-.orbitBeyond {
+.activityArc {
   fill: none;
   stroke-width: 8px;
   vector-effect: non-scaling-stroke;
 }
 .orbitTrack { stroke: rgba(15, 135, 124, 0.09); }
-.orbitTarget,
-.orbitBeyond {
-  transform: rotate(-90deg);
+.activityArc {
+  stroke: var(--activity-color);
   stroke-linecap: round;
+  opacity: var(--activity-opacity);
+  cursor: pointer;
+  transition: opacity 160ms ease, stroke-width 160ms ease, filter 160ms ease;
 }
-.orbitTarget { stroke: #bf8739; }
-.orbitBeyond { stroke: #0f877c; }
+.activityArc:hover,
+.activityArc:focus-visible {
+  stroke-width: 10px;
+  filter: drop-shadow(0 2px 3px rgba(22, 43, 44, 0.16));
+  outline: none;
+}
 .orbitValue {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 600;
   fill: #111;
 }
+.orbitValueDetail { font-size: 23px; }
 .orbitLabel,
+.orbitContext,
 .orbitUnit {
   font-family: var(--font-mono);
   font-weight: 700;
@@ -93,22 +100,52 @@
   fill: #617071;
 }
 .orbitLabel { font-size: 9px; }
+.orbitContext { font-size: 7.5px; }
 .orbitUnit { font-size: 8px; }
-.orbitLegend {
-  display: flex;
+.activityLegend {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  margin-top: 1px;
+  gap: 7px 16px;
+  width: 100%;
+  margin-top: 2px;
   font-family: var(--font-mono);
   font-size: 10px;
   color: #606b6b;
   transition: opacity 180ms ease;
 }
-.orbitLegend span { display: inline-flex; align-items: center; gap: 7px; }
-.orbitLegend i { width: 9px; height: 9px; border-radius: 50%; }
-.targetKey { background: #bf8739; }
-.beyondKey { background: #0f877c; }
+.activityLegend button {
+  display: grid;
+  grid-template-columns: 9px auto auto;
+  align-items: center;
+  gap: 0 7px;
+  min-height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.activityLegend button strong {
+  margin-left: 2px;
+  color: #7b817f;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.activityLegend button:hover,
+.activityLegend button:focus-visible,
+.activityLegend button[aria-pressed="true"] {
+  color: #111;
+  outline: none;
+}
+.activityLegend i {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--activity-color);
+}
 .outcomesHeading { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
 .outcomesHeading span {
   font-family: var(--font-mono);
@@ -228,6 +265,6 @@
   .figure { height: auto; }
   .sticky { position: static; }
   .metric small,
-  .orbitLegend,
+  .activityLegend,
   .outcome { transition: none; }
 }
