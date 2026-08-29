@@ -28,5 +28,5 @@ year,arrivals,geo_code,geography,unit,source_id,is_preliminary,note
 2021,32000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2022,636300,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2023,929740,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
-2024,928938,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
-2025,986367,FJ,Fiji,N,fiji-stats-provisional-2025,TRUE,Provisional annual visitor arrivals published January 18 2026.
+2024,982938,FJ,Fiji,N,fiji-stats-visitor-arrivals,FALSE,Fiji Bureau of Statistics total used to resolve a discrepancy in the SPC extract.
+2025,986367,FJ,Fiji,N,fiji-stats-visitor-arrivals,TRUE,Provisional annual visitor arrivals published January 18 2026.
