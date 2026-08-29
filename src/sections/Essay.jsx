@@ -5,6 +5,7 @@ import {
   parseBundledTourismArrivals,
 } from "../data/tourismArrivals";
 import { Ref } from "../components/Ref";
+import { Definition } from "../components/Definition";
 import { ArrivalsChart } from "./ArrivalsChart";
 import { flightComparison, journeyOptions } from "../data/journeyComparison";
 import { CoastalExposure } from "./CoastalExposure";
@@ -81,7 +82,7 @@ export function Essay() {
             Follow the line of arrivals and you will see visitor numbers rising
             dramatically since the turn of the century. There is, naturally, a
             two-year collapse beginning in 2020, when international travel
-            contracted almost overnight - we all know the reason.
+            contracted almost overnight. We all know the reason.
           </p>
         </div>
 
@@ -128,8 +129,14 @@ export function Essay() {
             to Nadi in economy class. Their return journey produces around {" "}
             <strong>
               {roundedJourneyTonnes} tonne
-              {roundedJourneyTonnes === 1 ? "" : "s"} of CO₂e
-            </strong> using UK government 2025 conversion factors.
+              {roundedJourneyTonnes === 1 ? "" : "s"} of {" "}
+              <Definition
+                label="CO₂e, carbon dioxide equivalent"
+                definition="Carbon dioxide equivalent: a common unit that expresses the warming impact of greenhouse gases and other climate effects as an equivalent amount of CO₂."
+              >
+                CO₂e
+              </Definition>
+            </strong>.
             <Ref
               n="4"
               href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025"
@@ -149,12 +156,12 @@ export function Essay() {
             />
           </p>
           <p>
-            The comparison below keeps the accounting boundaries visible.
-            The flight's direct CO₂ — about{" "}
-            <strong>{selectedDirectCo2.toFixed(1)} tonnes</strong> — can be
-            compared with Fiji's territorial CO₂. Fuel production and
-            aviation's non-CO₂ warming effects are then added separately to
-            show the wider estimated climate impact.
+            The chart below separates the journey's estimated climate impact
+            into three parts. Its direct CO₂ — about{" "}
+            <strong>{selectedDirectCo2.toFixed(1)} tonnes</strong> — is the
+            closest comparison with Fiji's territorial CO₂. Emissions from
+            fuel production and aviation's other warming effects are shown
+            separately, so the total reflects the journey's wider effect.
           </p>
         </div>
 
@@ -174,42 +181,41 @@ export function Essay() {
             aviation sits outside Fiji's territorial CO₂ total, even as the
             country has to spend more on adapting to a warmer climate.
           </p>
+          <p>
+            That imbalance reaches Fiji at the water's edge. But the data do
+            not show a simple story of every coastline retreating.
+          </p>
         </div>
 
         <div className={styles.prose}>
           <p>
-            Based on Fiji's 2007 census distribution, much of that adaptation
-            work is concentrated along the coast: {" "}
-            <strong>
-              76% of the population lived within five kilometres of the sea
-            </strong>
-            {". "}
-            More than a quarter lived within a single kilometre.
-            <Ref
-              n="6"
-              href="https://library.sprep.org/sites/default/files/coastal-proximity-populations-picts.pdf"
-              label="Coastal proximity of populations in Pacific island countries and territories"
-            />
-          </p>
-          <p>
             At Lautoka, sea level has risen by around{" "}
             <strong>13 centimetres since 1993</strong>.
             <Ref
-              n="7"
+              n="6"
               href="https://sealevel.nasa.gov/internal_resources/522/Lautoka_Fiji_combined.pdf"
               label="NASA Sea Level Change Team summary for Lautoka, Fiji"
             />
-            {" "}Thirteen centimetres can look small on paper. On the coast, it
-            raises the baseline beneath high tides and storm surges. NASA
-            expects flooding to become more frequent and severe as sea level
-            rises.
+            {" "}Shoreline position is a different measure. Across 3,838
+            good-certainty rate points around Lautoka and Nadi, shores moved in
+            both directions; the median was <strong>+0.22 metres a year</strong>.
           </p>
           <p>
-            Sea level and shoreline position are different measures. A
-            shoreline can move outward while the water beside it rises. The
-            satellite record below follows one small island off Lautoka. At the
-            nearest valid rate point, the shore grew outward. It is a local
-            result, not evidence that Fiji's coasts are advancing overall.
+            The visual below focuses on{" "}
+            <a
+              href="https://www.fiji.travel/things-to-do/day-trips/fiji-s-best-day-cruises"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Tivua Island
+            </a>
+            , about 13 kilometres west of Lautoka. It is the only closed island
+            outline in the extracted Lautoka–Nadi subset with good-certainty
+            observations in all four selected years. At the circled point, its
+            shoreline advanced by an average <strong>0.38 metres a year</strong>
+            {" "}(±0.10). The point sits at the 69th percentile of the local
+            distribution: above the median, but not an outlier. Tivua is a case
+            study, not a national average.
           </p>
         </div>
 
@@ -219,10 +225,18 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            For some communities, adapting in place may mean seawalls, raised
-            homes or changes to the water supply. For others, those measures
-            are no longer enough, and relocation needs to enter the
-            conversation.
+            The measurements are not contradictory. Sea level records the
+            height of the water; shoreline position marks where water meets
+            land, which also shifts with waves, sediment and vegetation. Fiji's
+            coasts are not changing along one neat line. Each coast — and each
+            community — faces a different combination of risks.
+          </p>
+          <p>
+            For the people living beside those changing shores, the important
+            question is not simply whether a line moved inward or outward. It is
+            whether homes, water supplies, roads and livelihoods can remain
+            safe. Sometimes the answer is to adapt in place. Sometimes it is to
+            move.
           </p>
         </div>
 
@@ -233,7 +247,7 @@ export function Essay() {
             two kilometres away by road. It is widely recognised as Fiji's
             first climate-related planned relocation.
             <Ref
-              n="8"
+              n="7"
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8072796/"
               label="Planned relocation and health case study from Vunidogoloa, Fiji"
             />
@@ -258,7 +272,7 @@ export function Essay() {
             some moved towards adapting in place, while others remained under
             assessment. Screening is not an order to move.
             <Ref
-              n="9"
+              n="8"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
@@ -271,26 +285,21 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            The assessments are not limited to sea-level rise. Heavy rainfall,
-            river flooding, landslides and unstable ground can also make a
-            settlement unsafe. In each case, the first question is whether the
-            risk can be reduced without moving the community.
+            Relocation is one outcome, not the default. Assessments are not
+            limited to sea-level rise: heavy rainfall, river flooding,
+            landslides and unstable ground can also make a settlement unsafe.
+            In each case, the first question is whether the risk can be reduced
+            without moving the community.
           </p>
           <p>
             With dozens requiring assessment, Fiji cannot improvise its
-            response one village at a time.
-          </p>
-        </div>
-
-        <div className={styles.prose}>
-          <p>
-            Fiji began formalising a national system for planned relocation.
-            It published national guidelines in 2018 and, in 2019, launched
-            what the Fijian government described as the world's first national
-            climate-relocation trust fund. Planned relocation was later written
-            into Fiji's Climate Change Act.
+            response one village at a time. It published national relocation
+            guidelines in 2018 and, in 2019, launched what the Fijian government
+            described as the world's first national climate-relocation trust
+            fund. Planned relocation was later written into Fiji's Climate
+            Change Act.
             <Ref
-              n="10"
+              n="9"
               href="https://www.un.int/fiji/news/world%E2%80%99s-first-%E2%80%93ever-relocation-trust-fund-people-displaced-climate-change-launched-fijian-prime"
               label="Fiji Mission to the United Nations, world-first relocation trust fund launch, 2019"
             />
@@ -309,7 +318,7 @@ export function Essay() {
             to move into permanent homes, with keys expected by September or
             October.
             <Ref
-              n="11"
+              n="10"
               href="https://pmn.co.nz/read/pacific-region/the-trauma-remains-fiji-families-finally-leaving-tent-life-after-nearly-six-years"
               label="Pacific Media Network, Nabavatu families prepare to relocate, July 2026"
             />
@@ -327,7 +336,7 @@ export function Essay() {
             by Indigenous landowning groups rather than simply bought and sold
             on the open market.
             <Ref
-              n="12"
+              n="11"
               href="https://tltb.com.fj/corporate-profile/"
               label="iTaukei Land Trust Board, communal land tenure in Fiji"
             />{" "}
@@ -336,7 +345,7 @@ export function Essay() {
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
             <Ref
-              n="13"
+              n="12"
               href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -348,7 +357,15 @@ export function Essay() {
         </div>
 
         <div className={styles.prose}>
-          <p>It brings the story back to its first word.</p>
+          <p>
+            Fiji is already doing this work — in policy, in villages and
+            between communities. Nothing a visitor does during a holiday can
+            cancel the flight that brought them there, or finance a village's
+            relocation. The more useful question is smaller — and more human:
+            once you arrive, what does it mean to help care for the place that
+            welcomed you?
+          </p>
+          <p>The answer brings the story back to its first word.</p>
           <p>Loloma.</p>
           <p>
             At its largest, loloma can look like one community making space
@@ -364,7 +381,7 @@ export function Essay() {
             visitors to give one hour of their stay back to the place they
             had come to enjoy.
             <Ref
-              n="14"
+              n="13"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour"
             />
@@ -377,7 +394,7 @@ export function Essay() {
             <strong>40 ways</strong> to participate, with a first-year target
             of <strong>5,000 hours</strong>.
             <Ref
-              n="15"
+              n="14"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour launch details"
             />
@@ -391,7 +408,7 @@ export function Essay() {
             from the environmental outcomes it reported; one is not a
             conversion of the other.
             <Ref
-              n="16"
+              n="15"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />
@@ -404,10 +421,9 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            These numbers should not be mistaken for an offset. An hour spent
-            planting coral does not cancel the flight that brought a visitor
-            to Fiji, and it does not replace the long-term financing that
-            planned relocation requires.
+            Loloma Hour is not an offset. It cannot cancel the flight that
+            brought a visitor to Fiji, and it does not replace the long-term
+            financing that planned relocation requires.
           </p>
           <p>
             It does something more modest: it directs some of the time,
