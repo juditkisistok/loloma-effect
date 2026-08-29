@@ -10,6 +10,7 @@ const bbox = {
 };
 const years = new Set([1999, 2007, 2015, 2023]);
 const displayIslandCenter = [177.347, -17.6141];
+const displayIslandName = "Tivua Island";
 const tileUrl = "https://tileserver.prod.digitalearthpacific.io/data/coastlines";
 const debug = process.argv.includes("--debug");
 
@@ -304,8 +305,10 @@ class PbfReader {
 async function main() {
   const shorelineFeatures = [];
   const rateFeatures = [];
+  const rateContextFeatures = [];
   const seenLines = new Set();
   const seenPoints = new Set();
+  const seenContextPoints = new Set();
   const counts = new Map();
   const yearCounts = new Map();
   const coordRange = {
@@ -361,21 +364,35 @@ async function main() {
 
       if (
         feature.layer === "rates_of_change" &&
-        feature.properties.certainty === "good" &&
-        feature.properties.sig_time <= 0.01
+        feature.properties.certainty === "good"
       ) {
         for (const point of feature.geometry) {
           const [lon, lat] = point;
           if (!inBbox(lon, lat, bbox)) continue;
           const rounded = roundCoord(point);
           const key = rounded.join(",");
+          const rate = Number(feature.properties.rate_time);
+          const se = Number(feature.properties.se_time);
+          const sig = Number(feature.properties.sig_time);
+          if (!Number.isFinite(rate)) continue;
+
+          if (!seenContextPoints.has(key)) {
+            seenContextPoints.add(key);
+            rateContextFeatures.push({
+              coordinates: rounded,
+              rate: round(rate, 3),
+              sig: Number.isFinite(sig) ? round(sig, 3) : null,
+            });
+          }
+
+          if (!Number.isFinite(sig) || sig > 0.01) continue;
           if (seenPoints.has(key)) continue;
           seenPoints.add(key);
           rateFeatures.push({
             coordinates: rounded,
-            rate: round(feature.properties.rate_time, 3),
-            se: round(feature.properties.se_time, 3),
-            sig: round(feature.properties.sig_time, 3),
+            rate: round(rate, 3),
+            se: Number.isFinite(se) ? round(se, 3) : null,
+            sig: round(sig, 3),
           });
         }
       }
@@ -389,6 +406,7 @@ async function main() {
     }))
     .sort((a, b) => a.displayDistance - b.displayDistance)[0];
   delete nearestRate.displayDistance;
+  const rateContext = summarizeRates(rateContextFeatures, nearestRate.rate);
 
   const data = {
     source: {
@@ -404,9 +422,11 @@ async function main() {
     shorelines: shorelineFeatures,
     rateSelection: {
       rule: "Nearest good, statistically significant rate point to the displayed island centre; selected from the complete extracted rate-point pool without sorting or filtering by rate magnitude.",
+      displayIslandName,
       displayIslandCenter,
       eligiblePointCount: rateFeatures.length,
     },
+    rateContext,
     rates: [nearestRate],
   };
 
@@ -417,7 +437,7 @@ async function main() {
   );
 
   console.log(
-    `Wrote ${shorelineFeatures.length} shoreline segments and ${rateFeatures.length} rate points.`,
+    `Wrote ${shorelineFeatures.length} shoreline segments, ${rateFeatures.length} significant rate points and ${rateContextFeatures.length} context rate points.`,
   );
 
   if (debug) {
@@ -428,6 +448,61 @@ async function main() {
     );
     console.log("Shoreline coordinate range:", coordRange);
   }
+}
+
+function summarizeRates(features, selectedRate) {
+  const values = features.map((feature) => feature.rate).sort((a, b) => a - b);
+  const lower = quantile(values, 0.02);
+  const upper = quantile(values, 0.98);
+  const rawLimit = Math.max(Math.abs(lower), Math.abs(upper), Math.abs(selectedRate));
+  const limit = Math.ceil(rawLimit * 5) / 5;
+  const binCount = 24;
+  const step = (limit * 2) / binCount;
+  const bins = Array.from({ length: binCount }, (_, index) => ({
+    x0: round(-limit + index * step, 3),
+    x1: round(-limit + (index + 1) * step, 3),
+    count: 0,
+  }));
+  let clippedLow = 0;
+  let clippedHigh = 0;
+
+  for (const value of values) {
+    if (value < -limit) {
+      clippedLow += 1;
+      continue;
+    }
+    if (value > limit) {
+      clippedHigh += 1;
+      continue;
+    }
+    const index = Math.min(binCount - 1, Math.floor((value + limit) / step));
+    bins[index].count += 1;
+  }
+
+  const atOrBelow = values.filter((value) => value <= selectedRate).length;
+
+  return {
+    rule: "All unique good-certainty rate points within the extracted Lautoka-Nadi bounding box. The display range spans the 2nd to 98th percentiles symmetrically around zero; values outside it are counted but clipped from the histogram.",
+    pointCount: values.length,
+    significantPointCount: features.filter(
+      (feature) => feature.sig !== null && feature.sig <= 0.01,
+    ).length,
+    domain: [-limit, limit],
+    median: round(quantile(values, 0.5), 3),
+    selectedPercentile: round((atOrBelow / values.length) * 100, 1),
+    clippedLow,
+    clippedHigh,
+    bins,
+  };
+}
+
+function quantile(sortedValues, probability) {
+  const index = (sortedValues.length - 1) * probability;
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  if (lower === upper) return sortedValues[lower];
+  const weight = index - lower;
+  return sortedValues[lower] * (1 - weight) + sortedValues[upper] * weight;
 }
 
 await main();

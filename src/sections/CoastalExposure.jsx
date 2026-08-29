@@ -3,6 +3,7 @@ import { useMemo, useRef, useState } from "react";
 import { coastalShoreline } from "../data/coastalShoreline";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
+import { stickyFigureProgress } from "../scroll/stickyFigure";
 import styles from "./CoastalExposure.module.css";
 
 const width = 700;
@@ -33,12 +34,11 @@ export function CoastalExposure() {
       return;
     }
 
-    const rect = el.getBoundingClientRect();
-    const stickyRatio = window.innerWidth <= 760 ? 0.06 : 0.12;
-    const stickyTop = Math.max(18, window.innerHeight * stickyRatio);
-    const stickyHeight = el.firstElementChild?.offsetHeight ?? 0;
-    const travel = Math.max(el.offsetHeight - stickyHeight - stickyTop, 1);
-    const next = clamp((stickyTop - rect.top) / travel, 0, 1);
+    const next = stickyFigureProgress(el, {
+      desktopTop: 0.12,
+      mobileTop: 0.06,
+      hold: 0,
+    });
 
     setProgress((current) =>
       Math.abs(current - next) > 0.002 ? next : current,
@@ -71,9 +71,13 @@ export function CoastalExposure() {
       <div className={styles.sticky}>
         <header className={styles.header}>
           <div>
-            <h3>One small island · four satellite snapshots</h3>
-            <p>Scroll: the thick line moves between four measured edges</p>
+            <h3>The moving edges of Tivua</h3>
+            <p>Four satellite observations · 1999–2023</p>
           </div>
+        </header>
+
+        <div className={styles.layout}>
+          <div className={styles.plotWrap}>
           <div className={styles.yearKey} aria-label={`Current observation year ${activeYear}`}>
             <strong>{activeYear}</strong>
             <div className={styles.yearRamp} aria-hidden="true">
@@ -81,15 +85,11 @@ export function CoastalExposure() {
             </div>
             <div className={styles.yearEnds}><span>1999</span><span>2023</span></div>
           </div>
-        </header>
-
-        <div className={styles.layout}>
-          <div className={styles.plotWrap}>
           <svg
             className={styles.svg}
             viewBox={`0 0 ${width} ${height}`}
             role="img"
-            aria-label={`Four satellite observations show how the edge of a small island off Lautoka changed between 1999 and 2023. The current observation year is ${activeYear}. The nearest valid rate measurement shows that this section of shore built outward by an average ${chart.hotspot.rate.toFixed(1)} metres per year.`}
+            aria-label={`Four satellite observations show how the edge of Tivua Island changed between 1999 and 2023. The current observation year is ${activeYear}. The nearest valid rate measurement shows that this section of shore moved outward by an average ${chart.hotspot.rate.toFixed(2)} metres per year.`}
           >
             <defs>
               <clipPath id="shore-paper-clip">
@@ -145,28 +145,101 @@ export function CoastalExposure() {
 
           <aside className={styles.factRail}>
             <p>AT THE CIRCLED POINT</p>
-            <strong>+{chart.hotspot.rate.toFixed(1)} m/yr</strong>
-            <span>this measured point accreted, on average</span>
-            <small>estimated uncertainty · ±{chart.hotspot.se.toFixed(1)} m/yr</small>
+            <strong>+{chart.hotspot.rate.toFixed(2)} m/yr</strong>
+            <span>on average, the shoreline moved outward</span>
+            <small>(±{chart.hotspot.se.toFixed(2)} m/yr est. uncertainty)</small>
+            <RateContext
+              context={coastalShoreline.rateContext}
+              selectedRate={chart.hotspot.rate}
+            />
           </aside>
         </div>
 
         <figcaption className={styles.caption}>
-          Measured shoreline edges: 1999, 2007, 2015 and 2023. The thick line
-          interpolates between them; it is not extra data. The circled rate is
-          the nearest valid measurement, not an island average. Source: {" "}
-          <a
-            href={coastalShoreline.source.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Digital Earth Pacific / Pacific Data Hub Annual Shorelines
-          </a>{" "}
-          (Landsat, 30 m). Elsewhere, shores may move in the opposite
-          direction; full method below.
+          Among the islands examined around Lautoka and Nadi, only Tivua has a
+          complete, good-certainty outline in all four years. Thin lines mark
+          observations; the thick line animates between them, so its in-between
+          positions are not additional data. The circled rate comes from the
+          nearest valid measurement to the island's centre, offering a local
+          view of change rather than a measure of the whole island or Fiji's
+          coastlines more broadly.
+            Source:{" "}
+            <a
+              href={coastalShoreline.source.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Digital Earth Pacific / Pacific Data Hub Annual Shorelines
+            </a>{" "}
+            (Landsat, 30 m). Full selection method below.
         </figcaption>
       </div>
     </figure>
+  );
+}
+
+function RateContext({ context, selectedRate }) {
+  const chartWidth = 216;
+  const chartHeight = 124;
+  const x0 = 6;
+  const x1 = 210;
+  const baseline = 80;
+  const maxBarHeight = 44;
+  const [domainMin, domainMax] = context.domain;
+  const maxCount = Math.max(...context.bins.map((bin) => bin.count));
+  const x = (value) =>
+    x0 + ((value - domainMin) / (domainMax - domainMin)) * (x1 - x0);
+  const selectedX = x(selectedRate);
+  const clippedCount = context.clippedLow + context.clippedHigh;
+
+  return (
+    <div className={styles.rateContext}>
+      <div className={styles.contextTitle}>NEARBY SHORES MOVED BOTH WAYS</div>
+      <div className={styles.contextDeck}>
+        local median · +{context.median.toFixed(2)} m/yr
+      </div>
+      <svg
+        className={styles.contextChart}
+        viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+        role="img"
+        aria-label={`Distribution of ${context.pointCount.toLocaleString()} good-certainty shoreline-rate estimates around Lautoka and Nadi. The selected rate is plus ${selectedRate.toFixed(2)} metres per year; the local median is plus ${context.median.toFixed(2)} metres per year.`}
+      >
+        <g className={styles.contextBars}>
+          {context.bins.map((bin) => {
+            const barX = x(bin.x0);
+            const barWidth = Math.max(1, x(bin.x1) - barX - 1);
+            const barHeight = (bin.count / maxCount) * maxBarHeight;
+            return (
+              <rect
+                key={bin.x0}
+                x={barX}
+                y={baseline - barHeight}
+                width={barWidth}
+                height={barHeight}
+                className={bin.x1 <= 0 ? styles.inwardBar : styles.outwardBar}
+              />
+            );
+          })}
+        </g>
+        <line className={styles.contextAxis} x1={x0} x2={x1} y1={baseline} y2={baseline} />
+        <line className={styles.zeroLine} x1={x(0)} x2={x(0)} y1="28" y2={baseline + 4} />
+        <g className={styles.selectedMarker} transform={`translate(${selectedX} 0)`}>
+          <text x="0" y="12" textAnchor="middle">selected +{selectedRate.toFixed(2)}</text>
+          <line x1="0" x2="0" y1="19" y2={baseline + 3} />
+          <circle cx="0" cy={baseline} r="2.8" />
+        </g>
+        <g className={styles.contextTicks}>
+          <text x={x0} y="98">−{Math.abs(domainMin).toFixed(1)}</text>
+          <text x={x(0)} y="98" textAnchor="middle">0</text>
+          <text x={x1} y="98" textAnchor="end">+{domainMax.toFixed(1)} m/yr</text>
+          <text x={x0} y="119">INWARD ←</text>
+          <text x={x1} y="119" textAnchor="end">→ OUTWARD</text>
+        </g>
+      </svg>
+      <div className={styles.contextNote}>
+        {context.pointCount.toLocaleString()} good-certainty estimates · middle 96% shown · {clippedCount} beyond chart range
+      </div>
+    </div>
   );
 }
 

@@ -25764,11 +25764,147 @@ export const coastalShoreline = {
   ],
   "rateSelection": {
     "rule": "Nearest good, statistically significant rate point to the displayed island centre; selected from the complete extracted rate-point pool without sorting or filtering by rate magnitude.",
+    "displayIslandName": "Tivua Island",
     "displayIslandCenter": [
       177.347,
       -17.6141
     ],
     "eligiblePointCount": 2095
+  },
+  "rateContext": {
+    "rule": "All unique good-certainty rate points within the extracted Lautoka-Nadi bounding box. The display range spans the 2nd to 98th percentiles symmetrically around zero; values outside it are counted but clipped from the histogram.",
+    "pointCount": 3838,
+    "significantPointCount": 2095,
+    "domain": [
+      -2.2,
+      2.2
+    ],
+    "median": 0.222,
+    "selectedPercentile": 68.8,
+    "clippedLow": 20,
+    "clippedHigh": 75,
+    "bins": [
+      {
+        "x0": -2.2,
+        "x1": -2.017,
+        "count": 5
+      },
+      {
+        "x0": -2.017,
+        "x1": -1.833,
+        "count": 9
+      },
+      {
+        "x0": -1.833,
+        "x1": -1.65,
+        "count": 2
+      },
+      {
+        "x0": -1.65,
+        "x1": -1.467,
+        "count": 8
+      },
+      {
+        "x0": -1.467,
+        "x1": -1.283,
+        "count": 10
+      },
+      {
+        "x0": -1.283,
+        "x1": -1.1,
+        "count": 21
+      },
+      {
+        "x0": -1.1,
+        "x1": -0.917,
+        "count": 27
+      },
+      {
+        "x0": -0.917,
+        "x1": -0.733,
+        "count": 36
+      },
+      {
+        "x0": -0.733,
+        "x1": -0.55,
+        "count": 77
+      },
+      {
+        "x0": -0.55,
+        "x1": -0.367,
+        "count": 108
+      },
+      {
+        "x0": -0.367,
+        "x1": -0.183,
+        "count": 192
+      },
+      {
+        "x0": -0.183,
+        "x1": 0,
+        "count": 480
+      },
+      {
+        "x0": 0,
+        "x1": 0.183,
+        "count": 741
+      },
+      {
+        "x0": 0.183,
+        "x1": 0.367,
+        "count": 863
+      },
+      {
+        "x0": 0.367,
+        "x1": 0.55,
+        "count": 456
+      },
+      {
+        "x0": 0.55,
+        "x1": 0.733,
+        "count": 283
+      },
+      {
+        "x0": 0.733,
+        "x1": 0.917,
+        "count": 155
+      },
+      {
+        "x0": 0.917,
+        "x1": 1.1,
+        "count": 104
+      },
+      {
+        "x0": 1.1,
+        "x1": 1.283,
+        "count": 50
+      },
+      {
+        "x0": 1.283,
+        "x1": 1.467,
+        "count": 42
+      },
+      {
+        "x0": 1.467,
+        "x1": 1.65,
+        "count": 28
+      },
+      {
+        "x0": 1.65,
+        "x1": 1.833,
+        "count": 22
+      },
+      {
+        "x0": 1.833,
+        "x1": 2.017,
+        "count": 14
+      },
+      {
+        "x0": 2.017,
+        "x1": 2.2,
+        "count": 10
+      }
+    ]
   },
   "rates": [
     {
