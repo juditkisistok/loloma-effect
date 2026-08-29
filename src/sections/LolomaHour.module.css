@@ -90,7 +90,7 @@
   font-weight: 600;
   fill: #111;
 }
-.orbitValueDetail { font-size: 23px; }
+.orbitValueDetail { font-size: 20px; }
 .orbitLabel,
 .orbitContext,
 .orbitUnit {
@@ -100,7 +100,8 @@
   fill: #617071;
 }
 .orbitLabel { font-size: 9px; }
-.orbitContext { font-size: 7.5px; }
+.orbitLabelDetail { font-size: 8px; letter-spacing: 0.035em; }
+.orbitContext { font-size: 7.25px; letter-spacing: 0.035em; }
 .orbitUnit { font-size: 8px; }
 .activityLegend {
   display: grid;

@@ -131,14 +131,8 @@ export function LolomaHour() {
 
                           const startShare = (segmentStart - ringStart) / ringCapacity;
                           const share = (segmentEnd - segmentStart) / ringCapacity;
-                          const startsInsideRing = segmentStart > ringStart + 0.001;
-                          const endsInsideRing = segmentEnd < ringEnd - 0.001;
-                          const startInset = startsInsideRing
-                            ? activityArcTrim / 2
-                            : 0;
-                          const endInset = endsInsideRing
-                            ? activityArcTrim / 2
-                            : 0;
+                          const startInset = activityArcTrim / 2;
+                          const endInset = activityArcTrim / 2;
                           const segmentLength = Math.max(
                             0,
                             share * circumference - startInset - endInset,
@@ -188,18 +182,23 @@ export function LolomaHour() {
                 <text
                   className={`${styles.orbitValue} ${activeActivity ? styles.orbitValueDetail : ""}`}
                   x="125"
-                  y="116"
+                  y={activeActivity ? "111" : "116"}
                   textAnchor="middle"
                 >
                   {activeActivity
                     ? formatWhole(activeActivity.value)
                     : `${displayedMultiple.toFixed(1)}×`}
                 </text>
-                <text className={styles.orbitLabel} x="125" y="132" textAnchor="middle">
+                <text
+                  className={`${styles.orbitLabel} ${activeActivity ? styles.orbitLabelDetail : ""}`}
+                  x="125"
+                  y={activeActivity ? "126" : "132"}
+                  textAnchor="middle"
+                >
                   {activeActivity ? `${activeActivity.label.toUpperCase()} HOURS` : "TARGET"}
                 </text>
                 {activeActivity && (
-                  <text className={styles.orbitContext} x="125" y="146" textAnchor="middle">
+                  <text className={styles.orbitContext} x="125" y="137" textAnchor="middle">
                     {((activeActivity.value / lolomaHour.yearOne.hours) * 100).toFixed(1)}% OF TOTAL
                   </text>
                 )}
