@@ -194,26 +194,20 @@ export function Essay() {
               href="https://sealevel.nasa.gov/internal_resources/522/Lautoka_Fiji_combined.pdf"
               label="NASA Sea Level Change Team summary for Lautoka, Fiji"
             />
-            {" "}Shoreline position is a different measure. Across 3,838
-            good-certainty rate points around Lautoka and Nadi, shores moved in
-            both directions; the median was <strong>+0.22 metres a year</strong>.
+            {" "}But sea level measures the height of the water; shoreline data
+            track where water meets land. Waves and currents can add sediment
+            in one place and remove it in another, so the two don't always move
+            together. Across 3,838 good-certainty measurements around Lautoka
+            and Nadi, shores moved in both directions; the median point shifted
+            seaward by <strong>0.22 metres a year</strong>.
           </p>
           <p>
-            The visual below focuses on{" "}
-            <a
-              href="https://www.fiji.travel/things-to-do/day-trips/fiji-s-best-day-cruises"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Tivua Island
-            </a>
-            , about 13 kilometres west of Lautoka. It is the only closed island
-            outline in the extracted Lautoka–Nadi subset with good-certainty
-            observations in all four selected years. At the circled point, its
-            shoreline advanced by an average <strong>0.38 metres a year</strong>
-            {" "}(±0.10). The point sits at the 69th percentile of the local
-            distribution: above the median, but not an outlier. Tivua is a case
-            study, not a national average.
+            Tivua Island, about 13 kilometres west of Lautoka, illustrates this
+            distinction. At the highlighted point, its shore advanced by an
+            average <strong>0.38 metres a year</strong>. The data tell us that
+            the shoreline moved, but not why — and outward movement does not
+            mean the island is safe from rising water. The climate story is,
+            unsurprisingly, more complicated than a single moving line.
           </p>
         </div>
 
