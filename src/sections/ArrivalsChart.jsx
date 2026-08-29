@@ -53,7 +53,8 @@ export function ArrivalsChart({ rows = [] }) {
     const stickyTop = Math.max(18, window.innerHeight * stickyRatio);
     const stickyHeight = el.firstElementChild?.offsetHeight ?? 0;
     const travel = Math.max(el.offsetHeight - stickyHeight - stickyTop, 1);
-    const next = clamp((stickyTop - rect.top) / travel, 0, 1);
+    const revealTravel = travel * 0.82;
+    const next = clamp((stickyTop - rect.top) / revealTravel, 0, 1);
 
     setProgress((current) =>
       Math.abs(current - next) > 0.002 ? next : current,
@@ -86,7 +87,7 @@ export function ArrivalsChart({ rows = [] }) {
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Official annual visitor-arrivals series for Fiji from 1995 to 2025. Pacific Data Hub observations are supplemented with Fiji Bureau of Statistics values for 2006, 2024 and 2025. Arrivals rise from 476,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
+        aria-label="Annual visitor-arrivals series for Fiji from 1995 to 2025. Pacific Data Hub observations through 2024 are supplemented with a Fiji Bureau of Statistics value for 2025. Arrivals rise from 318,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -133,11 +134,6 @@ export function ArrivalsChart({ rows = [] }) {
             {width < 360
               ? "Fiji visitors · 1995–2025"
               : "Visitor arrivals to Fiji, 1995–2025"}
-          </text>
-          <text x={margin.left + 14} y={margin.top - 15}>
-            {width < 360
-              ? "SCROLL: THIRTY YEARS OF ARRIVALS"
-              : "SCROLL: THE LINE TRACES THIRTY YEARS OF ARRIVALS"}
           </text>
         </g>
 
@@ -214,7 +210,7 @@ export function ArrivalsChart({ rows = [] }) {
               r="2.2"
               tabIndex={point.progress <= drawProgress + 0.015 ? 0 : -1}
               aria-label={`${point.year}: ${formatWhole(point.arrivals)} visitor arrivals${
-                point.isPreliminary ? ", preliminary" : ""
+                point.isPreliminary ? ", provisional" : ""
               }${
                 point.source?.id !== "spc-tourism-arrivals"
                   ? ", sourced from the Fiji Bureau of Statistics"
@@ -232,7 +228,7 @@ export function ArrivalsChart({ rows = [] }) {
             <text
               key={label.text}
               x={label.x ?? chart.x(label.year)}
-              y={height - 24}
+              y={height - 16}
               textAnchor={label.anchor}
             >
               {label.text}
@@ -252,16 +248,16 @@ export function ArrivalsChart({ rows = [] }) {
             <g
               className={styles.latestNote}
               opacity={latestNoteProgress}
-              transform={`translate(${width - margin.right - 140} ${
-                chart.y(chart.latest.arrivals) - 58 + (1 - latestNoteProgress) * 8
+              transform={`translate(${width - margin.right - 160} ${
+                chart.y(chart.latest.arrivals) - 70 + (1 - latestNoteProgress) * 8
               })`}
             >
-              <rect width="140" height="46" />
-              <text x="13" y="18">
+              <rect width="160" height="52" />
+              <text x="15" y="20">
                 {formatWhole(chart.latest.arrivals)}
               </text>
-              <text x="13" y="35">
-                {chart.latest.isPreliminary ? "2025 preliminary" : "2025"}
+              <text x="15" y="39">
+                {chart.latest.isPreliminary ? "2025 (PROVISIONAL)" : "2025"}
               </text>
             </g>
           </>
@@ -313,18 +309,25 @@ export function ArrivalsChart({ rows = [] }) {
             rel="noreferrer"
           >
             Pacific Data Hub / SPC Tourism Arrivals
-          </a>{" "}
-          — official Pacific Dataviz Challenge 2026 data. This chart uses its
-          TOUR series; the{" "}
+          </a>{" "}(
+          <span
+            className={styles.sourceTerm}
+            tabIndex="0"
+            aria-label="TOUR series: overnight visitors only; same-day excursionists excluded"
+          >
+            TOUR series
+            <span className={styles.sourceTip} role="tooltip">
+              Overnight visitors only; same-day excursionists excluded
+            </span>
+          </span>
+          ), supplemented with the provisional 2025 total from the{" "}
           <a
             href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
             target="_blank"
             rel="noreferrer"
           >
             Fiji Bureau of Statistics
-          </a>
-          {" "}supplies the exact 2006 total and provisional 2024–25 totals,
-          replacing an inconsistent 2024 value in the Pacific extract.
+          </a>.
         </figcaption>
       </div>
     </figure>
@@ -400,9 +403,22 @@ function buildChart(rows, width) {
     points,
     yTicks: [0, yMax / 3, (yMax * 2) / 3, yMax],
     storyLabels: (width < 600
-      ? [yearExtent[0], 2005, 2015, storyEndYear]
-      : [yearExtent[0], 2000, 2005, 2010, 2015, storyEndYear]
-    ).map((year) => ({ year, text: `${year}`, anchor: "middle" })),
+      ? [yearExtent[0], 2005, 2020, storyEndYear]
+      : [yearExtent[0], 2000, 2005, 2010, 2015, 2020, storyEndYear]
+    ).map((year) => {
+      if (year === yearExtent[0]) {
+        return {
+          year,
+          x: x(year) + 6,
+          text: `${year}`,
+          anchor: "start",
+        };
+      }
+      if (year === storyEndYear) {
+        return { year, x: x(year), text: `${year}`, anchor: "end" };
+      }
+      return { year, text: `${year}`, anchor: "middle" };
+    }),
     linePath,
     areaPath,
     interruption,

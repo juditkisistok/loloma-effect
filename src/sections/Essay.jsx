@@ -10,7 +10,6 @@ import { flightComparison, journeyOptions } from "../data/journeyComparison";
 import { CoastalExposure } from "./CoastalExposure";
 import { JourneyComparison } from "./JourneyComparison";
 import { RelocationDecision } from "./RelocationDecision";
-import { FundingTimeline } from "./FundingTimeline";
 import { LolomaHour } from "./LolomaHour";
 import { Methods } from "./Methods";
 import styles from "./Essay.module.css";
@@ -70,8 +69,8 @@ export function Essay() {
       <article className={styles.storyBlock}>
         <div className={styles.prose}>
           <p>
-            Fiji recorded {latestArrivals ?? "nearly one million"} visitor
-            arrivals in {storyEndYear}.
+            Fiji welcomed {latestArrivals ?? "nearly one million"} visitors in{" "}
+            {storyEndYear}.
             <Ref
               n="3"
               href="https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/"
@@ -81,12 +80,8 @@ export function Essay() {
           <p>
             Follow the line of arrivals and you will see visitor numbers rising
             dramatically since the turn of the century. There is, naturally, a
-            two-year interruption beginning in 2020, when international travel
-            stopped almost overnight. We all know the reason.
-          </p>
-          <p>
-            Then the visitors returned. By {storyEndYear}, Fiji was again near
-            the million-visitor mark.
+            two-year collapse beginning in 2020, when international travel
+            contracted almost overnight - we all know the reason.
           </p>
         </div>
 
@@ -96,14 +91,12 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Most of those visitors arrived by air. There is a shortage of
-            practical alternatives: Fiji is an archipelago in the middle of the
-            Pacific, thousands of kilometres from many of the people who travel
-            there.
+            Reaching Fiji usually means flying. It is an archipelago in the
+            middle of the Pacific, thousands of kilometres from many of the
+            people who travel there.
           </p>
-          <p>This is where the climate side of the story begins.</p>
           <p>
-            Take one visitor travelling from{" "}
+            Consider one visitor travelling from{" "}
             <span className={styles.inlineMenu}>
               <button
                 className={styles.inlineSelect}
@@ -136,7 +129,7 @@ export function Essay() {
             <strong>
               {roundedJourneyTonnes} tonne
               {roundedJourneyTonnes === 1 ? "" : "s"} of CO₂e
-            </strong>, depending on the route and calculation method.
+            </strong> using UK government 2025 conversion factors.
             <Ref
               n="4"
               href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025"
@@ -166,19 +159,20 @@ export function Essay() {
         </div>
 
         <div className={styles.dataBlock}>
-          <JourneyComparison selectedId={selectedJourneyId} />
+          <JourneyComparison
+            selectedId={selectedJourneyId}
+            onSelect={setSelectedJourneyId}
+          />
         </div>
 
         <div className={styles.prose}>
           <p>
             That flight is one small part of decades of accumulated global
-            emissions — a total Fiji has contributed very little to.
-          </p>
-          <p>
-            By the time Nadi's shoreline appears through the window, most of
-            the flight's climate impact has already been created. It sits
-            outside Fiji's national carbon account, even as the country has to
-            spend more on adapting to a warmer climate.
+            emissions — a total Fiji has contributed very little to. Yet by
+            the time Nadi's shoreline appears through the window, most of
+            the flight's climate impact has already been created. International
+            aviation sits outside Fiji's territorial CO₂ total, even as the
+            country has to spend more on adapting to a warmer climate.
           </p>
         </div>
 
@@ -193,8 +187,8 @@ export function Essay() {
             More than a quarter lived within a single kilometre.
             <Ref
               n="6"
-              href="https://www.sprep.org/news/676-communities-face-possible-relocation-in-fiji-as-climate-impacts-escalate"
-              label="SPREP coverage of possible community relocation in Fiji"
+              href="https://library.sprep.org/sites/default/files/coastal-proximity-populations-picts.pdf"
+              label="Coastal proximity of populations in Pacific island countries and territories"
             />
           </p>
           <p>
@@ -205,25 +199,17 @@ export function Essay() {
               href="https://sealevel.nasa.gov/internal_resources/522/Lautoka_Fiji_combined.pdf"
               label="NASA Sea Level Change Team summary for Lautoka, Fiji"
             />
+            {" "}Thirteen centimetres can look small on paper. On the coast, it
+            raises the baseline beneath high tides and storm surges. NASA
+            expects flooding to become more frequent and severe as sea level
+            rises.
           </p>
           <p>
-            Thirteen centimetres is easy to dismiss when it is drawn on a piece
-            of paper. On the coast, however, it gives high tides and storm
-            surges a higher starting point. Saltwater reaches gardens, fields
-            and freshwater supplies more often. Erosion becomes harder to
-            control.
-          </p>
-          <p>
-            The changes tend to arrive as a series of practical problems: a crop
-            that no longer grows well, a well that turns brackish, or a section
-            of shoreline that needs to be repaired again after the next period
-            of high water.
-          </p>
-          <p>
-            Shorelines do not all move in the same direction. The satellite
-            record below follows one small island off Lautoka where the nearest
-            valid rate measurement shows modest outward growth, even as local
-            sea level rose. One shoreline cannot stand in for the whole country.
+            Sea level and shoreline position are different measures. A
+            shoreline can move outward while the water beside it rises. The
+            satellite record below follows one small island off Lautoka. At the
+            nearest valid rate point, the shore grew outward. It is a local
+            result, not evidence that Fiji's coasts are advancing overall.
           </p>
         </div>
 
@@ -243,9 +229,9 @@ export function Essay() {
         <div className={styles.prose}>
           <p>
             For Vunidogoloa, a coastal village on Vanua Levu, that conversation
-            led to a move. In 2014, about 140 residents moved to a new site two
-            kilometres inland. It became Fiji's first planned relocation
-            because of climate change.
+            led to a move. In 2014, about 140 residents moved to a new site about
+            two kilometres away by road. It is widely recognised as Fiji's
+            first climate-related planned relocation.
             <Ref
               n="8"
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8072796/"
@@ -253,15 +239,11 @@ export function Essay() {
             />
           </p>
           <p>
-            The move resolved some immediate problems. The new site offered
-            safer housing, better road access and soil where taro, cassava,
-            pineapples and bananas could grow without saltwater reaching their
-            roots.
-          </p>
-          <p>
-            It also changed familiar routines. The sea was now two kilometres
-            away, making fishing more time-consuming. Residents later reported
-            eating less fresh seafood and more packaged food.
+            The new site offered safer housing, better road access and farmland
+            where crops could grow without saltwater intrusion. It also changed
+            familiar routines: the sea was now two kilometres away, making
+            fishing more time-consuming. Residents later reported eating less
+            fresh seafood and more packaged food.
           </p>
           <p>
             The move made Vunidogoloa safer, but it did not preserve the
@@ -269,12 +251,12 @@ export function Essay() {
             last resort.
           </p>
           <p>
-            Vunidogoloa was the first community to move, but it was not the
-            last. As of 2025, six communities had completed full or partial
-            relocations. Since 2021, <strong>43 communities had been
-            screened</strong>: some moved towards adapting in place, while
-            others remained under assessment. Screening is not an order to
-            move.
+            Vunidogoloa was the first village relocated through Fiji's
+            climate-change programme, but it was not the last community to
+            move. As of 2025, six communities had completed full or partial
+            relocations. Since 2021, <strong>43 communities had been screened</strong>:
+            some moved towards adapting in place, while others remained under
+            assessment. Screening is not an order to move.
             <Ref
               n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
@@ -295,117 +277,58 @@ export function Essay() {
             risk can be reduced without moving the community.
           </p>
           <p>
-            With dozens of communities requiring assessment, the response
-            cannot be improvised one village at a time.
+            With dozens requiring assessment, Fiji cannot improvise its
+            response one village at a time.
           </p>
         </div>
 
         <div className={styles.prose}>
           <p>
-            Fiji began building a national system for planned relocation
-            before most countries had one. It published national guidelines
-            in 2018 and, in 2019, created the world's first national trust
-            fund dedicated to relocating communities affected by climate
-            change. Planned relocation was later written into Fiji's Climate
-            Change Act.
+            Fiji began formalising a national system for planned relocation.
+            It published national guidelines in 2018 and, in 2019, launched
+            what the Fijian government described as the world's first national
+            climate-relocation trust fund. Planned relocation was later written
+            into Fiji's Climate Change Act.
             <Ref
               n="10"
               href="https://www.un.int/fiji/news/world%E2%80%99s-first-%E2%80%93ever-relocation-trust-fund-people-displaced-climate-change-launched-fijian-prime"
               label="Fiji Mission to the United Nations, world-first relocation trust fund launch, 2019"
             />
           </p>
-          <p>
-            The original plan directed 3% of the Environment and Climate
-            Adaptation Levy into the fund: a direct link between revenue
-            generated partly by the visitor economy and communities facing
-            climate loss.
-            <Ref
-              n="11"
-              href="https://www.laws.gov.fj/Acts/ViewSection/63007?query=plastic+bottle"
-              label="Laws of Fiji, three-percent allocation to the relocation trust fund"
-            />{" "}
-            When the levy ended in 2022, Fiji redirected the 3% allocation from
-            prescribed-service VAT and specified levies. The tax changed; the
-            domestic funding stream continued.
-            <Ref
-              n="12"
-              href="https://www.parliament.gov.fj/wp-content/uploads/2022/03/Daily-Hansard-Thursday-24-March-2022.pdf"
-              label="Fiji Parliament, replacement of the ECAL allocation with VAT and specified levies, 2022"
-            />
-          </p>
         </div>
 
         <div className={styles.prose}>
           <p>
-            The cost becomes clearer through one village. Nabavatu is inland,
-            also on Vanua Levu. After Tropical Cyclone Ana in January 2021, its
-            ground began to fail: land slumped, cracks opened and most homes
-            were mapped in medium- or high-risk areas.
+            The human reality becomes clearer through one village. Nabavatu is
+            inland, also on Vanua Levu. Heavy rain from Tropical Cyclone Ana in
+            January 2021 triggered landslides and deep cracks that left the
+            ground unstable.
           </p>
           <p>
-            The village was evacuated. Residents were initially told they
-            would be living in tents for three months. By July 2026, 37
-            families were preparing to move into permanent homes, with keys
-            expected by September or October.
+            The village was evacuated. By July 2026, 37 families were preparing
+            to move into permanent homes, with keys expected by September or
+            October.
             <Ref
-              n="13"
+              n="11"
               href="https://pmn.co.nz/read/pacific-region/the-trauma-remains-fiji-families-finally-leaving-tent-life-after-nearly-six-years"
               label="Pacific Media Network, Nabavatu families prepare to relocate, July 2026"
             />
           </p>
           <p>
-            In 2024, the government approved a new site around 800 metres away.
-            Its <strong>FJ$5.9 million</strong> budget covered homes and the
-            infrastructure around them: roads, drainage, water, electricity
-            and sanitation.
-            <Ref
-              n="14"
-              href="https://www.fiji.gov.fj/decisions-made-at-the-meeting-of-cabinet-held-on-27-february-2024/"
-              label="Fiji Cabinet, Nabavatu relocation budget approval, 2024"
-            />
-          </p>
-          <p>
-            In July 2025, the government committed{" "}
-            <strong>FJ$3.5 million</strong> from the relocation trust fund —
-            59% of that approved budget.
-            <Ref
-              n="9"
-              href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
-              label="Fiji Parliament Daily Hansard, 14 July 2025"
-            />
-          </p>
-        </div>
-
-        <div className={styles.dataBlock}>
-          <FundingTimeline />
-        </div>
-
-        <div className={styles.prose}>
-          <p>
-            In December 2025, New Zealand announced a further $5 million for
-            the national fund, including support for Nabavatu. The announcement
-            did not specify the currency or how much would go to the village.
-            <Ref
-              n="15"
-              href="https://www.fiji.gov.fj/fiji-secures-5-million-contribution-to-climate-relocation-of-communities-trust-fund-from-new-zealand/"
-              label="Fiji Government, New Zealand contribution to the Climate Relocation of Communities Trust Fund, December 2025"
-            />
-          </p>
-          <p>
-            The machinery now exists: rules for deciding when to move, a
-            domestic fund and outside partners. But money is only one part of a
-            relocation. A village also needs somewhere to go.
+            Nabavatu is a reminder that planned relocation is not only about
+            the sea, and that moving a community is a long process rather than
+            a single construction project.
           </p>
         </div>
 
         <div className={styles.prose}>
           <p>
-            Most land in Fiji is iTaukei land, held communally by Indigenous
-            landowning groups rather than simply bought and sold on the open
-            market.
+            About nine-tenths of land in Fiji is iTaukei land, held communally
+            by Indigenous landowning groups rather than simply bought and sold
+            on the open market.
             <Ref
-              n="16"
-              href="https://itaukeilandtrustboard.com.fj/"
+              n="12"
+              href="https://tltb.com.fj/corporate-profile/"
               label="iTaukei Land Trust Board, communal land tenure in Fiji"
             />{" "}
             Where a village cannot move within its own customary land,
@@ -413,7 +336,7 @@ export function Essay() {
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
             <Ref
-              n="17"
+              n="13"
               href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -441,7 +364,7 @@ export function Essay() {
             visitors to give one hour of their stay back to the place they
             had come to enjoy.
             <Ref
-              n="18"
+              n="14"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour"
             />
@@ -454,7 +377,7 @@ export function Essay() {
             <strong>40 ways</strong> to participate, with a first-year target
             of <strong>5,000 hours</strong>.
             <Ref
-              n="19"
+              n="15"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour launch details"
             />
@@ -463,15 +386,12 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            One year on, the programme had reached{" "}
-            <strong>17,407 hours</strong> across <strong>2,146 sessions</strong>{" "}
-            at <strong>27 properties</strong> — more than three times the
-            original 5,000-hour target. Participants planted{" "}
-            <strong>2,980 corals</strong> and <strong>13,056 mangroves</strong>,
-            added <strong>461 trees</strong>, and collected{" "}
-            <strong>1,112 kilograms</strong> of waste.
+            One year on, the programme had surpassed its target more than
+            threefold. The graphic below separates the contributed-hours total
+            from the environmental outcomes it reported; one is not a
+            conversion of the other.
             <Ref
-              n="20"
+              n="16"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />
