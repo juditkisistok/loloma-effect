@@ -89,7 +89,7 @@ export function CoastalExposure() {
             className={styles.svg}
             viewBox={`0 0 ${width} ${height}`}
             role="img"
-            aria-label={`Four satellite observations show how the edge of Tivua Island changed between 1999 and 2023. The current observation year is ${activeYear}. The nearest valid rate measurement shows that this section of shore moved outward by an average ${chart.hotspot.rate.toFixed(2)} metres per year.`}
+            aria-label={`Four satellite observations show how the edge of Tivua Island changed between 1999 and 2023. The current observation year is ${activeYear}. The nearest valid shoreline-rate estimate shows that this section of shore moved outward by an average ${chart.hotspot.rate.toFixed(2)} metres per year.`}
           >
             <defs>
               <clipPath id="shore-paper-clip">
@@ -160,9 +160,9 @@ export function CoastalExposure() {
           complete, good-certainty outline in all four years. Thin lines mark
           observations; the thick line animates between them, so its in-between
           positions are not additional data. The circled rate comes from the
-          nearest valid measurement to the island's centre, offering a local
-          view of change rather than a measure of the whole island or Fiji's
-          coastlines more broadly.
+          nearest valid shoreline-rate estimate to the island's centre,
+          offering a local view of change rather than a measure of the whole
+          island or Fiji's coastlines more broadly.
             Source:{" "}
             <a
               href={coastalShoreline.source.url}
@@ -237,7 +237,7 @@ function RateContext({ context, selectedRate }) {
         </g>
       </svg>
       <div className={styles.contextNote}>
-        {context.pointCount.toLocaleString()} good-certainty estimates · middle 96% shown · {clippedCount} beyond chart range
+        {context.pointCount.toLocaleString()} good-certainty shoreline-rate estimates · middle 96% shown · {clippedCount} beyond chart range
       </div>
     </div>
   );

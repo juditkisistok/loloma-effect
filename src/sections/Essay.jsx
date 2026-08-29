@@ -175,9 +175,14 @@ export function Essay() {
         <div className={styles.prose}>
           <p>
             That flight is one small part of decades of accumulated global
-            emissions — a total Fiji has contributed very little to. Yet by
-            the time Nadi's shoreline appears through the window, most of
-            the flight's climate impact has already been created.
+            emissions — a total Fiji has contributed very little to.
+            <Ref
+              n="6"
+              href="https://fijiclimatechangeportal.gov.fj/wp-content/uploads/2022/01/FIJI-NCCP-2018-2030_0.pdf"
+              label="Republic of Fiji, National Climate Change Policy 2018–2030"
+            />{" "}
+            Yet by the time Nadi's shoreline appears through the window, most
+            of the flight's climate impact has already been created.
           </p>
           <p>
             That imbalance reaches Fiji at the water's edge. But the data do
@@ -187,16 +192,16 @@ export function Essay() {
             At Lautoka, sea level has risen by around{" "}
             <strong>13 centimetres since 1993</strong>.
             <Ref
-              n="6"
+              n="7"
               href="https://sealevel.nasa.gov/internal_resources/522/Lautoka_Fiji_combined.pdf"
               label="NASA Sea Level Change Team summary for Lautoka, Fiji"
             />
             {" "}But sea level measures the height of the water; shoreline data
             track where water meets land. Waves and currents can add sediment
             in one place and remove it in another, so the two don't always move
-            together. Across 3,838 good-certainty measurements around Lautoka
-            and Nadi, shores moved in both directions; the median point shifted
-            seaward by <strong>0.22 metres a year</strong>.
+            together. Across 3,838 good-certainty shoreline-rate estimates
+            around Lautoka and Nadi, shores moved in both directions; the
+            median point shifted seaward by <strong>0.22 metres a year</strong>.
           </p>
           <p>
             Tivua Island, about 13 kilometres west of Lautoka, illustrates this
@@ -226,7 +231,7 @@ export function Essay() {
             It became Fiji's first village to relocate with government support
             away from environmental risk.
             <Ref
-              n="7"
+              n="8"
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12055693/"
               label="Longitudinal study of climate-related relocation in Vunidogoloa, Fiji"
             />
@@ -239,7 +244,7 @@ export function Essay() {
             a shift researchers linked both to the distance from fishing grounds
             and easier access to shops.
             <Ref
-              n="7"
+              n="8"
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12055693/"
               label="Longitudinal study of climate-related relocation in Vunidogoloa, Fiji"
             />
@@ -249,7 +254,7 @@ export function Essay() {
             did not preserve village life exactly as it was. This trade-off
             helps explain why Fiji treats relocation as a last resort.
             <Ref
-              n="8"
+              n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
@@ -260,7 +265,7 @@ export function Essay() {
             but screening did not necessarily lead to a move: some shifted
             towards adapting in place, while others remained under assessment.
             <Ref
-              n="8"
+              n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
@@ -279,14 +284,14 @@ export function Essay() {
             government described as the world's first climate-relocation trust
             fund.
             <Ref
-              n="9"
+              n="10"
               href="https://www.un.int/fiji/news/world%E2%80%99s-first-%E2%80%93ever-relocation-trust-fund-people-displaced-climate-change-launched-fijian-prime"
               label="Fiji Mission to the United Nations, world-first relocation trust fund launch, 2019"
             />
             Planned relocation was subsequently written into Fiji's Climate
             Change Act.
             <Ref
-              n="10"
+              n="11"
               href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -302,7 +307,7 @@ export function Essay() {
             by Indigenous landowning groups rather than simply bought and sold
             on the open market.
             <Ref
-              n="11"
+              n="12"
               href="https://tltb.com.fj/corporate-profile/"
               label="iTaukei Land Trust Board, communal land tenure in Fiji"
             />{" "}
@@ -311,7 +316,7 @@ export function Essay() {
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
             <Ref
-              n="10"
+              n="11"
               href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -345,7 +350,7 @@ export function Essay() {
             visitors to give one hour of their stay back to the place they
             had come to enjoy.
             <Ref
-              n="12"
+              n="13"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour"
             />
@@ -358,7 +363,7 @@ export function Essay() {
             <strong>40 ways</strong> to participate, with a first-year target
             of <strong>5,000 hours</strong>.
             <Ref
-              n="13"
+              n="14"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour launch details"
             />
@@ -367,7 +372,7 @@ export function Essay() {
             One year on, Tourism Fiji reported <strong>17,407 contributed
             hours</strong> — 3.5 times the programme's first-year target.
             <Ref
-              n="14"
+              n="15"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />

@@ -12,7 +12,7 @@ const rows = [
     name: "Shoreline snapshots",
     source: "Digital Earth Pacific / Pacific Data Hub",
     url: "https://pacificdata.org/data/dataset/dep_ls_coastlines",
-    method: "Tivua Island is the only closed outline in the extracted Lautoka–Nadi subset with good-certainty vectors in all four selected years: 1999, 2007, 2015 and 2023. It is a site-specific case study, not a national trend. Its rate is the nearest good, significant point in the full extracted extent, selected without filtering by magnitude; intermediate animation frames are not observations. A 3,838-point local distribution provides context.",
+    method: "Tivua Island is the only closed outline in the extracted Lautoka–Nadi subset with good-certainty vectors in all four selected years: 1999, 2007, 2015 and 2023. It is a site-specific case study, not a national trend. Its rate is the nearest good, significant shoreline-rate estimate in the full extracted extent, selected without filtering by magnitude; intermediate animation frames are not observations. A local distribution of 3,838 shoreline-rate estimates provides context.",
     licence: "CC BY-NC 4.0.",
   },
   {
