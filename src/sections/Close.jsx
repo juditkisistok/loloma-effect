@@ -78,7 +78,7 @@ export function Close() {
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.framing}>
               Fiji cannot simply ask people to stop coming — nor can an hour
-              solve the archipelago's climate challenge. But that hour can
+              solve the archipelago's climate challenge. <br /><br />But that hour can
               shift the relationship between visitor and host: from simply
               consuming a place to caring for one that has welcomed you.
             </p>
