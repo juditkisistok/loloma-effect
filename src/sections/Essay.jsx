@@ -177,9 +177,7 @@ export function Essay() {
             That flight is one small part of decades of accumulated global
             emissions — a total Fiji has contributed very little to. Yet by
             the time Nadi's shoreline appears through the window, most of
-            the flight's climate impact has already been created. International
-            aviation sits outside Fiji's territorial CO₂ total, even as the
-            country has to spend more on adapting to a warmer climate.
+            the flight's climate impact has already been created.
           </p>
           <p>
             That imbalance reaches Fiji at the water's edge. But the data do
