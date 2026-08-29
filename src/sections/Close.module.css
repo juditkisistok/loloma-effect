@@ -50,6 +50,10 @@
   text-shadow: 0 2px 30px rgba(4, 14, 26, 0.82);
 }
 
+.beat > .turn:first-child {
+  margin-top: 0;
+}
+
 .context {
   font-family: var(--font-body);
   font-weight: 400;

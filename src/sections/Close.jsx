@@ -77,13 +77,10 @@ export function Close() {
         <Act name="close3" align="center" height="165vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={styles.framing}>
-              An hour is not an answer to Fiji's climate problem. That
-              responsibility reaches far beyond any visitor.
-            </p>
-            <p className={styles.context}>
-              Fiji cannot simply ask people to stop coming. Loloma asks for a
-              different kind of arrival: come as more than a consumer, and
-              meet Fiji's welcome with care of your own.
+              Fiji cannot simply ask people to stop coming — nor can an hour
+              solve the archipelago's climate challenge. But that hour can
+              shift the relationship between visitor and host: from simply
+              consuming a place to caring for one that has welcomed you.
             </p>
             <p className={styles.turn}>
               So come. Stay. <br/>And while you are here, give an hour.
