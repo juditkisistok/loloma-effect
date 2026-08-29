@@ -312,17 +312,54 @@ const defaultPanel = {
 
 const completedSummaries = {
   "completed-denimanu": () =>
-    "After Tropical Cyclone Evan destroyed 19 coastal homes in December 2012, part of this low-lying community moved away from flooding, erosion and rising seas.",
+    "Part of the community relocated after Tropical Cyclone Evan destroyed 19 coastal homes in 2012. The remaining low-lying settlement faces flooding, erosion and rising seas.",
   "completed-tukuraki": (point) =>
-    `After a 2012 landslide buried 80% of the village and killed a young family, residents relocated about ${formatDistance(point.distanceMeters)}.`,
+    `The village relocated about ${formatDistance(point.distanceMeters)} after a 2012 landslide buried 80% of the settlement and killed a young family.`,
   "completed-narikoso": (point) =>
-    `Seven homes in the most flood-prone part of the village were moved about ${formatDistance(point.distanceMeters)} uphill. Most residents remain in low-lying areas exposed to rising seas, coastal flooding and erosion.`,
+    `Seven homes moved about ${formatDistance(point.distanceMeters)} uphill from the village's most flood-prone area. Most residents remain in low-lying areas exposed to rising seas, coastal flooding and erosion.`,
   "completed-vunidogoloa": (point) =>
     `The village moved about ${formatDistance(point.distanceMeters)} inland from low ground repeatedly flooded by storm surges, high tides and rising seas.`,
   "completed-nagasauva": (point) =>
-    `After Tropical Cyclone Tomas destroyed seven homes, part of the village moved about ${formatDistance(point.distanceMeters)} away from severe coastal erosion.`,
+    `Part of the village moved about ${formatDistance(point.distanceMeters)} after Tropical Cyclone Tomas destroyed seven homes. Severe coastal erosion remains a concern.`,
   "completed-vunisavisavi": (point) =>
-    `Four homes were moved about ${formatDistance(point.distanceMeters)} to higher ground within the village, but coastal flooding and saltwater intrusion continue.`,
+    `Four homes moved about ${formatDistance(point.distanceMeters)} to higher ground within the village. Coastal flooding and saltwater intrusion continue.`,
+};
+
+const surveySummaries = {
+  "survey-nabavatu":
+    "Rain-triggered landslides and cyclone winds threaten the community. About 85% of residents are temporarily displaced, and drainage remains a concern at the old and proposed sites.",
+  "survey-dawara":
+    "River flooding and bank erosion threaten homes. During severe floods, logs swept downstream have struck houses along the riverbank.",
+  "survey-cogea":
+    "Flooding from the Wainunu River has destroyed several homes. A proposed relocation site exists, but safe, flat land is scarce.",
+  "survey-soliyaga":
+    "Coastal flooding, rising seas and storm surges threaten homes and infrastructure. Rocky terrain leaves little habitable land for relocation.",
+  "survey-nakanacagi":
+    "The low-lying village floods when the Dawa River rises. Heavy rain can also cut its road connection to the highway.",
+  "survey-narata":
+    "River and flash flooding threaten the village. Homes nearest the Sigatoka River face the greatest flood and erosion risk.",
+  "survey-nawaqarua":
+    "The village faces river and flash flooding at the Ba River estuary. Some affected homes have moved onto reclaimed land nearby.",
+  "survey-nabuna:Lomaiviti":
+    "Coastal and river flooding, erosion and storm surges affect the village. Runoff and a culvert that slows drainage can push water back into the community.",
+  "survey-nabuna:Tavua":
+    "River and coastal flooding leave the village waterlogged. The flooding has disrupted vegetable, root-crop and sugar-cane farming.",
+  "survey-vanuakula":
+    "River and flash flooding affect this estuary-side settlement. Floodwater can remain for several days.",
+  "survey-vuniniudrovu":
+    "Flooding and erosion along the Waimanu River threaten the village. Further bank collapse could damage homes and the Waila water supply.",
+  "survey-saumakia":
+    "River flooding and erosion during heavy rain are occurring more often than residents remember. Floods disrupt access to markets and essential services.",
+  "survey-wailotua-1":
+    "River flooding affects the village. Some households have raised homes on stilts or built second storeys to protect belongings.",
+  "survey-wailotua-2":
+    "River and flash flooding repeatedly affect the village. Residents face repeated rebuilding and little vacant habitable land nearby.",
+  "survey-nadogoloa":
+    "Storm surges, rising seas, river and coastal flooding, and cyclone winds affect this low-lying village. Several homes have already moved to a relocation site or family-owned land.",
+  "survey-muani":
+    "Storm surges, rising seas and saltwater intrusion contribute to flooding and waterlogging. Residents have built drains to channel surface water to the sea.",
+  "survey-lekanai":
+    "Coastal and river flooding, along with cyclone winds, threaten the village. Water can back into the community during heavy rain and king tides.",
 };
 
 function buildDots() {
@@ -337,16 +374,23 @@ function buildDots() {
     type: "relocated",
   }));
 
-  const assessment = fijiBoundary.surveyed.map((point, index) => ({
-    ...point,
-    id: `${point.id}-${index}`,
-    title: point.name,
-    status: `${formatPlaceName(point.province)} ${
-      point.communityType?.toLowerCase() ?? "community"
-    } · surveyed 2022`,
-    summary: wrapText(point.hazards, 34),
-    type: "assessment",
-  }));
+  const assessment = fijiBoundary.surveyed.map((point, index) => {
+    const summaryKey =
+      point.id === "survey-nabuna"
+        ? `${point.id}:${formatPlaceName(point.province)}`
+        : point.id;
+
+    return {
+      ...point,
+      id: `${point.id}-${index}`,
+      title: point.name,
+      status: `${formatPlaceName(point.province)} ${
+        point.communityType?.toLowerCase() ?? "community"
+      } · surveyed 2022`,
+      summary: wrapText(surveySummaries[summaryKey] ?? point.hazards, 34),
+      type: "assessment",
+    };
+  });
 
   return [...relocated, ...assessment];
 }
