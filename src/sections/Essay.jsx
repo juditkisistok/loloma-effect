@@ -380,9 +380,11 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Seventeen thousand hours do not solve the larger imbalance. But
-            they turn part of what tourism brings — people's time, attention
-            and labour — towards work already being done on the islands.
+            Seventeen thousand hours will not solve Fiji's climate challenge.
+            But each one is a small act of loloma: time and care offered back
+            to the reefs, shores and communities that welcomed a visitor in.
+            Together, they suggest a more generous way to travel — to arrive
+            with wonder, and leave a little care behind.
           </p>
         </div>
         <Methods />
