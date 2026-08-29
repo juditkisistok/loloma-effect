@@ -38,9 +38,8 @@ const rows = [
   },
   {
     name: "Illustrative imagery",
-    source: "Images AI-generated with OpenAI",
-    url: "https://openai.com/",
-    method: "The bucket, coral, mangrove and tree cutouts do not reproduce existing photographs. Real-world imagery and species material were consulted only to guide their visual and ecological detail.",
+    source: "Images created with generative AI tools",
+    method: "The cleanup bucket, mangroves, trees, palms and corals used throughout the piece do not reproduce existing photographs. Real-world imagery and species material were consulted only to guide their visual and ecological detail.",
     references: [
       {
         label: "Give Clean Water — Project Fiji",
@@ -77,6 +76,12 @@ const rows = [
     ],
     licence: "No reference photograph is reproduced; linked photography and publications remain the property of their respective creators and publishers.",
   },
+  {
+    name: "Generative AI assistance and authorship",
+    source: "OpenAI and Anthropic Claude",
+    method: "Generative AI tools assisted me with code implementation, editorial refinement, source checking and illustrative imagery. I developed the concept, selected the sources and analytical framing, directed the visual and narrative design, and reviewed and revised every output.",
+    licence: "I retained final creative and analytical judgment throughout and checked all published claims against the cited sources.",
+  },
 ];
 
 export function Methods() {
@@ -93,7 +98,15 @@ export function Methods() {
           {rows.map((row) => (
             <section key={row.name} className={styles.row}>
               <h3>{row.name}</h3>
-              <p><a href={row.url} target="_blank" rel="noreferrer">{row.source}</a></p>
+              <p>
+                {row.url ? (
+                  <a href={row.url} target="_blank" rel="noreferrer">
+                    {row.source}
+                  </a>
+                ) : (
+                  row.source
+                )}
+              </p>
               <p>{row.method}</p>
               {row.references && (
                 <p>
