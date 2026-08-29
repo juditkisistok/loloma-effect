@@ -2,6 +2,7 @@ import { extent, format, line, max, pointer, scaleLinear } from "d3";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
+import { stickyFigureProgress } from "../scroll/stickyFigure";
 import styles from "./ArrivalsChart.module.css";
 
 const maxWidth = 1000;
@@ -48,13 +49,11 @@ export function ArrivalsChart({ rows = [] }) {
       return;
     }
 
-    const rect = el.getBoundingClientRect();
-    const stickyRatio = window.innerWidth <= 760 ? 0.06 : 0.18;
-    const stickyTop = Math.max(18, window.innerHeight * stickyRatio);
-    const stickyHeight = el.firstElementChild?.offsetHeight ?? 0;
-    const travel = Math.max(el.offsetHeight - stickyHeight - stickyTop, 1);
-    const revealTravel = travel * 0.82;
-    const next = clamp((stickyTop - rect.top) / revealTravel, 0, 1);
+    const next = stickyFigureProgress(el, {
+      desktopTop: 0.18,
+      mobileTop: 0.06,
+      hold: 0.18,
+    });
 
     setProgress((current) =>
       Math.abs(current - next) > 0.002 ? next : current,

@@ -1,6 +1,6 @@
 {
   "title": "Tourism Arrivals",
-  "fetchedAt": "2026-08-28T22:52:03.154Z",
+  "fetchedAt": "2026-08-29T11:24:32.068Z",
   "rawSource": {
     "id": "spc-tourism-arrivals",
     "name": "Pacific Data Hub .Stat",
@@ -17,20 +17,7 @@
       "note": "SPC DF_TOURISM_ARRIVALS annual visitor-arrivals series (VISITOR_DURATION_CAT = TOUR)."
     },
     {
-      "id": "fiji-stats-supplemental",
-      "name": "Fiji Bureau of Statistics visitor-arrivals table",
-      "url": "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
-      "note": "Official Fiji visitor-arrivals table used for the exact 2006 national total."
-    },
-    {
-      "id": "fiji-stats-provisional-2024",
-      "name": "Fiji Bureau of Statistics provisional visitor arrivals",
-      "url": "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-2024/",
-      "publishedDate": "2025-01-16",
-      "note": "Provisional 2024 annual visitor arrivals; used in place of an inconsistent value in the SPC extract."
-    },
-    {
-      "id": "fiji-stats-preliminary-2025",
+      "id": "fiji-stats-provisional-2025",
       "name": "Fiji Bureau of Statistics provisional visitor arrivals",
       "url": "https://www.statsfiji.gov.fj/provisional-visitor-arrivals-december-2025/",
       "publishedDate": "2026-01-18",
@@ -52,7 +39,7 @@
       "year": 2025,
       "arrivals": 986367,
       "unit": "N",
-      "sourceId": "fiji-stats-preliminary-2025",
+      "sourceId": "fiji-stats-provisional-2025",
       "isPreliminary": true
     }
   }

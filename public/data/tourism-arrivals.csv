@@ -10,7 +10,7 @@ year,arrivals,geo_code,geography,unit,source_id,is_preliminary,note
 2003,431000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2004,504000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2005,545000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
-2006,548589,FJ,Fiji,N,fiji-stats-supplemental,FALSE,"Exact national total from Fiji Bureau of Statistics; replaces the rounded 549,000 value in the Pacific Data Hub dataset."
+2006,549000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2007,540000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2008,585000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2009,542000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
@@ -28,5 +28,5 @@ year,arrivals,geo_code,geography,unit,source_id,is_preliminary,note
 2021,32000,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2022,636300,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
 2023,929740,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
-2024,982938,FJ,Fiji,N,fiji-stats-provisional-2024,TRUE,"Provisional national total published January 16 2025; replaces the Pacific Data Hub extract's inconsistent 928,938 value."
-2025,986367,FJ,Fiji,N,fiji-stats-preliminary-2025,TRUE,Provisional annual visitor arrivals published January 18 2026.
+2024,928938,FJ,Fiji,N,spc-tourism-arrivals,FALSE,
+2025,986367,FJ,Fiji,N,fiji-stats-provisional-2025,TRUE,Provisional annual visitor arrivals published January 18 2026.
