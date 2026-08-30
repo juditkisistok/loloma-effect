@@ -1,5 +1,5 @@
 .figure {
-  width: min(1040px, 92vw);
+  width: min(1180px, 94vw);
   height: 170vh;
   margin: 0 auto;
   padding: 0;
@@ -7,14 +7,23 @@
 
 .sticky {
   position: sticky;
-  top: max(18px, 18vh);
+  top: 18px;
+  display: flex;
+  min-height: calc(100svh - 36px);
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
+}
+
+.header {
+  width: 100%;
+  margin: 0 auto 4px;
 }
 
 .svg {
   display: block;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1180px;
   height: auto;
   margin: 0 auto;
   overflow: visible;
@@ -123,13 +132,6 @@
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
-}
-
-.chartHeader text:first-child {
-  font-family: var(--font-body);
-  font-size: 17px;
-  font-weight: 700;
-  fill: var(--ink-strong);
 }
 
 .storyLabels text {
@@ -292,13 +294,19 @@
   }
 
   .sticky {
-    top: max(18px, 18vh);
+    top: 18px;
   }
 
   .scrollWrap {
     position: relative;
     display: block;
     overflow: visible;
+    padding: 0 16px;
+  }
+
+  .header {
+    box-sizing: border-box;
+    margin-bottom: 0;
     padding: 0 16px;
   }
 
@@ -322,10 +330,6 @@
 
   .sourceMobile {
     display: inline;
-  }
-
-  .chartHeader text:first-child {
-    font-size: 16px;
   }
 
   .storyLabels text {

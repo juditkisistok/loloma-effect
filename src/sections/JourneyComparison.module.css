@@ -3,16 +3,7 @@
 }
 
 .header { margin: 0 0 34px; }
-.header h3 {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 20px;
-  line-height: 1.25;
-  color: #111;
-}
-.header p,
 .caption { font-family: var(--font-mono); color: var(--viz-muted); }
-.header p { margin: 7px 0 0; font-size: 13px; line-height: 1.45; }
 .routeMenu { position: relative; display: inline-block; }
 .routeSelect {
   appearance: none;
@@ -161,8 +152,6 @@
 @media (max-width: 760px) {
   .figure { width: auto; height: 185vh; margin: 0 20px; }
   .header { margin-bottom: 26px; }
-  .header h3 { font-size: 19px; }
-  .header p { font-size: 13px; }
   .routeSelect { min-height: 40px; margin: -10px 0; }
   .routeOption { min-height: 44px; }
   .layout {

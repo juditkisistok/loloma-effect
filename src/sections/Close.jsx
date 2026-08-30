@@ -91,7 +91,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close3" align="center" height="165vh">
+        <Act name="close3" align="center" height="145vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={`${panelStyles.panelBody} ${styles.framing}`}>
               Fiji cannot simply ask people to stop coming — nor can an hour
@@ -107,7 +107,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close4" align="start" height="140vh">
+        <Act name="close4" align="start" height="115vh">
           <div className={styles.vinakaLock}>
             <Card>
               <p className={styles.vinaka}>Vinaka.</p>

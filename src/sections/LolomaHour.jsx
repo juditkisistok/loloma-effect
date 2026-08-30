@@ -75,15 +75,19 @@ export function LolomaHour() {
   const countReveal = clamp(progress / 0.4, 0, 1);
   const displayedHours = Math.round(lolomaHour.yearOne.hours * countReveal);
   const detailReveal = clamp((progress - 0.32) / 0.18, 0, 1);
-  const ringReveal = clamp(progress / 0.85, 0, 1);
+  // Complete the rings before the mobile layout hands off to the outcomes.
+  // The short hold at full value makes the 3.5× comparison readable as a
+  // finished thought instead of letting the next scene interrupt it.
+  const ringReveal = clamp(progress / 0.58, 0, 1);
   const displayedMultiple = targetMultiple * ringReveal;
   const activeActivity = lolomaHour.yearOne.activityHours.find(
     (activity) => activity.id === activeActivityId,
   );
   const visibleActivityHours = lolomaHour.yearOne.hours * ringReveal;
-  const summarySceneOpacity = 1 - clamp((progress - 0.49) / 0.03, 0, 1);
-  const resultsSceneOpacity = clamp((progress - 0.47) / 0.03, 0, 1);
-  const mobileCaptionOpacity = clamp((progress - 0.6) / 0.12, 0, 1);
+  const showResultsScene = progress >= 0.72;
+  const summarySceneOpacity = showResultsScene ? 0 : 1;
+  const resultsSceneOpacity = showResultsScene ? 1 : 0;
+  const mobileCaptionOpacity = clamp((progress - 0.78) / 0.12, 0, 1);
 
   return (
     <figure
@@ -93,7 +97,7 @@ export function LolomaHour() {
       aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours contributed, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions at ${lolomaHour.yearOne.properties} properties. Reported outcomes are separate totals: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
     >
       <div className={visualizationStyles.stickyCenter}>
-        <header className={styles.header}>
+        <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <h3>What 17,407 hours looked like</h3>
           <p>Loloma Hour · {lolomaHour.yearOne.period}</p>
         </header>

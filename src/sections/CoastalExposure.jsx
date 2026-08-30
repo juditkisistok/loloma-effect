@@ -4,6 +4,7 @@ import { useNearViewport } from "../hooks/useNearViewport";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
+import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./CoastalExposure.module.css";
 
 const width = 700;
@@ -71,7 +72,7 @@ export function CoastalExposure() {
         aria-busy="true"
       >
         <div className={styles.sticky}>
-          <header className={styles.header}>
+          <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
             <div>
               <h3>The moving edges of Tivua</h3>
               <p>Four satellite observations · 1999–2023</p>
@@ -107,7 +108,7 @@ export function CoastalExposure() {
   return (
     <figure id="shoreline-chart" className={styles.figure} ref={ref}>
       <div className={styles.sticky}>
-        <header className={styles.header}>
+        <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <div>
             <h3>The moving edges of Tivua</h3>
             <p>Four satellite observations · 1999–2023</p>

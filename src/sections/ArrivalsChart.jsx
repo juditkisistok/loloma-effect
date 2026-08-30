@@ -3,9 +3,10 @@ import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
+import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./ArrivalsChart.module.css";
 
-const maxWidth = 1000;
+const maxWidth = 1180;
 const height = 392;
 const desktopMargin = { top: 82, right: 24, bottom: 38, left: 58 };
 const storyEndYear = 2025;
@@ -124,6 +125,10 @@ export function ArrivalsChart({ rows = [] }) {
   return (
     <figure id="arrivals-chart" className={styles.figure} ref={ref}>
       <div className={styles.sticky}>
+        <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
+          <h3>Visitor arrivals to Fiji</h3>
+          <p>Annual overnight visitors · 1995–2025</p>
+        </header>
         <div className={styles.scrollWrap} ref={wrapRef}>
       <svg
         className={styles.svg}
@@ -184,15 +189,6 @@ export function ArrivalsChart({ rows = [] }) {
           y1="20"
           y2={height - chart.margin.bottom}
         />
-
-        <g className={styles.chartHeader}>
-          <text
-            x={chart.margin.left + (compact ? 10 : 14)}
-            y={compact ? 30 : chart.margin.top - 34}
-          >
-            {compact ? "Visitor arrivals to Fiji" : "Visitor arrivals to Fiji, 1995–2025"}
-          </text>
-        </g>
 
         <g className={styles.yAxis}>
           {chart.yTicks.map((tick) => (

@@ -8,7 +8,6 @@ import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./RelocationDecision.module.css";
 
 const { width } = fijiBoundary.dimensions;
-const height = 590;
 
 export function RelocationDecision() {
   const ref = useRef(null);
@@ -35,9 +34,11 @@ export function RelocationDecision() {
     );
   });
 
-  const relocatedReveal = clamp(progress / 0.2, 0, 1);
-  const assessmentReveal = clamp((progress - 0.08) / 0.3, 0, 1);
-  const panelReveal = clamp((progress - 0.38) / 0.22, 0, 1);
+  // Establish the map early, then leave most of the sticky sequence for
+  // reading and exploration instead of holding the marks in a faint state.
+  const relocatedReveal = clamp(progress / 0.12, 0, 1);
+  const assessmentReveal = clamp((progress - 0.04) / 0.18, 0, 1);
+  const panelReveal = clamp((progress - 0.24) / 0.18, 0, 1);
   const hovered = dots.find((dot) => dot.id === hoveredId);
   const panel = hovered ?? defaultPanel;
 
@@ -49,22 +50,17 @@ export function RelocationDecision() {
     >
       <div className={visualizationStyles.stickyCenter}>
       <div className={styles.scrollWrap}>
+      <header className={`${visualizationStyles.figureHeader} ${styles.desktopHeader}`}>
+        <h3>Stay, adapt or move</h3>
+        <p>Public GIS locations · select a point for its recorded status</p>
+      </header>
       <svg
         className={`${styles.svg} ${styles.desktopSvg}`}
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={`0 60 ${width} 450`}
         role="group"
         aria-hidden={isMobile}
         aria-label="Interactive Fiji map showing six communities with completed full or partial relocations, 17 public adaptation-survey locations, and a national total of 43 communities screened since 2021."
       >
-        <g className={styles.header}>
-          <text x="58" y="47">
-            Stay, adapt or move
-          </text>
-          <text x="58" y="70">
-            Public GIS locations · select a point for its recorded status
-          </text>
-        </g>
-
         <g className={styles.map}>
           {fijiBoundary.paths.map((path) => (
             <path key={path.id} className={styles.land} d={path.d} />
@@ -125,7 +121,7 @@ export function RelocationDecision() {
           })}
         </g>
 
-        <g className={styles.legend} transform="translate(240 500)">
+        <g className={styles.legend} transform="translate(240 470)">
           <circle className={styles.relocatedDot} cx="0" cy="0" r="4.5" />
           <text x="13" y="4">
             completed move
@@ -141,7 +137,7 @@ export function RelocationDecision() {
           opacity={panelReveal}
           transform={`translate(${704 + (1 - panelReveal) * 8} 30)`}
         >
-          <line className={styles.panelRail} x1="-28" x2="-28" y1="34" y2="538" />
+          <line className={styles.panelRail} x1="-28" x2="-28" y1="34" y2="450" />
 
           <g className={styles.countPair} transform="translate(0 86)">
             <text className={styles.bigCount} x="0" y="0">
@@ -188,7 +184,7 @@ export function RelocationDecision() {
       </div>
 
       <div className={styles.mobileView} aria-hidden={!isMobile}>
-        <header className={styles.mobileHeader}>
+        <header className={`${visualizationStyles.figureHeader} ${styles.mobileHeader}`}>
           <h3>Stay, adapt or move</h3>
           <p>Public GIS locations · select a point for its recorded status</p>
         </header>

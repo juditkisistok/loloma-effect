@@ -1,15 +1,6 @@
 .figure { width: min(1180px, 94vw); }
 .header { margin: 0 0 32px; }
-.header h3 {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 20px;
-  line-height: 1.3;
-  color: #111;
-}
-.header p,
 .caption { font-family: var(--font-mono); color: var(--viz-muted); }
-.header p { margin: 7px 0 0; font-size: 13px; }
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(390px, 1.12fr);
@@ -212,8 +203,6 @@
 @media (max-width: 760px) {
   .figure { width: auto; height: 220vh; margin: 0 20px; }
   .header { margin-bottom: 22px; }
-  .header h3 { font-size: 20px; }
-  .header p { font-size: 12px; line-height: 1.45; }
   .contentGrid {
     display: grid;
     grid-template-columns: 1fr;
@@ -228,7 +217,7 @@
     opacity: var(--mobile-scene-opacity);
     transform: translateY(calc((1 - var(--mobile-scene-opacity)) * 10px));
     will-change: opacity, transform;
-    transition: opacity 140ms linear, transform 180ms ease-out;
+    transition: none;
   }
   .summaryColumn { padding-right: 0; border-right: 0; }
   .resultsColumn {
