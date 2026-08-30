@@ -1,5 +1,6 @@
 .figure {
   width: min(1280px, 94vw);
+  height: 220vh;
 }
 
 .sticky {
@@ -29,7 +30,7 @@
 }
 .routeValue,
 .routeDetails,
-.valueChange { animation: value-change 420ms cubic-bezier(0.22, 1, 0.36, 1); }
+.valueChange { animation: value-change 620ms cubic-bezier(0.22, 1, 0.36, 1); }
 .routeOptions {
   position: absolute;
   z-index: 12;
@@ -92,9 +93,15 @@
   height: 100%;
   overflow: hidden;
   border-radius: inherit;
+  transform-origin: left center;
+  will-change: clip-path;
+  transition: width 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.flightBar span {
+  display: block;
+  height: 100%;
   transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.flightBar span { display: block; height: 100%; transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1); }
 .segmentDirect { background: var(--teal-deep); }
 .segmentSupply { background: #aacbc7; }
 .segmentWarming { background: var(--coral); }
@@ -107,16 +114,15 @@
   font-size: 13px;
   line-height: 1.4;
   color: #5e6867;
-  transition: opacity 220ms ease;
+  transition: opacity 160ms ease-out;
 }
 .legend span { display: inline-flex; align-items: center; gap: 9px; }
 .legend i { width: 10px; height: 10px; border-radius: 2px; flex: 0 0 auto; }
 .benchmarkBar {
   height: 100%;
-  min-width: 4px;
   border-radius: inherit;
   background: var(--sand-deep);
-  transition: width 280ms ease;
+  will-change: width;
 }
 .stat {
   grid-area: stat;
@@ -125,7 +131,7 @@
   justify-content: center;
   padding-left: 34px;
   border-left: 1px solid rgba(17, 17, 17, 0.15);
-  transition: opacity 220ms ease, transform 220ms ease;
+  transition: opacity 160ms ease-out, transform 160ms ease-out;
 }
 .stat p,
 .stat span { margin: 0; font-family: var(--font-mono); color: #637071; }
@@ -155,14 +161,14 @@
 }
 
 @media (max-width: 900px) {
-  .figure { width: auto; height: 175vh; margin: 0 20px; }
+  .figure { width: auto; height: 210vh; margin: 0 20px; }
   .sticky { justify-content: flex-start; }
   .header { margin-bottom: 26px; }
   .routeSelect { min-height: 40px; margin: -10px 0; }
   .routeOption { min-height: 44px; }
   .layout {
     grid-template-columns: 1fr;
-    grid-template-areas: "stat" "bars";
+    grid-template-areas: "bars" "stat";
     gap: 30px;
   }
   .stat {
@@ -170,9 +176,9 @@
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 0 18px;
-    padding: 0 0 22px;
+    padding: 22px 0 0;
     border-left: 0;
-    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+    border-top: 1px solid rgba(17, 17, 17, 0.15);
   }
   .stat p { grid-column: 1 / -1; font-size: 12px; }
   .stat strong { grid-row: 2 / span 2; font-size: 58px; }
@@ -187,10 +193,11 @@
 }
 
 @media (max-width: 760px) {
-  .figure { height: 185vh; }
+  .figure { height: 230vh; }
 }
 
 @media (min-width: 761px) and (max-width: 900px) {
+  .sticky { justify-content: center; }
   .rowHeading,
   .rowHeading strong { font-size: 12px; }
   .track { height: 30px; }
@@ -211,6 +218,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .figure { height: auto; }
   .flightBar,
   .flightBar span,
   .benchmarkBar { transition: none; }

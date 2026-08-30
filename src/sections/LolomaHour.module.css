@@ -1,4 +1,7 @@
-.figure { width: min(1280px, 94vw); }
+.figure {
+  width: min(1280px, 94vw);
+  height: 220vh;
+}
 .header { margin: 0 0 32px; }
 .caption { font-family: var(--font-mono); color: var(--viz-muted); }
 .contentGrid {
@@ -201,7 +204,7 @@
 .caption a { color: inherit; text-decoration-color: rgba(15, 135, 124, 0.45); text-underline-offset: 2px; }
 
 @media (max-width: 900px) {
-  .figure { width: auto; height: 170vh; margin: 0 20px; }
+  .figure { width: auto; height: 230vh; margin: 0 20px; }
   .header { margin-bottom: 22px; }
   .contentGrid {
     display: grid;
@@ -214,18 +217,27 @@
   .resultsColumn {
     grid-area: scene;
     align-self: start;
-    opacity: var(--mobile-scene-opacity);
-    transform: translateY(calc((1 - var(--mobile-scene-opacity)) * 10px));
-    will-change: opacity, transform;
     transition: none;
   }
-  .summaryColumn { padding-right: 0; border-right: 0; }
+  .summaryColumn {
+    padding-right: 0;
+    border-right: 0;
+    opacity: var(--mobile-scene-opacity);
+    transition: opacity 220ms ease-out;
+  }
   .resultsColumn {
     align-self: stretch;
     min-height: 100%;
     padding-top: 0;
     border-top: 0;
     background: var(--viz-surface);
+    opacity: 1;
+    clip-path: inset(0 0 calc((1 - var(--mobile-scene-opacity)) * 100%) 0);
+    transform: translateY(calc((1 - var(--mobile-scene-opacity)) * 8px));
+    transition:
+      clip-path 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: clip-path, transform;
   }
   .metric strong { font-size: 64px; }
   .metric span { font-size: 11px; }
@@ -249,7 +261,7 @@
 }
 
 @media (max-width: 760px) {
-  .figure { height: 220vh; }
+  .figure { height: 250vh; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
@@ -268,6 +280,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .figure { height: auto; }
   .metric small,
   .activityLegend,
   .outcome { transition: none; }

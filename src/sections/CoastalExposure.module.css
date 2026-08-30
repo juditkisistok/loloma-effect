@@ -253,6 +253,7 @@
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
+  .sticky { justify-content: center; }
   .factRail p,
   .factRail span,
   .factRail small,

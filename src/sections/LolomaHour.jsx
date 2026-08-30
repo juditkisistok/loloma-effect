@@ -86,10 +86,10 @@ export function LolomaHour() {
     (activity) => activity.id === activeActivityId,
   );
   const visibleActivityHours = lolomaHour.yearOne.hours * ringReveal;
-  const showResultsScene = progress >= 0.78;
-  const summarySceneOpacity = 1 - clamp((progress - 0.75) / 0.12, 0, 1);
-  const resultsSceneOpacity = clamp((progress - 0.7) / 0.12, 0, 1);
-  const mobileCaptionOpacity = clamp((progress - 0.8) / 0.12, 0, 1);
+  const showResultsScene = progress >= 0.84;
+  const summarySceneOpacity = 1 - clamp((progress - 0.82) / 0.08, 0, 1);
+  const resultsSceneOpacity = clamp((progress - 0.76) / 0.14, 0, 1);
+  const mobileCaptionOpacity = clamp((progress - 0.84) / 0.1, 0, 1);
 
   return (
     <figure

@@ -358,6 +358,7 @@
 }
 
 @media (min-width: 761px) and (max-width: 900px) {
+  .sticky { justify-content: center; }
   .caption { font-size: var(--viz-caption-size); }
 }
 

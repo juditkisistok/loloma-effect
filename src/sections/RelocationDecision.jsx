@@ -38,7 +38,7 @@ export function RelocationDecision() {
   // reading and exploration instead of holding the marks in a faint state.
   const relocatedReveal = clamp(progress / 0.12, 0, 1);
   const assessmentReveal = clamp((progress - 0.04) / 0.18, 0, 1);
-  const panelReveal = clamp((progress - 0.24) / 0.18, 0, 1);
+  const panelReveal = clamp((progress - 0.16) / 0.22, 0, 1);
   const hovered = dots.find((dot) => dot.id === hoveredId);
   const panel = hovered ?? defaultPanel;
 
@@ -94,7 +94,7 @@ export function RelocationDecision() {
                   );
             const selected = dot.id === hoveredId;
             return (
-              <g key={dot.id} opacity={reveal}>
+              <g key={dot.id} opacity={0.5 + reveal * 0.5}>
                 <circle
                   className={`${styles.dotPulse} ${
                     dot.type === "relocated"
@@ -215,7 +215,7 @@ export function RelocationDecision() {
                     );
               const selected = dot.id === hoveredId;
               return (
-                <g key={dot.id} opacity={reveal}>
+                <g key={dot.id} opacity={0.5 + reveal * 0.5}>
                   <circle
                     className={`${styles.dotPulse} ${dot.type === "relocated" ? styles.relocatedPulse : styles.assessmentPulse} ${selected ? styles.selectedPulse : ""}`}
                     cx={dot.x}

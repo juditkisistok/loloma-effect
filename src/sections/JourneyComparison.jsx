@@ -4,6 +4,7 @@ import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
 import { Definition } from "../components/Definition";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./JourneyComparison.module.css";
 
@@ -14,10 +15,31 @@ const segmentClassNames = {
   warming: styles.segmentWarming,
 };
 
+const easedReveal = (progress, start, end) => {
+  const t = clamp((progress - start) / (end - start), 0, 1);
+  return t * t * (3 - 2 * t);
+};
+
+const steadyReveal = (progress, start, end) => {
+  const t = clamp((progress - start) / (end - start), 0, 1);
+  const edge = 0.1;
+
+  if (t < edge) {
+    const u = t / edge;
+    return edge * u * u * (2 - u);
+  }
+  if (t > 1 - edge) {
+    const u = (1 - t) / edge;
+    return 1 - edge * u * u * (2 - u);
+  }
+  return t;
+};
+
 export function JourneyComparison({ selectedId = "london", onSelect }) {
   const figureRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
+  const isCompact = useMediaQuery("(max-width: 900px)");
   const menuRef = useRef(null);
   const selected =
     journeyOptions.find((route) => route.id === selectedId) ?? journeyOptions[0];
@@ -25,10 +47,31 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
   const directMultiple = direct.value / flightComparison.fijiPerPerson;
   const flightWidth = (selected.total / maxFlightTotal) * 100;
   const benchmarkWidth = (flightComparison.fijiPerPerson / maxFlightTotal) * 100;
-  const flightReveal = clamp(progress / 0.46, 0, 1);
-  const benchmarkReveal = clamp((progress - 0.18) / 0.42, 0, 1);
-  const legendReveal = clamp((progress - 0.3) / 0.2, 0, 1);
-  const statReveal = clamp((progress - 0.5) / 0.24, 0, 1);
+  const flightReveal = steadyReveal(progress, 0.02, 0.58);
+  let segmentStart = 0;
+  const revealedSegments = selected.segments.map((segment) => {
+    const share = segment.value / selected.total;
+    const start = segmentStart;
+    segmentStart += share;
+    return {
+      ...segment,
+      share,
+      opacity:
+        0.4 +
+        0.6 * easedReveal(flightReveal, start, Math.min(1, start + 0.12)),
+    };
+  });
+  const benchmarkReveal = steadyReveal(progress, 0.14, 0.72);
+  const legendReveal = easedReveal(
+    progress,
+    isCompact ? 0.18 : 0.32,
+    isCompact ? 0.46 : 0.64,
+  );
+  const statReveal = easedReveal(
+    progress,
+    isCompact ? 0.34 : 0.54,
+    isCompact ? 0.62 : 0.86,
+  );
 
   useFrame((frame) => {
     if (frame.reduced) {
@@ -129,12 +172,21 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
               role="img"
               aria-label={`${selected.total.toFixed(2)} tonnes carbon dioxide equivalent: ${selected.segments.map((segment) => `${segment.label} ${segment.value.toFixed(2)} tonnes`).join(", ")}.`}
             >
-              <div className={styles.flightBar} style={{ width: `${flightWidth * flightReveal}%` }}>
-                {selected.segments.map((segment) => (
+              <div
+                className={styles.flightBar}
+                style={{
+                  width: `${flightWidth}%`,
+                  clipPath: `inset(0 ${(1 - flightReveal) * 100}% 0 0)`,
+                }}
+              >
+                {revealedSegments.map((segment) => (
                   <span
                     key={segment.key}
                     className={segmentClassNames[segment.key]}
-                    style={{ width: `${(segment.value / selected.total) * 100}%` }}
+                    style={{
+                      width: `${segment.share * 100}%`,
+                      opacity: segment.opacity,
+                    }}
                   />
                 ))}
               </div>

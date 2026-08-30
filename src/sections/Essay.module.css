@@ -96,9 +96,11 @@
   font-size: clamp(17px, 1.35vw, 20px);
   line-height: 1.48;
   color: #3e3e3c;
-  text-wrap: pretty;
-  text-align: left;
-  hyphens: none;
+  text-wrap: wrap;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 .prose p + p {
@@ -165,6 +167,12 @@
   min-width: 0;
   padding: var(--space-data-pad) 0;
   background: var(--viz-surface);
+}
+
+@media (min-width: 761px) {
+  .prose p {
+    hyphens: none;
+  }
 }
 
 @media (max-width: 760px) {

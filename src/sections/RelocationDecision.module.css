@@ -358,6 +358,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .figure { height: auto; }
   .dotPulse {
     animation: none;
     opacity: 1;

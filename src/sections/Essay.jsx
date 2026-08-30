@@ -64,9 +64,7 @@ export function Essay() {
           </p>
           <p>
             Follow the line of arrivals and you will see visitor numbers rising
-            dramatically since the turn of the century. There is, naturally, a
-            two-year collapse beginning in 2020, when international travel
-            contracted almost overnight. We all know the reason.
+            dramatically since the turn of the century. Then comes the two-year collapse beginning in 2020, when international travel contracted almost overnight — we’re all painfully aware of the reason.
           </p>
         </div>
 
@@ -76,7 +74,7 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Reaching Fiji usually means flying. It is an archipelago in the
+            Reaching Fiji usually means flying. It's an archipelago in the
             middle of the Pacific, thousands of kilometres from many of the
             people who travel there.
           </p>
@@ -230,7 +228,7 @@ export function Essay() {
           </p>
           <p>
             The move reduced Vunidogoloa's exposure to coastal hazards, but it
-            did not preserve village life exactly as it was. This trade-off
+            didn't preserve village life exactly as it was. This trade-off
             helps explain why Fiji treats relocation as a last resort.
             <Ref
               n="10"
@@ -263,7 +261,7 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            With dozens requiring assessment, Fiji cannot improvise its
+            With dozens requiring assessment, Fiji can't improvise its
             response one village at a time. It published national relocation
             guidelines in 2018 and, a year later, launched what the Fijian
             government described as the world's first climate-relocation trust
@@ -296,7 +294,7 @@ export function Essay() {
               href="https://tltb.com.fj/corporate-profile/"
               label="iTaukei Land Trust Board, communal land tenure in Fiji"
             />{" "}
-            Where a village cannot move within its own customary land,
+            Where a village can't move within its own customary land,
             another landowning group may need to agree to host it. Fiji's
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
