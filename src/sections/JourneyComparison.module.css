@@ -1,18 +1,18 @@
 .figure {
-  width: min(1040px, 92vw);
+  width: min(1180px, 94vw);
 }
 
 .header { margin: 0 0 34px; }
 .header h3 {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.25;
   color: #111;
 }
 .header p,
 .caption { font-family: var(--font-mono); color: var(--viz-muted); }
-.header p { margin: 7px 0 0; font-size: 12px; line-height: 1.45; }
+.header p { margin: 7px 0 0; font-size: 13px; line-height: 1.45; }
 .routeMenu { position: relative; display: inline-block; }
 .routeSelect {
   appearance: none;
@@ -65,9 +65,9 @@
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 190px;
+  grid-template-columns: minmax(0, 1fr) 220px;
   grid-template-areas: "bars stat";
-  gap: 44px;
+  gap: 54px;
   align-items: stretch;
 }
 .bars { grid-area: bars; display: grid; gap: 32px; min-width: 0; }
@@ -78,7 +78,7 @@
   gap: 20px;
   margin-bottom: 12px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0.07em;
@@ -86,7 +86,7 @@
 }
 .rowHeading strong { color: #5f6867; letter-spacing: 0.02em; white-space: nowrap; }
 .track {
-  height: 30px;
+  height: 34px;
   overflow: hidden;
   border-radius: 999px;
   background: rgba(17, 17, 17, 0.075);
@@ -108,7 +108,7 @@
   gap: 10px 28px;
   margin-top: 14px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
   color: #5e6867;
   transition: opacity 220ms ease;
@@ -133,20 +133,20 @@
 }
 .stat p,
 .stat span { margin: 0; font-family: var(--font-mono); color: #637071; }
-.stat p { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
+.stat p { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; }
 .stat strong {
   margin: 4px 0 8px;
   font-family: var(--font-display);
-  font-size: 62px;
+  font-size: 70px;
   font-weight: 600;
   line-height: 1;
   color: #111;
 }
-.stat span { max-width: 150px; font-size: 12px; line-height: 1.55; }
+.stat span { max-width: 160px; font-size: 13px; line-height: 1.55; }
 .caption {
   max-width: 720px;
   margin: 34px auto 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.55;
   text-align: center;
 }

@@ -102,6 +102,22 @@
     visibility 140ms ease;
 }
 
+.sourceMobile {
+  display: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .sourceTerm:hover .sourceTip,
 .sourceTerm:focus-visible .sourceTip {
   opacity: 1;
@@ -272,17 +288,18 @@
 @media (max-width: 760px) {
   .figure {
     width: 100%;
-    height: 185vh;
+    height: 235vh;
   }
 
   .sticky {
-    top: max(18px, 6vh);
+    top: max(18px, 18vh);
   }
 
   .scrollWrap {
+    position: relative;
     display: block;
     overflow: visible;
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .svg {
@@ -291,10 +308,40 @@
   }
 
   .caption {
-    padding: 0 20px;
-    max-width: none;
-    margin-top: 14px;
+    max-width: 340px;
+    margin: 12px auto 0;
+    padding: 0 16px;
+    font-size: 10.5px;
+    line-height: 1.4;
     text-align: left;
+  }
+
+  .sourceDesktop {
+    display: none;
+  }
+
+  .sourceMobile {
+    display: inline;
+  }
+
+  .chartHeader text:first-child {
+    font-size: 16px;
+  }
+
+  .storyLabels text {
+    font-size: 11px;
+  }
+
+  .latestNote text:first-of-type {
+    font-size: 13px;
+  }
+
+  .latestNote text:last-of-type {
+    font-size: 9.5px;
+  }
+
+  .interruptionLabel {
+    font-size: 10px;
   }
 }
 

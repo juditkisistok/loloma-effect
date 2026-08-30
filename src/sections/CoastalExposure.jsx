@@ -67,7 +67,7 @@ export function CoastalExposure() {
   const currentColor = colorForYear(activeT);
 
   return (
-    <figure className={styles.figure} ref={ref}>
+    <figure id="shoreline-chart" className={styles.figure} ref={ref}>
       <div className={styles.sticky}>
         <header className={styles.header}>
           <div>
@@ -156,13 +156,14 @@ export function CoastalExposure() {
         </div>
 
         <figcaption className={styles.caption}>
-          Among the islands examined around Lautoka and Nadi, only Tivua has a
-          complete, good-certainty outline in all four years. Thin lines mark
-          observations; the thick line animates between them, so its in-between
-          positions are not additional data. The circled rate comes from the
-          nearest valid shoreline-rate estimate to the island's centre,
-          offering a local view of change rather than a measure of the whole
-          island or Fiji's coastlines more broadly.
+          <span className={styles.sourceDesktop}>
+            Among the islands examined around Lautoka and Nadi, only Tivua has a
+            complete, good-certainty outline in all four years. Thin lines mark
+            observations; the thick line animates between them, so its in-between
+            positions are not additional data. The circled rate comes from the
+            nearest valid shoreline-rate estimate to the island's centre,
+            offering a local view of change rather than a measure of the whole
+            island or Fiji's coastlines more broadly.
             Source:{" "}
             <a
               href={coastalShoreline.source.url}
@@ -172,6 +173,20 @@ export function CoastalExposure() {
               Digital Earth Pacific / Pacific Data Hub Annual Shorelines
             </a>{" "}
             (Landsat, 30 m). Full selection method below.
+          </span>
+          <span className={styles.sourceMobile}>
+            Thin lines are the four measured shorelines; the thick line moves
+            between them. The circled +{chart.hotspot.rate.toFixed(2)} m/yr rate
+            is a nearby local estimate, not an island average. Source:{" "}
+            <a
+              href={coastalShoreline.source.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pacific Data Hub Annual Shorelines
+            </a>{" "}
+            (Landsat, 30 m). Full method below.
+          </span>
         </figcaption>
       </div>
     </figure>

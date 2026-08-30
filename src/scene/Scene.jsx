@@ -1,5 +1,5 @@
 import { curveCatmullRom, line } from "d3";
-import { useMemo, useState } from "react";
+import { useMemo, useRef } from "react";
 import { dawnTheme, interpolateSky } from "./sceneThemes";
 import { useFrame } from "../scroll/stageContext";
 import styles from "./Scene.module.css";
@@ -122,16 +122,41 @@ export function Scene({
     }),
     [],
   );
-  const [tone, setTone] = useState(0);
-  const color = interpolateSky(theme.skyStops, tone);
-  const sun = theme.sunPosition(tone);
-  const starsOpacity = theme.starsOpacity ? theme.starsOpacity(tone) : 0;
+  const initialColor = useMemo(
+    () => interpolateSky(theme.skyStops, 0),
+    [theme],
+  );
+  const initialSun = useMemo(() => theme.sunPosition(0), [theme]);
+  const toneRef = useRef(-1);
+  const skyTopRef = useRef(null);
+  const skyMidRef = useRef(null);
+  const skyHorizonRef = useRef(null);
+  const seaRef = useRef(null);
+  const sunRef = useRef(null);
+  const starsRef = useRef(null);
+  const mistRef = useRef(null);
 
   useFrame((frame) => {
     const nextTone = frame.span(toneStart, toneEnd);
-    setTone((current) =>
-      Math.abs(current - nextTone) > 0.00001 ? nextTone : current,
-    );
+    if (Math.abs(toneRef.current - nextTone) <= 0.0005) return;
+
+    toneRef.current = nextTone;
+    const color = interpolateSky(theme.skyStops, nextTone);
+    const sun = theme.sunPosition(nextTone);
+    const starsOpacity = theme.starsOpacity
+      ? theme.starsOpacity(nextTone)
+      : 0;
+
+    skyTopRef.current?.setAttribute("stop-color", color.top);
+    skyMidRef.current?.setAttribute("stop-color", color.mid);
+    skyHorizonRef.current?.setAttribute("stop-color", color.hor);
+    seaRef.current?.setAttribute("stop-color", color.sea);
+    sunRef.current?.setAttribute("cx", sun.x);
+    sunRef.current?.setAttribute("cy", sun.y);
+    sunRef.current?.setAttribute("fill", sun.fill);
+    sunRef.current?.setAttribute("opacity", sun.opacity ?? 0.9);
+    starsRef.current?.setAttribute("opacity", starsOpacity);
+    mistRef.current?.setAttribute("opacity", 0.5 - nextTone * 0.32);
   });
 
   return (
@@ -143,12 +168,12 @@ export function Scene({
       >
         <defs>
           <linearGradient id={`${idPrefix}-sky`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color.top} />
-            <stop offset="55%" stopColor={color.mid} />
-            <stop offset="100%" stopColor={color.hor} />
+            <stop ref={skyTopRef} offset="0%" stopColor={initialColor.top} />
+            <stop ref={skyMidRef} offset="55%" stopColor={initialColor.mid} />
+            <stop ref={skyHorizonRef} offset="100%" stopColor={initialColor.hor} />
           </linearGradient>
           <linearGradient id={`${idPrefix}-sea`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color.sea} />
+            <stop ref={seaRef} offset="0%" stopColor={initialColor.sea} />
             <stop offset="100%" stopColor="#081f33" />
           </linearGradient>
           <filter id={`${idPrefix}-grain`}>
@@ -180,7 +205,7 @@ export function Scene({
         </defs>
 
         <rect width={WIDTH} height={HEIGHT} fill={`url(#${idPrefix}-sky)`} />
-        <g className={styles.stars} opacity={starsOpacity}>
+        <g ref={starsRef} className={styles.stars} opacity="0">
           {stars.map((star) => (
             <circle
               key={star.id}
@@ -192,13 +217,14 @@ export function Scene({
           ))}
         </g>
         <circle
-          cx={sun.x}
-          cy={sun.y}
+          ref={sunRef}
+          cx={initialSun.x}
+          cy={initialSun.y}
           r="34"
-          fill={sun.fill}
-          opacity={sun.opacity ?? 0.9}
+          fill={initialSun.fill}
+          opacity={initialSun.opacity ?? 0.9}
         />
-        <g className={styles.mist} filter={`url(#${idPrefix}-mist)`} opacity={0.5 - tone * 0.32}>
+        <g ref={mistRef} className={styles.mist} filter={`url(#${idPrefix}-mist)`} opacity="0.5">
           <ellipse cx="420" cy="430" rx="360" ry="26" fill="#fbf6ec" opacity="0.3" />
           <ellipse cx="980" cy="470" rx="440" ry="30" fill="#fbf6ec" opacity="0.22" />
           <ellipse cx="700" cy="392" rx="300" ry="20" fill="#fbf6ec" opacity="0.18" />
@@ -238,7 +264,13 @@ export function Scene({
             </g>
           </g>
         )}
-        <rect width={WIDTH} height={HEIGHT} filter={`url(#${idPrefix}-grain)`} opacity="0.06" />
+        <rect
+          className={styles.grain}
+          width={WIDTH}
+          height={HEIGHT}
+          filter={`url(#${idPrefix}-grain)`}
+          opacity="0.06"
+        />
         <rect width={WIDTH} height={HEIGHT} fill={`url(#${idPrefix}-vignette)`} />
       </svg>
 

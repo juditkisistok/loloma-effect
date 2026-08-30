@@ -7,7 +7,7 @@ import styles from "./ArrivalsChart.module.css";
 
 const maxWidth = 1000;
 const height = 392;
-const margin = { top: 82, right: 24, bottom: 38, left: 58 };
+const desktopMargin = { top: 82, right: 24, bottom: 38, left: 58 };
 const storyEndYear = 2025;
 const formatWhole = format(",");
 
@@ -18,11 +18,16 @@ export function ArrivalsChart({ rows = [] }) {
   const [hovered, setHovered] = useState(null);
   const [width, setWidth] = useState(maxWidth);
   const chart = useMemo(() => buildChart(rows, width), [rows, width]);
+  const compact = width < 600;
   const drawProgress = chart.points.length ? progress : 0;
   const interruptionProgress = chart.interruption
     ? clamp((drawProgress - chart.interruption.startProgress) / 0.08, 0, 1)
     : 0;
-  const latestNoteProgress = clamp((drawProgress - 0.975) / 0.025, 0, 1);
+  const latestNoteProgress = clamp(
+    (drawProgress - (compact ? 0.91 : 0.965)) / (compact ? 0.07 : 0.035),
+    0,
+    1,
+  );
 
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
@@ -51,8 +56,8 @@ export function ArrivalsChart({ rows = [] }) {
 
     const next = stickyFigureProgress(el, {
       desktopTop: 0.18,
-      mobileTop: 0.06,
-      hold: 0.18,
+      mobileTop: 0.18,
+      hold: window.innerWidth <= 760 ? 0.3 : 0.18,
     });
 
     setProgress((current) =>
@@ -78,15 +83,67 @@ export function ArrivalsChart({ rows = [] }) {
     setHovered(next && next.progress <= drawProgress + 0.015 ? next : null);
   }
 
+  function handleChartKeyDown(event) {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End", "Escape"].includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+    if (event.key === "Escape") {
+      setHovered(null);
+      return;
+    }
+
+    const visible = chart.points.filter(
+      (point) => point.progress <= drawProgress + 0.015,
+    );
+    if (!visible.length) return;
+
+    const currentIndex = Math.max(
+      0,
+      visible.findIndex((point) => point.year === hovered?.year),
+    );
+    const nextIndex =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? visible.length - 1
+          : event.key === "ArrowLeft"
+            ? Math.max(0, currentIndex - 1)
+            : Math.min(visible.length - 1, currentIndex + 1);
+    setHovered(visible[nextIndex]);
+  }
+
+  const latestNoteWidth = compact ? 142 : 160;
+  const latestNoteHeight = compact ? 50 : 52;
+  const latestNoteX = width - chart.margin.right - latestNoteWidth;
+  const latestNoteY = compact
+    ? 49
+    : chart.y(chart.latest?.arrivals ?? 0) - 70;
+
   return (
-    <figure className={styles.figure} ref={ref}>
+    <figure id="arrivals-chart" className={styles.figure} ref={ref}>
       <div className={styles.sticky}>
         <div className={styles.scrollWrap} ref={wrapRef}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${width} ${height}`}
-        role="img"
-        aria-label="Annual visitor-arrivals series for Fiji from 1995 to 2025. Pacific Data Hub observations through 2023 are followed by Fiji Bureau of Statistics values for 2024 and 2025. Arrivals rise from 318,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
+        role="group"
+        tabIndex="0"
+        aria-label="Interactive annual visitor-arrivals chart for Fiji from 1995 to 2025. Use left and right arrow keys to explore years. Arrivals rise from 318,000 in 1995, collapse during the COVID-19 interruption in 2020 and 2021, and recover to 986,367 in 2025."
+        onKeyDown={handleChartKeyDown}
+        onFocus={() => {
+          if (hovered) return;
+          const visible = chart.points.filter(
+            (point) => point.progress <= drawProgress + 0.015,
+          );
+          setHovered(
+            visible.findLast((point) => point.year !== storyEndYear) ??
+              visible.at(-1) ??
+              null,
+          );
+        }}
+        onBlur={() => setHovered(null)}
         onPointerLeave={() => setHovered(null)}
       >
         <defs>
@@ -105,9 +162,9 @@ export function ArrivalsChart({ rows = [] }) {
           </linearGradient>
           <clipPath id="arrivals-reveal">
             <rect
-              x={margin.left}
+              x={chart.margin.left}
               y="0"
-              width={(width - margin.left - margin.right) * drawProgress}
+              width={(width - chart.margin.left - chart.margin.right) * drawProgress}
               height={height}
             />
           </clipPath>
@@ -115,32 +172,33 @@ export function ArrivalsChart({ rows = [] }) {
 
         <rect
           className={styles.plotSurface}
-          x={margin.left}
+          x={chart.margin.left}
           y="20"
-          width={width - margin.left - margin.right}
-          height={height - 20 - margin.bottom}
+          width={width - chart.margin.left - chart.margin.right}
+          height={height - 20 - chart.margin.bottom}
         />
         <line
           className={styles.plotRule}
-          x1={margin.left}
-          x2={margin.left}
+          x1={chart.margin.left}
+          x2={chart.margin.left}
           y1="20"
-          y2={height - margin.bottom}
+          y2={height - chart.margin.bottom}
         />
 
         <g className={styles.chartHeader}>
-          <text x={margin.left + 14} y={margin.top - 34}>
-            {width < 360
-              ? "Fiji visitors · 1995–2025"
-              : "Visitor arrivals to Fiji, 1995–2025"}
+          <text
+            x={chart.margin.left + (compact ? 10 : 14)}
+            y={compact ? 30 : chart.margin.top - 34}
+          >
+            {compact ? "Visitor arrivals to Fiji" : "Visitor arrivals to Fiji, 1995–2025"}
           </text>
         </g>
 
         <g className={styles.yAxis}>
           {chart.yTicks.map((tick) => (
             <g key={tick} transform={`translate(0 ${chart.y(tick)})`}>
-              <line x1={margin.left} x2={width - margin.right} />
-              <text x={margin.left - 10} y="4" textAnchor="end">
+              <line x1={chart.margin.left} x2={width - chart.margin.right} />
+              <text x={chart.margin.left - 9} y="4" textAnchor="end">
                 {formatAxisValue(tick)}
               </text>
             </g>
@@ -154,16 +212,16 @@ export function ArrivalsChart({ rows = [] }) {
           >
             <rect
               x={chart.interruption.x}
-              y={margin.top}
+              y={chart.margin.top}
               width={chart.interruption.width}
-              height={height - margin.top - margin.bottom}
+              height={height - chart.margin.top - chart.margin.bottom}
             />
             <rect
               className={styles.hatch}
               x={chart.interruption.x}
-              y={margin.top}
+              y={chart.margin.top}
               width={chart.interruption.width}
-              height={height - margin.top - margin.bottom}
+              height={height - chart.margin.top - chart.margin.bottom}
             />
             <text
               className={styles.interruptionLabel}
@@ -171,8 +229,8 @@ export function ArrivalsChart({ rows = [] }) {
               y="0"
               textAnchor="end"
               transform={`translate(${
-                chart.interruption.x + 14
-              } ${margin.top + 12}) rotate(-90)`}
+                chart.interruption.x + (compact ? 12 : 14)
+              } ${chart.margin.top + 12}) rotate(-90)`}
             >
               COVID-19
             </text>
@@ -201,22 +259,13 @@ export function ArrivalsChart({ rows = [] }) {
 
         <g className={styles.dataPoints} clipPath="url(#arrivals-reveal)">
           {chart.points.map((point) => (
-           <circle
-             key={point.year}
+            <circle
+              key={point.year}
               className={styles.dataDot}
-             cx={chart.x(point.year)}
-             cy={chart.y(point.arrivals)}
+              cx={chart.x(point.year)}
+              cy={chart.y(point.arrivals)}
               r="2.2"
-              tabIndex={point.progress <= drawProgress + 0.015 ? 0 : -1}
-              aria-label={`${point.year}: ${formatWhole(point.arrivals)} visitor arrivals${
-                point.isPreliminary ? ", provisional" : ""
-              }${
-                point.source?.id !== "spc-tourism-arrivals"
-                  ? ", sourced from the Fiji Bureau of Statistics"
-                  : ""
-              }`}
-              onFocus={() => setHovered(point)}
-              onBlur={() => setHovered(null)}
+              aria-hidden="true"
               onPointerDown={() => setHovered(point)}
             />
           ))}
@@ -246,12 +295,12 @@ export function ArrivalsChart({ rows = [] }) {
             />
             <g
               className={styles.latestNote}
-              opacity={latestNoteProgress}
-              transform={`translate(${width - margin.right - 160} ${
-                chart.y(chart.latest.arrivals) - 70 + (1 - latestNoteProgress) * 8
+              opacity={hovered?.year === storyEndYear ? 0 : latestNoteProgress}
+              transform={`translate(${latestNoteX} ${
+                latestNoteY + (1 - latestNoteProgress) * 8
               })`}
             >
-              <rect width="160" height="52" />
+              <rect width={latestNoteWidth} height={latestNoteHeight} />
               <text x="15" y="20">
                 {formatWhole(chart.latest.arrivals)}
               </text>
@@ -299,34 +348,60 @@ export function ArrivalsChart({ rows = [] }) {
           onPointerLeave={() => setHovered(null)}
         />
       </svg>
+          <span className={styles.srOnly} aria-live="polite">
+            {hovered
+              ? `${hovered.year}: ${formatWhole(hovered.arrivals)} visitor arrivals${hovered.isPreliminary ? ", provisional" : ""}.`
+              : ""}
+          </span>
         </div>
         <figcaption className={styles.caption}>
-          Source:{" "}
-          <a
-            href="https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Pacific Data Hub / SPC Tourism Arrivals
-          </a>{" "}(
-          <span
-            className={styles.sourceTerm}
-            tabIndex="0"
-            aria-label="TOUR series: overnight visitors only; same-day excursionists excluded"
-          >
-            TOUR series
-            <span className={styles.sourceTip} role="tooltip">
-              Overnight visitors only; same-day excursionists excluded
+          <span className={styles.sourceDesktop}>
+            Source:{" "}
+            <a
+              href="https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pacific Data Hub / SPC Tourism Arrivals
+            </a>{" "}(
+            <span
+              className={styles.sourceTerm}
+              tabIndex="0"
+              aria-label="TOUR series: overnight visitors only; same-day excursionists excluded"
+            >
+              TOUR series
+              <span className={styles.sourceTip} role="tooltip">
+                Overnight visitors only; same-day excursionists excluded
+              </span>
             </span>
+            ) through 2023, with 2024 and provisional 2025 values from the{" "}
+            <a
+              href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Fiji Bureau of Statistics
+            </a>.
           </span>
-          ) through 2023, with 2024 and provisional 2025 values from the{" "}
-          <a
-            href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Fiji Bureau of Statistics
-          </a>.
+          <span className={styles.sourceMobile}>
+            Source:{" "}
+            <a
+              href="https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals"
+              target="_blank"
+              rel="noreferrer"
+            >
+              SPC Tourism Arrivals
+            </a>{" "}
+            through 2023;{" "}
+            <a
+              href="https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Fiji Bureau of Statistics
+            </a>{" "}
+            for 2024 and provisional 2025.
+          </span>
         </figcaption>
       </div>
     </figure>
@@ -334,6 +409,10 @@ export function ArrivalsChart({ rows = [] }) {
 }
 
 function buildChart(rows, width) {
+  const margin =
+    width < 600
+      ? { top: 112, right: 18, bottom: 42, left: 46 }
+      : desktopMargin;
   const fallback = {
     x: () => margin.left,
     y: () => height - margin.bottom,
@@ -344,6 +423,7 @@ function buildChart(rows, width) {
     areaPath: "",
     interruption: null,
     latest: null,
+    margin,
   };
 
   if (rows.length === 0) return fallback;
@@ -416,12 +496,16 @@ function buildChart(rows, width) {
       if (year === storyEndYear) {
         return { year, x: x(year), text: `${year}`, anchor: "end" };
       }
+      if (width < 600 && year === 2020) {
+        return { year, x: x(year) - 5, text: `${year}`, anchor: "end" };
+      }
       return { year, text: `${year}`, anchor: "middle" };
     }),
     linePath,
     areaPath,
     interruption,
     latest: rows.find((row) => row.year === storyEndYear) ?? rows.at(-1),
+    margin,
   };
 }
 

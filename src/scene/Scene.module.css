@@ -4,6 +4,7 @@
   z-index: 1;
   overflow: hidden;
   background: var(--deep-scene);
+  contain: paint;
 }
 
 .svg {
@@ -122,6 +123,11 @@
 }
 
 @media (max-width: 700px) {
+  .mist,
+  .grain {
+    display: none;
+  }
+
   .palmLarge {
     left: 32%;
     bottom: 51.2%;

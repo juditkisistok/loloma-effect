@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { fijiBoundary } from "../data/fijiBoundary";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
@@ -14,6 +15,7 @@ export function RelocationDecision() {
   const [progress, setProgress] = useState(0);
   const [hoveredId, setHoveredId] = useState("completed-vunidogoloa");
   const dots = useMemo(() => buildDots(), []);
+  const isMobile = useMediaQuery("(max-width: 760px)");
 
   useFrame((frame) => {
     const el = ref.current;
@@ -33,14 +35,15 @@ export function RelocationDecision() {
     );
   });
 
-  const relocatedReveal = clamp(progress / 0.3, 0, 1);
-  const assessmentReveal = clamp((progress - 0.24) / 0.42, 0, 1);
-  const panelReveal = clamp((progress - 0.58) / 0.22, 0, 1);
+  const relocatedReveal = clamp(progress / 0.2, 0, 1);
+  const assessmentReveal = clamp((progress - 0.08) / 0.3, 0, 1);
+  const panelReveal = clamp((progress - 0.38) / 0.22, 0, 1);
   const hovered = dots.find((dot) => dot.id === hoveredId);
   const panel = hovered ?? defaultPanel;
 
   return (
     <figure
+      id="relocation-map"
       className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
       ref={ref}
     >
@@ -49,7 +52,8 @@ export function RelocationDecision() {
       <svg
         className={`${styles.svg} ${styles.desktopSvg}`}
         viewBox={`0 0 ${width} ${height}`}
-        role="img"
+        role="group"
+        aria-hidden={isMobile}
         aria-label="Interactive Fiji map showing six communities with completed full or partial relocations, 17 public adaptation-survey locations, and a national total of 43 communities screened since 2021."
       >
         <g className={styles.header}>
@@ -105,14 +109,15 @@ export function RelocationDecision() {
                   cy={dot.y}
                   r={selected ? 20 : dot.type === "relocated" ? 17 : 10}
                   style={{ animationDelay: `${-(index % 8) * 0.42}s` }}
-                  tabIndex="0"
+                  data-point-index={index}
+                  tabIndex={!isMobile && selected ? 0 : -1}
                   role="button"
                   aria-label={`${dot.title}: ${dot.status}`}
                   onPointerEnter={() => setHoveredId(dot.id)}
                   onPointerDown={() => setHoveredId(dot.id)}
                   onFocus={() => setHoveredId(dot.id)}
                   onKeyDown={(event) =>
-                    selectPointFromKeyboard(event, () => setHoveredId(dot.id))
+                    selectPointFromKeyboard(event, index, dots, setHoveredId)
                   }
                 />
               </g>
@@ -182,7 +187,7 @@ export function RelocationDecision() {
       </svg>
       </div>
 
-      <div className={styles.mobileView}>
+      <div className={styles.mobileView} aria-hidden={!isMobile}>
         <header className={styles.mobileHeader}>
           <h3>Stay, adapt or move</h3>
           <p>Public GIS locations · select a point for its recorded status</p>
@@ -194,7 +199,7 @@ export function RelocationDecision() {
         <svg
           className={styles.mobileMap}
           viewBox="35 78 665 405"
-          role="img"
+          role="group"
           aria-label="Map of Fiji with six completed full or partial relocation locations and 17 public adaptation-survey locations."
         >
           <g className={styles.map}>
@@ -221,13 +226,14 @@ export function RelocationDecision() {
                     cy={dot.y}
                     r={selected ? 18 : dot.type === "relocated" ? 15 : 9}
                     style={{ animationDelay: `${-(index % 8) * 0.42}s` }}
-                    tabIndex="0"
+                    data-point-index={index}
+                    tabIndex={isMobile && selected ? 0 : -1}
                     role="button"
                     aria-label={`${dot.title}: ${dot.status}`}
                     onPointerDown={() => setHoveredId(dot.id)}
                     onFocus={() => setHoveredId(dot.id)}
                     onKeyDown={(event) =>
-                      selectPointFromKeyboard(event, () => setHoveredId(dot.id))
+                      selectPointFromKeyboard(event, index, dots, setHoveredId)
                     }
                   />
                 </g>
@@ -250,33 +256,63 @@ export function RelocationDecision() {
         </section>
       </div>
       <figcaption className={styles.caption}>
-        Each dot represents either a completed full or partial relocation or an
-        adaptation-survey location at a public coordinate from the{" "}
-        <a
-          href={fijiBoundary.source.relocationAppUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Fiji Climate Change Division / UNOSAT GIS portal
-        </a>
-        . Only the 17 survey locations with public coordinates are shown; Fiji
-        reported 43 communities screened nationally. Boundary:{"\u00a0"}
-        <a
-          href={fijiBoundary.source.boundaryUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          geoBoundaries
-        </a>
-        . National screening total:{"\u00a0"}
-        <a
-          href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Parliament of Fiji, July 2025
-        </a>
-        .
+        <span className={styles.sourceDesktop}>
+          Each dot represents either a completed full or partial relocation or an
+          adaptation-survey location at a public coordinate from the{" "}
+          <a
+            href={fijiBoundary.source.relocationAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Fiji Climate Change Division / UNOSAT GIS portal
+          </a>
+          . Only the 17 survey locations with public coordinates are shown; Fiji
+          reported 43 communities screened nationally. Boundary:{"\u00a0"}
+          <a
+            href={fijiBoundary.source.boundaryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            geoBoundaries
+          </a>
+          . National screening total:{"\u00a0"}
+          <a
+            href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Parliament of Fiji, July 2025
+          </a>
+          .
+        </span>
+        <span className={styles.sourceMobile}>
+          Locations:{" "}
+          <a
+            href={fijiBoundary.source.relocationAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Fiji Climate Change Division / UNOSAT
+          </a>
+          ; boundary:{" "}
+          <a
+            href={fijiBoundary.source.boundaryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            geoBoundaries
+          </a>
+          . The map shows 17 survey locations with public coordinates; 43 is
+          Fiji's national screening total ({" "}
+          <a
+            href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Parliament, July 2025
+          </a>
+          ).
+        </span>
       </figcaption>
       </div>
     </figure>
@@ -299,10 +335,32 @@ function TextBlock({ className, lines, x, y, lineHeight }) {
   );
 }
 
-function selectPointFromKeyboard(event, select) {
-  if (event.key !== "Enter" && event.key !== " ") return;
+function selectPointFromKeyboard(event, index, dots, select) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    select(dots[index].id);
+    return;
+  }
+
+  if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+    return;
+  }
+
   event.preventDefault();
-  select();
+  const direction = event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 1;
+  const nextIndex =
+    event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? dots.length - 1
+        : (index + direction + dots.length) % dots.length;
+  select(dots[nextIndex].id);
+  requestAnimationFrame(() => {
+    event.currentTarget
+      .closest("svg")
+      ?.querySelector(`[data-point-index="${nextIndex}"]`)
+      ?.focus();
+  });
 }
 
 const defaultPanel = {

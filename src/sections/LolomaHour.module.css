@@ -1,24 +1,24 @@
-.figure { width: min(1040px, 92vw); }
+.figure { width: min(1180px, 94vw); }
 .header { margin: 0 0 32px; }
 .header h3 {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.3;
   color: #111;
 }
 .header p,
 .caption { font-family: var(--font-mono); color: var(--viz-muted); }
-.header p { margin: 7px 0 0; font-size: 12px; }
+.header p { margin: 7px 0 0; font-size: 13px; }
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(390px, 1.12fr);
-  gap: 54px;
+  gap: 68px;
   align-items: stretch;
 }
 .summaryColumn {
   min-width: 0;
-  padding-right: 54px;
+  padding-right: 68px;
   border-right: 1px solid rgba(17, 17, 17, 0.14);
 }
 .resultsColumn { min-width: 0; padding-top: 2px; }
@@ -36,14 +36,14 @@
 }
 .metric span {
   margin-top: 13px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.085em;
   color: #4f6062;
 }
 .metric small {
   margin-top: 9px;
-  font-size: 12px;
+  font-size: 13px;
   color: #747a77;
   transition: opacity 180ms ease;
 }
@@ -54,7 +54,7 @@
   min-width: 0;
   margin: 22px auto 0;
 }
-.orbitChart { display: block; width: min(330px, 100%); height: auto; overflow: visible; }
+.orbitChart { display: block; width: min(360px, 100%); height: auto; overflow: visible; }
 .orbitTrack,
 .activityArc {
   fill: none;
@@ -141,7 +141,7 @@
 .outcomesHeading { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
 .outcomesHeading span {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #5e6c6d;
@@ -160,8 +160,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 116px;
-  height: 104px;
+  width: 128px;
+  height: 114px;
   overflow: visible;
 }
 .outcomeImage img {
@@ -196,7 +196,7 @@
   max-width: 150px;
   margin-top: 6px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.4;
   color: #5f6866;
 }
@@ -227,10 +227,17 @@
     align-self: start;
     opacity: var(--mobile-scene-opacity);
     transform: translateY(calc((1 - var(--mobile-scene-opacity)) * 10px));
-    transition: opacity 180ms ease, transform 180ms ease;
+    will-change: opacity, transform;
+    transition: opacity 140ms linear, transform 180ms ease-out;
   }
   .summaryColumn { padding-right: 0; border-right: 0; }
-  .resultsColumn { padding-top: 0; border-top: 0; }
+  .resultsColumn {
+    align-self: stretch;
+    min-height: 100%;
+    padding-top: 0;
+    border-top: 0;
+    background: var(--viz-surface);
+  }
   .metric strong { font-size: 64px; }
   .metric span { font-size: 11px; }
   .metric small { font-size: 12px; }

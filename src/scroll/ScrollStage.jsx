@@ -7,6 +7,7 @@ export function ScrollStage({ children }) {
   const wrapRef = useRef(null);
   const sectionsRef = useRef(new Map());
   const subsRef = useRef(new Set());
+  const requestFrameRef = useRef(() => {});
 
   const registerSection = useCallback((name, el) => {
     if (!el) return undefined;
@@ -16,31 +17,54 @@ export function ScrollStage({ children }) {
 
   const subscribe = useCallback((fn) => {
     subsRef.current.add(fn);
+    requestFrameRef.current();
     return () => subsRef.current.delete(fn);
   }, []);
 
   useEffect(() => {
-    const reduced =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     let raf = 0;
-    const loop = (now) => {
+    let scheduled = false;
+    const reducedQuery = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    const publish = (now) => {
+      scheduled = false;
       const sections = sectionsRef.current;
       const frame = {
         p: scrollProgressOf(wrapRef.current),
         act: (name) => scrollProgressOf(sections.get(name)),
         span: (startName, endName) =>
           scrollProgressBetween(sections.get(startName), sections.get(endName)),
-        t: reduced ? 0 : now / 1000,
-        reduced,
+        t: reducedQuery?.matches ? 0 : now / 1000,
+        reduced: reducedQuery?.matches ?? false,
       };
       subsRef.current.forEach((fn) => fn(frame));
-      raf = requestAnimationFrame(loop);
     };
 
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    const requestFrame = () => {
+      if (scheduled) return;
+      scheduled = true;
+      raf = requestAnimationFrame(publish);
+    };
+
+    requestFrameRef.current = requestFrame;
+    window.addEventListener("scroll", requestFrame, { passive: true });
+    window.addEventListener("resize", requestFrame);
+    window.addEventListener("orientationchange", requestFrame);
+    window.visualViewport?.addEventListener("resize", requestFrame);
+    reducedQuery?.addEventListener("change", requestFrame);
+    requestFrame();
+
+    return () => {
+      requestFrameRef.current = () => {};
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", requestFrame);
+      window.removeEventListener("resize", requestFrame);
+      window.removeEventListener("orientationchange", requestFrame);
+      window.visualViewport?.removeEventListener("resize", requestFrame);
+      reducedQuery?.removeEventListener("change", requestFrame);
+    };
   }, []);
 
   const api = useMemo(

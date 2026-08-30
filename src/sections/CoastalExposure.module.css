@@ -210,6 +210,7 @@
 .caption a { color: inherit; text-decoration-color: rgba(17, 17, 17, 0.35); text-underline-offset: 0.18em; }
 .caption a:hover,
 .caption a:focus-visible { color: #111; }
+.sourceMobile { display: none; }
 @media (max-width: 760px) {
   .figure { width: auto; height: 160vh; margin: 0 20px; }
   .sticky { top: max(18px, 5vh); }
@@ -243,7 +244,9 @@
     margin-top: 12px;
     padding-top: 14px;
   }
-  .caption { margin-top: 14px; font-size: 11px; text-align: left; }
+  .caption { margin-top: 14px; font-size: 10.5px; line-height: 1.45; text-align: left; }
+  .sourceDesktop { display: none; }
+  .sourceMobile { display: inline; }
 }
 
 @media (prefers-reduced-motion: reduce) {

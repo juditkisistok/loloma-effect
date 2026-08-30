@@ -79,12 +79,13 @@ export function LolomaHour() {
     (activity) => activity.id === activeActivityId,
   );
   const visibleActivityHours = lolomaHour.yearOne.hours * ringReveal;
-  const summarySceneOpacity = 1 - clamp((progress - 0.38) / 0.08, 0, 1);
-  const resultsSceneOpacity = clamp((progress - 0.46) / 0.1, 0, 1);
-  const mobileCaptionOpacity = clamp((progress - 0.58) / 0.12, 0, 1);
+  const summarySceneOpacity = 1 - clamp((progress - 0.49) / 0.03, 0, 1);
+  const resultsSceneOpacity = clamp((progress - 0.47) / 0.03, 0, 1);
+  const mobileCaptionOpacity = clamp((progress - 0.6) / 0.12, 0, 1);
 
   return (
     <figure
+      id="loloma-hour-chart"
       className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
       ref={ref}
       aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours contributed, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions at ${lolomaHour.yearOne.properties} properties. Reported outcomes are separate totals: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
@@ -143,8 +144,6 @@ export function LolomaHour() {
                             startShare + startInset / circumference;
                           const renderedEndShare =
                             renderedStartShare + segmentLength / circumference;
-                          const isFirstArc = segmentStart === activity.start;
-
                           return (
                             <path
                               className={styles.activityArc}
@@ -161,19 +160,9 @@ export function LolomaHour() {
                                     ? 0.16
                                     : 1,
                               }}
-                              tabIndex={isFirstArc ? 0 : undefined}
-                              role={isFirstArc ? "button" : undefined}
-                              aria-hidden={isFirstArc ? undefined : "true"}
-                              aria-label={
-                                isFirstArc
-                                  ? `${activity.label}: ${formatWhole(activity.value)} hours, ${((activity.value / lolomaHour.yearOne.hours) * 100).toFixed(1)} percent of the total`
-                                  : undefined
-                              }
+                              aria-hidden="true"
                               onMouseEnter={() => setActiveActivityId(activity.id)}
                               onMouseLeave={() => setActiveActivityId(null)}
-                              onFocus={() => setActiveActivityId(activity.id)}
-                              onBlur={() => setActiveActivityId(null)}
-                              onClick={() => setActiveActivityId(activity.id)}
                             />
                           );
                         })}

@@ -1,4 +1,6 @@
 .hero {
+  width: min(640px, 100%);
+  min-width: 0;
   max-width: 640px;
   text-align: center;
 }
@@ -11,6 +13,29 @@
   letter-spacing: -0.01em;
   color: var(--paper);
   margin: 0;
+  white-space: normal;
+  text-shadow: 0 3px 28px rgba(4, 14, 26, 0.7);
+}
+
+@media (max-width: 520px) {
+  .hero {
+    width: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
+  }
+
+  .title {
+    max-width: 320px;
+    margin-inline: auto;
+    font-size: clamp(42px, 12vw, 54px);
+    overflow-wrap: anywhere;
+  }
+
+  .definition {
+    max-width: 330px;
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.48;
+  }
 }
 
 .definition {

@@ -69,6 +69,7 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
 
   return (
     <figure
+      id="journey-comparison"
       className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
       ref={figureRef}
     >
