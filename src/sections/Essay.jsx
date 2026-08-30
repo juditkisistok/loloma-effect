@@ -338,8 +338,8 @@ export function Essay() {
             directions.
           </p>
           <p>
-            That leaves us with a more human question: how might you take part
-            in that care?
+            That leaves us with a more human question: what might that
+            relationship look like in practice?
           </p>
           <p>
             The answer brings us back to where we started: <b>loloma</b>.
@@ -384,11 +384,10 @@ export function Essay() {
 
         <div className={styles.prose}>
           <p>
-            Seventeen thousand hours will not solve Fiji's climate challenge.
-            But each one is a small act of loloma: time and care offered back
-            to the reefs, shores and communities that welcomed a visitor in.
-            Together, they suggest a more generous way to travel — to arrive
-            with wonder, and leave a little care behind.
+            Each of those hours is a small act of loloma: time and care offered
+            back to the reefs, shores and communities that welcomed a visitor
+            in. Together, they suggest a more generous way to travel — to
+            arrive with wonder, and leave a little care behind.
           </p>
         </div>
         <Methods />
