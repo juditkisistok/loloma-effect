@@ -126,12 +126,12 @@ export function RelocationDecision() {
         </g>
 
         <g className={styles.legend} transform="translate(240 500)">
-          <circle className={styles.relocatedDot} cx="0" cy="0" r="5.5" />
-          <text x="14" y="4">
-            relocated
+          <circle className={styles.relocatedDot} cx="0" cy="0" r="4.5" />
+          <text x="13" y="4">
+            completed move
           </text>
-          <circle className={styles.assessmentDot} cx="105" cy="0" r="4" />
-          <text x="118" y="4">
+          <circle className={styles.assessmentDot} cx="122" cy="0" r="4.5" />
+          <text x="135" y="4">
             surveyed for adaptation
           </text>
         </g>

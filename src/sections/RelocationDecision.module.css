@@ -105,15 +105,15 @@
 }
 
 .relocatedDot {
-  fill: var(--coral);
-  stroke: rgba(247, 247, 245, 0.95);
-  stroke-width: 1.6;
+  fill: rgba(255, 111, 97, 0.38);
+  stroke: rgba(226, 84, 70, 0.9);
+  stroke-width: 1;
 }
 
 .assessmentDot {
-  fill: rgba(15, 157, 143, 0.28);
-  stroke: #0f877c;
-  stroke-width: 1.4;
+  fill: rgba(15, 135, 124, 0.28);
+  stroke: rgba(10, 118, 109, 0.82);
+  stroke-width: 1;
 }
 
 .legend text {
@@ -289,7 +289,23 @@
     color: #5f6f72;
   }
   .mobileLegend span { display: inline-flex; align-items: center; gap: 7px; }
-  .mobileLegend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+  .mobileLegend i {
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 50%;
+  }
+  .mobileLegend .relocatedDot {
+    width: 9px;
+    height: 9px;
+    border: 1px solid rgba(226, 84, 70, 0.9);
+    background: rgba(255, 111, 97, 0.38);
+  }
+  .mobileLegend .assessmentDot {
+    width: 9px;
+    height: 9px;
+    border: 1px solid rgba(10, 118, 109, 0.82);
+    background: rgba(15, 135, 124, 0.28);
+  }
   .mobilePanel {
     margin-top: 22px;
     padding-top: 18px;
