@@ -47,7 +47,7 @@ const stars = Array.from({ length: 90 }, (_, i) => ({
 
 const coralCollage = [
   {
-    src: "table-coral-transparent.png",
+    src: "table-coral-transparent.webp",
     left: "4%",
     bottom: "0%",
     width: "19vw",
@@ -58,7 +58,7 @@ const coralCollage = [
     zIndex: 1,
   },
   {
-    src: "branching-coral-lavender.png",
+    src: "branching-coral-lavender.webp",
     left: "14%",
     bottom: "2%",
     width: "13vw",
@@ -69,7 +69,7 @@ const coralCollage = [
     zIndex: 3,
   },
   {
-    src: "brain-coral.png",
+    src: "brain-coral.webp",
     left: "22%",
     bottom: "1%",
     width: "7vw",
@@ -80,7 +80,7 @@ const coralCollage = [
     zIndex: 4,
   },
   {
-    src: "soft-coral-pink.png",
+    src: "soft-coral-pink.webp",
     left: "72%",
     bottom: "2%",
     width: "12vw",
@@ -91,7 +91,7 @@ const coralCollage = [
     zIndex: 2,
   },
   {
-    src: "branching-coral-a.png",
+    src: "branching-coral-a.webp",
     left: "78%",
     bottom: "2%",
     width: "14vw",
@@ -275,8 +275,20 @@ export function Scene({
       </svg>
 
       <div className={styles.flora}>
-        <img className={styles.palmLarge} src={assetUrl("palm-tree.png")} alt="" />
-        <img className={styles.palmSmall} src={assetUrl("palm-tree.png")} alt="" />
+        <img
+          className={styles.palmLarge}
+          src={assetUrl("palm-tree.webp")}
+          alt=""
+          decoding="async"
+          fetchPriority="high"
+        />
+        <img
+          className={styles.palmSmall}
+          src={assetUrl("palm-tree.webp")}
+          alt=""
+          decoding="async"
+          fetchPriority="high"
+        />
       </div>
 
       {corals && (
@@ -287,6 +299,8 @@ export function Scene({
               className={styles.collageImg}
               src={assetUrl(item.src)}
               alt=""
+              loading="lazy"
+              decoding="async"
               style={{
                 left: item.left,
                 bottom: item.bottom,

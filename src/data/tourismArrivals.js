@@ -1,7 +1,5 @@
-import { ascending, csv, csvParse, extent, max } from "d3";
+import { ascending, csvParse, extent, max } from "d3";
 import tourismArrivalsCsvText from "./tourism-arrivals.csv?raw";
-
-export const tourismArrivalsCsvUrl = "/data/tourism-arrivals.csv";
 
 export const tourismArrivalSources = {
   "spc-tourism-arrivals": {
@@ -16,16 +14,12 @@ export const tourismArrivalSources = {
   },
 };
 
-export async function loadTourismArrivals(url = tourismArrivalsCsvUrl) {
-  const rows =
-    url === tourismArrivalsCsvUrl
-      ? parseBundledTourismArrivals()
-      : await csv(url, parseTourismArrivalRow);
-  return sortTourismArrivals(rows.filter(isValidTourismArrival));
-}
-
 export function parseBundledTourismArrivals() {
-  return csvParse(tourismArrivalsCsvText, parseTourismArrivalRow);
+  return sortTourismArrivals(
+    csvParse(tourismArrivalsCsvText, parseTourismArrivalRow).filter(
+      isValidTourismArrival,
+    ),
+  );
 }
 
 export function fijiTourismArrivals(rows) {

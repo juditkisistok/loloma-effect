@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Act } from "../scroll/Act";
 import { Card } from "../components/Card";
 import { Scene } from "../scene/Scene";
 import { duskTheme } from "../scene/sceneThemes";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
+import { useNearViewport } from "../hooks/useNearViewport";
 import panelStyles from "../styles/panel.module.css";
 import scrollSceneStyles from "../styles/scrollScene.module.css";
 import styles from "./Close.module.css";
 
 export function Close() {
+  const closeRef = useRef(null);
   const [coralsOn, setCoralsOn] = useState(false);
   const [lights, setLights] = useState({ on: false, climb: 0 });
+  const loadCloseScene = useNearViewport(closeRef, "200% 0px");
 
   useFrame((frame) => {
+    if (!loadCloseScene) return;
     const coralProgress = frame.act("close2");
     const nextCoralsOn = coralProgress > 0.03;
     setCoralsOn((current) => (current !== nextCoralsOn ? nextCoralsOn : current));
@@ -29,19 +33,21 @@ export function Close() {
   });
 
   return (
-    <div className={scrollSceneStyles.wrap}>
+    <div className={scrollSceneStyles.wrap} ref={closeRef}>
       <div className={scrollSceneStyles.sticky}>
-        <Scene
-          theme={duskTheme}
-          toneStart="close1"
-          toneEnd="close4"
-          idPrefix="dusk"
-          corals
-          coralsOn={coralsOn}
-          lights
-          lightsOn={lights.on}
-          lightsClimb={lights.climb}
-        />
+        {loadCloseScene && (
+          <Scene
+            theme={duskTheme}
+            toneStart="close1"
+            toneEnd="close4"
+            idPrefix="dusk"
+            corals
+            coralsOn={coralsOn}
+            lights
+            lightsOn={lights.on}
+            lightsClimb={lights.climb}
+          />
+        )}
       </div>
 
       <div className={scrollSceneStyles.steps}>

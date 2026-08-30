@@ -10,9 +10,9 @@ const assert = (condition, message) => {
   if (!condition) throw new Error(message);
 };
 
-const publicTourism = read("public/data/tourism-arrivals.csv");
+const sourceTourism = read("data/tourism-arrivals.csv");
 const bundledTourism = read("src/data/tourism-arrivals.csv");
-assert(publicTourism === bundledTourism, "Tourism CSV copies differ.");
+assert(sourceTourism === bundledTourism, "Tourism CSV copies differ.");
 
 const tourism = csvParse(bundledTourism, (row) => ({
   year: Number(row.year),

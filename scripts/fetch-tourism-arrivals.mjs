@@ -10,16 +10,16 @@ const explorerUrl =
   "https://stats.pacificdata.org/vis?locale=en&dataflow[datasourceId]=SPC2&dataflow[agencyId]=SPC&dataflow[dataflowId]=DF_TOURISM_ARRIVALS&dataflow[version]=1.0";
 
 const csvPath = fileURLToPath(
-  new URL("../public/data/tourism-arrivals.csv", import.meta.url),
+  new URL("../data/tourism-arrivals.csv", import.meta.url),
 );
 const bundledCsvPath = fileURLToPath(
   new URL("../src/data/tourism-arrivals.csv", import.meta.url),
 );
 const rawCsvPath = fileURLToPath(
-  new URL("../public/data/tourism-arrivals-spc-raw.csv", import.meta.url),
+  new URL("../data/tourism-arrivals-spc-raw.csv", import.meta.url),
 );
 const metadataPath = fileURLToPath(
-  new URL("../public/data/tourism-arrivals.metadata.json", import.meta.url),
+  new URL("../data/tourism-arrivals.metadata.json", import.meta.url),
 );
 
 const sourceSpc = {

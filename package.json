@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "assets:optimize": "node scripts/optimize-images.mjs",
+    "audit:assets": "node scripts/audit-assets.mjs",
     "data:tourism": "node scripts/fetch-tourism-arrivals.mjs",
     "audit:data": "node scripts/audit-data.mjs",
-    "build": "vite build",
+    "build": "npm run audit:assets && vite build",
     "deploy": "npm run build && gh-pages -d dist",
     "lint": "oxlint",
     "preview": "vite preview"
@@ -23,6 +25,7 @@
     "@vitejs/plugin-react": "^6.0.4",
     "gh-pages": "^6.3.0",
     "oxlint": "^1.75.0",
+    "sharp": "^0.35.4",
     "vite": "^8.2.0"
   }
 }

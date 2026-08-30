@@ -1,6 +1,7 @@
 import { format } from "d3";
 import { useRef, useState } from "react";
 import { lolomaHour } from "../data/lolomaHour";
+import { useNearViewport } from "../hooks/useNearViewport";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
@@ -12,10 +13,10 @@ const formatOutcome = (value) =>
   Number.isInteger(value) ? formatWhole(value) : format(",.2f")(value);
 const assetUrl = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const tileImages = {
-  rubbish: assetUrl("blue-cleanup-bucket.png"),
-  corals: assetUrl("soft-coral-pink.png"),
-  mangroves: assetUrl("mature-mangrove.png"),
-  trees: assetUrl("coastal-tree-cluster.png"),
+  rubbish: assetUrl("blue-cleanup-bucket.webp"),
+  corals: assetUrl("soft-coral-pink.webp"),
+  mangroves: assetUrl("mature-mangrove.webp"),
+  trees: assetUrl("coastal-tree-cluster.webp"),
 };
 const targetMultiple =
   lolomaHour.yearOne.hours / lolomaHour.launch.firstYearTargetHours;
@@ -53,6 +54,7 @@ export function LolomaHour() {
   const ref = useRef(null);
   const [progress, setProgress] = useState(0);
   const [activeActivityId, setActiveActivityId] = useState(null);
+  const loadOutcomeImages = useNearViewport(ref);
 
   useFrame((frame) => {
     const el = ref.current;
@@ -234,7 +236,7 @@ export function LolomaHour() {
                     key={outcome.id}
                     style={{ opacity: reveal, transform: `translateY(${(1 - reveal) * 10}px)` }}
                   >
-                    <OutcomeImage id={outcome.id} />
+                    <OutcomeImage id={outcome.id} enabled={loadOutcomeImages} />
                     <strong>{formatOutcome(outcome.value)}</strong>
                     <span>{outcome.label}</span>
                   </div>
@@ -261,10 +263,18 @@ export function LolomaHour() {
   );
 }
 
-function OutcomeImage({ id }) {
+function OutcomeImage({ id, enabled }) {
   return (
     <div className={styles.outcomeImage} data-outcome={id} aria-hidden="true">
-      <img src={tileImages[id]} alt="" />
+      {enabled && (
+        <img
+          src={tileImages[id]}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      )}
     </div>
   );
 }

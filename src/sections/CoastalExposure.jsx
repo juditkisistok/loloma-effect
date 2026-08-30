@@ -1,6 +1,6 @@
 import { curveCatmullRomClosed, interpolateRgb, line } from "d3";
-import { useMemo, useRef, useState } from "react";
-import { coastalShoreline } from "../data/coastalShoreline";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useNearViewport } from "../hooks/useNearViewport";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
@@ -9,7 +9,7 @@ import styles from "./CoastalExposure.module.css";
 const width = 700;
 const height = 390;
 const plot = { x0: 24, y0: 10, x1: 676, y1: 380 };
-const years = coastalShoreline.years;
+const fallbackYears = [1999, 2007, 2015, 2023];
 const islandCenter = [177.347, -17.6141];
 const yearColors = ["#149f94", "#2f9188", "#d88970", "#ff7668"];
 
@@ -24,11 +24,28 @@ function colorForYear(t) {
 export function CoastalExposure() {
   const ref = useRef(null);
   const [progress, setProgress] = useState(0);
-  const chart = useMemo(() => buildChart(), []);
+  const [shorelineData, setShorelineData] = useState(null);
+  const shouldLoadData = useNearViewport(ref, "200% 0px");
+  const years = shorelineData?.years ?? fallbackYears;
+  const chart = useMemo(
+    () => (shorelineData ? buildChart(shorelineData) : null),
+    [shorelineData],
+  );
+
+  useEffect(() => {
+    if (!shouldLoadData || shorelineData) return undefined;
+    let active = true;
+    import("../data/coastalShoreline").then(({ coastalShoreline }) => {
+      if (active) setShorelineData(coastalShoreline);
+    });
+    return () => {
+      active = false;
+    };
+  }, [shouldLoadData, shorelineData]);
 
   useFrame((frame) => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || !chart) return;
     if (frame.reduced) {
       setProgress(1);
       return;
@@ -44,6 +61,27 @@ export function CoastalExposure() {
       Math.abs(current - next) > 0.002 ? next : current,
     );
   });
+
+  if (!chart) {
+    return (
+      <figure
+        id="shoreline-chart"
+        className={styles.figure}
+        ref={ref}
+        aria-busy="true"
+      >
+        <div className={styles.sticky}>
+          <header className={styles.header}>
+            <div>
+              <h3>The moving edges of Tivua</h3>
+              <p>Four satellite observations · 1999–2023</p>
+            </div>
+          </header>
+          <div className={styles.loading}>Loading shoreline record…</div>
+        </div>
+      </figure>
+    );
+  }
 
   const yearPosition = progress * (years.length - 1);
   const segmentIndex = Math.min(
@@ -149,7 +187,7 @@ export function CoastalExposure() {
             <span>on average, the shoreline moved outward</span>
             <small>(±{chart.hotspot.se.toFixed(2)} m/yr est. uncertainty)</small>
             <RateContext
-              context={coastalShoreline.rateContext}
+              context={shorelineData.rateContext}
               selectedRate={chart.hotspot.rate}
             />
           </aside>
@@ -166,7 +204,7 @@ export function CoastalExposure() {
             island or Fiji's coastlines more broadly.
             Source:{" "}
             <a
-              href={coastalShoreline.source.url}
+              href={shorelineData.source.url}
               target="_blank"
               rel="noreferrer"
             >
@@ -179,7 +217,7 @@ export function CoastalExposure() {
             between them. The circled +{chart.hotspot.rate.toFixed(2)} m/yr rate
             is a nearby local estimate, not an island average. Source:{" "}
             <a
-              href={coastalShoreline.source.url}
+              href={shorelineData.source.url}
               target="_blank"
               rel="noreferrer"
             >
@@ -258,7 +296,8 @@ function RateContext({ context, selectedRate }) {
   );
 }
 
-function buildChart() {
+function buildChart(coastalShoreline) {
+  const years = coastalShoreline.years;
   const observations = years.map((year) => {
     const shoreline = coastalShoreline.shorelines
       .filter(

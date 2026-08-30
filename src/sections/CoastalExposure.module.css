@@ -4,6 +4,14 @@
   margin: 0 auto;
 }
 .sticky { position: sticky; top: max(18px, 10vh); width: 100%; }
+.loading {
+  display: grid;
+  place-items: center;
+  min-height: 58vh;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--viz-muted);
+}
 .header {
   margin: 0 0 10px;
 }

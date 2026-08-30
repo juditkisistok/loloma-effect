@@ -1,9 +1,6 @@
 import { format } from "d3";
-import { useEffect, useMemo, useState } from "react";
-import {
-  loadTourismArrivals,
-  parseBundledTourismArrivals,
-} from "../data/tourismArrivals";
+import { useMemo, useState } from "react";
+import { parseBundledTourismArrivals } from "../data/tourismArrivals";
 import { Ref } from "../components/Ref";
 import { Definition } from "../components/Definition";
 import { ArrivalsChart } from "./ArrivalsChart";
@@ -17,25 +14,12 @@ import styles from "./Essay.module.css";
 
 const storyEndYear = 2025;
 const formatWhole = format(",");
+const tourismRows = parseBundledTourismArrivals().filter(
+  (row) => row.year <= storyEndYear,
+);
 
 export function Essay() {
-  const [rows, setRows] = useState(() =>
-    parseBundledTourismArrivals().filter((row) => row.year <= storyEndYear),
-  );
-
-  useEffect(() => {
-    let alive = true;
-
-    loadTourismArrivals().then((data) => {
-      if (alive) {
-        setRows(data.filter((row) => row.year <= storyEndYear));
-      }
-    });
-
-    return () => {
-      alive = false;
-    };
-  }, []);
+  const rows = tourismRows;
 
   const latest = useMemo(
     () => rows.find((row) => row.year === storyEndYear),
