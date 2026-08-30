@@ -92,8 +92,10 @@
 
 .prose p {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(17px, 1.35vw, 20px);
+  font-family: var(--font-editorial);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(18px, 1.4vw, 21px);
   line-height: 1.48;
   color: #3e3e3c;
   text-wrap: wrap;
@@ -178,6 +180,10 @@
 @media (max-width: 760px) {
   .essay {
     padding: 9vh 0 14vh;
+  }
+
+  .prose {
+    width: min(600px, 90vw);
   }
 
   .masthead {

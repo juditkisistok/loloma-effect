@@ -25,7 +25,9 @@
 }
 
 .panelBody {
-  font-family: var(--font-body);
+  font-family: var(--font-editorial);
+  font-optical-sizing: auto;
+  font-weight: 400;
   font-size: var(--card-body-size);
   line-height: var(--card-body-leading);
   color: var(--paper-soft);
