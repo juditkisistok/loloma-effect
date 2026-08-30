@@ -4,6 +4,7 @@ import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
 import { Definition } from "../components/Definition";
+import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./JourneyComparison.module.css";
 
 const maxFlightTotal = Math.max(...journeyOptions.map((route) => route.total));
@@ -67,8 +68,11 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
   };
 
   return (
-    <figure className={styles.figure} ref={figureRef}>
-      <div className={styles.sticky}>
+    <figure
+      className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
+      ref={figureRef}
+    >
+      <div className={visualizationStyles.stickyCenter}>
       <header className={styles.header}>
         <h3>One return journey to Nadi</h3>
         <p>

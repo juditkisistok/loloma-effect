@@ -3,6 +3,7 @@ import { fijiBoundary } from "../data/fijiBoundary";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
+import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./RelocationDecision.module.css";
 
 const { width } = fijiBoundary.dimensions;
@@ -39,8 +40,11 @@ export function RelocationDecision() {
   const panel = hovered ?? defaultPanel;
 
   return (
-    <figure className={styles.figure} ref={ref}>
-      <div className={styles.sticky}>
+    <figure
+      className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
+      ref={ref}
+    >
+      <div className={visualizationStyles.stickyCenter}>
       <div className={styles.scrollWrap}>
       <svg
         className={`${styles.svg} ${styles.desktopSvg}`}

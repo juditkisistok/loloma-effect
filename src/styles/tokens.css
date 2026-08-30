@@ -1,27 +1,32 @@
 :root {
   /* --- surfaces --- */
-  --deep: #081f33; 
-  --deep-scene: #12243a; 
+  --deep: #081f33;
+  --deep-scene: #12243a;
   --deep-footer: #0b1c2e;
-  --ink: #12262d; 
-  --ink-soft: #33474c; 
-  --paper: #fbf6ec; 
-  --paper-plate: #f3ede0; 
-  --paper-land: #e4dccb; 
+  --ink: #12262d;
+  --ink-soft: #33474c;
+  --ink-strong: #111;
+  --paper: #fbf6ec;
+  --paper-plate: #f3ede0;
+  --paper-land: #e4dccb;
+  --story-surface: #f7f7f5;
+  --viz-surface: #efefeb;
 
   /* --- accents --- */
   --teal: #0f9d8f;
+  --teal-deep: #0f877c;
   --teal-soft: #8fb0aa;
   --mist: #cfe2df;
   --paper-soft: #e6f0ec; /* body copy set over the scene */
-  --coral: #ff6f61; 
-  --coral-warm: #ff9f6b; 
-  --sand: #cb9a5c; 
+  --coral: #ff6f61;
+  --coral-warm: #ff9f6b;
+  --sand: #cb9a5c;
   --sand-deep: #b7823c;
   --brass: #e6c98a;
   --sage: #9fd6b0;
-  --mono-dim: #6a7b7f; 
-  --sepia: #8a6a5e; 
+  --mono-dim: #6a7b7f;
+  --viz-muted: #686e6c;
+  --sepia: #8a6a5e;
 
   /* --- type --- */
   --font-display: Fraunces, Georgia, serif;
@@ -32,5 +37,4 @@
   --card-body-size: 17px;
   --card-body-leading: 1.58;
   --card-body-width: 540px;
-
 }

@@ -4,6 +4,7 @@ import { lolomaHour } from "../data/lolomaHour";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
+import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./LolomaHour.module.css";
 
 const formatWhole = format(",");
@@ -84,11 +85,11 @@ export function LolomaHour() {
 
   return (
     <figure
-      className={styles.figure}
+      className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
       ref={ref}
       aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours contributed, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions at ${lolomaHour.yearOne.properties} properties. Reported outcomes are separate totals: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
     >
-      <div className={styles.sticky}>
+      <div className={visualizationStyles.stickyCenter}>
         <header className={styles.header}>
           <h3>What 17,407 hours looked like</h3>
           <p>Loloma Hour · {lolomaHour.yearOne.period}</p>

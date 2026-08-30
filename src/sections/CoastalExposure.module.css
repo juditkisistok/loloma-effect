@@ -22,7 +22,7 @@
   font-size: 12px;
   line-height: 1.45;
   letter-spacing: 0;
-  color: #686e6c;
+  color: var(--viz-muted);
 }
 .yearKey {
   position: absolute;
@@ -210,12 +210,6 @@
 .caption a { color: inherit; text-decoration-color: rgba(17, 17, 17, 0.35); text-underline-offset: 0.18em; }
 .caption a:hover,
 .caption a:focus-visible { color: #111; }
-.sourceLine {
-  display: block;
-  margin-top: 7px;
-  color: #797d7b;
-}
-
 @media (max-width: 760px) {
   .figure { width: auto; height: 160vh; margin: 0 20px; }
   .sticky { top: max(18px, 5vh); }

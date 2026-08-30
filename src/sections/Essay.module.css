@@ -6,7 +6,7 @@
   z-index: 3;
   min-height: 100vh;
   padding: 10vh 0 18vh;
-  background: #f7f7f5;
+  background: var(--story-surface);
   color: var(--ink);
 }
 
@@ -23,7 +23,7 @@
   font-weight: 600;
   line-height: 1.08;
   margin: 0;
-  color: #111;
+  color: var(--ink-strong);
   text-wrap: balance;
 }
 
@@ -37,12 +37,12 @@
 }
 
 .byline a {
-  color: #111;
+  color: var(--ink-strong);
   border-bottom-color: rgba(17, 17, 17, 0.55);
 }
 
 .byline a:hover {
-  color: #111;
+  color: var(--ink-strong);
   border-bottom-color: rgba(17, 17, 17, 0.85);
 }
 
@@ -117,7 +117,7 @@
   border-bottom: 1px dashed rgba(15, 135, 124, 0.55);
   border-radius: 0;
   background: transparent;
-  color: #0f877c;
+  color: var(--teal-deep);
   font: inherit;
   font-weight: 700;
   line-height: 1;
@@ -157,14 +157,14 @@
 .inlineOption:hover,
 .inlineOption:focus-visible {
   background: rgba(15, 135, 124, 0.08);
-  color: #0f877c;
+  color: var(--teal-deep);
 }
 
 .dataBlock {
   width: 100%;
   min-width: 0;
   padding: var(--space-data-pad) 0;
-  background: #efefeb;
+  background: var(--viz-surface);
 }
 
 @media (max-width: 760px) {

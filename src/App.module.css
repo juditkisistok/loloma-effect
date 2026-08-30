@@ -2,23 +2,3 @@
   position: relative;
   background: var(--deep);
 }
-
-.wrap {
-  position: relative;
-}
-
-.sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 1;
-  background: var(--deep-scene);
-}
-
-.steps {
-  position: relative;
-  margin-top: -100vh;
-  z-index: 2;
-  pointer-events: none;
-}

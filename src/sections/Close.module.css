@@ -1,24 +1,3 @@
-.wrap {
-  position: relative;
-  background: var(--deep);
-}
-
-.sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 1;
-  background: var(--deep-scene);
-}
-
-.steps {
-  position: relative;
-  margin-top: -100vh;
-  z-index: 2;
-  pointer-events: none;
-}
-
 .beat {
   max-width: 680px;
   margin: 0 auto;
@@ -26,44 +5,17 @@
 }
 
 .framing {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--card-body-size);
-  line-height: var(--card-body-leading);
-  color: var(--paper-soft);
-  max-width: var(--card-body-width);
   margin: 0;
-  text-wrap: pretty;
   text-shadow: 0 1px 22px rgba(4, 14, 26, 0.85);
 }
 
 .turn {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(21px, 2.45vw, 34px);
-  line-height: 1.2;
-  color: var(--paper);
   max-width: 650px;
   margin: 26px auto 0;
-  text-wrap: balance;
-  text-shadow: 0 2px 30px rgba(4, 14, 26, 0.82);
 }
 
 .beat > .turn:first-child {
   margin-top: 0;
-}
-
-.context {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: clamp(14.5px, 1.45vw, 16.5px);
-  line-height: 1.65;
-  color: var(--mist);
-  max-width: 560px;
-  margin: 22px auto 0;
-  text-wrap: pretty;
-  text-shadow: 0 1px 20px rgba(4, 14, 26, 0.8);
 }
 
 .vinakaLock {

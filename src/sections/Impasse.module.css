@@ -1,32 +1,12 @@
 .statement {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--card-body-size);
-  line-height: var(--card-body-leading);
-  color: var(--paper-soft);
-  max-width: var(--card-body-width);
   margin: 0 auto 18px;
-  text-wrap: pretty;
   text-shadow: 0 1px 22px rgba(4, 14, 26, 0.85);
 }
 
 .body {
-  font-size: var(--card-body-size);
-  line-height: var(--card-body-leading);
-  max-width: var(--card-body-width);
   margin: 0 auto 18px;
-  color: var(--paper-soft);
 }
 
 .turn {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(21px, 2.45vw, 34px);
-  line-height: 1.2;
-  color: var(--paper);
-  max-width: 700px;
   margin: 0 auto;
-  text-wrap: balance;
-  text-shadow: 0 2px 30px rgba(4, 14, 26, 0.82);
 }

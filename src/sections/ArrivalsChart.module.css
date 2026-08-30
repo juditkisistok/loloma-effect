@@ -42,11 +42,15 @@
 }
 
 .caption {
+  max-width: 520px;
+  margin: 16px auto 0;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.02em;
+  line-height: 1.5;
   fill: #777;
   color: #777;
+  text-align: center;
 }
 
 .caption a {
@@ -57,7 +61,7 @@
 
 .caption a:hover,
 .caption a:focus-visible {
-  color: #111;
+  color: var(--ink-strong);
 }
 
 .sourceTerm {
@@ -69,7 +73,7 @@
 }
 
 .sourceTerm:focus-visible {
-  color: #111;
+  color: var(--ink-strong);
   border-bottom-style: solid;
 }
 
@@ -109,7 +113,7 @@
   font-family: var(--font-body);
   font-size: 17px;
   font-weight: 700;
-  fill: #111;
+  fill: var(--ink-strong);
 }
 
 .storyLabels text {
@@ -127,7 +131,7 @@
 
 .line {
   fill: none;
-  stroke: #0f877c;
+  stroke: var(--teal-deep);
   stroke-width: 3.1;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -184,11 +188,11 @@
 
 .latestNote text {
   font-family: var(--font-mono);
-  fill: #111;
+  fill: var(--ink-strong);
 }
 
 .latestDot {
-  fill: #0f877c;
+  fill: var(--teal-deep);
   stroke: none;
 }
 
@@ -201,7 +205,7 @@
 }
 
 .dataDot:focus {
-  fill: #0f877c;
+  fill: var(--teal-deep);
   stroke: rgba(247, 247, 245, 0.96);
   stroke-width: 2;
 }
@@ -222,7 +226,7 @@
 }
 
 .hover circle {
-  fill: #0f877c;
+  fill: var(--teal-deep);
   stroke: rgba(247, 247, 245, 0.92);
   stroke-width: 2.5;
 }
@@ -234,7 +238,7 @@
 }
 
 .hover .hoverAccent {
-  fill: #0f877c;
+  fill: var(--teal-deep);
   stroke: none;
 }
 
@@ -263,13 +267,6 @@
   stroke-linejoin: round;
   pointer-events: stroke;
   cursor: crosshair;
-}
-
-.caption {
-  max-width: 520px;
-  margin: 16px auto 0;
-  line-height: 1.5;
-  text-align: center;
 }
 
 @media (max-width: 760px) {

@@ -1,0 +1,20 @@
+.wrap {
+  position: relative;
+  background: var(--deep);
+}
+
+.sticky {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--deep-scene);
+}
+
+.steps {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+  pointer-events: none;
+}

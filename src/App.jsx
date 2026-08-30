@@ -7,6 +7,7 @@ import { Impasse } from "./sections/Impasse";
 import { Essay } from "./sections/Essay";
 import { Close } from "./sections/Close";
 import styles from "./App.module.css";
+import scrollSceneStyles from "./styles/scrollScene.module.css";
 
 export default function App() {
   return (
@@ -21,12 +22,12 @@ function Stage() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.wrap} ref={wrapRef}>
-        <div className={styles.sticky}>
+      <div className={scrollSceneStyles.wrap} ref={wrapRef}>
+        <div className={scrollSceneStyles.sticky}>
           <Scene />
         </div>
 
-        <div className={styles.steps}>
+        <div className={scrollSceneStyles.steps}>
           <Hero />
           <Knot />
           <Impasse />

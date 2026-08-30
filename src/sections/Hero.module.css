@@ -24,9 +24,6 @@
   margin: 30px auto 0;
 }
 
-/* The part-of-speech marker reads as an annotation, not prose. Small caps keep
-   it in the display face, so it sits with the italic rather than interrupting
-   it — the way a printed dictionary sets its labels. */
 /* The annotations that precede the definition. Both are set roman against the
    italic run — when the surrounding text is italic, emphasis inverts — so they
    read as one dimmed cluster of apparatus rather than as prose.
