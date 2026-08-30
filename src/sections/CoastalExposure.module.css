@@ -1,9 +1,19 @@
 .figure {
-  width: min(1180px, 94vw);
+  width: min(1280px, 94vw);
   height: 150vh;
   margin: 0 auto;
 }
-.sticky { position: sticky; top: max(18px, 10vh); width: 100%; }
+.sticky {
+  position: sticky;
+  top: 18px;
+  display: flex;
+  min-height: calc(100svh - 36px);
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding-top: 0;
+}
 .loading {
   display: grid;
   place-items: center;
@@ -192,7 +202,7 @@
   max-width: 760px;
   margin: 20px auto 0;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: var(--viz-caption-size);
   letter-spacing: 0.01em;
   line-height: 1.55;
   color: #686e6c;
@@ -202,9 +212,9 @@
 .caption a:hover,
 .caption a:focus-visible { color: #111; }
 .sourceMobile { display: none; }
-@media (max-width: 760px) {
-  .figure { width: auto; height: 160vh; margin: 0 20px; }
-  .sticky { top: max(18px, 5vh); }
+@media (max-width: 900px) {
+  .figure { width: auto; height: 155vh; margin: 0 20px; }
+  .sticky { top: 18px; justify-content: flex-start; padding-top: 0; }
   .header { margin-bottom: 12px; }
   .yearKey { top: 0; right: 4px; width: 108px; }
   .yearKey strong { font-size: 29px; }
@@ -233,9 +243,30 @@
     margin-top: 12px;
     padding-top: 14px;
   }
-  .caption { margin-top: 14px; font-size: 11px; line-height: 1.45; text-align: left; }
+  .caption { margin-top: 14px; font-size: var(--viz-caption-mobile-size); line-height: 1.45; text-align: left; }
   .sourceDesktop { display: none; }
   .sourceMobile { display: inline; }
+}
+
+@media (max-width: 760px) {
+  .figure { height: 160vh; }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .factRail p,
+  .factRail span,
+  .factRail small,
+  .contextTitle,
+  .contextDeck { font-size: 12px; }
+  .factRail strong { font-size: 38px; }
+  .rateContext { width: min(285px, 100%); }
+  .contextNote,
+  .caption { font-size: var(--viz-caption-size); }
+}
+
+@media (min-width: 1600px) {
+  .figure { width: min(1600px, 94vw); }
+  .layout { grid-template-columns: minmax(0, 1fr) 290px; gap: 54px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

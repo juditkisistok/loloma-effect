@@ -10,7 +10,7 @@ export function stickyFigureProgress(
 ) {
   if (!element) return 0;
 
-  const topRatio = window.innerWidth <= 760 ? mobileTop : desktopTop;
+  const topRatio = window.innerWidth <= 900 ? mobileTop : desktopTop;
   const stickyTop = Math.max(18, window.innerHeight * topRatio);
   const stickyHeight = element.firstElementChild?.offsetHeight ?? 0;
   const travel = Math.max(element.offsetHeight - stickyHeight - stickyTop, 1);

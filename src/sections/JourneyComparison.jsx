@@ -73,7 +73,7 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
       className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
       ref={figureRef}
     >
-      <div className={visualizationStyles.stickyCenter}>
+      <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
       <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
         <h3>One return journey to Nadi</h3>
         <p>

@@ -1,4 +1,4 @@
-.figure { width: min(1180px, 94vw); }
+.figure { width: min(1280px, 94vw); }
 .header { margin: 0 0 32px; }
 .caption { font-family: var(--font-mono); color: var(--viz-muted); }
 .contentGrid {
@@ -82,9 +82,9 @@
   fill: #617071;
 }
 .orbitLabel { font-size: 9px; }
-.orbitLabelDetail { font-size: 8px; letter-spacing: 0.035em; }
-.orbitContext { font-size: 7.25px; letter-spacing: 0.035em; }
-.orbitUnit { font-size: 8px; }
+.orbitLabelDetail { font-size: 9px; letter-spacing: 0.035em; }
+.orbitContext { font-size: 8.5px; letter-spacing: 0.035em; }
+.orbitUnit { font-size: 9px; }
 .activityLegend {
   display: grid;
   grid-template-columns: repeat(2, max-content);
@@ -132,7 +132,7 @@
 .outcomesHeading { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
 .outcomesHeading span {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--viz-caption-size);
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #5e6c6d;
@@ -200,8 +200,8 @@
 }
 .caption a { color: inherit; text-decoration-color: rgba(15, 135, 124, 0.45); text-underline-offset: 2px; }
 
-@media (max-width: 760px) {
-  .figure { width: auto; height: 220vh; margin: 0 20px; }
+@media (max-width: 900px) {
+  .figure { width: auto; height: 170vh; margin: 0 20px; }
   .header { margin-bottom: 22px; }
   .contentGrid {
     display: grid;
@@ -241,11 +241,30 @@
   .outcome span { font-size: 11px; }
   .caption {
     margin-top: 18px;
-    font-size: 11px;
+    font-size: var(--viz-caption-mobile-size);
     text-align: left;
     opacity: var(--mobile-caption-opacity);
     transition: opacity 180ms ease;
   }
+}
+
+@media (max-width: 760px) {
+  .figure { height: 220vh; }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .metric span { font-size: 12px; }
+  .outcome strong { font-size: 20px; }
+  .outcome span,
+  .caption { font-size: var(--viz-caption-size); }
+}
+
+@media (min-width: 1600px) {
+  .figure { width: min(1600px, 94vw); }
+  .contentGrid { grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr); gap: 82px; }
+  .summaryColumn { padding-right: 82px; }
+  .orbitChart { width: min(400px, 100%); }
+  .outcomeImage { width: 142px; height: 126px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

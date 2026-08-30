@@ -14,7 +14,7 @@ export function RelocationDecision() {
   const [progress, setProgress] = useState(0);
   const [hoveredId, setHoveredId] = useState("completed-vunidogoloa");
   const dots = useMemo(() => buildDots(), []);
-  const isMobile = useMediaQuery("(max-width: 760px)");
+  const isMobile = useMediaQuery("(max-width: 900px)");
 
   useFrame((frame) => {
     const el = ref.current;

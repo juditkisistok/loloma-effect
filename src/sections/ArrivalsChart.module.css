@@ -1,5 +1,5 @@
 .figure {
-  width: min(1180px, 94vw);
+  width: min(1280px, 94vw);
   height: 170vh;
   margin: 0 auto;
   padding: 0;
@@ -10,9 +10,11 @@
   top: 18px;
   display: flex;
   min-height: calc(100svh - 36px);
+  box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  padding-top: 0;
 }
 
 .header {
@@ -23,7 +25,7 @@
 .svg {
   display: block;
   width: 100%;
-  max-width: 1180px;
+  max-width: 1280px;
   height: auto;
   margin: 0 auto;
   overflow: visible;
@@ -54,7 +56,7 @@
   max-width: 520px;
   margin: 16px auto 0;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--viz-caption-size);
   letter-spacing: 0.02em;
   line-height: 1.5;
   fill: #777;
@@ -287,14 +289,16 @@
   cursor: crosshair;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .figure {
     width: 100%;
-    height: 235vh;
+    height: 200vh;
   }
 
   .sticky {
     top: 18px;
+    justify-content: flex-start;
+    padding-top: 0;
   }
 
   .scrollWrap {
@@ -319,7 +323,7 @@
     max-width: 340px;
     margin: 12px auto 0;
     padding: 0 16px;
-    font-size: 10.5px;
+    font-size: var(--viz-caption-mobile-size);
     line-height: 1.4;
     text-align: left;
   }
@@ -347,6 +351,19 @@
   .interruptionLabel {
     font-size: 10px;
   }
+}
+
+@media (max-width: 760px) {
+  .figure { height: 235vh; }
+}
+
+@media (min-width: 761px) and (max-width: 900px) {
+  .caption { font-size: var(--viz-caption-size); }
+}
+
+@media (min-width: 1600px) {
+  .figure { width: min(1600px, 94vw); }
+  .svg { max-width: 1600px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

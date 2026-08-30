@@ -277,7 +277,7 @@ export function Essay() {
             Change Act.
             <Ref
               n="14"
-              href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
+              href="https://parliament.gov.fj/wp-content/uploads/2021/09/Act-No.-43-Climate-Change.pdf"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
           </p>
@@ -302,7 +302,7 @@ export function Essay() {
             relocating and host communities to be taken into account.
             <Ref
               n="16"
-              href="https://www.laws.gov.fj/Acts/ViewSection/131378?query=climate+change"
+              href="https://parliament.gov.fj/wp-content/uploads/2021/09/Act-No.-43-Climate-Change.pdf"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
           </p>

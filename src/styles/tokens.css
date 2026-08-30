@@ -28,6 +28,13 @@
   --viz-muted: #686e6c;
   --sepia: #8a6a5e;
 
+  /* --- shared data-visualisation hierarchy --- */
+  --viz-title-size: 20px;
+  --viz-subtitle-size: 13px;
+  --viz-caption-size: 12px;
+  --viz-caption-mobile-size: 11px;
+  --viz-frame-top: clamp(24px, 4vh, 40px);
+
   /* --- type --- */
   --font-display: Fraunces, Georgia, serif;
   --font-body: Inter, system-ui, sans-serif;

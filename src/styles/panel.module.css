@@ -46,7 +46,7 @@
   text-shadow: 0 2px 30px rgba(4, 14, 26, 0.82);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .panel {
     padding: 34px 24px;
     -webkit-backdrop-filter: none;

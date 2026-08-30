@@ -5,8 +5,8 @@ const rows = [
     name: "Visitor arrivals",
     source: "Pacific Data Hub / SPC; Fiji Bureau of Statistics",
     url: "https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals",
-    method: "Annual TOUR series. Pacific Data supplies 1995–2023. The SPC extract lists 928,938 arrivals for 2024; Fiji's national statistical authority reports 982,938, consistent with its published 5.7% annual increase. The visual therefore uses Fiji Bureau of Statistics values for 2024 and provisional 2025. Same-day excursionists are excluded so every year uses one definition.",
-    licence: "Pacific Data Hub: Other (Open); the 2024–2025 national values are cited at source.",
+    method: "Annual TOUR series. Pacific Data supplies 1995–2023. Its current extract lists 928,938 arrivals for 2024; Fiji's national statistical authority reports 982,938 in its current tourism table, consistent with the 5.7% increase announced in its initial provisional release. The visual therefore uses the current Fiji Bureau of Statistics total for 2024 and its provisional total for 2025. Same-day excursionists are excluded so every year uses one definition.",
+    licence: "Pacific Data Hub: Other (Open). The two supplemental official totals are quoted as attributed published facts; no Fiji Bureau of Statistics file is redistributed.",
   },
   {
     name: "Shoreline snapshots",
@@ -27,14 +27,14 @@ const rows = [
     source: "Fiji Climate Change Division / UNOSAT; Parliament of Fiji; geoBoundaries",
     url: "https://www.geoboundaries.org/countryDownloads.html",
     method: "Public coordinates from the 2023 completed-relocation and 2022 adaptation-survey layers. The 43-community figure is a 2025 national screening total, not 43 mapped relocation sites.",
-    licence: "gbOpen boundary: CC BY 4.0; source GIS attribution retained.",
+    licence: "gbOpen boundary: CC BY 4.0. Public GIS coordinates are quoted with source attribution; no underlying UNOSAT file is redistributed.",
   },
   {
     name: "Loloma Hour",
     source: "Tourism Fiji",
     url: "https://www.fiji.travel/loloma-hour",
     method: "Annual-results totals transcribed from Tourism Fiji. The 17,407 hours comprise wildlife (4,581), reef (3,390), community (5,672) and coastline (3,764) activities. Each circular ring represents 5,000 hours—the programme's first-year target—and categories continue from one ring to the next. The four illustrated outcomes are additional programme totals; image size is decorative, not proportional.",
-    licence: "Numeric facts transcribed from official programme reporting; source attribution retained.",
+    licence: "Official programme totals are quoted with source attribution; no Tourism Fiji source file is redistributed.",
   },
   {
     name: "Illustrative imagery",

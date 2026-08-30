@@ -137,7 +137,7 @@ export function Scene({
   const mistRef = useRef(null);
 
   useFrame((frame) => {
-    const nextTone = frame.span(toneStart, toneEnd);
+    const nextTone = frame.reduced ? 1 : frame.span(toneStart, toneEnd);
     if (Math.abs(toneRef.current - nextTone) <= 0.0005) return;
 
     toneRef.current = nextTone;

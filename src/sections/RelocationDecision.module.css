@@ -1,5 +1,5 @@
 .figure {
-  width: min(1320px, 96vw);
+  width: min(1240px, 94vw);
   padding: 0;
 }
 
@@ -190,7 +190,7 @@
   max-width: 720px;
   margin: 12px auto 0;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--viz-caption-size);
   letter-spacing: 0.01em;
   line-height: 1.5;
   color: #777;
@@ -212,10 +212,10 @@
   display: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .figure {
     width: auto;
-    height: 190vh;
+    height: 150vh;
     margin: 0 20px;
   }
 
@@ -264,7 +264,7 @@
     gap: 8px 18px;
     margin-top: 4px;
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--viz-caption-mobile-size);
     color: #5f6f72;
   }
   .mobileLegend span { display: inline-flex; align-items: center; gap: 7px; }
@@ -329,6 +329,32 @@
   }
   .sourceDesktop { display: none; }
   .sourceMobile { display: inline; }
+}
+
+@media (max-width: 760px) {
+  .figure { height: 190vh; }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .mobileCounts span { font-size: 12.5px; }
+  .mobileLegend,
+  .caption { font-size: var(--viz-caption-size); }
+  .mobilePanel h4 { font-size: 23px; }
+  .mobilePanel strong { font-size: 13px; }
+  .mobileSummary { font-size: 15px; }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .countPair text:not(.bigCount),
+  .panelStatus,
+  .detailSummary { font-size: 13px !important; }
+  .bigCount { font-size: 46px !important; }
+  .panelTitle { font-size: 19px !important; }
+  .legend text { font-size: 11px; }
+}
+
+@media (min-width: 1600px) {
+  .figure { width: min(1680px, 94vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {

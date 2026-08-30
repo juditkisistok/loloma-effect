@@ -146,4 +146,11 @@
   .shimmer {
     animation: none;
   }
+
+  .stars,
+  .lights,
+  .collage,
+  .collageImg {
+    transition: none;
+  }
 }

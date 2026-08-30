@@ -18,6 +18,13 @@ export function Close() {
 
   useFrame((frame) => {
     if (!loadCloseScene) return;
+    if (frame.reduced) {
+      setCoralsOn((current) => (current ? current : true));
+      setLights((current) =>
+        current.on && current.climb === 1 ? current : { on: true, climb: 1 },
+      );
+      return;
+    }
     const coralProgress = frame.act("close2");
     const nextCoralsOn = coralProgress > 0.03;
     setCoralsOn((current) => (current !== nextCoralsOn ? nextCoralsOn : current));
@@ -51,7 +58,7 @@ export function Close() {
       </div>
 
       <div className={scrollSceneStyles.steps}>
-        <Act name="close1" align="center" height="110vh">
+        <Act name="close1" align="center" height="100vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={`${panelStyles.panelBody} ${styles.framing}`}>
               We tend to think about travel in terms of what we take home.
@@ -72,7 +79,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close2" align="center" height="120vh">
+        <Act name="close2" align="center" height="108vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={`${panelStyles.panelTurn} ${styles.turn}`}>
               Loloma Hour asks what might move in the other direction.
@@ -91,7 +98,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close3" align="center" height="145vh">
+        <Act name="close3" align="center" height="124vh">
           <Card className={`${panelStyles.panel} ${styles.beat}`}>
             <p className={`${panelStyles.panelBody} ${styles.framing}`}>
               Fiji cannot simply ask people to stop coming — nor can an hour
@@ -107,7 +114,7 @@ export function Close() {
           </Card>
         </Act>
 
-        <Act name="close4" align="start" height="115vh">
+        <Act name="close4" align="start" height="140vh">
           <div className={styles.vinakaLock}>
             <Card>
               <p className={styles.vinaka}>Vinaka.</p>

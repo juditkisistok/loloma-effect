@@ -1,12 +1,12 @@
 import { extent, format, line, max, pointer, scaleLinear } from "d3";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
 import visualizationStyles from "../styles/visualization.module.css";
 import styles from "./ArrivalsChart.module.css";
 
-const maxWidth = 1180;
+const maxWidth = 1400;
 const height = 392;
 const desktopMargin = { top: 82, right: 24, bottom: 38, left: 58 };
 const storyEndYear = 2025;
@@ -47,6 +47,12 @@ export function ArrivalsChart({ rows = [] }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const clearTouchSelection = () => setHovered(null);
+    window.addEventListener("scroll", clearTouchSelection, { passive: true });
+    return () => window.removeEventListener("scroll", clearTouchSelection);
+  }, []);
+
   useFrame((frame) => {
     const el = ref.current;
     if (!el) return;
@@ -58,7 +64,7 @@ export function ArrivalsChart({ rows = [] }) {
     const next = stickyFigureProgress(el, {
       desktopTop: 0.18,
       mobileTop: 0.18,
-      hold: window.innerWidth <= 760 ? 0.3 : 0.18,
+      hold: window.innerWidth <= 900 ? 0.3 : 0.18,
     });
 
     setProgress((current) =>
@@ -150,6 +156,7 @@ export function ArrivalsChart({ rows = [] }) {
         }}
         onBlur={() => setHovered(null)}
         onPointerLeave={() => setHovered(null)}
+        onPointerCancel={() => setHovered(null)}
       >
         <defs>
           <pattern
@@ -342,6 +349,7 @@ export function ArrivalsChart({ rows = [] }) {
           onPointerMove={handlePointerMove}
           onPointerDown={handlePointerMove}
           onPointerLeave={() => setHovered(null)}
+          onPointerCancel={() => setHovered(null)}
         />
       </svg>
           <span className={styles.srOnly} aria-live="polite">

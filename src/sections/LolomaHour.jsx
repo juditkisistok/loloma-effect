@@ -2,6 +2,7 @@ import { format } from "d3";
 import { useRef, useState } from "react";
 import { lolomaHour } from "../data/lolomaHour";
 import { useNearViewport } from "../hooks/useNearViewport";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import { clamp } from "../lib/math";
 import { useFrame } from "../scroll/stageContext";
 import { stickyFigureProgress } from "../scroll/stickyFigure";
@@ -55,6 +56,7 @@ export function LolomaHour() {
   const [progress, setProgress] = useState(0);
   const [activeActivityId, setActiveActivityId] = useState(null);
   const loadOutcomeImages = useNearViewport(ref);
+  const isCompact = useMediaQuery("(max-width: 900px)");
 
   useFrame((frame) => {
     const el = ref.current;
@@ -84,10 +86,10 @@ export function LolomaHour() {
     (activity) => activity.id === activeActivityId,
   );
   const visibleActivityHours = lolomaHour.yearOne.hours * ringReveal;
-  const showResultsScene = progress >= 0.72;
-  const summarySceneOpacity = showResultsScene ? 0 : 1;
-  const resultsSceneOpacity = showResultsScene ? 1 : 0;
-  const mobileCaptionOpacity = clamp((progress - 0.78) / 0.12, 0, 1);
+  const showResultsScene = progress >= 0.78;
+  const summarySceneOpacity = 1 - clamp((progress - 0.75) / 0.12, 0, 1);
+  const resultsSceneOpacity = clamp((progress - 0.7) / 0.12, 0, 1);
+  const mobileCaptionOpacity = clamp((progress - 0.8) / 0.12, 0, 1);
 
   return (
     <figure
@@ -106,6 +108,8 @@ export function LolomaHour() {
           <div
             className={styles.summaryColumn}
             style={{ "--mobile-scene-opacity": summarySceneOpacity }}
+            aria-hidden={isCompact ? showResultsScene : undefined}
+            inert={isCompact && showResultsScene ? true : undefined}
           >
             <div className={styles.metric}>
               <strong>{formatWhole(displayedHours)}</strong>
@@ -216,6 +220,7 @@ export function LolomaHour() {
                     onFocus={() => setActiveActivityId(activity.id)}
                     onBlur={() => setActiveActivityId(null)}
                     onClick={() => setActiveActivityId(activity.id)}
+                    tabIndex={isCompact && showResultsScene ? -1 : 0}
                   >
                     <i />
                     <span>{activity.label}</span>
@@ -229,6 +234,8 @@ export function LolomaHour() {
           <div
             className={styles.resultsColumn}
             style={{ "--mobile-scene-opacity": resultsSceneOpacity }}
+            aria-hidden={isCompact ? !showResultsScene : undefined}
+            inert={isCompact && !showResultsScene ? true : undefined}
           >
             <div className={styles.outcomesHeading}><span>REPORTED OUTCOMES</span><i /></div>
             <div className={styles.outcomes}>
