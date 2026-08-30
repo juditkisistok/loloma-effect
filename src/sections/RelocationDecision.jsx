@@ -9,6 +9,11 @@ import styles from "./RelocationDecision.module.css";
 
 const { width } = fijiBoundary.dimensions;
 
+const softReveal = (progress, start, end) => {
+  const t = clamp((progress - start) / (end - start), 0, 1);
+  return t * t * (3 - 2 * t);
+};
+
 export function RelocationDecision() {
   const ref = useRef(null);
   const [progress, setProgress] = useState(0);
@@ -34,11 +39,14 @@ export function RelocationDecision() {
     );
   });
 
-  // Establish the map early, then leave most of the sticky sequence for
-  // reading and exploration instead of holding the marks in a faint state.
+  // Keep the mobile sequence compact. On desktop, let readers land on the
+  // geography first, then introduce completed moves, surveys and the panel.
   const relocatedReveal = clamp(progress / 0.12, 0, 1);
   const assessmentReveal = clamp((progress - 0.04) / 0.18, 0, 1);
-  const panelReveal = clamp((progress - 0.16) / 0.22, 0, 1);
+  const panelReveal = isMobile
+    ? clamp((progress - 0.16) / 0.22, 0, 1)
+    : softReveal(progress, 0.68, 0.88);
+  const legendReveal = isMobile ? 1 : softReveal(progress, 0.3, 0.48);
   const hovered = dots.find((dot) => dot.id === hoveredId);
   const panel = hovered ?? defaultPanel;
 
@@ -82,19 +90,25 @@ export function RelocationDecision() {
           ))}
 
           {dots.map((dot, index) => {
-            const reveal =
-              dot.type === "relocated"
+            const assessmentIndex = index - fijiBoundary.completed.length;
+            const reveal = isMobile
+              ? dot.type === "relocated"
                 ? clamp((relocatedReveal - index * 0.05) / 0.24, 0, 1)
                 : clamp(
-                    (assessmentReveal -
-                      (index - fijiBoundary.completed.length) * 0.018) /
-                      0.18,
+                    (assessmentReveal - assessmentIndex * 0.018) / 0.18,
                     0,
                     1,
+                  )
+              : dot.type === "relocated"
+                ? softReveal(progress, 0.04 + index * 0.03, 0.2 + index * 0.03)
+                : softReveal(
+                    progress,
+                    0.36 + assessmentIndex * 0.011,
+                    0.52 + assessmentIndex * 0.011,
                   );
             const selected = dot.id === hoveredId;
             return (
-              <g key={dot.id} opacity={0.5 + reveal * 0.5}>
+              <g key={dot.id} opacity={isMobile ? 0.5 + reveal * 0.5 : reveal}>
                 <circle
                   className={`${styles.dotPulse} ${
                     dot.type === "relocated"
@@ -121,7 +135,11 @@ export function RelocationDecision() {
           })}
         </g>
 
-        <g className={styles.legend} transform="translate(240 470)">
+        <g
+          className={styles.legend}
+          transform="translate(240 470)"
+          opacity={legendReveal}
+        >
           <circle className={styles.relocatedDot} cx="0" cy="0" r="4.5" />
           <text x="13" y="4">
             completed move

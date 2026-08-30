@@ -214,9 +214,8 @@ export function CoastalExposure() {
             (Landsat, 30 m). Full selection method below.
           </span>
           <span className={styles.sourceMobile}>
-            Thin lines are the four measured shorelines; the thick line moves
-            between them. The circled +{chart.hotspot.rate.toFixed(2)} m/yr rate
-            is a nearby local estimate, not an island average. Source:{" "}
+            Thin lines mark four observations; the thick line moves between
+            them. The circled rate is local, not an island average. Source:{" "}
             <a
               href={shorelineData.source.url}
               target="_blank"
@@ -224,7 +223,7 @@ export function CoastalExposure() {
             >
               Pacific Data Hub Annual Shorelines
             </a>{" "}
-            (Landsat, 30 m). Full method below.
+            (Landsat, 30 m). Method below.
           </span>
         </figcaption>
       </div>

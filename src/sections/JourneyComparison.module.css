@@ -194,6 +194,7 @@
 
 @media (max-width: 760px) {
   .figure { height: 230vh; }
+  .sticky { justify-content: center; }
 }
 
 @media (min-width: 761px) and (max-width: 900px) {

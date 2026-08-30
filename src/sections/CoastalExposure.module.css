@@ -257,6 +257,41 @@
 
 @media (max-width: 760px) {
   .figure { height: 205vh; }
+  .sticky { justify-content: center; }
+  .layout { gap: 18px; }
+  .factRail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-bottom: 14px;
+    text-align: center;
+  }
+  .factRail p { order: 1; }
+  .factRail strong {
+    order: 2;
+    margin: 6px 0 4px;
+  }
+  .factRail span { order: 3; max-width: 250px; }
+  .factRail small { order: 4; margin-top: 7px; }
+  .rateContext {
+    order: 5;
+    width: min(280px, 100%);
+    margin-top: 16px;
+    padding-top: 14px;
+    text-align: left;
+  }
+  .contextChart {
+    height: 122px;
+    margin-top: 8px;
+  }
+  .contextNote {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .plotWrap { padding-top: 62px; }
+  .svg { height: 160px; }
+  .caption { margin-top: 10px; line-height: 1.4; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {

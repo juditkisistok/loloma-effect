@@ -211,13 +211,14 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: "scene";
+    align-items: center;
     gap: 0;
     min-height: 400px;
   }
   .summaryColumn,
   .resultsColumn {
     grid-area: scene;
-    align-self: start;
+    align-self: center;
     transition: none;
   }
   .summaryColumn {
@@ -227,8 +228,10 @@
     transition: opacity 220ms ease-out;
   }
   .resultsColumn {
-    align-self: stretch;
-    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
     padding-top: 0;
     border-top: 0;
     background: transparent;
@@ -255,16 +258,24 @@
   .outcome strong { font-size: 19px; }
   .outcome span { font-size: 11px; }
   .caption {
-    margin-top: 18px;
+    max-height: calc(var(--mobile-caption-opacity) * 120px);
+    margin-top: calc(var(--mobile-caption-opacity) * 18px);
+    overflow: hidden;
     font-size: var(--viz-caption-mobile-size);
     text-align: left;
     opacity: var(--mobile-caption-opacity);
-    transition: opacity 180ms ease;
+    transition:
+      opacity 180ms ease,
+      max-height 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      margin-top 240ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
 @media (max-width: 760px) {
   .figure { height: 285vh; }
+  .sticky { justify-content: center; }
+  .contentGrid { min-height: min(430px, 56svh); }
+  .resultsColumn { min-height: min(430px, 56svh); }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
