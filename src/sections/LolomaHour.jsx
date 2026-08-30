@@ -80,16 +80,18 @@ export function LolomaHour() {
   // Complete the rings before the mobile layout hands off to the outcomes.
   // The short hold at full value makes the 3.5× comparison readable as a
   // finished thought instead of letting the next scene interrupt it.
-  const ringReveal = clamp(progress / 0.58, 0, 1);
+  const ringReveal = clamp(progress / 0.62, 0, 1);
   const displayedMultiple = targetMultiple * ringReveal;
   const activeActivity = lolomaHour.yearOne.activityHours.find(
     (activity) => activity.id === activeActivityId,
   );
   const visibleActivityHours = lolomaHour.yearOne.hours * ringReveal;
-  const showResultsScene = progress >= 0.84;
-  const summarySceneOpacity = 1 - clamp((progress - 0.82) / 0.08, 0, 1);
-  const resultsSceneOpacity = clamp((progress - 0.76) / 0.14, 0, 1);
-  const mobileCaptionOpacity = clamp((progress - 0.84) / 0.1, 0, 1);
+  const mobileResultsPhase = clamp((progress - 0.84) / 0.14, 0, 1);
+  const showResultsScene = progress >= 0.9;
+  const summarySceneOpacity = 1 - clamp((progress - 0.8) / 0.12, 0, 1);
+  const resultsSceneOpacity = mobileResultsPhase;
+  const resultsHeadingOpacity = clamp((progress - 0.89) / 0.08, 0, 1);
+  const mobileCaptionOpacity = clamp((progress - 0.92) / 0.06, 0, 1);
 
   return (
     <figure
@@ -98,7 +100,7 @@ export function LolomaHour() {
       ref={ref}
       aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours contributed, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions at ${lolomaHour.yearOne.properties} properties. Reported outcomes are separate totals: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
     >
-      <div className={visualizationStyles.stickyCenter}>
+      <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
         <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <h3>What 17,407 hours looked like</h3>
           <p>Loloma Hour · {lolomaHour.yearOne.period}</p>
@@ -233,14 +235,27 @@ export function LolomaHour() {
 
           <div
             className={styles.resultsColumn}
-            style={{ "--mobile-scene-opacity": resultsSceneOpacity }}
+            style={{
+              "--mobile-scene-opacity": resultsSceneOpacity,
+              "--mobile-heading-opacity": resultsHeadingOpacity,
+            }}
             aria-hidden={isCompact ? !showResultsScene : undefined}
             inert={isCompact && !showResultsScene ? true : undefined}
           >
             <div className={styles.outcomesHeading}><span>REPORTED OUTCOMES</span><i /></div>
             <div className={styles.outcomes}>
               {lolomaHour.yearOne.outcomes.map((outcome, index) => {
-                const reveal = clamp((progress - (0.1 + index * 0.08)) / 0.22, 0, 1);
+                const reveal = isCompact
+                  ? clamp(
+                      (mobileResultsPhase - index * 0.055) / 0.72,
+                      0,
+                      1,
+                    )
+                  : clamp(
+                      (progress - (0.1 + index * 0.08)) / 0.22,
+                      0,
+                      1,
+                    );
                 return (
                   <div
                     className={styles.outcome}

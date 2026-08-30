@@ -213,10 +213,16 @@
 .caption a:focus-visible { color: #111; }
 .sourceMobile { display: none; }
 @media (max-width: 900px) {
-  .figure { width: auto; height: 155vh; margin: 0 20px; }
-  .sticky { top: 18px; justify-content: flex-start; padding-top: 0; }
+  .figure { width: auto; height: 185vh; margin: 0 20px; }
+  .sticky { top: 18px; justify-content: center; padding-top: 0; }
   .header { margin-bottom: 12px; }
-  .yearKey { top: 0; right: 4px; width: 108px; }
+  .plotWrap { padding-top: 68px; }
+  .yearKey {
+    top: 0;
+    right: 50%;
+    width: 132px;
+    transform: translateX(50%);
+  }
   .yearKey strong { font-size: 29px; }
   .yearEnds { font-size: 11px; }
   .layout {
@@ -240,7 +246,8 @@
   .rateContext {
     grid-column: 1 / -1;
     width: min(250px, 100%);
-    margin-top: 12px;
+    justify-self: center;
+    margin: 16px auto 0;
     padding-top: 14px;
   }
   .caption { margin-top: 14px; font-size: var(--viz-caption-mobile-size); line-height: 1.45; text-align: left; }
@@ -249,11 +256,42 @@
 }
 
 @media (max-width: 760px) {
-  .figure { height: 160vh; }
+  .figure { height: 205vh; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
   .sticky { justify-content: center; }
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 230px;
+    grid-template-areas: "plot fact";
+    gap: 24px;
+    align-items: center;
+  }
+  .plotWrap { width: auto; margin: 0; }
+  .factRail {
+    display: block;
+    padding: 0 0 0 20px;
+    border-bottom: 0;
+    border-left: 1px solid rgba(17, 17, 17, 0.14);
+  }
+  .factRail p { display: block; }
+  .factRail strong {
+    display: block;
+    margin: 10px 0 7px;
+    font-size: 34px;
+  }
+  .factRail span { display: block; }
+  .factRail small {
+    display: block;
+    margin: 9px 0 0;
+    white-space: normal;
+  }
+  .rateContext {
+    display: block;
+    width: 100%;
+    margin: 20px 0 0;
+    padding-top: 16px;
+  }
   .factRail p,
   .factRail span,
   .factRail small,

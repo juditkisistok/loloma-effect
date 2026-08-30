@@ -204,7 +204,8 @@
 .caption a { color: inherit; text-decoration-color: rgba(15, 135, 124, 0.45); text-underline-offset: 2px; }
 
 @media (max-width: 900px) {
-  .figure { width: auto; height: 230vh; margin: 0 20px; }
+  .figure { width: auto; height: 260vh; margin: 0 20px; }
+  .sticky { justify-content: center; }
   .header { margin-bottom: 22px; }
   .contentGrid {
     display: grid;
@@ -230,14 +231,16 @@
     min-height: 100%;
     padding-top: 0;
     border-top: 0;
-    background: var(--viz-surface);
+    background: transparent;
     opacity: 1;
-    clip-path: inset(0 0 calc((1 - var(--mobile-scene-opacity)) * 100%) 0);
-    transform: translateY(calc((1 - var(--mobile-scene-opacity)) * 8px));
+    transform: none;
+  }
+  .resultsColumn .outcomesHeading {
+    opacity: var(--mobile-heading-opacity);
+    transform: translateY(calc((1 - var(--mobile-heading-opacity)) * 10px));
     transition:
-      clip-path 260ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: clip-path, transform;
+      opacity 220ms ease-out,
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .metric strong { font-size: 64px; }
   .metric span { font-size: 11px; }
@@ -261,7 +264,7 @@
 }
 
 @media (max-width: 760px) {
-  .figure { height: 250vh; }
+  .figure { height: 285vh; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {

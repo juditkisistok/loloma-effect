@@ -246,6 +246,7 @@ export function ArrivalsChart({ rows = [] }) {
         <path
           className={styles.line}
           d={chart.linePath}
+          clipPath="url(#arrivals-reveal)"
           pathLength="1"
           style={{
             strokeDasharray: 1,
