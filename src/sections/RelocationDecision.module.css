@@ -302,7 +302,7 @@
   .mobilePanel h4 {
     margin: 0 0 8px;
     font-family: var(--font-body);
-    font-size: 21px;
+    font-size: 18px;
     color: #111;
   }
   .mobilePanel strong {
@@ -346,7 +346,7 @@
   }
   .mobileCounts strong { font-size: 48px; }
   .mobileCounts span { font-size: 12.5px; text-align: center; }
-  .mobilePanel h4 { font-size: 22px; }
+  .mobilePanel h4 { font-size: 18px; }
   .mobilePanel strong { font-size: 13px; }
   .mobileSummary { font-size: 14.5px; }
   .mobilePanel { text-align: center; }
@@ -357,7 +357,7 @@
   .mobileCounts span { font-size: 12.5px; }
   .mobileLegend,
   .caption { font-size: var(--viz-caption-size); }
-  .mobilePanel h4 { font-size: 23px; }
+  .mobilePanel h4 { font-size: 18px; }
   .mobilePanel strong { font-size: 13px; }
   .mobileSummary { font-size: 15px; }
 }
@@ -390,7 +390,7 @@
   .mobileCounts { margin: 14px 0 8px; }
   .mobileMap { max-height: 180px; }
   .mobilePanel { margin-top: 14px; padding-top: 12px; }
-  .mobilePanel h4 { margin-bottom: 5px; font-size: 19px; }
+  .mobilePanel h4 { margin-bottom: 5px; font-size: 17.5px; }
   .mobileSummary { margin-top: 10px; font-size: 13px; line-height: 1.42; }
   .caption { margin-top: 14px; font-size: 9.5px; line-height: 1.35; }
 }
@@ -402,7 +402,7 @@
   .mobileMap { max-height: 142px; }
   .mobileLegend { margin-top: 1px; font-size: 9px; }
   .mobilePanel { margin-top: 9px; padding-top: 9px; }
-  .mobilePanel h4 { font-size: 18px; }
+  .mobilePanel h4 { font-size: 17px; }
   .mobilePanel strong { font-size: 11.5px; }
   .mobileSummary { margin-top: 7px; font-size: 12px; line-height: 1.35; }
   .caption { margin-top: 9px; font-size: 8.75px; line-height: 1.3; }
