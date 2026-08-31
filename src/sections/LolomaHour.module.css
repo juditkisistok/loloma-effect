@@ -284,11 +284,59 @@
   .sticky { justify-content: center; }
 }
 
+@media (max-width: 360px) and (max-height: 600px) {
+  .figure { height: 260vh; }
+  .header { margin-bottom: 10px; }
+  .contentGrid { height: min(var(--mobile-scene-height), 360px) !important; }
+  .metric strong { font-size: 54px; }
+  .metric span { margin-top: 8px; }
+  .metric small { margin-top: 5px; font-size: 10px; }
+  .targetOrbit { width: 250px; margin-top: 10px; }
+  .orbitChart { width: 250px; }
+  .activityLegend { gap: 4px 10px; margin-top: -2px; font-size: 8.5px; }
+  .outcomesHeading { margin-bottom: 12px; }
+  .outcomes { gap: 18px 12px; }
+  .outcome { grid-template-rows: 66px auto auto; }
+  .outcomeImage { width: 70px; height: 66px; }
+  .outcomeImage[data-outcome="rubbish"] img { transform: translateY(18px); }
+  .outcome strong { margin-top: 10px; font-size: 17px; }
+  .outcome span { margin-top: 3px; font-size: 9.5px; }
+  .caption { margin-top: 8px; font-size: 8.75px; line-height: 1.25; }
+}
+
 @media (min-width: 600px) and (max-width: 900px) {
   .metric span { font-size: 12px; }
   .outcome strong { font-size: 20px; }
   .outcome span,
   .caption { font-size: var(--viz-caption-size); }
+}
+
+@media (min-width: 600px) and (max-width: 900px) and (max-height: 700px) {
+  .figure { height: 220vh; }
+  .header { margin-bottom: 12px; }
+  .contentGrid { height: min(var(--mobile-scene-height), 410px) !important; }
+  .caption { margin-top: 10px; }
+}
+
+@media (min-width: 600px) and (max-width: 900px) and (max-height: 500px) {
+  .figure { height: 200vh; }
+  .header { margin-bottom: 4px; }
+  .contentGrid { height: 270px !important; }
+  .metric strong { font-size: 46px; }
+  .metric span { margin-top: 6px; font-size: 9px; }
+  .metric small { margin-top: 4px; font-size: 9px; }
+  .targetOrbit { width: 190px; margin-top: 5px; }
+  .orbitChart { width: 190px; }
+  .activityLegend { gap: 2px 10px; margin-top: -8px; font-size: 8px; }
+  .outcomesHeading { margin-bottom: 8px; }
+  .outcomesHeading span { font-size: 10px; }
+  .outcomes { gap: 10px 16px; }
+  .outcome { grid-template-rows: 50px auto auto; }
+  .outcomeImage { width: 58px; height: 54px; }
+  .outcomeImage[data-outcome="rubbish"] img { transform: translateY(14px); }
+  .outcome strong { margin-top: 8px; font-size: 15px; }
+  .outcome span { margin-top: 2px; font-size: 9px; }
+  .caption { margin-top: 4px; font-size: 9px; line-height: 1.25; }
 }
 
 @media (min-width: 1600px) {

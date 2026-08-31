@@ -148,10 +148,11 @@
 .caption {
   max-width: 720px;
   margin: 34px auto 0;
-  font-size: 13px;
+  font-size: var(--viz-caption-size);
   line-height: 1.55;
   text-align: center;
 }
+
 .caption a { color: inherit; text-underline-offset: 0.18em; }
 .caption a:hover,
 .caption a:focus-visible { color: #111; }
@@ -197,12 +198,56 @@
   .sticky { justify-content: center; }
 }
 
+@media (max-width: 360px) and (max-height: 600px) {
+  .figure { height: 215vh; }
+  .header { margin-bottom: 14px; }
+  .bars { gap: 16px; }
+  .layout { gap: 16px; }
+  .rowHeading { margin-bottom: 7px; }
+  .legend { gap: 4px; margin-top: 8px; font-size: 11px; }
+  .stat { gap: 0 12px; padding-top: 12px; }
+  .stat strong { margin: 2px 0 4px; font-size: 48px; }
+  .stat span { font-size: 11px; line-height: 1.35; }
+  .caption { margin-top: 14px; font-size: 9.5px; line-height: 1.35; }
+}
+
 @media (min-width: 761px) and (max-width: 900px) {
   .sticky { justify-content: center; }
   .rowHeading,
   .rowHeading strong { font-size: 12px; }
   .track { height: 30px; }
   .caption { font-size: var(--viz-caption-size); }
+}
+
+@media (min-width: 600px) and (max-width: 900px) and (max-height: 700px) {
+  .figure { height: 190vh; }
+  .header { margin-bottom: 16px; }
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 170px;
+    grid-template-areas: "bars stat";
+    gap: 28px;
+  }
+  .bars { gap: 18px; }
+  .stat {
+    display: flex;
+    padding: 0 0 0 22px;
+    border-top: 0;
+    border-left: 1px solid rgba(17, 17, 17, 0.15);
+  }
+  .stat p { font-size: 10px; }
+  .stat strong { margin: 3px 0 5px; font-size: 48px; }
+  .stat span { font-size: 11px; line-height: 1.4; }
+  .legend { gap: 6px 18px; margin-top: 9px; font-size: 10.5px; }
+  .caption { margin-top: 16px; font-size: 10.5px; line-height: 1.4; }
+}
+
+@media (min-width: 600px) and (max-width: 900px) and (max-height: 500px) {
+  .header { margin-bottom: 10px; }
+  .bars { gap: 12px; }
+  .rowHeading { margin-bottom: 6px; }
+  .track { height: 24px; }
+  .legend { margin-top: 6px; }
+  .caption { margin-top: 10px; }
 }
 
 @media (min-width: 1100px) {

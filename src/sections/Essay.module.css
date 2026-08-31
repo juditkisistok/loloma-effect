@@ -105,6 +105,13 @@
   hyphens: auto;
 }
 
+@media (max-width: 760px) {
+  .prose p {
+    hyphens: none;
+    overflow-wrap: normal;
+  }
+}
+
 .prose p + p {
   margin-top: 1.08em;
 }

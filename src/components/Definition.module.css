@@ -52,7 +52,7 @@
   transform: translate(-50%, 0);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .popover {
     position: fixed;
     right: 16px;
