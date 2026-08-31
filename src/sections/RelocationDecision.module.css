@@ -1,5 +1,4 @@
 .figure {
-  width: min(1280px, 94vw);
   padding: 0;
 }
 
@@ -213,9 +212,7 @@
 
 @media (max-width: 900px) {
   .figure {
-    width: auto;
     height: 150vh;
-    margin: 0 20px;
   }
 
   .scrollWrap { display: none; }
@@ -335,7 +332,6 @@
 }
 
 @media (max-width: 760px) {
-  .figure { margin: 0 14px; }
   .sticky { justify-content: center; }
   .mobileCounts div {
     grid-template-columns: 1fr;
@@ -423,14 +419,6 @@
   .bigCount { font-size: 46px !important; }
   .panelTitle { font-size: 16px !important; }
   .legend text { font-size: 11px; }
-}
-
-@media (min-width: 901px) and (max-height: 800px) {
-  .figure { width: min(1380px, 94vw); }
-}
-
-@media (min-width: 1600px) {
-  .figure { width: min(1600px, 94vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {

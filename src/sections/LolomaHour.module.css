@@ -1,5 +1,4 @@
 .figure {
-  width: min(1280px, 94vw);
   height: 220vh;
 }
 .header { margin: 0 0 32px; }
@@ -204,7 +203,7 @@
 .caption a { color: inherit; text-decoration-color: rgba(15, 135, 124, 0.45); text-underline-offset: 2px; }
 
 @media (max-width: 900px) {
-  .figure { width: auto; height: 260vh; margin: 0 20px; }
+  .figure { height: 260vh; }
   .sticky { justify-content: center; }
   .header { margin-bottom: 22px; }
   .contentGrid {
@@ -342,7 +341,6 @@
 }
 
 @media (min-width: 1600px) {
-  .figure { width: min(1600px, 94vw); }
   .contentGrid { grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr); gap: 82px; }
   .summaryColumn { padding-right: 82px; }
   .orbitChart { width: min(400px, 100%); }

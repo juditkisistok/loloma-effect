@@ -67,7 +67,7 @@ export function CoastalExposure() {
     return (
       <figure
         id="shoreline-chart"
-        className={styles.figure}
+        className={`${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
         ref={ref}
         aria-busy="true"
       >
@@ -106,7 +106,11 @@ export function CoastalExposure() {
   const currentColor = colorForYear(activeT);
 
   return (
-    <figure id="shoreline-chart" className={styles.figure} ref={ref}>
+    <figure
+      id="shoreline-chart"
+      className={`${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
+      ref={ref}
+    >
       <div className={styles.sticky}>
         <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <div>

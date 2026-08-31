@@ -129,7 +129,11 @@ export function ArrivalsChart({ rows = [] }) {
     : chart.y(chart.latest?.arrivals ?? 0) - 70;
 
   return (
-    <figure id="arrivals-chart" className={styles.figure} ref={ref}>
+    <figure
+      id="arrivals-chart"
+      className={`${visualizationStyles.figureFrame} ${styles.figure}`}
+      ref={ref}
+    >
       <div className={styles.sticky}>
         <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <h3>Visitor arrivals to Fiji</h3>

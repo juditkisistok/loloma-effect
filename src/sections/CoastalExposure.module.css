@@ -1,7 +1,5 @@
 .figure {
-  width: min(1280px, 94vw);
   height: 150vh;
-  margin: 0 auto;
 }
 .sticky {
   position: sticky;
@@ -214,7 +212,7 @@
 .caption a:focus-visible { color: #111; }
 .sourceMobile { display: none; }
 @media (max-width: 900px) {
-  .figure { width: auto; height: 185vh; margin: 0 20px; }
+  .figure { height: 185vh; }
   .sticky { top: 18px; justify-content: center; padding-top: 0; }
   .header { margin-bottom: 12px; }
   .plotWrap { padding-top: 68px; }
@@ -442,7 +440,6 @@
 }
 
 @media (min-width: 1600px) {
-  .figure { width: min(1600px, 94vw); }
   .layout { grid-template-columns: minmax(0, 1fr) 290px; gap: 54px; }
 }
 

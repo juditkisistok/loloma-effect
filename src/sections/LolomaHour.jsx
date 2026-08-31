@@ -96,7 +96,7 @@ export function LolomaHour() {
   return (
     <figure
       id="loloma-hour-chart"
-      className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
+      className={`${visualizationStyles.scrollFigure} ${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
       ref={ref}
       aria-label={`${formatWhole(lolomaHour.yearOne.hours)} hours contributed, ${targetMultiple.toFixed(1)} times the first-year target, across ${formatWhole(lolomaHour.yearOne.sessions)} sessions at ${lolomaHour.yearOne.properties} properties. Reported outcomes are separate totals: ${lolomaHour.yearOne.outcomes.map((outcome) => `${formatOutcome(outcome.value)} ${outcome.label}`).join("; ")}.`}
     >

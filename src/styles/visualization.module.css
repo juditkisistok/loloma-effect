@@ -3,6 +3,15 @@
   margin: 0 auto;
 }
 
+.figureFrame {
+  box-sizing: border-box;
+  width: min(1200px, 90vw);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .stickyCenter {
   position: sticky;
   top: 18px;
@@ -25,6 +34,13 @@
   color: #111;
 }
 
+.figureHeader {
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .figureHeader p {
   margin: 7px 0 0;
   font-family: var(--font-mono);
@@ -35,6 +51,12 @@
 }
 
 @media (max-width: 900px) {
+  .insetFrame {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
   .figureHeader {
     text-align: center;
   }
@@ -46,6 +68,14 @@
     justify-content: flex-start;
     padding-top: 0;
   }
+}
+
+@media (min-width: 1600px) {
+  .figureFrame { width: min(1480px, 90vw); }
+}
+
+@media (min-width: 901px) and (max-height: 800px) {
+  .wideFrame { width: min(1280px, 90vw); }
 }
 
 @media (min-width: 600px) and (max-width: 900px) and (min-height: 700px) {

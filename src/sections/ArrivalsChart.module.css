@@ -1,7 +1,5 @@
 .figure {
-  width: min(1280px, 94vw);
   height: 170vh;
-  margin: 0 auto;
   padding: 0;
 }
 
@@ -376,7 +374,6 @@
 }
 
 @media (min-width: 1600px) {
-  .figure { width: min(1600px, 94vw); }
   .svg { max-width: 1600px; }
 }
 

@@ -55,7 +55,7 @@ export function RelocationDecision() {
   return (
     <figure
       id="relocation-map"
-      className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
+      className={`${visualizationStyles.scrollFigure} ${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${visualizationStyles.wideFrame} ${styles.figure}`}
       ref={ref}
     >
       <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
@@ -71,7 +71,7 @@ export function RelocationDecision() {
         aria-hidden={isMobile}
         aria-label="Interactive Fiji map showing six communities with completed full or partial relocations, 17 public adaptation-survey locations, and a national total of 43 communities screened since 2021."
       >
-        <g className={styles.map}>
+        <g className={styles.map} transform="translate(-70 -10) scale(1.08)">
           {fijiBoundary.paths.map((path) => (
             <path key={path.id} className={styles.land} d={path.d} />
           ))}
@@ -139,7 +139,7 @@ export function RelocationDecision() {
 
         <g
           className={styles.legend}
-          transform="translate(240 470)"
+          transform="translate(200 490)"
           opacity={legendReveal}
         >
           <circle className={styles.relocatedDot} cx="0" cy="0" r="4.5" />
@@ -155,7 +155,7 @@ export function RelocationDecision() {
         <g
           className={styles.panel}
           opacity={panelReveal}
-          transform={`translate(${704 + (1 - panelReveal) * 8} 30)`}
+          transform={`translate(${744 + (1 - panelReveal) * 8} 30)`}
         >
           <line className={styles.panelRail} x1="-28" x2="-28" y1="34" y2="450" />
 
