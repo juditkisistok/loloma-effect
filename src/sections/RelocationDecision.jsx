@@ -9,6 +9,13 @@ import styles from "./RelocationDecision.module.css";
 
 const { width } = fijiBoundary.dimensions;
 
+const overlapOffsets = {
+  "survey-nabuna-8": -4,
+  "survey-vanuakula-9": 4,
+  "survey-wailotua-1-12": -4,
+  "survey-wailotua-2-13": 4,
+};
+
 const softReveal = (progress, start, end) => {
   const t = clamp((progress - start) / (end - start), 0, 1);
   return t * t * (3 - 2 * t);
@@ -109,6 +116,7 @@ export function RelocationDecision() {
                     0.52 + assessmentIndex * 0.011,
                   );
             const selected = dot.id === hoveredId;
+            const xOffset = overlapOffsets[dot.id] ?? 0;
             return (
               <g key={dot.id} opacity={isMobile ? 0.5 + reveal * 0.5 : reveal}>
                 <circle
@@ -117,7 +125,7 @@ export function RelocationDecision() {
                       ? styles.relocatedPulse
                       : styles.assessmentPulse
                   } ${selected ? styles.selectedPulse : ""}`}
-                  cx={dot.x}
+                  cx={dot.x + xOffset}
                   cy={dot.y}
                   r={selected ? 20 : dot.type === "relocated" ? 17 : 10}
                   style={{ animationDelay: `${-(index % 8) * 0.42}s` }}
@@ -234,13 +242,14 @@ export function RelocationDecision() {
                       1,
                     );
               const selected = dot.id === hoveredId;
+              const xOffset = overlapOffsets[dot.id] ?? 0;
               return (
                 <g key={dot.id} opacity={0.5 + reveal * 0.5}>
                   <circle
                     className={`${styles.dotPulse} ${dot.type === "relocated" ? styles.relocatedPulse : styles.assessmentPulse} ${selected ? styles.selectedPulse : ""}`}
-                    cx={dot.x}
+                    cx={dot.x + xOffset}
                     cy={dot.y}
-                    r={selected ? 18 : dot.type === "relocated" ? 15 : 9}
+                    r={selected ? 20 : dot.type === "relocated" ? 17 : 10}
                     style={{ animationDelay: `${-(index % 8) * 0.42}s` }}
                     data-point-index={index}
                     tabIndex={isMobile && selected ? 0 : -1}
