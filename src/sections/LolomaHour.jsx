@@ -106,7 +106,16 @@ export function LolomaHour() {
           <p>Loloma Hour · {lolomaHour.yearOne.period}</p>
         </header>
 
-        <div className={styles.contentGrid}>
+        <div
+          className={styles.contentGrid}
+          style={
+            isCompact
+              ? {
+                  "--mobile-scene-height": `${472 - mobileResultsPhase * 88}px`,
+                }
+              : undefined
+          }
+        >
           <div
             className={styles.summaryColumn}
             style={{ "--mobile-scene-opacity": summarySceneOpacity }}

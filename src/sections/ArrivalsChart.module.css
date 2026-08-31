@@ -325,7 +325,7 @@
     padding: 0 16px;
     font-size: var(--viz-caption-mobile-size);
     line-height: 1.4;
-    text-align: left;
+    text-align: center;
   }
 
   .sourceDesktop {

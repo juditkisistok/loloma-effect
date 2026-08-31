@@ -250,7 +250,7 @@
     margin: 16px auto 0;
     padding-top: 14px;
   }
-  .caption { margin-top: 14px; font-size: var(--viz-caption-mobile-size); line-height: 1.45; text-align: left; }
+  .caption { margin-top: 14px; font-size: var(--viz-caption-mobile-size); line-height: 1.45; text-align: center; }
   .sourceDesktop { display: none; }
   .sourceMobile { display: inline; }
 }
@@ -279,7 +279,7 @@
     width: min(280px, 100%);
     margin-top: 16px;
     padding-top: 14px;
-    text-align: left;
+    text-align: center;
   }
   .contextChart {
     height: 122px;

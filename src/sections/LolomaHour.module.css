@@ -208,15 +208,19 @@
   .sticky { justify-content: center; }
   .header { margin-bottom: 22px; }
   .contentGrid {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: "scene";
     align-items: center;
     gap: 0;
-    min-height: 400px;
+    height: var(--mobile-scene-height);
+    min-height: 0;
   }
   .summaryColumn,
   .resultsColumn {
+    position: absolute;
+    inset: 0;
     grid-area: scene;
     align-self: center;
     transition: none;
@@ -231,7 +235,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 400px;
+    min-height: 0;
     padding-top: 0;
     border-top: 0;
     background: transparent;
@@ -250,7 +254,11 @@
   .metric small { font-size: 12px; }
   .targetOrbit { width: min(300px, 100%); margin: 24px auto 0; }
   .orbitChart { width: min(304px, 92vw); }
-  .outcomesHeading { margin-bottom: 22px; }
+  .outcomesHeading {
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .outcomesHeading i { display: none; }
   .outcomes { grid-template-columns: repeat(2, 1fr); gap: 30px 18px; }
   .outcome { grid-template-rows: 86px auto auto; }
   .outcomeImage { width: 88px; height: 82px; }
@@ -262,7 +270,7 @@
     margin-top: calc(var(--mobile-caption-opacity) * 18px);
     overflow: hidden;
     font-size: var(--viz-caption-mobile-size);
-    text-align: left;
+    text-align: center;
     opacity: var(--mobile-caption-opacity);
     transition:
       opacity 180ms ease,
@@ -274,8 +282,6 @@
 @media (max-width: 760px) {
   .figure { height: 285vh; }
   .sticky { justify-content: center; }
-  .contentGrid { min-height: min(430px, 56svh); }
-  .resultsColumn { min-height: min(430px, 56svh); }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {

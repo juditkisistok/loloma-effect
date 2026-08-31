@@ -35,6 +35,10 @@
 }
 
 @media (max-width: 900px) {
+  .figureHeader {
+    text-align: center;
+  }
+
   .figureHeader h3 { font-size: 19px; }
   .figureHeader p { font-size: 12px; }
 
