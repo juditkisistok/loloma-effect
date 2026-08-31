@@ -343,6 +343,7 @@
   .mobilePanel h4 { font-size: 22px; }
   .mobilePanel strong { font-size: 13px; }
   .mobileSummary { font-size: 14.5px; }
+  .mobilePanel { text-align: center; }
   .caption { font-size: 11.5px; line-height: 1.45; }
 }
 

@@ -258,14 +258,14 @@
 @media (max-width: 760px) {
   .figure { height: 205vh; }
   .sticky { justify-content: center; }
-  .header { margin-bottom: 18px; }
-  .layout { gap: 26px; }
+  .header { margin-bottom: 24px; }
+  .layout { gap: 32px; }
   .factRail {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
-    padding-bottom: 20px;
+    padding-bottom: 28px;
     text-align: center;
   }
   .factRail p { order: 1; }
@@ -278,8 +278,8 @@
   .rateContext {
     order: 5;
     width: min(280px, 100%);
-    margin-top: 24px;
-    padding-top: 20px;
+    margin-top: 34px;
+    padding-top: 24px;
     text-align: center;
   }
   .contextChart {
