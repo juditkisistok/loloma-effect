@@ -3,9 +3,17 @@ import styles from "./Methods.module.css";
 const rows = [
   {
     name: "Visitor arrivals",
-    source: "Pacific Data Hub / SPC; Fiji Bureau of Statistics",
-    url: "https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals",
-    method: "Annual TOUR series. Pacific Data supplies 1995–2023. Its current extract lists 928,938 arrivals for 2024; Fiji's national statistical authority reports 982,938 in its current tourism table, consistent with the 5.7% increase announced in its initial provisional release. The visual therefore uses the current Fiji Bureau of Statistics total for 2024 and its provisional total for 2025. Same-day excursionists are excluded so every year uses one definition.",
+    sources: [
+      {
+        label: "Pacific Data Hub / SPC",
+        url: "https://pacificdata.org/data/dataset/tourism-arrivals-df-tourism-arrivals",
+      },
+      {
+        label: "Fiji Bureau of Statistics",
+        url: "https://www.statsfiji.gov.fj/statistics/social-statistics/tourism-and-migration-statistics/",
+      },
+    ],
+    method: "Annual TOUR series from Pacific Data for 1995–2023, continued with the Fiji Bureau of Statistics' official visitor-arrival total for 2024 and provisional total for 2025. Pacific Data's current extract lists 928,938 arrivals for 2024; Fiji's national statistical authority reports 982,938 in its current tourism table, consistent with the 5.7% increase announced in its initial provisional release.",
     licence: "Pacific Data Hub: Other (Open). The two supplemental official totals are quoted as attributed published facts; no Fiji Bureau of Statistics file is redistributed.",
   },
   {
@@ -17,15 +25,35 @@ const rows = [
   },
   {
     name: "Flight comparison",
-    source: "UK government conversion factors; Our World in Data",
-    url: "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+    sources: [
+      {
+        label: "UK government conversion factors",
+        url: "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+      },
+      {
+        label: "Our World in Data",
+        url: "https://ourworldindata.org/profile/co2/fiji",
+      },
+    ],
     method: "Return great-circle distance multiplied by 2025 long-haul economy factors. Direct CO₂ is compared with Fiji territorial CO₂; fuel-supply, trace-gas and non-CO₂ effects remain visibly separate.",
     licence: "UK Open Government Licence; OWID attribution terms.",
   },
   {
     name: "Relocation map",
-    source: "Fiji Climate Change Division / UNOSAT; Parliament of Fiji; geoBoundaries",
-    url: "https://www.geoboundaries.org/countryDownloads.html",
+    sources: [
+      {
+        label: "Fiji Climate Change Division / UNOSAT",
+        url: "https://unosat-geodrr.cern.ch/apps/FJI/CCD/index.html",
+      },
+      {
+        label: "Parliament of Fiji",
+        url: "https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf",
+      },
+      {
+        label: "geoBoundaries",
+        url: "https://www.geoboundaries.org/api.html",
+      },
+    ],
     method: "Public coordinates from the 2023 completed-relocation and 2022 adaptation-survey layers. The 43-community figure is a 2025 national screening total, not 43 mapped relocation sites.",
     licence: "gbOpen boundary: CC BY 4.0. Public GIS coordinates are quoted with source attribution; no underlying UNOSAT file is redistributed.",
   },
@@ -59,7 +87,7 @@ const rows = [
       },
       {
         label: "SPREP — Status of Coral Reefs in Fiji",
-        url: "https://www.sprep.org/att/IRC/eCOPIES/Countries/Fiji/13.pdf",
+        url: "https://library.sprep.org/sites/default/files/13_7.pdf",
       },
       {
         label: "WWF — Kabara vesi factsheet",
@@ -99,7 +127,16 @@ export function Methods() {
             <section key={row.name} className={styles.row}>
               <h3>{row.name}</h3>
               <p>
-                {row.url ? (
+                {row.sources ? (
+                  row.sources.map((source, index) => (
+                    <span key={source.url}>
+                      {index > 0 ? "; " : ""}
+                      <a href={source.url} target="_blank" rel="noreferrer">
+                        {source.label}
+                      </a>
+                    </span>
+                  ))
+                ) : row.url ? (
                   <a href={row.url} target="_blank" rel="noreferrer">
                     {row.source}
                   </a>

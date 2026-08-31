@@ -340,9 +340,8 @@ export function Essay() {
             Visitors could plant coral, restore mangroves, join wildlife
             conservation, help with beach clean-ups or take part in cultural
             activities led by local communities. At launch,{" "}
-            <strong>21 tourism partners</strong> offered more than{" "}
-            <strong>40 ways</strong> to participate, with a first-year target
-            of <strong>5,000 hours</strong>.
+            <strong>21 resorts</strong> offered ways to participate, with a
+            first-year target of <strong>5,000 hours</strong>.
             <Ref
               n="18"
               href="https://www.fiji.travel/loloma-hour"
