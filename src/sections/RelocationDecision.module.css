@@ -338,8 +338,14 @@
 @media (max-width: 760px) {
   .figure { margin: 0 14px; }
   .sticky { justify-content: center; }
+  .mobileCounts div {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 5px;
+    text-align: center;
+  }
   .mobileCounts strong { font-size: 48px; }
-  .mobileCounts span { font-size: 12.5px; }
+  .mobileCounts span { font-size: 12.5px; text-align: center; }
   .mobilePanel h4 { font-size: 22px; }
   .mobilePanel strong { font-size: 13px; }
   .mobileSummary { font-size: 14.5px; }

@@ -183,10 +183,12 @@ export function CoastalExposure() {
           </div>
 
           <aside className={styles.factRail}>
-            <p>AT THE CIRCLED POINT</p>
-            <strong>+{chart.hotspot.rate.toFixed(2)} m/yr</strong>
-            <span>on average, the shoreline moved outward</span>
-            <small>(±{chart.hotspot.se.toFixed(2)} m/yr est. uncertainty)</small>
+            <div className={styles.pointSummary}>
+              <p>AT THE CIRCLED POINT</p>
+              <strong>+{chart.hotspot.rate.toFixed(2)} m/yr</strong>
+              <span>on average, the shoreline moved outward</span>
+              <small>(±{chart.hotspot.se.toFixed(2)} m/yr est. uncertainty)</small>
+            </div>
             <RateContext
               context={shorelineData.rateContext}
               selectedRate={chart.hotspot.rate}
