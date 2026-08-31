@@ -335,7 +335,7 @@
   .figure { height: 190vh; }
 }
 
-@media (max-width: 599px) {
+@media (max-width: 760px) {
   .figure { margin: 0 14px; }
   .sticky { justify-content: center; }
   .mobileCounts strong { font-size: 48px; }
