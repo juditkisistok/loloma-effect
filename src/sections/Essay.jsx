@@ -139,8 +139,8 @@ export function Essay() {
           </p>
           <p>
             The chart below separates the journey's estimated climate impact
-            into three parts. Its direct CO₂ — about{" "}
-            <strong>{selectedDirectCo2.toFixed(1)} tonnes</strong> — is the
+            into three parts. Its direct CO₂, about{" "}
+            <strong>{selectedDirectCo2.toFixed(1)} tonnes</strong>, is the
             closest comparison with Fiji's territorial CO₂. Emissions from
             fuel production and aviation's other warming effects are shown
             separately, so the total reflects the journey's wider effect.
