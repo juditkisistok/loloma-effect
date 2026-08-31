@@ -221,7 +221,7 @@ export function Essay() {
             a shift researchers linked both to the distance from fishing grounds
             and easier access to shops.
             <Ref
-              n="9"
+              n="8"
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12055693/"
               label="Longitudinal study of climate-related relocation in Vunidogoloa, Fiji"
             />
@@ -231,7 +231,7 @@ export function Essay() {
             didn't preserve village life exactly as it was. This trade-off
             helps explain why Fiji treats relocation as a last resort.
             <Ref
-              n="10"
+              n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
@@ -240,7 +240,7 @@ export function Essay() {
             By 2025, six communities in total had completed full or partial
             relocations.
             <Ref
-              n="11"
+              n="10"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/98Report-of-the-Auditor-General-of-the-Republic-of-Fiji-%E2%80%93-Performance-Audit-on-Implementation-of-Climate-Change-Adaptation-Actions-in-Fiji.pdf"
               label="Fiji Auditor-General, performance audit on climate-change adaptation actions, 2025"
             />{" "}
@@ -248,7 +248,7 @@ export function Essay() {
             but screening did not necessarily lead to a move: some shifted
             towards adapting in place, while others remained under assessment.
             <Ref
-              n="12"
+              n="9"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/Daily-Hansard-Monday-14th-July-2025.pdf"
               label="Fiji Parliament Daily Hansard, 14 July 2025"
             />
@@ -267,14 +267,14 @@ export function Essay() {
             government described as the world's first climate-relocation trust
             fund.
             <Ref
-              n="13"
+              n="11"
               href="https://www.un.int/fiji/news/world%E2%80%99s-first-%E2%80%93ever-relocation-trust-fund-people-displaced-climate-change-launched-fijian-prime"
               label="Fiji Mission to the United Nations, world-first relocation trust fund launch, 2019"
             />
             Planned relocation was subsequently written into Fiji's Climate
             Change Act.
             <Ref
-              n="14"
+              n="12"
               href="https://parliament.gov.fj/wp-content/uploads/2021/09/Act-No.-43-Climate-Change.pdf"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -290,7 +290,7 @@ export function Essay() {
             by Indigenous landowning groups rather than simply bought and sold
             on the open market.
             <Ref
-              n="15"
+              n="13"
               href="https://tltb.com.fj/corporate-profile/"
               label="iTaukei Land Trust Board, communal land tenure in Fiji"
             />{" "}
@@ -299,7 +299,7 @@ export function Essay() {
             Climate Change Act requires the rights and concerns of both the
             relocating and host communities to be taken into account.
             <Ref
-              n="16"
+              n="12"
               href="https://parliament.gov.fj/wp-content/uploads/2021/09/Act-No.-43-Climate-Change.pdf"
               label="Fiji Climate Change Act 2021, planned relocation provisions"
             />
@@ -331,7 +331,7 @@ export function Essay() {
             visitors to give one hour of their stay back to the place they
             had come to enjoy.
             <Ref
-              n="17"
+              n="1"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour"
             />
@@ -343,7 +343,7 @@ export function Essay() {
             <strong>21 resorts</strong> offered ways to participate, with a
             first-year target of <strong>5,000 hours</strong>.
             <Ref
-              n="18"
+              n="1"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour launch details"
             />
@@ -352,7 +352,7 @@ export function Essay() {
             One year on, Tourism Fiji reported <strong>17,407 contributed
             hours</strong> — 3.5 times the programme's first-year target.
             <Ref
-              n="19"
+              n="1"
               href="https://www.fiji.travel/loloma-hour"
               label="Tourism Fiji, Loloma Hour annual results, April 2025 – April 2026"
             />
