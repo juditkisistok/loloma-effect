@@ -265,7 +265,7 @@
       "point"
       "plot"
       "context";
-    row-gap: 22px;
+    row-gap: 0;
   }
   .factRail {
     display: contents;
@@ -289,7 +289,7 @@
     grid-area: context;
     width: min(280px, 100%);
     justify-self: center;
-    margin-top: 0;
+    margin-top: 34px;
     padding-top: 18px;
     text-align: center;
   }
