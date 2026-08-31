@@ -354,12 +354,25 @@
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
+  .mobileCounts {
+    grid-template-columns: max-content max-content;
+    justify-content: center;
+    gap: clamp(64px, 10vw, 112px);
+    margin-right: auto;
+    margin-left: auto;
+  }
   .mobileCounts span { font-size: 12.5px; }
   .mobileLegend,
   .caption { font-size: var(--viz-caption-size); }
+  .mobilePanel { text-align: center; }
   .mobilePanel h4 { font-size: 18px; }
   .mobilePanel strong { font-size: 13px; }
-  .mobileSummary { font-size: 15px; }
+  .mobileSummary {
+    max-width: 720px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 15px;
+  }
 }
 
 /* Short tablet and landscape screens use the integrated map instead of the

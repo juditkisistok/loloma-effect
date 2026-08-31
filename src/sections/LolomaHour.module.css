@@ -305,6 +305,8 @@
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
+  .summaryColumn { text-align: center; }
+  .metric { justify-items: center; }
   .metric span { font-size: 12px; }
   .outcome strong { font-size: 20px; }
   .outcome span,
