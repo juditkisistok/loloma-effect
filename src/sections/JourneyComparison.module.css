@@ -196,6 +196,19 @@
 @media (max-width: 760px) {
   .figure { height: 230vh; }
   .sticky { justify-content: center; }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    text-align: center;
+  }
+  .stat p { grid-column: auto; }
+  .stat strong {
+    grid-row: auto;
+    margin: 6px 0 5px;
+  }
+  .stat span { max-width: 240px; }
 }
 
 @media (max-width: 360px) and (max-height: 600px) {

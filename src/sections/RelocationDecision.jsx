@@ -58,7 +58,7 @@ export function RelocationDecision() {
       className={`${visualizationStyles.scrollFigure} ${styles.figure}`}
       ref={ref}
     >
-      <div className={visualizationStyles.stickyCenter}>
+      <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
       <div className={styles.scrollWrap}>
       <header className={`${visualizationStyles.figureHeader} ${styles.desktopHeader}`}>
         <h3>Stay, adapt or move</h3>

@@ -335,6 +335,17 @@
   .figure { height: 190vh; }
 }
 
+@media (max-width: 599px) {
+  .figure { margin: 0 14px; }
+  .sticky { justify-content: center; }
+  .mobileCounts strong { font-size: 48px; }
+  .mobileCounts span { font-size: 12.5px; }
+  .mobilePanel h4 { font-size: 22px; }
+  .mobilePanel strong { font-size: 13px; }
+  .mobileSummary { font-size: 14.5px; }
+  .caption { font-size: 11.5px; line-height: 1.45; }
+}
+
 @media (min-width: 600px) and (max-width: 900px) {
   .mobileCounts span { font-size: 12.5px; }
   .mobileLegend,
