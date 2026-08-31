@@ -188,14 +188,14 @@ export function RelocationDecision() {
           <text className={styles.panelTitle} x="0" y="232">
             {panel.title}
           </text>
-          <text className={styles.panelStatus} x="0" y="258">
+          <text className={styles.panelStatus} x="0" y="252">
             {panel.status}
           </text>
           <TextBlock
             className={styles.detailSummary}
             lines={panel.summary}
             x={0}
-            y={292}
+            y={286}
             lineHeight={20}
           />
 

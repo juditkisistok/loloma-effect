@@ -167,7 +167,7 @@
 
 .panelTitle {
   font-family: var(--font-body) !important;
-  font-size: 16.5px !important;
+  font-size: 14.5px !important;
   font-weight: 700;
   letter-spacing: 0 !important;
   fill: #111 !important;
@@ -374,7 +374,7 @@
   .panelStatus,
   .detailSummary { font-size: 14px !important; }
   .bigCount { font-size: 50px !important; }
-  .panelTitle { font-size: 20px !important; }
+  .panelTitle { font-size: 16.5px !important; }
   .legend text { font-size: 12px; }
   .place text { font-size: 11px; }
   .caption { margin-top: 8px; font-size: 10.5px; line-height: 1.4; }
@@ -413,7 +413,7 @@
   .panelStatus,
   .detailSummary { font-size: 13px !important; }
   .bigCount { font-size: 46px !important; }
-  .panelTitle { font-size: 19px !important; }
+  .panelTitle { font-size: 16px !important; }
   .legend text { font-size: 11px; }
 }
 

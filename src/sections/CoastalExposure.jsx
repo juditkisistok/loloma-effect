@@ -116,6 +116,10 @@ export function CoastalExposure() {
         </header>
 
         <div className={styles.layout}>
+          <PointSummary
+            hotspot={chart.hotspot}
+            className={`${styles.pointSummary} ${styles.mobilePointSummary}`}
+          />
           <div className={styles.plotWrap}>
           <div className={styles.yearKey} aria-label={`Current observation year ${activeYear}`}>
             <strong>{activeYear}</strong>
@@ -183,12 +187,10 @@ export function CoastalExposure() {
           </div>
 
           <aside className={styles.factRail}>
-            <div className={styles.pointSummary}>
-              <p>AT THE CIRCLED POINT</p>
-              <strong>+{chart.hotspot.rate.toFixed(2)} m/yr</strong>
-              <span>on average, the shoreline moved outward</span>
-              <small>(±{chart.hotspot.se.toFixed(2)} m/yr est. uncertainty)</small>
-            </div>
+            <PointSummary
+              hotspot={chart.hotspot}
+              className={`${styles.pointSummary} ${styles.desktopPointSummary}`}
+            />
             <RateContext
               context={shorelineData.rateContext}
               selectedRate={chart.hotspot.rate}
@@ -230,6 +232,17 @@ export function CoastalExposure() {
         </figcaption>
       </div>
     </figure>
+  );
+}
+
+function PointSummary({ hotspot, className }) {
+  return (
+    <div className={className}>
+      <p>AT THE CIRCLED POINT</p>
+      <strong>+{hotspot.rate.toFixed(2)} m/yr</strong>
+      <span>on average, the shoreline moved outward</span>
+      <small>(±{hotspot.se.toFixed(2)} m/yr est. uncertainty)</small>
+    </div>
   );
 }
 
