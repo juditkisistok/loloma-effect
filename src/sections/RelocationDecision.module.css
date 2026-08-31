@@ -1,5 +1,5 @@
 .figure {
-  width: min(1240px, 94vw);
+  width: min(1280px, 94vw);
   padding: 0;
 }
 
@@ -25,7 +25,6 @@
 
 .desktopHeader {
   margin: 0 0 -4px;
-  padding-left: 5.92%;
 }
 
 .map {
@@ -225,7 +224,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
-    margin: 24px 0 12px;
+    margin: 26px 0 12px;
   }
   .mobileCounts div {
     display: grid;
@@ -286,8 +285,8 @@
     background: rgba(15, 135, 124, 0.28);
   }
   .mobilePanel {
-    margin-top: 22px;
-    padding-top: 18px;
+    margin-top: 32px;
+    padding-top: 25px;
     border-top: 1px solid rgba(17, 17, 17, 0.14);
     transition: opacity 220ms ease;
   }
@@ -400,21 +399,17 @@
 }
 
 @media (max-width: 599px) and (max-height: 700px) {
-  .mobileCounts { margin: 14px 0 8px; }
   .mobileMap { max-height: 180px; }
-  .mobilePanel { margin-top: 14px; padding-top: 12px; }
   .mobilePanel h4 { margin-bottom: 5px; font-size: 17.5px; }
   .mobileSummary { margin-top: 10px; font-size: 13px; line-height: 1.42; }
   .caption { margin-top: 14px; font-size: 9.5px; line-height: 1.35; }
 }
 
 @media (max-width: 360px) and (max-height: 600px) {
-  .mobileCounts { margin: 8px 0 4px; }
   .mobileCounts strong { font-size: 38px; }
   .mobileCounts span { font-size: 10.5px; }
   .mobileMap { max-height: 142px; }
   .mobileLegend { margin-top: 1px; font-size: 9px; }
-  .mobilePanel { margin-top: 9px; padding-top: 9px; }
   .mobilePanel h4 { font-size: 17px; }
   .mobilePanel strong { font-size: 11.5px; }
   .mobileSummary { margin-top: 7px; font-size: 12px; line-height: 1.35; }
@@ -430,8 +425,12 @@
   .legend text { font-size: 11px; }
 }
 
+@media (min-width: 901px) and (max-height: 800px) {
+  .figure { width: min(1380px, 94vw); }
+}
+
 @media (min-width: 1600px) {
-  .figure { width: min(1680px, 94vw); }
+  .figure { width: min(1600px, 94vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {
