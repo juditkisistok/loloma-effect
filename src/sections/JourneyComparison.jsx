@@ -113,7 +113,7 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
   return (
     <figure
       id="journey-comparison"
-      className={`${visualizationStyles.scrollFigure} ${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${visualizationStyles.wideFrame} ${styles.figure}`}
+      className={`${visualizationStyles.scrollFigure} ${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
       ref={figureRef}
     >
       <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>

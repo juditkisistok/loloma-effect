@@ -55,7 +55,7 @@ export function RelocationDecision() {
   return (
     <figure
       id="relocation-map"
-      className={`${visualizationStyles.scrollFigure} ${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${visualizationStyles.wideFrame} ${styles.figure}`}
+      className={`${visualizationStyles.scrollFigure} ${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
       ref={ref}
     >
       <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
