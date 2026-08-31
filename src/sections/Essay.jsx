@@ -237,8 +237,8 @@ export function Essay() {
             />
           </p>
           <p>
-            By 2025, six communities in total had completed full or partial
-            relocations.
+            By 2025, <strong>six communities</strong> in total had completed
+            full or partial relocations.
             <Ref
               n="10"
               href="https://www.parliament.gov.fj/wp-content/uploads/2025/08/98Report-of-the-Auditor-General-of-the-Republic-of-Fiji-%E2%80%93-Performance-Audit-on-Implementation-of-Climate-Change-Adaptation-Actions-in-Fiji.pdf"
@@ -324,7 +324,7 @@ export function Essay() {
             relationship look like in practice?
           </p>
           <p>
-            The answer brings us back to where we started: <b>loloma</b>.
+            The answer brings us back to where we started: <em>loloma</em>.
           </p>
           <p>
             In April 2025, Tourism Fiji launched Loloma Hour, inviting
@@ -339,9 +339,9 @@ export function Essay() {
           <p>
             Visitors could plant coral, restore mangroves, join wildlife
             conservation, help with beach clean-ups or take part in cultural
-            activities led by local communities. At launch,{" "}
-            <strong>21 resorts</strong> offered ways to participate, with a
-            first-year target of <strong>5,000 hours</strong>.
+            activities led by local communities. At launch, 21 resorts offered
+            ways to participate, with a first-year target of{" "}
+            <strong>5,000 hours</strong>.
             <Ref
               n="1"
               href="https://www.fiji.travel/loloma-hour"
