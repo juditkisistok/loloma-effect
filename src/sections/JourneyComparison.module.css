@@ -7,8 +7,6 @@
   padding-top: 0;
 }
 
-.header { margin: 0 0 28px; }
-.caption { font-family: var(--font-mono); color: var(--viz-muted); }
 .routeMenu { position: relative; display: inline-block; }
 .routeSelect {
   appearance: none;
@@ -63,7 +61,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
   grid-template-areas: "bars stat";
-  gap: 54px;
+  gap: var(--viz-column-rule-gap);
   align-items: stretch;
 }
 .bars { grid-area: bars; display: grid; gap: 32px; min-width: 0; }
@@ -129,7 +127,7 @@
   box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
-  padding-left: 34px;
+  padding-left: var(--viz-column-rule-gap);
   border-left: 1px solid rgba(17, 17, 17, 0.15);
   transition: opacity 160ms ease-out, transform 160ms ease-out;
 }
@@ -152,14 +150,6 @@
   color: #111;
 }
 .stat span { max-width: 160px; font-size: 13px; line-height: 1.55; }
-.caption {
-  max-width: 720px;
-  margin: 34px auto 0;
-  font-size: var(--viz-caption-size);
-  line-height: 1.55;
-  text-align: center;
-}
-
 .caption a { color: inherit; text-underline-offset: 0.18em; }
 .caption a:hover,
 .caption a:focus-visible { color: #111; }
@@ -171,20 +161,19 @@
 @media (max-width: 900px) {
   .figure { height: 210vh; }
   .sticky { justify-content: flex-start; }
-  .header { margin-bottom: 26px; }
   .routeSelect { min-height: 40px; margin: -10px 0; }
   .routeOption { min-height: 44px; }
   .layout {
     grid-template-columns: 1fr;
     grid-template-areas: "bars" "stat";
-    gap: 30px;
+    gap: var(--viz-rule-gap);
   }
   .stat {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
-    padding: 22px 0 0;
+    padding: var(--viz-rule-gap) 0 0;
     border-left: 0;
     border-top: 1px solid rgba(17, 17, 17, 0.15);
     text-align: center;
@@ -198,7 +187,6 @@
   .rowHeading strong { font-size: 11px; text-align: right; }
   .track { height: 26px; }
   .legend { display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 13px; }
-  .caption { margin-top: 30px; font-size: var(--viz-caption-mobile-size); text-align: center; }
 }
 
 @media (max-width: 760px) {
@@ -208,7 +196,6 @@
 
 @media (max-width: 360px) and (max-height: 600px) {
   .figure { height: 215vh; }
-  .header { margin-bottom: 14px; }
   .bars { gap: 16px; }
   .layout { gap: 16px; }
   .rowHeading { margin-bottom: 7px; }
@@ -216,7 +203,6 @@
   .stat { gap: 0 12px; padding-top: 12px; }
   .stat strong { margin: 2px 0 4px; font-size: 48px; }
   .stat span { font-size: 11px; line-height: 1.35; }
-  .caption { margin-top: 14px; font-size: 9.5px; line-height: 1.35; }
 }
 
 @media (min-width: 761px) and (max-width: 900px) {
@@ -224,12 +210,10 @@
   .rowHeading,
   .rowHeading strong { font-size: 12px; }
   .track { height: 30px; }
-  .caption { font-size: var(--viz-caption-size); }
 }
 
 @media (min-width: 600px) and (max-width: 900px) and (max-height: 700px) {
   .figure { height: 190vh; }
-  .header { margin-bottom: 16px; }
   .layout {
     grid-template-columns: minmax(0, 1fr) 170px;
     grid-template-areas: "bars stat";
@@ -246,16 +230,13 @@
   .stat strong { margin: 3px 0 5px; font-size: 48px; }
   .stat span { font-size: 11px; line-height: 1.4; }
   .legend { gap: 6px 18px; margin-top: 9px; font-size: 10.5px; }
-  .caption { margin-top: 16px; font-size: 10.5px; line-height: 1.4; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) and (max-height: 500px) {
-  .header { margin-bottom: 10px; }
   .bars { gap: 12px; }
   .rowHeading { margin-bottom: 6px; }
   .track { height: 24px; }
   .legend { margin-top: 6px; }
-  .caption { margin-top: 10px; }
 }
 
 @media (min-width: 1100px) {
@@ -267,7 +248,6 @@
 /* Short laptop screens need the chapter to read as a full-screen graphic,
    rather than a reduced slide floating above unused space. */
 @media (min-width: 901px) and (max-height: 800px) {
-  .header { margin-bottom: 32px; }
   .layout {
     grid-template-columns: minmax(0, 1fr) 230px;
     gap: 58px;
@@ -277,15 +257,10 @@
   .legend { margin-top: 16px; font-size: 13.5px; }
   .stat strong { font-size: 80px; }
   .stat span { font-size: 13.5px; }
-  .caption {
-    max-width: 780px;
-    margin-top: 38px;
-    font-size: 12.5px;
-  }
 }
 
 @media (min-width: 1600px) {
-  .layout { grid-template-columns: minmax(0, 1fr) 250px; gap: 66px; }
+  .layout { grid-template-columns: minmax(0, 1fr) 250px; }
   .track { height: 38px; }
   .stat strong { font-size: 78px; }
 }

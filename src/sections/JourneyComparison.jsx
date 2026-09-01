@@ -233,7 +233,7 @@ export function JourneyComparison({ selectedId = "london", onSelect }) {
         </aside>
       </div>
 
-      <figcaption className={styles.caption}>
+      <figcaption className={`${visualizationStyles.figureCaption} ${styles.caption}`}>
         A single return flight and one year of Fiji's territorial CO₂ per
         person are shown together to compare scale. Distances follow the
         shortest path between airports; actual itineraries may be longer.

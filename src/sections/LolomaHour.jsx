@@ -282,7 +282,7 @@ export function LolomaHour() {
         </div>
 
         <figcaption
-          className={styles.caption}
+          className={`${visualizationStyles.figureCaption} ${styles.caption}`}
           style={{ "--mobile-caption-opacity": mobileCaptionOpacity }}
         >
           Tourism Fiji divides the 17,407 hours among wildlife, reef,

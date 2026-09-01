@@ -280,7 +280,7 @@ export function RelocationDecision() {
           <div className={styles.mobileSummary}>{panel.summary.join(" ")}</div>
         </section>
       </div>
-      <figcaption className={styles.caption}>
+      <figcaption className={`${visualizationStyles.figureCaption} ${styles.caption}`}>
         <span className={styles.sourceDesktop}>
           Each dot represents either a completed full or partial relocation or an
           adaptation-survey location at a public coordinate from the{" "}

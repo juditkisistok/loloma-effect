@@ -111,7 +111,7 @@ export function CoastalExposure() {
       className={`${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
       ref={ref}
     >
-      <div className={styles.sticky}>
+      <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
         <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <div>
             <h3>The moving edges of Tivua</h3>
@@ -202,7 +202,7 @@ export function CoastalExposure() {
           </aside>
         </div>
 
-        <figcaption className={styles.caption}>
+        <figcaption className={`${visualizationStyles.figureCaption} ${styles.caption}`}>
           <span className={styles.sourceDesktop}>
             Among the islands examined around Lautoka and Nadi, only Tivua has a
             complete, good-certainty outline in all four years. Thin lines mark

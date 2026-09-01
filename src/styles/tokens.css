@@ -29,8 +29,8 @@
   --sepia: #8a6a5e;
 
   /* --- shared data-visualisation hierarchy --- */
-  --viz-title-size: 20px;
-  --viz-subtitle-size: 13px;
+  --viz-title-size: 22px;
+  --viz-subtitle-size: 14px;
   --viz-caption-size: 12px;
   --viz-caption-mobile-size: 11px;
   --viz-frame-top: clamp(24px, 4vh, 40px);

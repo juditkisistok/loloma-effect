@@ -131,10 +131,10 @@ export function ArrivalsChart({ rows = [] }) {
   return (
     <figure
       id="arrivals-chart"
-      className={`${visualizationStyles.figureFrame} ${styles.figure}`}
+      className={`${visualizationStyles.figureFrame} ${visualizationStyles.insetFrame} ${styles.figure}`}
       ref={ref}
     >
-      <div className={styles.sticky}>
+      <div className={`${visualizationStyles.stickyCenter} ${styles.sticky}`}>
         <header className={`${visualizationStyles.figureHeader} ${styles.header}`}>
           <h3>Visitor arrivals to Fiji</h3>
           <p>Annual overnight visitors · 1995–2025</p>
@@ -363,7 +363,7 @@ export function ArrivalsChart({ rows = [] }) {
               : ""}
           </span>
         </div>
-        <figcaption className={styles.caption}>
+        <figcaption className={`${visualizationStyles.figureCaption} ${styles.caption}`}>
           <span className={styles.sourceDesktop}>
             Source:{" "}
             <a
